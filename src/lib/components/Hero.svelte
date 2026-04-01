@@ -66,12 +66,7 @@
     </div> <!-- /hero-text-col -->
 
     <div class="hero-photo-col">
-      <div class="hero-photo-placeholder">
-        <svg width="64" height="64" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.2" stroke-linecap="round" stroke-linejoin="round" class="photo-icon">
-          <path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"/>
-          <circle cx="12" cy="7" r="4"/>
-        </svg>
-      </div>
+      <img src="/photo.png" alt="Arya Aji Kusuma" class="hero-photo" />
     </div>
 
   </div>
@@ -99,22 +94,17 @@
     display: none; /* hidden on small screens by default, overridden below */
   }
 
-  .hero-photo-placeholder {
+  .hero-photo {
     width: 200px;
     height: 200px;
     border-radius: 50%;
-    background: var(--ctp-surface0);
-    border: 3px dashed var(--ctp-surface2);
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    color: var(--ctp-overlay0);
+    object-fit: cover;
+    border: 3px solid var(--ctp-surface2);
     transition: all 0.3s ease;
   }
 
-  .hero-photo-placeholder:hover {
+  .hero-photo:hover {
     border-color: var(--accent);
-    color: var(--accent);
     transform: scale(1.02);
   }
 

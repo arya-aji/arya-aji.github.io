@@ -18,15 +18,7 @@
     <!-- Hero row: photo left, text right -->
     <div class="hero-row">
       <div class="photo-col">
-        <div class="photo-placeholder">
-          <div class="photo-inner">
-            <svg width="64" height="64" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.2" stroke-linecap="round" stroke-linejoin="round">
-              <path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"/>
-              <circle cx="12" cy="7" r="4"/>
-            </svg>
-            <span class="photo-hint">Photo</span>
-          </div>
-        </div>
+        <img src="/photo.png" alt="Arya Aji Kusuma" class="photo-img" />
         <div class="photo-caption">Arya Aji Kusuma</div>
         <div class="photo-sub">Jakarta, Indonesia · Developer</div>
       </div>
@@ -125,35 +117,18 @@
     gap: 10px;
   }
 
-  .photo-placeholder {
+  .photo-img {
     width: 100%;
     aspect-ratio: 1 / 1;
     border-radius: 20px;
-    background: var(--ctp-surface0);
-    border: 2px dashed var(--ctp-surface2);
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    overflow: hidden;
-    transition: border-color 0.2s;
+    object-fit: cover;
+    border: 2px solid var(--ctp-surface2);
+    transition: all 0.3s ease;
   }
 
-  .photo-placeholder:hover {
+  .photo-img:hover {
     border-color: var(--accent);
-  }
-
-  .photo-inner {
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    gap: 10px;
-    color: var(--ctp-overlay0);
-  }
-
-  .photo-hint {
-    font-size: 0.78rem;
-    font-family: 'JetBrains Mono', 'Fira Code', monospace;
-    color: var(--ctp-overlay0);
+    transform: scale(1.02);
   }
 
   .photo-caption {
@@ -244,8 +219,8 @@
       gap: 16px;
     }
 
-    .photo-placeholder {
-      width: 100px;
+    .photo-img {
+      width: 120px;
       flex-shrink: 0;
     }
   }

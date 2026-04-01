@@ -65,7 +65,8 @@
                 <Star size={14} fill="currentColor" />
               </div>
             </div>
-            <div class="terminal-body">
+            <div class="terminal-content-row">
+              <div class="terminal-body">
               <p class="repo-name">
                 <span class="repo-org">{project.org}</span>
                 <span class="repo-sep"> / </span>
@@ -85,7 +86,17 @@
                 </span>
               </div>
             </div>
+            <div class="terminal-preview">
+              <div class="preview-placeholder" aria-label="Project Preview">
+                <svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round">
+                  <rect x="3" y="3" width="18" height="18" rx="2" ry="2"/>
+                  <circle cx="8.5" cy="8.5" r="1.5"/>
+                  <polyline points="21 15 16 10 5 21"/>
+                </svg>
+              </div>
+            </div>
           </div>
+        </div>
 
           <!-- Info section below -->
           <div class="project-info">
@@ -173,8 +184,39 @@
     font-family: 'JetBrains Mono', 'Fira Code', monospace;
   }
 
-  .terminal-body {
+  .terminal-content-row {
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-start;
     padding: 0 16px 16px;
+    gap: 16px;
+  }
+
+  .terminal-body {
+    flex: 1;
+  }
+
+  .terminal-preview {
+    flex-shrink: 0;
+  }
+
+  .preview-placeholder {
+    width: 130px;
+    height: 85px;
+    background: var(--ctp-surface0);
+    border: 2px dashed var(--ctp-surface1);
+    border-radius: 6px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: var(--ctp-overlay0);
+    transition: all 0.3s ease;
+  }
+
+  .project-card-wrapper:hover .preview-placeholder {
+    border-color: var(--accent);
+    color: var(--accent);
+    transform: scale(1.02);
   }
 
   .repo-name {
