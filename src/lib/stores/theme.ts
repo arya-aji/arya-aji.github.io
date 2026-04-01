@@ -20,7 +20,7 @@ function getInitial<T>(key: string, fallback: T): T {
   return fallback;
 }
 
-export const theme = writable<ThemeFlavor>(getInitial(THEME_KEY, 'latte'));
+export const theme = writable<ThemeFlavor>(getInitial(THEME_KEY, 'mocha'));
 export const accent = writable<AccentColor>(getInitial(ACCENT_KEY, 'peach'));
 export const bgEffect = writable<boolean>(
   browser ? localStorage.getItem(BG_EFFECT_KEY) !== 'false' : true
