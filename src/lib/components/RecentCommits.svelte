@@ -3,25 +3,25 @@
 
   const commits = [
     {
-      repo: 'nyx',
-      message: 'feat: integrate latest commits fetching and display in project overview',
-      additions: 305,
-      deletions: 23,
-      url: 'https://github.com/JasonLovesDoggo/nyx/commit/d73346658330be57a5f34bf2391b5ad32b519341'
+      repo: 'geomon',
+      message: 'feat: add spatial filtering and wilkerstat layer integration',
+      additions: 142,
+      deletions: 18,
+      url: 'https://github.com/arya-aji/geomon'
     },
     {
-      repo: 'Katib',
-      message: 'Merge pull request #4 from JasonLovesDoggo/feature/github-streak-endp…',
-      additions: 41,
-      deletions: 8,
-      url: 'https://github.com/JasonLovesDoggo/Katib/commit/dca9afc8c1c732d9ccbf9391e77b1fe289e2e05c'
+      repo: 'automation',
+      message: 'fix: handle rate limits in geocoding automation script',
+      additions: 25,
+      deletions: 4,
+      url: 'https://github.com/arya-aji/automation'
     },
     {
-      repo: 'Katib',
-      message: 'Add author filtering to GetMostRecentCommit function',
-      additions: 41,
-      deletions: 8,
-      url: 'https://github.com/JasonLovesDoggo/Katib/commit/e1e1d7df68e7c9e975d35f7394b7509ace215c80'
+      repo: 'sbr-dashboard',
+      message: 'style: update typescript typings for specific charts components',
+      additions: 53,
+      deletions: 12,
+      url: 'https://github.com/arya-aji/sbr-dashboard'
     }
   ];
 
@@ -62,7 +62,7 @@
   </div>
 
   <div class="commits-footer">
-    <a href="https://github.com/jasonlovesdoggo" target="_blank" rel="noopener noreferrer" class="gh-link">
+    <a href="https://github.com/arya-aji" target="_blank" rel="noopener noreferrer" class="gh-link">
       View on GitHub <ExternalLink size={14} />
     </a>
 

@@ -127,8 +127,8 @@
 </script>
 
 <svelte:head>
-  <title>Projects | Jason Cameron</title>
-  <meta name="description" content="Projects built by Jason Cameron — from distributed systems to AI tools." />
+  <title>Projects | Arya Aji Kusuma</title>
+  <meta name="description" content="Projects built by Arya Aji Kusuma — from geospatial dashboards to automation tools." />
 </svelte:head>
 
 <Navbar />

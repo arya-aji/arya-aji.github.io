@@ -15,8 +15,8 @@
 </script>
 
 <svelte:head>
-  <title>Jason Cameron</title>
-  <meta name="description" content="Jason Cameron - Shipping from Toronto, Canada. I like occasionally building cool shit" />
+  <title>Arya Aji Kusuma</title>
+  <meta name="description" content="Arya Aji Kusuma - Developer from Jakarta, Indonesia. Building web applications, tools, and geospatial systems." />
   <meta name="viewport" content="width=device-width, initial-scale=1" />
 </svelte:head>
 

@@ -4,38 +4,36 @@
 
   const projects = [
     {
-      org: 'TecharoHQ',
-      name: 'anubis',
-      description: 'Weighs the soul of incoming HTTP requests to stop AI crawlers',
-      longDesc: 'Weighs the soul of incoming HTTP requests using proof-of-work to stop AI crawlers and other malicious bots.',
-      stars: 15933,
-      contributors: 150,
-      tags: ['golang', 'security', 'ai', 'anti-bot', 'defense', 'proof-of-work'],
-      href: '/projects/anubis'
+      org: 'arya-aji',
+      name: 'geomon',
+      description: 'Geospatial Work Area Monitoring App for BPS',
+      longDesc: 'Aplikasi Geospasial Monitoring Wilkerstat untuk BPS Jakarta Pusat. Memantau dan memvisualisasikan data wilayah kerja statistik secara real-time.',
+      stars: 0,
+      contributors: 1,
+      tags: ['svelte', 'geospasial', 'bps', 'data-viz'],
+      href: 'https://github.com/arya-aji/geomon'
     },
     {
-      org: 'jasonlovesdoggo',
-      name: 'abacus',
-      description: ':abacus: A highly-scalable and stateless counting API',
-      longDesc: "Abacus at it's core is a simple counter. However, it was designed from the ground up to be scalable, secure and easy to use. It was build using Golang, Gin, Docker, Redis.",
-      stars: 31,
+      org: 'arya-aji',
+      name: 'sbr-dashboard',
+      description: '📊 A highly interactive TypeScript-based Dashboard',
+      longDesc: 'Dashboard visualisasi data berbasis TypeScript dengan tampilan modern dan interaktif. Berfungsi untuk menyajikan analitik data dengan chart yang optimal.',
+      stars: 0,
       contributors: 1,
-      tags: ['golang', 'gin', 'docker', 'redis', 'analytics'],
-      href: '/projects/abacus'
+      tags: ['typescript', 'dashboard', 'analytics', 'vercel'],
+      href: 'https://github.com/arya-aji/sbr-dashboard'
     }
   ];
 
   const tagColors: Record<string, string> = {
-    golang: 'var(--ctp-sapphire)',
-    security: 'var(--ctp-red)',
-    ai: 'var(--ctp-mauve)',
-    'anti-bot': 'var(--ctp-peach)',
-    defense: 'var(--ctp-green)',
-    'proof-of-work': 'var(--ctp-yellow)',
-    gin: 'var(--ctp-teal)',
-    docker: 'var(--ctp-blue)',
-    redis: 'var(--ctp-red)',
-    analytics: 'var(--ctp-lavender)'
+    svelte: 'var(--ctp-red)',
+    geospasial: 'var(--ctp-green)',
+    bps: 'var(--ctp-blue)',
+    'data-viz': 'var(--ctp-peach)',
+    typescript: 'var(--ctp-sapphire)',
+    dashboard: 'var(--ctp-teal)',
+    analytics: 'var(--ctp-mauve)',
+    vercel: 'var(--ctp-yellow)'
   };
 </script>
 

@@ -77,8 +77,8 @@
 </script>
 
 <svelte:head>
-  <title>Posts | Jason Cameron</title>
-  <meta name="description" content="Blog posts by Jason Cameron on software engineering, systems, and more." />
+  <title>Posts | Arya Aji Kusuma</title>
+  <meta name="description" content="Blog posts by Arya Aji Kusuma on software development, geospatial tools, and more." />
 </svelte:head>
 
 <Navbar />
