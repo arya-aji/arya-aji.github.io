@@ -7,6 +7,9 @@
   let clickCount = $state(0);
   let globalCount = $state(793402);
   let localTime = $state('');
+  
+  let mapElement: HTMLElement | undefined = $state();
+  let mapInstance: any;
 
   const accentColorMap: Record<string, string> = {
     rosewater: '#dc8a78', flamingo: '#dd7878', pink: '#ea76cb', mauve: '#8839ef',
@@ -33,7 +36,31 @@
   onMount(() => {
     updateTime();
     const interval = setInterval(updateTime, 1000);
-    return () => clearInterval(interval);
+    let isMounted = true;
+
+    if (typeof window !== 'undefined' && mapElement) {
+      (async () => {
+        const L = await import('leaflet');
+        await import('leaflet/dist/leaflet.css');
+        if (!isMounted) return;
+        
+        mapInstance = L.map(mapElement, {
+          zoomControl: false,
+          attributionControl: false
+          // default behavior enables dragging & touchZoom
+        }).setView([-6.1754, 106.8272], 12);
+
+        L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
+          maxZoom: 19
+        }).addTo(mapInstance);
+      })();
+    }
+
+    return () => {
+      isMounted = false;
+      clearInterval(interval);
+      if (mapInstance) mapInstance.remove();
+    };
   });
 </script>
 
@@ -99,15 +126,11 @@
         </div>
 
         <div class="map-container">
-          <iframe
-            title="Jakarta Map"
-            width="100%"
-            height="100%"
-            frameborder="0"
-            scrolling="no"
-            src="https://www.openstreetmap.org/export/embed.html?bbox=106.7,-6.3,106.9,-6.1&amp;layer=mapnik&amp;zoom=11"
-            style="border: none; pointer-events: none; filter: grayscale(1) opacity(0.85) {$theme !== 'latte' ? 'invert(0.9) hue-rotate(180deg)' : ''};"
-          ></iframe>
+          <div
+            bind:this={mapElement}
+            class="leaflet-container-root"
+            style="width: 100%; height: 100%; filter: grayscale(1) opacity(0.85) {$theme !== 'latte' ? 'invert(0.9) hue-rotate(180deg)' : ''};"
+          ></div>
         </div>
 
         <div class="location-footer">
