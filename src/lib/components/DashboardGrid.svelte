@@ -99,14 +99,15 @@
         </div>
 
         <div class="map-container">
-          <div class="map-placeholder">
-            <div class="map-grid">
-              {#each Array(6) as _}
-                <div class="map-line"></div>
-              {/each}
-            </div>
-            <span class="map-label">JAKARTA</span>
-          </div>
+          <iframe
+            title="Jakarta Map"
+            width="100%"
+            height="100%"
+            frameborder="0"
+            scrolling="no"
+            src="https://www.openstreetmap.org/export/embed.html?bbox=106.7,-6.3,106.9,-6.1&amp;layer=mapnik&amp;zoom=11"
+            style="border: none; pointer-events: none; filter: grayscale(1) opacity(0.85) {$theme !== 'latte' ? 'invert(0.9) hue-rotate(180deg)' : ''};"
+          ></iframe>
         </div>
 
         <div class="location-footer">
@@ -272,39 +273,7 @@
     overflow: hidden;
   }
 
-  .map-placeholder {
-    width: 100%;
-    height: 140px;
-    background: var(--ctp-crust);
-    border-radius: 12px;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    position: relative;
-    overflow: hidden;
-  }
 
-  .map-grid {
-    position: absolute;
-    inset: 0;
-    display: flex;
-    flex-direction: column;
-    justify-content: space-evenly;
-    opacity: 0.15;
-  }
-
-  .map-line {
-    height: 1px;
-    background: var(--ctp-overlay0);
-  }
-
-  .map-label {
-    font-size: 1.2rem;
-    font-weight: 700;
-    letter-spacing: 8px;
-    color: var(--ctp-overlay1);
-    text-transform: uppercase;
-  }
 
   .location-footer {
     display: flex;

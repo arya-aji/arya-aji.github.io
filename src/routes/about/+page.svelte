@@ -70,19 +70,7 @@
       </div>
     </div>
 
-    <!-- Bella section -->
-    <div class="bella-section" id="bella">
-      <h2 class="section-title">About Me</h2>
-      <div class="bella-content">
-        <div class="bella-photo-placeholder">
-          <span class="bella-emoji">👨‍💻</span>
-          <p class="bella-caption">Arya — Developer</p>
-        </div>
-        <div class="bella-text">
-          <p>I'm a Statistics graduate who has been working in software development since 2020. I actively build web apps, automation tools, and data systems. I believe great technology should be easy to use and make a real difference for its users.</p>
-        </div>
-      </div>
-    </div>
+
 
   </div>
 </main>
@@ -101,20 +89,7 @@
     padding: 0 24px;
   }
 
-  /* Breadcrumb */
-  .breadcrumb {
-    display: flex;
-    align-items: center;
-    gap: 6px;
-    margin-bottom: 32px;
-    font-size: 0.85rem;
-    font-family: 'JetBrains Mono', 'Fira Code', monospace;
-  }
 
-  .bc-link { color: var(--accent); text-decoration: none; font-weight: 600; }
-  .bc-link:hover { opacity: 0.75; }
-  .bc-sep { color: var(--ctp-overlay0); }
-  .bc-current { color: var(--ctp-subtext0); }
 
   /* Title */
   .page-title {
@@ -216,14 +191,7 @@
 
   .inline-link:hover { opacity: 0.75; }
 
-  .star-count {
-    display: inline-flex;
-    align-items: center;
-    font-size: 0.78rem;
-    color: var(--ctp-overlay1);
-    margin-left: 3px;
-    vertical-align: middle;
-  }
+
 
   /* Social buttons */
   .social-links {
@@ -254,67 +222,7 @@
     opacity: 1;
   }
 
-  /* ── Bella section ── */
-  .bella-section {
-    padding-top: 40px;
-    border-top: 1px solid var(--ctp-surface0);
-  }
 
-  .section-title {
-    font-size: 1.4rem;
-    font-weight: 600;
-    color: var(--ctp-text);
-    margin-bottom: 20px;
-    display: flex;
-    align-items: center;
-    gap: 10px;
-  }
-
-  .section-title::before {
-    content: '#';
-    color: var(--accent);
-    font-family: 'JetBrains Mono', 'Fira Code', monospace;
-  }
-
-  .bella-content {
-    display: grid;
-    grid-template-columns: 180px 1fr;
-    gap: 28px;
-    align-items: start;
-  }
-
-  .bella-photo-placeholder {
-    aspect-ratio: 1 / 1;
-    background: var(--ctp-surface0);
-    border: 2px dashed var(--ctp-surface2);
-    border-radius: 16px;
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    justify-content: center;
-    gap: 8px;
-    padding: 20px;
-    transition: border-color 0.2s;
-  }
-
-  .bella-photo-placeholder:hover {
-    border-color: var(--accent);
-  }
-
-  .bella-emoji { font-size: 3.5rem; }
-
-  .bella-caption {
-    font-size: 0.72rem;
-    color: var(--ctp-subtext0);
-    font-style: italic;
-    text-align: center;
-  }
-
-  .bella-text p {
-    font-size: 0.95rem;
-    line-height: 1.8;
-    color: var(--ctp-subtext1);
-  }
 
   /* Responsive */
   @media (max-width: 640px) {
@@ -331,10 +239,6 @@
     .photo-placeholder {
       width: 100px;
       flex-shrink: 0;
-    }
-
-    .bella-content {
-      grid-template-columns: 1fr;
     }
   }
 </style>
