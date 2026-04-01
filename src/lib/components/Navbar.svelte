@@ -14,10 +14,10 @@
   ];
 
   const moreLinks = [
-    { href: '/resume',    label: 'Resume' },
-    { href: '/tutorials', label: 'Tutorials' },
-    { href: '/notes',     label: 'Notes' },
-    { href: '/terminal',  label: 'Terminal' }
+    { href: '/resume',    label: 'Resume',    external: false, wip: true },
+    { href: '/tutorials', label: 'Tutorials', external: false, wip: true },
+    { href: '/notes',     label: 'Notes',     external: false, wip: true },
+    { href: '/terminal',  label: 'Terminal',  external: false, wip: true }
   ];
 
   // Breadcrumb

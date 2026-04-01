@@ -1,0 +1,388 @@
+
+> web-portfolio@0.0.1 build
+> vite build
+
+[36mvite v7.3.1 [32mbuilding ssr environment for production...[36m[39m
+transforming...
+13.45.53 [vite-plugin-svelte] src/routes/about/+page.svelte:105:2 Unused CSS selector ".breadcrumb"
+https://svelte.dev/e/css_unused_selector
+103: 
+104:   /* Breadcrumb */
+105:   .breadcrumb {
+                  ^
+106:     display: flex;
+107:     align-items: center;
+13.45.53 [vite-plugin-svelte] src/routes/about/+page.svelte:114:2 Unused CSS selector ".bc-link"
+https://svelte.dev/e/css_unused_selector
+112:   }
+113: 
+114:   .bc-link { color: var(--accent); text-decoration: none; font-weight: 600; }
+               ^
+115:   .bc-link:hover { opacity: 0.75; }
+116:   .bc-sep { color: var(--ctp-overlay0); }
+13.45.53 [vite-plugin-svelte] src/routes/about/+page.svelte:115:2 Unused CSS selector ".bc-link:hover"
+https://svelte.dev/e/css_unused_selector
+113: 
+114:   .bc-link { color: var(--accent); text-decoration: none; font-weight: 600; }
+115:   .bc-link:hover { opacity: 0.75; }
+                     ^
+116:   .bc-sep { color: var(--ctp-overlay0); }
+117:   .bc-current { color: var(--ctp-subtext0); }
+13.45.53 [vite-plugin-svelte] src/routes/about/+page.svelte:116:2 Unused CSS selector ".bc-sep"
+https://svelte.dev/e/css_unused_selector
+114:   .bc-link { color: var(--accent); text-decoration: none; font-weight: 600; }
+115:   .bc-link:hover { opacity: 0.75; }
+116:   .bc-sep { color: var(--ctp-overlay0); }
+              ^
+117:   .bc-current { color: var(--ctp-subtext0); }
+118: 
+13.45.53 [vite-plugin-svelte] src/routes/about/+page.svelte:117:2 Unused CSS selector ".bc-current"
+https://svelte.dev/e/css_unused_selector
+115:   .bc-link:hover { opacity: 0.75; }
+116:   .bc-sep { color: var(--ctp-overlay0); }
+117:   .bc-current { color: var(--ctp-subtext0); }
+                  ^
+118: 
+119:   /* Title */
+13.45.53 [vite-plugin-svelte] src/routes/about/+page.svelte:219:2 Unused CSS selector ".star-count"
+https://svelte.dev/e/css_unused_selector
+217:   .inline-link:hover { opacity: 0.75; }
+218: 
+219:   .star-count {
+                  ^
+220:     display: inline-flex;
+221:     align-items: center;
+13.45.53 [vite-plugin-svelte] src/routes/projects/+page.svelte:200:2 Unused CSS selector ".breadcrumb"
+https://svelte.dev/e/css_unused_selector
+198:   }
+199: 
+200:   .breadcrumb {
+                  ^
+201:     display: flex;
+202:     align-items: center;
+13.45.53 [vite-plugin-svelte] src/routes/projects/+page.svelte:209:2 Unused CSS selector ".bc-link"
+https://svelte.dev/e/css_unused_selector
+207:   }
+208: 
+209:   .bc-link {
+               ^
+210:     color: var(--accent);
+211:     text-decoration: none;
+13.45.53 [vite-plugin-svelte] src/routes/projects/+page.svelte:215:2 Unused CSS selector ".bc-link:hover"
+https://svelte.dev/e/css_unused_selector
+213:   }
+214: 
+215:   .bc-link:hover { opacity: 0.75; }
+                     ^
+216:   .bc-sep { color: var(--ctp-overlay0); }
+217:   .bc-current { color: var(--ctp-subtext0); }
+13.45.53 [vite-plugin-svelte] src/routes/projects/+page.svelte:216:2 Unused CSS selector ".bc-sep"
+https://svelte.dev/e/css_unused_selector
+214: 
+215:   .bc-link:hover { opacity: 0.75; }
+216:   .bc-sep { color: var(--ctp-overlay0); }
+              ^
+217:   .bc-current { color: var(--ctp-subtext0); }
+218: 
+13.45.53 [vite-plugin-svelte] src/routes/projects/+page.svelte:217:2 Unused CSS selector ".bc-current"
+https://svelte.dev/e/css_unused_selector
+215:   .bc-link:hover { opacity: 0.75; }
+216:   .bc-sep { color: var(--ctp-overlay0); }
+217:   .bc-current { color: var(--ctp-subtext0); }
+                  ^
+218: 
+219:   .page-title {
+13.45.53 [vite-plugin-svelte] src/routes/posts/+page.svelte:128:2 Unused CSS selector ".breadcrumb"
+https://svelte.dev/e/css_unused_selector
+126:   }
+127: 
+128:   .breadcrumb {
+                  ^
+129:     display: flex;
+130:     align-items: center;
+13.45.53 [vite-plugin-svelte] src/routes/posts/+page.svelte:137:2 Unused CSS selector ".bc-link"
+https://svelte.dev/e/css_unused_selector
+135:   }
+136: 
+137:   .bc-link {
+               ^
+138:     color: var(--accent);
+139:     text-decoration: none;
+13.45.53 [vite-plugin-svelte] src/routes/posts/+page.svelte:143:2 Unused CSS selector ".bc-link:hover"
+https://svelte.dev/e/css_unused_selector
+141:   }
+142: 
+143:   .bc-link:hover { opacity: 0.75; }
+                     ^
+144: 
+145:   .bc-sep { color: var(--ctp-overlay0); }
+13.45.53 [vite-plugin-svelte] src/routes/posts/+page.svelte:145:2 Unused CSS selector ".bc-sep"
+https://svelte.dev/e/css_unused_selector
+143:   .bc-link:hover { opacity: 0.75; }
+144: 
+145:   .bc-sep { color: var(--ctp-overlay0); }
+              ^
+146:   .bc-current { color: var(--ctp-subtext0); }
+147: 
+13.45.53 [vite-plugin-svelte] src/routes/posts/+page.svelte:146:2 Unused CSS selector ".bc-current"
+https://svelte.dev/e/css_unused_selector
+144: 
+145:   .bc-sep { color: var(--ctp-overlay0); }
+146:   .bc-current { color: var(--ctp-subtext0); }
+                  ^
+147: 
+148:   .page-title {
+13.45.53 [vite-plugin-svelte] src/lib/components/Hero.svelte:109:2 Unused CSS selector ".ref-link"
+https://svelte.dev/e/css_unused_selector
+107:   }
+108: 
+109:   .ref-link {
+                ^
+110:     color: var(--accent);
+111:     font-size: 0.75rem;
+[32mΓ£ô[39m 3789 modules transformed.
+rendering chunks...
+[36mvite v7.3.1 [32mbuilding client environment for production...[36m[39m
+transforming...
+13.46.01 [vite-plugin-svelte] src/routes/about/+page.svelte:105:2 Unused CSS selector ".breadcrumb"
+https://svelte.dev/e/css_unused_selector
+103: 
+104:   /* Breadcrumb */
+105:   .breadcrumb {
+                  ^
+106:     display: flex;
+107:     align-items: center;
+13.46.01 [vite-plugin-svelte] src/routes/about/+page.svelte:114:2 Unused CSS selector ".bc-link"
+https://svelte.dev/e/css_unused_selector
+112:   }
+113: 
+114:   .bc-link { color: var(--accent); text-decoration: none; font-weight: 600; }
+               ^
+115:   .bc-link:hover { opacity: 0.75; }
+116:   .bc-sep { color: var(--ctp-overlay0); }
+13.46.01 [vite-plugin-svelte] src/routes/about/+page.svelte:115:2 Unused CSS selector ".bc-link:hover"
+https://svelte.dev/e/css_unused_selector
+113: 
+114:   .bc-link { color: var(--accent); text-decoration: none; font-weight: 600; }
+115:   .bc-link:hover { opacity: 0.75; }
+                     ^
+116:   .bc-sep { color: var(--ctp-overlay0); }
+117:   .bc-current { color: var(--ctp-subtext0); }
+13.46.01 [vite-plugin-svelte] src/routes/about/+page.svelte:116:2 Unused CSS selector ".bc-sep"
+https://svelte.dev/e/css_unused_selector
+114:   .bc-link { color: var(--accent); text-decoration: none; font-weight: 600; }
+115:   .bc-link:hover { opacity: 0.75; }
+116:   .bc-sep { color: var(--ctp-overlay0); }
+              ^
+117:   .bc-current { color: var(--ctp-subtext0); }
+118: 
+13.46.01 [vite-plugin-svelte] src/routes/about/+page.svelte:117:2 Unused CSS selector ".bc-current"
+https://svelte.dev/e/css_unused_selector
+115:   .bc-link:hover { opacity: 0.75; }
+116:   .bc-sep { color: var(--ctp-overlay0); }
+117:   .bc-current { color: var(--ctp-subtext0); }
+                  ^
+118: 
+119:   /* Title */
+13.46.01 [vite-plugin-svelte] src/routes/about/+page.svelte:219:2 Unused CSS selector ".star-count"
+https://svelte.dev/e/css_unused_selector
+217:   .inline-link:hover { opacity: 0.75; }
+218: 
+219:   .star-count {
+                  ^
+220:     display: inline-flex;
+221:     align-items: center;
+13.46.01 [vite-plugin-svelte] src/routes/posts/+page.svelte:128:2 Unused CSS selector ".breadcrumb"
+https://svelte.dev/e/css_unused_selector
+126:   }
+127: 
+128:   .breadcrumb {
+                  ^
+129:     display: flex;
+130:     align-items: center;
+13.46.01 [vite-plugin-svelte] src/routes/posts/+page.svelte:137:2 Unused CSS selector ".bc-link"
+https://svelte.dev/e/css_unused_selector
+135:   }
+136: 
+137:   .bc-link {
+               ^
+138:     color: var(--accent);
+139:     text-decoration: none;
+13.46.01 [vite-plugin-svelte] src/routes/posts/+page.svelte:143:2 Unused CSS selector ".bc-link:hover"
+https://svelte.dev/e/css_unused_selector
+141:   }
+142: 
+143:   .bc-link:hover { opacity: 0.75; }
+                     ^
+144: 
+145:   .bc-sep { color: var(--ctp-overlay0); }
+13.46.01 [vite-plugin-svelte] src/routes/posts/+page.svelte:145:2 Unused CSS selector ".bc-sep"
+https://svelte.dev/e/css_unused_selector
+143:   .bc-link:hover { opacity: 0.75; }
+144: 
+145:   .bc-sep { color: var(--ctp-overlay0); }
+              ^
+146:   .bc-current { color: var(--ctp-subtext0); }
+147: 
+13.46.01 [vite-plugin-svelte] src/routes/posts/+page.svelte:146:2 Unused CSS selector ".bc-current"
+https://svelte.dev/e/css_unused_selector
+144: 
+145:   .bc-sep { color: var(--ctp-overlay0); }
+146:   .bc-current { color: var(--ctp-subtext0); }
+                  ^
+147: 
+148:   .page-title {
+13.46.01 [vite-plugin-svelte] src/routes/projects/+page.svelte:200:2 Unused CSS selector ".breadcrumb"
+https://svelte.dev/e/css_unused_selector
+198:   }
+199: 
+200:   .breadcrumb {
+                  ^
+201:     display: flex;
+202:     align-items: center;
+13.46.01 [vite-plugin-svelte] src/routes/projects/+page.svelte:209:2 Unused CSS selector ".bc-link"
+https://svelte.dev/e/css_unused_selector
+207:   }
+208: 
+209:   .bc-link {
+               ^
+210:     color: var(--accent);
+211:     text-decoration: none;
+13.46.01 [vite-plugin-svelte] src/routes/projects/+page.svelte:215:2 Unused CSS selector ".bc-link:hover"
+https://svelte.dev/e/css_unused_selector
+213:   }
+214: 
+215:   .bc-link:hover { opacity: 0.75; }
+                     ^
+216:   .bc-sep { color: var(--ctp-overlay0); }
+217:   .bc-current { color: var(--ctp-subtext0); }
+13.46.01 [vite-plugin-svelte] src/routes/projects/+page.svelte:216:2 Unused CSS selector ".bc-sep"
+https://svelte.dev/e/css_unused_selector
+214: 
+215:   .bc-link:hover { opacity: 0.75; }
+216:   .bc-sep { color: var(--ctp-overlay0); }
+              ^
+217:   .bc-current { color: var(--ctp-subtext0); }
+218: 
+13.46.01 [vite-plugin-svelte] src/routes/projects/+page.svelte:217:2 Unused CSS selector ".bc-current"
+https://svelte.dev/e/css_unused_selector
+215:   .bc-link:hover { opacity: 0.75; }
+216:   .bc-sep { color: var(--ctp-overlay0); }
+217:   .bc-current { color: var(--ctp-subtext0); }
+                  ^
+218: 
+219:   .page-title {
+13.46.02 [vite-plugin-svelte] src/lib/components/Hero.svelte:109:2 Unused CSS selector ".ref-link"
+https://svelte.dev/e/css_unused_selector
+107:   }
+108: 
+109:   .ref-link {
+                ^
+110:     color: var(--accent);
+111:     font-size: 0.75rem;
+[32mΓ£ô[39m 3804 modules transformed.
+rendering chunks...
+computing gzip size...
+[2m.svelte-kit/output/client/[22m[32m_app/version.json                                                        [39m[1m[2m 0.03 kB[22m[1m[22m[2m Γöé gzip:  0.05 kB[22m
+[2m.svelte-kit/output/client/[22m[32m_app/immutable/assets/montserrat-vietnamese-500-normal.DpeZlV_K.woff     [39m[1m[2m 7.25 kB[22m[1m[22m
+[2m.svelte-kit/output/client/[22m[32m_app/immutable/assets/montserrat-vietnamese-400-normal.BeEscFYY.woff     [39m[1m[2m 7.27 kB[22m[1m[22m
+[2m.svelte-kit/output/client/[22m[32m_app/immutable/assets/montserrat-vietnamese-700-normal.DnwGT2D9.woff     [39m[1m[2m 7.30 kB[22m[1m[22m
+[2m.svelte-kit/output/client/[22m[32m_app/immutable/assets/montserrat-vietnamese-600-normal.SJ-HTWuM.woff     [39m[1m[2m 7.30 kB[22m[1m[22m
+[2m.svelte-kit/output/client/[22m[32m_app/immutable/assets/montserrat-vietnamese-500-normal.NT-t8RG1.woff2    [39m[1m[2m 7.87 kB[22m[1m[22m
+[2m.svelte-kit/output/client/[22m[32m_app/immutable/assets/montserrat-vietnamese-400-normal.D4oHqQTd.woff2    [39m[1m[2m 7.90 kB[22m[1m[22m
+[2m.svelte-kit/output/client/[22m[32m_app/immutable/assets/montserrat-vietnamese-700-normal.C0x1De3p.woff2    [39m[1m[2m 7.90 kB[22m[1m[22m
+[2m.svelte-kit/output/client/[22m[32m_app/immutable/assets/montserrat-vietnamese-600-normal.DKe6qT_E.woff2    [39m[1m[2m 7.90 kB[22m[1m[22m
+[2m.svelte-kit/output/client/[22m[32m_app/immutable/assets/montserrat-cyrillic-400-normal.jEs4Tk-Z.woff       [39m[1m[2m10.91 kB[22m[1m[22m
+[2m.svelte-kit/output/client/[22m[32m_app/immutable/assets/montserrat-cyrillic-700-normal.BvLYcGP1.woff       [39m[1m[2m10.93 kB[22m[1m[22m
+[2m.svelte-kit/output/client/[22m[32m_app/immutable/assets/montserrat-cyrillic-600-normal.DUglwBrH.woff       [39m[1m[2m10.98 kB[22m[1m[22m
+[2m.svelte-kit/output/client/[22m[32m_app/immutable/assets/montserrat-cyrillic-400-normal.BPq32Q8K.woff2      [39m[1m[2m10.98 kB[22m[1m[22m
+[2m.svelte-kit/output/client/[22m[32m_app/immutable/assets/montserrat-cyrillic-500-normal.CyGtXmN9.woff       [39m[1m[2m10.99 kB[22m[1m[22m
+[2m.svelte-kit/output/client/[22m[32m_app/immutable/assets/montserrat-cyrillic-600-normal.CQEPC0hM.woff2      [39m[1m[2m11.12 kB[22m[1m[22m
+[2m.svelte-kit/output/client/[22m[32m_app/immutable/assets/montserrat-cyrillic-500-normal.T0SG181k.woff2      [39m[1m[2m11.13 kB[22m[1m[22m
+[2m.svelte-kit/output/client/[22m[32m_app/immutable/assets/montserrat-cyrillic-700-normal.D-Pqjtdp.woff2      [39m[1m[2m11.16 kB[22m[1m[22m
+[2m.svelte-kit/output/client/[22m[32m_app/immutable/assets/montserrat-cyrillic-ext-400-normal.Xqov12YL.woff2  [39m[1m[2m11.94 kB[22m[1m[22m
+[2m.svelte-kit/output/client/[22m[32m_app/immutable/assets/montserrat-cyrillic-ext-500-normal.11xBT7e1.woff2  [39m[1m[2m11.96 kB[22m[1m[22m
+[2m.svelte-kit/output/client/[22m[32m_app/immutable/assets/montserrat-cyrillic-ext-500-normal.DOzfAZ45.woff   [39m[1m[2m12.06 kB[22m[1m[22m
+[2m.svelte-kit/output/client/[22m[32m_app/immutable/assets/montserrat-cyrillic-ext-600-normal.BtBW-rpm.woff2  [39m[1m[2m12.06 kB[22m[1m[22m
+[2m.svelte-kit/output/client/[22m[32m_app/immutable/assets/montserrat-cyrillic-ext-700-normal.MyDreaeu.woff2  [39m[1m[2m12.06 kB[22m[1m[22m
+[2m.svelte-kit/output/client/[22m[32m_app/immutable/assets/montserrat-cyrillic-ext-700-normal.D-Mk2xRJ.woff   [39m[1m[2m12.08 kB[22m[1m[22m
+[2m.svelte-kit/output/client/[22m[32m_app/immutable/assets/montserrat-cyrillic-ext-600-normal.wReYPmz2.woff   [39m[1m[2m12.08 kB[22m[1m[22m
+[2m.svelte-kit/output/client/[22m[32m_app/immutable/assets/montserrat-cyrillic-ext-400-normal.DRPPeomZ.woff   [39m[1m[2m12.09 kB[22m[1m[22m
+[2m.svelte-kit/output/client/[22m[32m_app/immutable/assets/montserrat-latin-600-normal.UVxSCcoG.woff2         [39m[1m[2m18.69 kB[22m[1m[22m
+[2m.svelte-kit/output/client/[22m[32m_app/immutable/assets/montserrat-latin-500-normal.DRFEGfly.woff2         [39m[1m[2m18.75 kB[22m[1m[22m
+[2m.svelte-kit/output/client/[22m[32m_app/immutable/assets/montserrat-latin-400-normal.BLhwKU8k.woff2         [39m[1m[2m18.78 kB[22m[1m[22m
+[2m.svelte-kit/output/client/[22m[32m_app/immutable/assets/montserrat-latin-700-normal.BdjcYUrC.woff2         [39m[1m[2m18.82 kB[22m[1m[22m
+[2m.svelte-kit/output/client/[22m[32m.vite/manifest.json                                                      [39m[1m[2m18.92 kB[22m[1m[22m[2m Γöé gzip:  1.80 kB[22m
+[2m.svelte-kit/output/client/[22m[32m_app/immutable/assets/montserrat-latin-600-normal.CdhFl4lI.woff          [39m[1m[2m20.55 kB[22m[1m[22m
+[2m.svelte-kit/output/client/[22m[32m_app/immutable/assets/montserrat-latin-500-normal.Dok2oTci.woff          [39m[1m[2m20.61 kB[22m[1m[22m
+[2m.svelte-kit/output/client/[22m[32m_app/immutable/assets/montserrat-latin-400-normal.xItZbAXg.woff          [39m[1m[2m20.65 kB[22m[1m[22m
+[2m.svelte-kit/output/client/[22m[32m_app/immutable/assets/montserrat-latin-700-normal.BWkrl476.woff          [39m[1m[2m20.67 kB[22m[1m[22m
+[2m.svelte-kit/output/client/[22m[32m_app/immutable/assets/montserrat-latin-ext-400-normal.B8bwfy6Y.woff2     [39m[1m[2m32.27 kB[22m[1m[22m
+[2m.svelte-kit/output/client/[22m[32m_app/immutable/assets/montserrat-latin-ext-500-normal.BKtbrd6n.woff2     [39m[1m[2m32.29 kB[22m[1m[22m
+[2m.svelte-kit/output/client/[22m[32m_app/immutable/assets/montserrat-latin-ext-600-normal.DSkTqI9L.woff2     [39m[1m[2m33.19 kB[22m[1m[22m
+[2m.svelte-kit/output/client/[22m[32m_app/immutable/assets/montserrat-latin-ext-700-normal.BOP2Nhf0.woff2     [39m[1m[2m33.53 kB[22m[1m[22m
+[2m.svelte-kit/output/client/[22m[32m_app/immutable/assets/montserrat-latin-ext-400-normal.BffdBkAA.woff      [39m[1m[2m40.37 kB[22m[1m[22m
+[2m.svelte-kit/output/client/[22m[32m_app/immutable/assets/montserrat-latin-ext-500-normal.DWPqqZgs.woff      [39m[1m[2m40.39 kB[22m[1m[22m
+[2m.svelte-kit/output/client/[22m[32m_app/immutable/assets/montserrat-latin-ext-600-normal.CSDhkhgS.woff      [39m[1m[2m41.04 kB[22m[1m[22m
+[2m.svelte-kit/output/client/[22m[32m_app/immutable/assets/montserrat-latin-ext-700-normal.DdDFr05Z.woff      [39m[1m[2m41.34 kB[22m[1m[22m
+[2m.svelte-kit/output/client/[22m[35m_app/immutable/assets/4.8E3GuV0e.css                                     [39m[1m[2m 1.90 kB[22m[1m[22m[2m Γöé gzip:  0.74 kB[22m
+[2m.svelte-kit/output/client/[22m[35m_app/immutable/assets/5.C8P3zsGQ.css                                     [39m[1m[2m 3.03 kB[22m[1m[22m[2m Γöé gzip:  0.98 kB[22m
+[2m.svelte-kit/output/client/[22m[35m_app/immutable/assets/3.CH2ARiaP.css                                     [39m[1m[2m 3.48 kB[22m[1m[22m[2m Γöé gzip:  0.99 kB[22m
+[2m.svelte-kit/output/client/[22m[35m_app/immutable/assets/1.YhxtvPH7.css                                     [39m[1m[2m 5.44 kB[22m[1m[22m[2m Γöé gzip:  1.55 kB[22m
+[2m.svelte-kit/output/client/[22m[35m_app/immutable/assets/Footer.B2yc_-JO.css                                [39m[1m[2m 8.49 kB[22m[1m[22m[2m Γöé gzip:  1.90 kB[22m
+[2m.svelte-kit/output/client/[22m[35m_app/immutable/assets/2.CIhAwGdL.css                                     [39m[1m[2m12.37 kB[22m[1m[22m[2m Γöé gzip:  2.65 kB[22m
+[2m.svelte-kit/output/client/[22m[35m_app/immutable/assets/0.CBbqU96n.css                                     [39m[1m[2m14.22 kB[22m[1m[22m[2m Γöé gzip:  3.23 kB[22m
+[2m.svelte-kit/output/client/[22m[36m_app/immutable/entry/start.BmnScXEE.js                                   [39m[1m[2m 0.08 kB[22m[1m[22m[2m Γöé gzip:  0.09 kB[22m
+[2m.svelte-kit/output/client/[22m[36m_app/immutable/chunks/BDcRqe8j.js                                        [39m[1m[2m 0.38 kB[22m[1m[22m[2m Γöé gzip:  0.28 kB[22m
+[2m.svelte-kit/output/client/[22m[36m_app/immutable/chunks/Deu735n4.js                                        [39m[1m[2m 1.14 kB[22m[1m[22m[2m Γöé gzip:  0.55 kB[22m
+[2m.svelte-kit/output/client/[22m[36m_app/immutable/nodes/0.PWiLTvFq.js                                       [39m[1m[2m 1.45 kB[22m[1m[22m[2m Γöé gzip:  0.84 kB[22m
+[2m.svelte-kit/output/client/[22m[36m_app/immutable/chunks/xi3WCi6s.js                                        [39m[1m[2m 2.81 kB[22m[1m[22m[2m Γöé gzip:  1.39 kB[22m
+[2m.svelte-kit/output/client/[22m[36m_app/immutable/chunks/DufjO3q7.js                                        [39m[1m[2m 3.21 kB[22m[1m[22m[2m Γöé gzip:  1.47 kB[22m
+[2m.svelte-kit/output/client/[22m[36m_app/immutable/nodes/4.k-UP1pXu.js                                       [39m[1m[2m 3.60 kB[22m[1m[22m[2m Γöé gzip:  1.68 kB[22m
+[2m.svelte-kit/output/client/[22m[36m_app/immutable/nodes/1.CKV1wRbO.js                                       [39m[1m[2m 4.31 kB[22m[1m[22m[2m Γöé gzip:  1.88 kB[22m
+[2m.svelte-kit/output/client/[22m[36m_app/immutable/nodes/3.BamwYm7y.js                                       [39m[1m[2m 5.03 kB[22m[1m[22m[2m Γöé gzip:  2.12 kB[22m
+[2m.svelte-kit/output/client/[22m[36m_app/immutable/entry/app.CdHfvvUN.js                                     [39m[1m[2m 6.57 kB[22m[1m[22m[2m Γöé gzip:  2.99 kB[22m
+[2m.svelte-kit/output/client/[22m[36m_app/immutable/nodes/5.C2velYqh.js                                       [39m[1m[2m 7.00 kB[22m[1m[22m[2m Γöé gzip:  2.70 kB[22m
+[2m.svelte-kit/output/client/[22m[36m_app/immutable/chunks/BSwjXZ2y.js                                        [39m[1m[2m 9.61 kB[22m[1m[22m[2m Γöé gzip:  4.18 kB[22m
+[2m.svelte-kit/output/client/[22m[36m_app/immutable/nodes/2.foFAazwA.js                                       [39m[1m[2m19.68 kB[22m[1m[22m[2m Γöé gzip:  6.89 kB[22m
+[2m.svelte-kit/output/client/[22m[36m_app/immutable/chunks/ByeH_rFV.js                                        [39m[1m[2m22.84 kB[22m[1m[22m[2m Γöé gzip:  9.53 kB[22m
+[2m.svelte-kit/output/client/[22m[36m_app/immutable/chunks/DCMWuHBs.js                                        [39m[1m[2m25.92 kB[22m[1m[22m[2m Γöé gzip: 10.16 kB[22m
+[2m.svelte-kit/output/client/[22m[36m_app/immutable/chunks/DAhF4zY_.js                                        [39m[1m[2m26.26 kB[22m[1m[22m[2m Γöé gzip: 10.30 kB[22m
+[32mΓ£ô built in 8.71s[39m
+
+[404] GET /resume
+[prerender] Skipping WIP page: /resume
+
+[404] GET /tutorials
+[prerender] Skipping WIP page: /tutorials
+
+[404] GET /notes
+[prerender] Skipping WIP page: /notes
+
+[404] GET /terminal
+[prerender] Skipping WIP page: /terminal
+
+[404] GET /projects/anubis
+
+[404] GET /projects/abacus
+
+[404] GET /posts/aws-lambda-handler-gotchas
+
+[404] GET /posts/aws-cdk-sso-hell
+
+[404] GET /posts/hello-world
+
+[404] GET /posts/fastapi-cancel-on-disconnect
+
+[404] GET /posts/agno-stop-button
+
+node:internal/event_target:1101
+  process.nextTick(() => { throw err; });
+                           ^
+Error: 404 /projects/anubis (linked from /)
+    at handleHttpError (file:///C:/Shared/Coding/web-portfolio/svelte.config.js?ts=1775025970610:31:11)
+    at file:///C:/Shared/Coding/web-portfolio/node_modules/@sveltejs/kit/src/core/postbuild/prerender.js:75:25
+    at save (file:///C:/Shared/Coding/web-portfolio/node_modules/@sveltejs/kit/src/core/postbuild/prerender.js:464:4)
+    at visit (file:///C:/Shared/Coding/web-portfolio/node_modules/@sveltejs/kit/src/core/postbuild/prerender.js:283:3)
+
+Node.js v22.19.0
