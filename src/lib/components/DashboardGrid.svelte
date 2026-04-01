@@ -84,7 +84,7 @@
           <span class="card-title">Let's Connect</span>
         </div>
         <p class="connect-text">Always open to interesting projects and conversations.</p>
-        <a href="https://cal.com/jsoncam/15min" target="_blank" rel="noopener noreferrer" class="btn btn-accent connect-btn">
+        <a href="mailto:hello@example.com" class="btn btn-accent connect-btn">
           <CalendarDays size={16} />
           Book a Chat
         </a>
@@ -105,12 +105,12 @@
                 <div class="map-line"></div>
               {/each}
             </div>
-            <span class="map-label">TORONTO</span>
+            <span class="map-label">JAKARTA</span>
           </div>
         </div>
 
         <div class="location-footer">
-          <span class="location-name">Toronto, ON</span>
+          <span class="location-name">Jakarta, ID</span>
           <span class="location-time">
             🌙 {localTime}
           </span>
