@@ -135,9 +135,9 @@
     </div>
   </div>
 
-  {#if hoveredProjectObj && hoveredProjectObj.gif}
+  {#if hoveredProjectObj && (hoveredProjectObj.gif || hoveredProjectObj.image)}
     <!-- svelte-ignore a11y_no_static_element_interactions -->
-    <div class="floating-video-popup" style="--x: {mouseX + 20}px; --y: {mouseY + 20}px; background-image: url('{hoveredProjectObj.gif}');"></div>
+    <div class="floating-video-popup" style="--x: {mouseX + 20}px; --y: {mouseY + 20}px; background-image: url('{hoveredProjectObj.gif || hoveredProjectObj.image}');"></div>
   {/if}
 </section>
 

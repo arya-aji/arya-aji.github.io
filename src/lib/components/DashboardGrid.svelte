@@ -111,7 +111,7 @@
           <span class="card-title">Let's Connect</span>
         </div>
         <p class="connect-text">Always open to interesting projects and conversations.</p>
-        <a href="mailto:hello@example.com" class="btn btn-accent connect-btn">
+        <a href="mailto:aryaaku999@gmail.com" class="btn btn-accent connect-btn">
           <CalendarDays size={16} />
           Book a Chat
         </a>
