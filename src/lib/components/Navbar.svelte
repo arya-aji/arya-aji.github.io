@@ -4,7 +4,6 @@
   import { theme, accent, bgEffect, ACCENT_COLORS, THEME_FLAVORS } from '$lib/stores/theme';
   import type { ThemeFlavor, AccentColor } from '$lib/stores/theme';
 
-  let mobileOpen = $state(false);
   let navPanelOpen = $state(false);
 
   const navLinks = [
@@ -80,29 +79,12 @@
     <!-- Mobile hamburger -->
     <button
       class="mobile-toggle mobile-only"
-      onclick={() => (mobileOpen = !mobileOpen)}
+      onclick={() => (navPanelOpen = true)}
       aria-label="Toggle menu"
     >
-      {#if mobileOpen}
-        <X size={24} />
-      {:else}
-        <Menu size={24} />
-      {/if}
+      <Menu size={24} />
     </button>
   </div>
-
-  <!-- Mobile dropdown menu -->
-  {#if mobileOpen}
-    <div class="mobile-menu">
-      {#each navLinks as link}
-        <a href={link.href} class="mobile-link" onclick={() => (mobileOpen = false)}>{link.label}</a>
-      {/each}
-      <div class="mobile-divider"></div>
-      {#each moreLinks as link}
-        <a href={link.href} class="mobile-link" onclick={() => (mobileOpen = false)}>{link.label}</a>
-      {/each}
-    </div>
-  {/if}
 </nav>
 
 <!-- Backdrop -->
@@ -257,20 +239,6 @@
     cursor: pointer; padding: 8px; border-radius: 8px; transition: background 0.2s;
   }
   .mobile-toggle:hover { background: var(--ctp-surface0); }
-  .mobile-menu {
-    padding: 16px 24px;
-    border-top: 1px solid var(--ctp-surface0);
-    display: flex; flex-direction: column; gap: 4px;
-    animation: mobile-in 0.2s ease;
-  }
-  @keyframes mobile-in { from { opacity: 0; transform: translateY(-8px); } to { opacity: 1; transform: translateY(0); } }
-  .mobile-link {
-    padding: 12px 16px; border-radius: 8px;
-    font-size: 0.95rem; font-weight: 500;
-    color: var(--ctp-subtext1); text-decoration: none; transition: all 0.15s ease;
-  }
-  .mobile-link:hover { background: var(--ctp-surface0); color: var(--accent); opacity: 1; }
-  .mobile-divider { height: 1px; background: var(--ctp-surface0); margin: 8px 0; }
   .desktop-only { display: flex; }
   .mobile-only { display: none; }
   @media (max-width: 768px) {

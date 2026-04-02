@@ -1,6 +1,7 @@
 <script lang="ts">
   import Navbar from '$lib/components/Navbar.svelte';
   import Footer from '$lib/components/Footer.svelte';
+  import { ChevronLeft, ChevronRight } from 'lucide-svelte';
 
   interface Post {
     slug: string;
@@ -74,6 +75,12 @@
     redis: 'var(--ctp-red)',
     async2: 'var(--ctp-sky)'
   };
+  
+  let currentPage = $state(1);
+  const itemsPerPage = 4; // Display 4 posts per page
+  
+  let totalPages = $derived(Math.ceil(posts.length / itemsPerPage));
+  let paginatedPosts = $derived(posts.slice((currentPage - 1) * itemsPerPage, currentPage * itemsPerPage));
 </script>
 
 <svelte:head>
@@ -91,23 +98,60 @@
     <p class="page-subtitle">Thoughts on software, systems, and whatever else is rattling around my head.</p>
 
     <div class="posts-list">
-      {#each posts as post}
+      {#each paginatedPosts as post}
         <a href="/posts/{post.slug}" class="post-card">
-          <div class="post-meta">
-            <time class="post-date" datetime={post.date}>{post.dateDisplay}</time>
+          <div class="post-content">
+            <div class="post-meta">
+              <time class="post-date" datetime={post.date}>{post.dateDisplay}</time>
+            </div>
+            <h2 class="post-title">{post.title}</h2>
+            <p class="post-summary">{post.summary}</p>
+            <div class="post-tags">
+              {#each post.tags as tag}
+                <span class="tag" style="--tag-color: {tagColors[tag] ?? 'var(--accent)'}">
+                  {tag}
+                </span>
+              {/each}
+            </div>
           </div>
-          <h2 class="post-title">{post.title}</h2>
-          <p class="post-summary">{post.summary}</p>
-          <div class="post-tags">
-            {#each post.tags as tag}
-              <span class="tag" style="--tag-color: {tagColors[tag] ?? 'var(--accent)'}">
-                {tag}
-              </span>
-            {/each}
+          <div class="post-image-placeholder">
+            <svg xmlns="http://www.w3.org/2000/svg" width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><rect width="18" height="18" x="3" y="3" rx="2" ry="2"/><circle cx="9" cy="9" r="2"/><path d="m21 15-3.086-3.086a2 2 0 0 0-2.828 0L6 21"/></svg>
           </div>
         </a>
       {/each}
     </div>
+
+    <!-- Pagination Controls -->
+    {#if totalPages > 1}
+      <div class="pagination">
+        <button 
+          class="page-btn" 
+          disabled={currentPage === 1} 
+          onclick={() => currentPage--}
+        >
+          <ChevronLeft size={16} /> Previous
+        </button>
+        
+        <div class="page-numbers">
+          {#each Array(totalPages) as _, i}
+            <button 
+              class="page-num {currentPage === i + 1 ? 'active' : ''}" 
+              onclick={() => currentPage = i + 1}
+            >
+              {i + 1}
+            </button>
+          {/each}
+        </div>
+
+        <button 
+          class="page-btn" 
+          disabled={currentPage === totalPages} 
+          onclick={() => currentPage++}
+        >
+          Next <ChevronRight size={16} />
+        </button>
+      </div>
+    {/if}
   </div>
 </main>
 
@@ -124,26 +168,6 @@
     margin: 0 auto;
     padding: 0 24px;
   }
-
-  .breadcrumb {
-    display: flex;
-    align-items: center;
-    gap: 6px;
-    margin-bottom: 32px;
-    font-size: 0.85rem;
-    font-family: 'JetBrains Mono', 'Fira Code', monospace;
-  }
-
-  .bc-link {
-    color: var(--accent);
-    text-decoration: none;
-    font-weight: 600;
-  }
-
-  .bc-link:hover { opacity: 0.75; }
-
-  .bc-sep { color: var(--ctp-overlay0); }
-  .bc-current { color: var(--ctp-subtext0); }
 
   .page-title {
     font-size: 2.4rem;
@@ -166,7 +190,9 @@
   }
 
   .post-card {
-    display: block;
+    display: flex;
+    gap: 24px;
+    align-items: stretch;
     padding: 24px 28px;
     border-radius: 14px;
     background: transparent;
@@ -175,6 +201,29 @@
     color: inherit;
     transition: all 0.2s ease;
     position: relative;
+  }
+
+  .post-image-placeholder {
+    flex-shrink: 0;
+    width: 140px;
+    border-radius: 8px;
+    background: color-mix(in srgb, var(--ctp-surface0) 50%, transparent);
+    border: 1px solid var(--ctp-surface1);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: var(--ctp-overlay0);
+    transition: all 0.2s ease;
+  }
+
+  .post-card:hover .post-image-placeholder {
+    border-color: var(--accent);
+    color: var(--accent);
+    background: color-mix(in srgb, var(--accent) 10%, transparent);
+  }
+
+  .post-content {
+    flex-grow: 1;
   }
 
   .post-card::before {
@@ -252,7 +301,95 @@
 
   @media (max-width: 600px) {
     .post-card {
+      flex-direction: column;
+      gap: 16px;
       padding: 18px 16px 18px 20px;
+    }
+
+    .post-image-placeholder {
+      width: 100%;
+      aspect-ratio: 2 / 1;
+    }
+  }
+
+  /* --- Pagination --- */
+  .pagination {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 20px;
+    margin-top: 48px;
+  }
+
+  .page-btn {
+    display: flex;
+    align-items: center;
+    gap: 6px;
+    padding: 8px 16px;
+    background: var(--ctp-surface0);
+    border: 1px solid var(--ctp-surface1);
+    border-radius: 8px;
+    color: var(--ctp-text);
+    font-weight: 500;
+    font-size: 0.9rem;
+    cursor: pointer;
+    transition: all 0.2s;
+  }
+
+  .page-btn:hover:not(:disabled) {
+    background: var(--ctp-surface1);
+    color: var(--accent);
+    border-color: var(--accent);
+  }
+
+  .page-btn:disabled {
+    opacity: 0.5;
+    cursor: not-allowed;
+  }
+
+  .page-numbers {
+    display: flex;
+    gap: 8px;
+  }
+
+  .page-num {
+    width: 36px;
+    height: 36px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background: var(--ctp-mantle);
+    border: 1px solid var(--ctp-surface1);
+    border-radius: 8px;
+    color: var(--ctp-text);
+    font-weight: 600;
+    font-size: 0.9rem;
+    cursor: pointer;
+    transition: all 0.2s;
+  }
+
+  .page-num:hover:not(.active) {
+    background: var(--ctp-surface0);
+  }
+
+  .page-num.active {
+    background: var(--accent);
+    color: var(--ctp-crust);
+    border-color: var(--accent);
+  }
+
+  @media (max-width: 640px) {
+    .pagination {
+      gap: 12px;
+    }
+    .page-btn {
+      padding: 8px 12px;
+      font-size: 0.8rem;
+    }
+    .page-num {
+      width: 32px;
+      height: 32px;
+      font-size: 0.8rem;
     }
   }
 </style>

@@ -82,7 +82,7 @@ a:hover {
 }
 
 .section-link:hover {
-  text-decoration: underline;
+  text-decoration: underline dotted;
 }
 
 /* --- Card --- */

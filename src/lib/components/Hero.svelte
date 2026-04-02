@@ -144,7 +144,7 @@
 
   .bio-link {
     color: var(--accent);
-    text-decoration: underline;
+    text-decoration: underline dotted;
     text-underline-offset: 3px;
     text-decoration-thickness: 1.5px;
     font-weight: 500;

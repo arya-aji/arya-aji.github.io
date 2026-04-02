@@ -161,7 +161,7 @@
 
   .inline-link {
     color: var(--accent);
-    text-decoration: underline;
+    text-decoration: underline dotted;
     text-underline-offset: 3px;
     text-decoration-thickness: 1px;
     font-weight: 500;
