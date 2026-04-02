@@ -67,12 +67,37 @@
 <section class="dashboard section" id="dashboard">
   <div class="container">
     <div class="dashboard-grid">
+      <!-- Location Card -->
+      <div class="card dash-card location-card">
+        <div class="card-header">
+          <MapPin size={16} />
+          <span class="card-title">Currently Based In</span>
+          <span class="location-pin">📍</span>
+        </div>
+
+        <div class="map-container">
+          <div
+            bind:this={mapElement}
+            class="leaflet-container-root"
+            style="width: 100%; height: 100%; filter: grayscale(1) opacity(0.85) {$theme !== 'latte' ? 'invert(0.9) hue-rotate(180deg)' : ''};"
+          ></div>
+        </div>
+
+        <div class="location-footer">
+          <span class="location-name">Jakarta, ID</span>
+          <span class="location-time">
+            🌙 {localTime}
+          </span>
+        </div>
+      </div>
+
       <!-- Theme Card -->
       <div class="card dash-card theme-card">
         <div class="card-header">
           <Palette size={16} />
           <span class="card-title">Theme</span>
         </div>
+
 
         <div class="theme-buttons">
           {#each THEME_FLAVORS as flavor}
@@ -115,30 +140,6 @@
           <CalendarDays size={16} />
           Book a Chat
         </a>
-      </div>
-
-      <!-- Location Card -->
-      <div class="card dash-card location-card">
-        <div class="card-header">
-          <MapPin size={16} />
-          <span class="card-title">Currently Based In</span>
-          <span class="location-pin">📍</span>
-        </div>
-
-        <div class="map-container">
-          <div
-            bind:this={mapElement}
-            class="leaflet-container-root"
-            style="width: 100%; height: 100%; filter: grayscale(1) opacity(0.85) {$theme !== 'latte' ? 'invert(0.9) hue-rotate(180deg)' : ''};"
-          ></div>
-        </div>
-
-        <div class="location-footer">
-          <span class="location-name">Jakarta, ID</span>
-          <span class="location-time">
-            🌙 {localTime}
-          </span>
-        </div>
       </div>
 
       <!-- Clicker Card -->
