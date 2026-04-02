@@ -163,6 +163,7 @@
     font-size: 1.1rem;
     line-height: 1.75;
     color: var(--ctp-subtext1);
+    overflow: hidden; /* clearfix for floated images */
   }
 
   :global(.markdown-body h2) {

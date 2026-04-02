@@ -15,6 +15,7 @@ tags:
 ---
 
 <script lang="ts">
+  import FloatImage from '$lib/components/FloatImage.svelte';
   let { currentLang = 'id' } = $props();
 </script>
 
@@ -22,6 +23,8 @@ tags:
 
 
 # Halo, saya Aji 👋
+
+<FloatImage src='/posts/introduction/myself.png' alt="Foto saya" position="right" />
 
 Kalau kita ngobrol hari ini, mungkin kamu bakal langsung ngenalin saya sebagai seorang *Software Engineer*. Tapi kalau ditarik ke belakang, sebenarnya saya nggak langsung "nyemplung" di sini. Perjalanan saya justru dimulai dari tumpukan data. Dulu, hari-hari saya penuh dengan angka—mastiin semuanya valid dan rapi. Tapi jujur, ada satu hal yang bikin saya sering "geregetan": prosesnya lambat banget, serba manual, dan rasanya nggak efisien. Insight-nya sudah dekat, tapi jalannya kok muter-muter? Dari situ muncul pertanyaan simpel: **“Kenapa harus serumit ini, sih?”**
 
@@ -40,11 +43,12 @@ function solveProblem(input: any) {
 
 Perjalanan ini masih panjang, tapi saya percaya: **kalau sesuatu bisa dibuat lebih simpel, kenapa harus dibiarin ribet?**
 
-![Cover](/posts/introduction/myself.png)
 
 {:else}
 
 # Hi, I'm Aji 👋
+
+<FloatImage src='/posts/introduction/myself.png' alt="Photo of me" position="right" />
 
 If we met today, you’d probably tag me as a *Software Engineer*. But that’s actually the second chapter of my story; it all started with a deep dive into the world of data. I used to spend my days surrounded by numbers—validating, cleaning, and organizing. But I kept hitting the same wall: the processes were slow, painfully manual, and just felt "clunky." The data was there, the insights were waiting, but the path to get there was a total maze. That’s when I started asking myself: **“Does it really have to be this hard?”**
 
@@ -62,7 +66,5 @@ function solveProblem(input: any) {
 ```
 
 The journey is still unfolding, and one thing remains constant: **if it can be made simpler, it’s worth building.**
-
-![Cover](/posts/introduction/myself.png)
 
 {/if}
