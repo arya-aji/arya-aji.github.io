@@ -3,57 +3,14 @@
   import Footer from '$lib/components/Footer.svelte';
   import { ChevronLeft, ChevronRight } from 'lucide-svelte';
 
-  interface Post {
-    slug: string;
-    title: string;
-    date: string;
-    dateDisplay: string;
-    summary: string;
-    tags: string[];
-  }
+  let { data } = $props();
+  
+  let currentLang = $state('id');
 
-  const posts: Post[] = [
-    {
-      slug: 'aws-lambda-handler-gotchas',
-      title: 'AWS Lambda InvalidEntrypoint Debugging',
-      date: '2025-11-28',
-      dateDisplay: 'November 28, 2025',
-      summary: 'Runtime.InvalidEntrypoint can mean async handlers, architecture mismatches, or file permissions — CloudWatch won\'t tell you which.',
-      tags: ['aws', 'lambda', 'python', 'docker', 'debugging']
-    },
-    {
-      slug: 'aws-cdk-sso-hell',
-      title: 'AWS CDK Credentials Hell',
-      date: '2025-11-26',
-      dateDisplay: 'November 26, 2025',
-      summary: 'Fix AWS CDK InvalidClientTokenId error after migrating to AWS SSO. The solution: delete stale ~/.aws/credentials.',
-      tags: ['aws', 'cdk', 'sso', 'debugging']
-    },
-    {
-      slug: 'hello-world',
-      title: 'Hello World',
-      date: '2025-10-19',
-      dateDisplay: 'October 19, 2025',
-      summary: 'Hey there — What this site is built with and how it works.',
-      tags: ['meta', 'web-dev', 'sveltekit']
-    },
-    {
-      slug: 'fastapi-cancel-on-disconnect',
-      title: 'Stop Burning CPU on Dead FastAPI Streams',
-      date: '2025-07-06',
-      dateDisplay: 'July 06, 2025',
-      summary: 'Monitor FastAPI client connections and auto-cancel abandoned streaming tasks with structured concurrency.',
-      tags: ['fastapi', 'python', 'async', 'streaming']
-    },
-    {
-      slug: 'agno-stop-button',
-      title: 'How to Stop AI Streams in Agno',
-      date: '2025-07-05',
-      dateDisplay: 'July 05, 2025',
-      summary: 'Build reliable cancellation for Agno AI streaming with FastAPI, WebSockets, and Redis. 5 battle-tested patterns with real failure modes.',
-      tags: ['agno', 'ai-streaming', 'fastapi', 'cancellation', 'redis']
-    }
-  ];
+  let langPosts = $derived(data.posts.map((post: any) => {
+    const meta = post.meta[currentLang] || post.meta['id'] || Object.values(post.meta)[0];
+    return { ...post, activeMeta: meta };
+  }));
 
   const tagColors: Record<string, string> = {
     aws: 'var(--ctp-peach)',
@@ -75,12 +32,31 @@
     redis: 'var(--ctp-red)',
     async2: 'var(--ctp-sky)'
   };
-  
+
   let currentPage = $state(1);
   const itemsPerPage = 4; // Display 4 posts per page
   
-  let totalPages = $derived(Math.ceil(posts.length / itemsPerPage));
-  let paginatedPosts = $derived(posts.slice((currentPage - 1) * itemsPerPage, currentPage * itemsPerPage));
+  let totalPages = $derived(Math.ceil(langPosts.length / itemsPerPage));
+  let paginatedPosts = $derived(langPosts.slice((currentPage - 1) * itemsPerPage, currentPage * itemsPerPage));
+
+  $effect(() => {
+    // Reset page whenever language changes
+    currentLang;
+    currentPage = 1;
+  });
+
+  function handleCoverError(img: HTMLImageElement) {
+    const src = img.getAttribute('src') || '';
+    if (src.endsWith('.svg')) {
+      img.setAttribute('src', src.replace('.svg', '.jpg'));
+    } else if (src.endsWith('.jpg')) {
+      img.setAttribute('src', src.replace('.jpg', '.png'));
+    } else {
+      img.onerror = null;
+      img.parentElement!.style.display = 'none';
+      (img.parentElement!.nextElementSibling as HTMLElement).style.display = 'flex';
+    }
+  }
 </script>
 
 <svelte:head>
@@ -94,29 +70,68 @@
   <div class="container">
 
     <!-- Breadcrumb -->
-    <h1 class="page-title">Posts</h1>
-    <p class="page-subtitle">Thoughts on software, systems, and whatever else is rattling around my head.</p>
+    <div class="header-row">
+      <div class="header-titles">
+        <h1 class="page-title">Posts</h1>
+        <p class="page-subtitle">Thoughts on software, systems, and whatever else is rattling around my head.</p>
+      </div>
+      
+      <div class="lang-switch">
+        <button 
+          class="lang-btn {currentLang === 'id' ? 'active' : ''}" 
+          onclick={() => currentLang = 'id'}
+        >
+          ID
+        </button>
+        <button 
+          class="lang-btn {currentLang === 'en' ? 'active' : ''}" 
+          onclick={() => currentLang = 'en'}
+        >
+          EN
+        </button>
+      </div>
+    </div>
 
     <div class="posts-list">
       {#each paginatedPosts as post}
-        <a href="/posts/{post.slug}" class="post-card">
+        <a href="/posts/{post.slug}?lang={currentLang}" class="post-card">
           <div class="post-content">
             <div class="post-meta">
-              <time class="post-date" datetime={post.date}>{post.dateDisplay}</time>
+              <time class="post-date" datetime={post.activeMeta.date}>{post.activeMeta.dateDisplay}</time>
             </div>
-            <h2 class="post-title">{post.title}</h2>
-            <p class="post-summary">{post.summary}</p>
+            <h2 class="post-title">{post.activeMeta.title}</h2>
+            <p class="post-summary">{post.activeMeta.summary}</p>
             <div class="post-tags">
-              {#each post.tags as tag}
+              {#each post.activeMeta.tags as tag}
                 <span class="tag" style="--tag-color: {tagColors[tag] ?? 'var(--accent)'}">
                   {tag}
                 </span>
               {/each}
             </div>
           </div>
-          <div class="post-image-placeholder">
-            <svg xmlns="http://www.w3.org/2000/svg" width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><rect width="18" height="18" x="3" y="3" rx="2" ry="2"/><circle cx="9" cy="9" r="2"/><path d="m21 15-3.086-3.086a2 2 0 0 0-2.828 0L6 21"/></svg>
-          </div>
+          {#if post.activeMeta.image}
+            <div class="post-image">
+              <img
+                src={post.activeMeta.image}
+                alt={post.activeMeta.title}
+                onerror={(e) => { const img = e.currentTarget; img.onerror = null; img.parentElement.style.display = 'none'; img.parentElement.nextElementSibling.style.display = 'flex'; }}
+              />
+            </div>
+            <div class="post-image-placeholder" style="display:none">
+              <svg xmlns="http://www.w3.org/2000/svg" width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><rect width="18" height="18" x="3" y="3" rx="2" ry="2"/><circle cx="9" cy="9" r="2"/><path d="m21 15-3.086-3.086a2 2 0 0 0-2.828 0L6 21"/></svg>
+            </div>
+          {:else}
+            <div class="post-image">
+              <img
+                src="/posts/{post.slug}/cover.svg"
+                alt={post.activeMeta.title}
+                onerror={(e) => handleCoverError(e.currentTarget)}
+              />
+            </div>
+            <div class="post-image-placeholder" style="display:none">
+              <svg xmlns="http://www.w3.org/2000/svg" width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><rect width="18" height="18" x="3" y="3" rx="2" ry="2"/><circle cx="9" cy="9" r="2"/><path d="m21 15-3.086-3.086a2 2 0 0 0-2.828 0L6 21"/></svg>
+            </div>
+          {/if}
         </a>
       {/each}
     </div>
@@ -160,13 +175,50 @@
 <style>
   .page-main {
     min-height: calc(100vh - 64px);
-    padding: 40px 0 24px;
+    padding: 40px 0 32px;
   }
 
   .container {
     max-width: 860px;
     margin: 0 auto;
     padding: 0 24px;
+  }
+
+  .header-row {
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-start;
+    margin-bottom: 40px;
+  }
+
+  .lang-switch {
+    display: flex;
+    background: var(--ctp-surface0);
+    border-radius: 8px;
+    padding: 4px;
+    gap: 4px;
+  }
+
+  .lang-btn {
+    padding: 6px 14px;
+    font-size: 0.85rem;
+    font-weight: 600;
+    font-family: inherit;
+    border-radius: 6px;
+    background: transparent;
+    border: none;
+    color: var(--ctp-subtext0);
+    cursor: pointer;
+    transition: all 0.2s ease;
+  }
+
+  .lang-btn:hover {
+    color: var(--ctp-text);
+  }
+
+  .lang-btn.active {
+    background: color-mix(in srgb, var(--accent) 15%, transparent);
+    color: var(--accent);
   }
 
   .page-title {
@@ -214,6 +266,26 @@
     justify-content: center;
     color: var(--ctp-overlay0);
     transition: all 0.2s ease;
+  }
+
+  .post-image {
+    flex-shrink: 0;
+    width: 140px;
+    border-radius: 8px;
+    overflow: hidden;
+    border: 1px solid var(--ctp-surface1);
+    transition: all 0.2s ease;
+  }
+
+  .post-image img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    display: block;
+  }
+
+  .post-card:hover .post-image {
+    border-color: var(--accent);
   }
 
   .post-card:hover .post-image-placeholder {
@@ -307,6 +379,11 @@
     }
 
     .post-image-placeholder {
+      width: 100%;
+      aspect-ratio: 2 / 1;
+    }
+
+    .post-image {
       width: 100%;
       aspect-ratio: 2 / 1;
     }
