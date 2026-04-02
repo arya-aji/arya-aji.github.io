@@ -6,6 +6,11 @@
   import Footer from '$lib/components/Footer.svelte';
 </script>
 
+<svelte:head>
+  <title>Arya Aji Kusuma | Software Engineer</title>
+  <meta name="description" content="Portfolio of Arya Aji Kusuma — Software Engineer building web apps, dashboards, and SaaS products." />
+</svelte:head>
+
 <Navbar />
 
 <main>

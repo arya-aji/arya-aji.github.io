@@ -1,45 +1,63 @@
 <script lang="ts">
-  import { Menu, X } from 'lucide-svelte';
-  import { page } from '$app/stores';
-  import { theme, accent, bgEffect, ACCENT_COLORS, THEME_FLAVORS } from '$lib/stores/theme';
-  import type { ThemeFlavor, AccentColor } from '$lib/stores/theme';
+  import { Menu, X } from "lucide-svelte";
+  import { page } from "$app/stores";
+  import {
+    theme,
+    accent,
+    bgEffect,
+    ACCENT_COLORS,
+    THEME_FLAVORS,
+  } from "$lib/stores/theme";
+  import type { ThemeFlavor, AccentColor } from "$lib/stores/theme";
 
   let navPanelOpen = $state(false);
 
   const navLinks = [
-    { href: '/about',    label: 'About' },
-    { href: '/posts',    label: 'Posts' },
-    { href: '/projects', label: 'Projects' }
+    { href: "/about", label: "About" },
+    { href: "/posts", label: "Posts" },
+    { href: "/projects", label: "Projects" },
   ];
 
   const moreLinks = [
-    { href: '/resume',    label: 'Resume',    external: false, wip: true },
-    { href: '/tutorials', label: 'Tutorials', external: false, wip: true },
-    { href: '/notes',     label: 'Notes',     external: false, wip: true },
-    { href: '/terminal',  label: 'Terminal',  external: false, wip: true }
+    { href: "/resume", label: "Resume", external: false, wip: true },
+    // { href: '/tutorials', label: 'Tutorials', external: false, wip: true },
+    // { href: '/notes',     label: 'Notes',     external: false, wip: true },
+    // { href: '/terminal',  label: 'Terminal',  external: false, wip: true }
   ];
 
   // Breadcrumb
   let segments = $derived(
-    $page.url.pathname === '/'
+    $page.url.pathname === "/"
       ? []
-      : $page.url.pathname.split('/').filter(Boolean)
+      : $page.url.pathname.split("/").filter(Boolean),
   );
   let crumbs = $derived(
     segments.map((seg, i) => ({
       label: seg,
-      href: '/' + segments.slice(0, i + 1).join('/')
-    }))
+      href: "/" + segments.slice(0, i + 1).join("/"),
+    })),
   );
 
-  function closePanel() { navPanelOpen = false; }
+  function closePanel() {
+    navPanelOpen = false;
+  }
 
   // Accent color CSS var lookup (for swatch preview)
   const accentVarMap: Record<AccentColor, string> = {
-    rosewater: '#f5e0dc', flamingo: '#f2cdcd', pink: '#f5c2e7', mauve: '#cba6f7',
-    red: '#f38ba8', maroon: '#eba0ac', peach: '#fab387', yellow: '#f9e2af',
-    green: '#a6e3a1', teal: '#94e2d5', sky: '#89dceb', sapphire: '#74c7ec',
-    blue: '#89b4fa', lavender: '#b4befe'
+    rosewater: "#f5e0dc",
+    flamingo: "#f2cdcd",
+    pink: "#f5c2e7",
+    mauve: "#cba6f7",
+    red: "#f38ba8",
+    maroon: "#eba0ac",
+    peach: "#fab387",
+    yellow: "#f9e2af",
+    green: "#a6e3a1",
+    teal: "#94e2d5",
+    sky: "#89dceb",
+    sapphire: "#74c7ec",
+    blue: "#89b4fa",
+    lavender: "#b4befe",
   };
 </script>
 
@@ -99,7 +117,11 @@
   <!-- Header -->
   <div class="panel-header">
     <span class="panel-title">Navigation</span>
-    <button class="panel-close" onclick={closePanel} aria-label="Close navigation panel">
+    <button
+      class="panel-close"
+      onclick={closePanel}
+      aria-label="Close navigation panel"
+    >
       <X size={20} />
     </button>
   </div>
@@ -107,8 +129,19 @@
   <!-- Theme section -->
   <div class="panel-section">
     <div class="section-label">
-      <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
-        <circle cx="12" cy="12" r="4"/><path d="M12 2v2M12 20v2M4.93 4.93l1.41 1.41M17.66 17.66l1.41 1.41M2 12h2M20 12h2M6.34 17.66l-1.41 1.41M19.07 4.93l-1.41 1.41"/>
+      <svg
+        width="14"
+        height="14"
+        viewBox="0 0 24 24"
+        fill="none"
+        stroke="currentColor"
+        stroke-width="2"
+        stroke-linecap="round"
+        stroke-linejoin="round"
+      >
+        <circle cx="12" cy="12" r="4" /><path
+          d="M12 2v2M12 20v2M4.93 4.93l1.41 1.41M17.66 17.66l1.41 1.41M2 12h2M20 12h2M6.34 17.66l-1.41 1.41M19.07 4.93l-1.41 1.41"
+        />
       </svg>
       Theme
     </div>
@@ -144,7 +177,11 @@
     <label class="bg-effect-toggle">
       <input type="checkbox" bind:checked={$bgEffect} />
       <span class="toggle-box"></span>
-      <span class="toggle-label">Background effect: <span class="toggle-state">{$bgEffect ? 'on' : 'off'}</span></span>
+      <span class="toggle-label"
+        >Background effect: <span class="toggle-state"
+          >{$bgEffect ? "on" : "off"}</span
+        ></span
+      >
     </label>
   </div>
 
@@ -153,7 +190,9 @@
   <!-- Main nav links -->
   <div class="panel-nav">
     {#each navLinks as link}
-      <a href={link.href} class="panel-link" onclick={closePanel}>{link.label}</a>
+      <a href={link.href} class="panel-link" onclick={closePanel}
+        >{link.label}</a
+      >
     {/each}
   </div>
 
@@ -163,7 +202,9 @@
   <div class="panel-nav">
     <span class="panel-section-label">MORE</span>
     {#each moreLinks as link}
-      <a href={link.href} class="panel-link" onclick={closePanel}>{link.label}</a>
+      <a href={link.href} class="panel-link" onclick={closePanel}
+        >{link.label}</a
+      >
     {/each}
   </div>
 </div>
@@ -177,7 +218,8 @@
     background: color-mix(in srgb, var(--ctp-base) 80%, transparent);
     backdrop-filter: blur(16px);
     -webkit-backdrop-filter: blur(16px);
-    border-bottom: 1px solid color-mix(in srgb, var(--ctp-surface0) 50%, transparent);
+    border-bottom: 1px solid
+      color-mix(in srgb, var(--ctp-surface0) 50%, transparent);
     transition: background 0.3s ease;
   }
 
@@ -196,27 +238,59 @@
     display: flex;
     align-items: center;
     gap: 6px;
-    font-family: 'JetBrains Mono', 'Fira Code', monospace;
+    font-family: "JetBrains Mono", "Fira Code", monospace;
     font-size: 1rem;
     font-weight: 600;
     flex-shrink: 0;
   }
-  .logo-home { color: var(--ctp-text); text-decoration: none; transition: color 0.2s; }
-  .logo-home:hover { color: var(--accent); opacity: 1; }
+  .logo-home {
+    color: var(--ctp-text);
+    text-decoration: none;
+    transition: color 0.2s;
+  }
+  .logo-home:hover {
+    color: var(--accent);
+    opacity: 1;
+  }
   .logo-cursor {
     color: var(--accent);
     animation: blink 1s step-end infinite;
     line-height: 1;
     margin-left: -4px;
   }
-  @keyframes blink { 0%, 50% { opacity: 1; } 51%, 100% { opacity: 0; } }
-  .bc-sep { color: var(--ctp-overlay0); user-select: none; }
-  .bc-link { color: var(--ctp-subtext0); text-decoration: none; transition: color 0.15s; }
-  .bc-link:hover { color: var(--accent); opacity: 1; }
-  .bc-current { color: var(--accent); }
+  @keyframes blink {
+    0%,
+    50% {
+      opacity: 1;
+    }
+    51%,
+    100% {
+      opacity: 0;
+    }
+  }
+  .bc-sep {
+    color: var(--ctp-overlay0);
+    user-select: none;
+  }
+  .bc-link {
+    color: var(--ctp-subtext0);
+    text-decoration: none;
+    transition: color 0.15s;
+  }
+  .bc-link:hover {
+    color: var(--accent);
+    opacity: 1;
+  }
+  .bc-current {
+    color: var(--accent);
+  }
 
   /* ─── Desktop nav links ──────────────────────────────── */
-  .nav-links { display: flex; align-items: center; gap: 8px; }
+  .nav-links {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+  }
   .nav-link {
     padding: 8px 16px;
     border-radius: 8px;
@@ -228,22 +302,45 @@
     background: none;
     border: none;
     cursor: pointer;
-    font-family: 'Montserrat', sans-serif;
+    font-family: "Montserrat", sans-serif;
   }
-  .nav-link:hover { color: var(--accent); background: color-mix(in srgb, var(--accent) 10%, transparent); opacity: 1; }
-  .more-btn { display: flex; align-items: center; gap: 4px; }
+  .nav-link:hover {
+    color: var(--accent);
+    background: color-mix(in srgb, var(--accent) 10%, transparent);
+    opacity: 1;
+  }
+  .more-btn {
+    display: flex;
+    align-items: center;
+    gap: 4px;
+  }
 
   /* ─── Mobile ─────────────────────────────────────────── */
   .mobile-toggle {
-    background: none; border: none; color: var(--ctp-text);
-    cursor: pointer; padding: 8px; border-radius: 8px; transition: background 0.2s;
+    background: none;
+    border: none;
+    color: var(--ctp-text);
+    cursor: pointer;
+    padding: 8px;
+    border-radius: 8px;
+    transition: background 0.2s;
   }
-  .mobile-toggle:hover { background: var(--ctp-surface0); }
-  .desktop-only { display: flex; }
-  .mobile-only { display: none; }
+  .mobile-toggle:hover {
+    background: var(--ctp-surface0);
+  }
+  .desktop-only {
+    display: flex;
+  }
+  .mobile-only {
+    display: none;
+  }
   @media (max-width: 768px) {
-    .desktop-only { display: none; }
-    .mobile-only { display: flex; }
+    .desktop-only {
+      display: none;
+    }
+    .mobile-only {
+      display: flex;
+    }
   }
 
   /* ─── Backdrop ───────────────────────────────────────── */
@@ -254,7 +351,14 @@
     z-index: 299;
     animation: fade-in 0.2s ease;
   }
-  @keyframes fade-in { from { opacity: 0; } to { opacity: 1; } }
+  @keyframes fade-in {
+    from {
+      opacity: 0;
+    }
+    to {
+      opacity: 1;
+    }
+  }
 
   /* ─── Navigation Panel ───────────────────────────────── */
   .nav-panel {
@@ -274,7 +378,9 @@
     transition: transform 0.28s cubic-bezier(0.4, 0, 0.2, 1);
     overflow-y: auto;
   }
-  .nav-panel.open { transform: translateX(0); }
+  .nav-panel.open {
+    transform: translateX(0);
+  }
 
   /* Panel header */
   .panel-header {
@@ -302,10 +408,15 @@
     align-items: center;
     transition: all 0.15s;
   }
-  .panel-close:hover { background: var(--ctp-surface0); color: var(--ctp-text); }
+  .panel-close:hover {
+    background: var(--ctp-surface0);
+    color: var(--ctp-text);
+  }
 
   /* Panel sections */
-  .panel-section { padding: 20px 24px 4px; }
+  .panel-section {
+    padding: 20px 24px 4px;
+  }
 
   .section-label {
     display: flex;
@@ -334,9 +445,12 @@
     color: var(--ctp-subtext1);
     cursor: pointer;
     transition: all 0.15s;
-    font-family: 'Montserrat', sans-serif;
+    font-family: "Montserrat", sans-serif;
   }
-  .flavor-btn:hover { border-color: var(--accent); color: var(--ctp-text); }
+  .flavor-btn:hover {
+    border-color: var(--accent);
+    color: var(--ctp-text);
+  }
   .flavor-btn.active {
     background: transparent;
     border-color: var(--accent);
@@ -358,8 +472,13 @@
     cursor: pointer;
     transition: all 0.15s;
   }
-  .accent-swatch:hover { transform: scale(1.15); }
-  .accent-swatch.active { border-color: var(--ctp-text); transform: scale(1.12); }
+  .accent-swatch:hover {
+    transform: scale(1.15);
+  }
+  .accent-swatch.active {
+    border-color: var(--ctp-text);
+    transform: scale(1.12);
+  }
 
   /* Background effect toggle */
   .bg-effect-toggle {
@@ -370,7 +489,9 @@
     padding: 4px 0 16px;
     user-select: none;
   }
-  .bg-effect-toggle input { display: none; }
+  .bg-effect-toggle input {
+    display: none;
+  }
   .toggle-box {
     width: 16px;
     height: 16px;
@@ -385,33 +506,47 @@
     background: var(--accent);
   }
   .bg-effect-toggle input:checked + .toggle-box::after {
-    content: '';
+    content: "";
     position: absolute;
-    top: 1px; left: 3px;
-    width: 5px; height: 8px;
+    top: 1px;
+    left: 3px;
+    width: 5px;
+    height: 8px;
     border: 2px solid var(--ctp-base);
-    border-top: none; border-left: none;
+    border-top: none;
+    border-left: none;
     transform: rotate(45deg);
   }
   .toggle-label {
     font-size: 0.82rem;
-    font-family: 'JetBrains Mono', monospace;
+    font-family: "JetBrains Mono", monospace;
     color: var(--ctp-subtext1);
   }
-  .toggle-state { color: var(--accent); }
+  .toggle-state {
+    color: var(--accent);
+  }
 
   /* Divider */
-  .panel-divider { height: 1px; background: var(--ctp-surface0); margin: 4px 0; flex-shrink: 0; }
+  .panel-divider {
+    height: 1px;
+    background: var(--ctp-surface0);
+    margin: 4px 0;
+    flex-shrink: 0;
+  }
 
   /* Nav links in panel */
-  .panel-nav { padding: 8px 12px; display: flex; flex-direction: column; }
+  .panel-nav {
+    padding: 8px 12px;
+    display: flex;
+    flex-direction: column;
+  }
   .panel-section-label {
     font-size: 0.72rem;
     font-weight: 700;
     letter-spacing: 0.1em;
     color: var(--ctp-overlay0);
     padding: 8px 12px 4px;
-    font-family: 'Montserrat', sans-serif;
+    font-family: "Montserrat", sans-serif;
   }
   .panel-link {
     padding: 14px 12px;

@@ -3,6 +3,7 @@
   import Footer from '$lib/components/Footer.svelte';
   import { Star, Tag, ExternalLink, ChevronLeft, ChevronRight } from 'lucide-svelte';
   import { projects, tagColors } from '$lib/data/projects';
+  import type { Project } from '$lib/data/projects';
 
   const sliderProjects = projects.slice(0, 10);
 
@@ -12,6 +13,20 @@
   
   let totalPages = $derived(Math.ceil(projects.length / itemsPerPage));
   let paginatedGridProjects = $derived(projects.slice((currentPage - 1) * itemsPerPage, currentPage * itemsPerPage));
+
+  let mouseX = $state(0);
+  let mouseY = $state(0);
+  let hoveredProject: Project | null = $state(null);
+
+  function handleMouseMove(e: MouseEvent, project: Project) {
+    mouseX = e.clientX;
+    mouseY = e.clientY;
+    hoveredProject = project;
+  }
+
+  function handleMouseLeave() {
+    hoveredProject = null;
+  }
 
   function nextSlide() {
     currentIndex = (currentIndex + 1) % sliderProjects.length;
@@ -60,7 +75,8 @@
         <div class="slider-track" style="transform: translateX(-{currentIndex * 100}%);">
           {#each sliderProjects as highlight}
             <div class="slider-slide">
-              <div class="project-card-wrapper featured">
+              <!-- svelte-ignore a11y_no_static_element_interactions -->
+              <div class="project-card-wrapper featured" onmousemove={(e) => handleMouseMove(e, highlight)} onmouseleave={handleMouseLeave}>
                 
                 <!-- Left side: Visuals & Terminal -->
                 <div class="project-visual-side">
@@ -141,12 +157,15 @@
       <h2 class="grid-section-title">All Projects</h2>
       <div class="projects-grid">
         {#each paginatedGridProjects as project}
+          <!-- svelte-ignore a11y_no_static_element_interactions -->
           <a
             href={project.href ?? `/projects/${project.slug}`}
             target={project.href ? '_blank' : undefined}
             rel={project.href ? 'noopener noreferrer' : undefined}
             class="grid-card"
             class:featured-grid={project.featured}
+            onmousemove={(e) => handleMouseMove(e, project)}
+            onmouseleave={handleMouseLeave}
           >
             <div class="card-header">
               <div class="card-title-row">
@@ -214,6 +233,11 @@
     {/if}
   </div>
 </main>
+
+{#if hoveredProject && hoveredProject.gif}
+  <!-- svelte-ignore a11y_no_static_element_interactions -->
+  <div class="floating-video-popup" style="--x: {mouseX + 20}px; --y: {mouseY + 20}px; background-image: url('{hoveredProject.gif}');"></div>
+{/if}
 
 <Footer />
 
@@ -687,6 +711,30 @@
 
   .grid-card:hover :global(.ext-icon) {
     color: var(--accent);
+  }
+
+  /* --- Floating Hover Popup --- */
+  .floating-video-popup {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 320px;
+    height: 200px;
+    background-size: cover;
+    background-position: center;
+    border-radius: 12px;
+    border: 3px solid var(--accent);
+    box-shadow: 0 20px 60px rgba(0,0,0,0.8);
+    pointer-events: none;
+    z-index: 9999;
+    transform: translate3d(var(--x), var(--y), 0);
+    will-change: transform;
+    animation: popupFadeIn 0.25s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+  }
+
+  @keyframes popupFadeIn {
+    0% { opacity: 0; filter: blur(4px); transform: translate3d(var(--x), calc(var(--y) + 20px), 0) scale(0.9); }
+    100% { opacity: 1; filter: blur(0); transform: translate3d(var(--x), var(--y), 0) scale(1); }
   }
 
   /* Responsive */
