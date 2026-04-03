@@ -17,7 +17,16 @@
   function getTremorTargets(): HTMLElement[] {
     return Array.from(
       document.querySelectorAll<HTMLElement>(
-        'nav.navbar, .hero, .featured-projects, .dash-card, .footer, .section-header, .dashboard .container, .page-header, .content-wrapper, article, .card'
+        [
+          'nav.navbar', '.footer',
+          // Home
+          '.hero', '.featured-projects', '.dash-card', '.dashboard .container', '.section-header',
+          // All other pages: target direct children of page-main and common elements
+          '.page-main > *', '.page-main .container > *',
+          '.post-card', '.post-article',
+          '.grid-card', '.slider-slide',
+          '.hero-row', '.photo-col', '.text-col'
+        ].join(', ')
       )
     );
   }
