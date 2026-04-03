@@ -120,10 +120,6 @@
       </div>
     </div>
     <!-- /hero-text-col -->
-
-    <div class="hero-photo-col">
-      <img src="/photo.png" alt="Arya Aji Kusuma" class="hero-photo" />
-    </div>
   </div>
 </section>
 
@@ -142,31 +138,6 @@
   .hero-text-col {
     flex: 1;
     max-width: 680px;
-  }
-
-  .hero-photo-col {
-    flex-shrink: 0;
-    display: none; /* hidden on small screens by default, overridden below */
-  }
-
-  .hero-photo {
-    width: 200px;
-    height: 200px;
-    border-radius: 50%;
-    object-fit: cover;
-    border: 3px solid var(--ctp-surface2);
-    transition: all 0.3s ease;
-  }
-
-  .hero-photo:hover {
-    border-color: var(--accent);
-    transform: scale(1.02);
-  }
-
-  @media (min-width: 768px) {
-    .hero-photo-col {
-      display: block;
-    }
   }
 
   .hero-heading {

@@ -5,6 +5,9 @@
     theme,
     accent,
     bgEffect,
+    snowEffect,
+    blackHoleEffect,
+    mouseTremorEffect,
     ACCENT_COLORS,
     THEME_FLAVORS,
   } from "$lib/stores/theme";
@@ -206,6 +209,37 @@
         >{link.label}</a
       >
     {/each}
+  </div>
+
+  <div class="panel-divider"></div>
+
+  <!-- Fun Zone -->
+  <div class="panel-section">
+    <div class="section-label">
+      <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+        <path d="m12 3-1.912 5.813a2 2 0 0 1-1.275 1.275L3 12l5.813 1.912a2 2 0 0 1 1.275 1.275L12 21l1.912-5.813a2 2 0 0 1 1.275-1.275L21 12l-5.813-1.912a2 2 0 0 1-1.275-1.275L12 3Z"/>
+        <path d="M5 3v4"/><path d="M19 17v4"/><path d="M3 5h4"/><path d="M17 19h4"/>
+      </svg>
+      Fun Zone
+    </div>
+
+    <label class="bg-effect-toggle">
+      <input type="checkbox" bind:checked={$snowEffect} />
+      <span class="toggle-box"></span>
+      <span class="toggle-label">Let it snow: <span class="toggle-state">{$snowEffect ? 'on' : 'off'}</span></span>
+    </label>
+
+    <label class="bg-effect-toggle">
+      <input type="checkbox" bind:checked={$blackHoleEffect} />
+      <span class="toggle-box"></span>
+      <span class="toggle-label">Black Hole: <span class="toggle-state">{$blackHoleEffect ? 'on' : 'off'}</span></span>
+    </label>
+
+    <label class="bg-effect-toggle">
+      <input type="checkbox" bind:checked={$mouseTremorEffect} />
+      <span class="toggle-box"></span>
+      <span class="toggle-label">Mouse Tremor: <span class="toggle-state">{$mouseTremorEffect ? 'on' : 'off'}</span></span>
+    </label>
   </div>
 </div>
 
