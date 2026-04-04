@@ -226,31 +226,31 @@
     </div>
 
     <label class="bg-effect-toggle">
-      <input type="checkbox" bind:checked={$snowEffect} />
+      <input type="checkbox" checked={$snowEffect} onchange={() => { if ($grayWorldEffect) grayWorldEffect.set(false); snowEffect.update(v => !v); }} />
       <span class="toggle-box"></span>
       <span class="toggle-label">Let it snow: <span class="toggle-state">{$snowEffect ? 'on' : 'off'}</span></span>
     </label>
 
     <label class="bg-effect-toggle">
-      <input type="checkbox" bind:checked={$blackHoleEffect} />
+      <input type="checkbox" checked={$blackHoleEffect} onchange={() => { if ($grayWorldEffect) grayWorldEffect.set(false); blackHoleEffect.update(v => !v); }} />
       <span class="toggle-box"></span>
       <span class="toggle-label">Black Hole: <span class="toggle-state">{$blackHoleEffect ? 'on' : 'off'}</span></span>
     </label>
 
     <label class="bg-effect-toggle">
-      <input type="checkbox" bind:checked={$mouseTremorEffect} />
+      <input type="checkbox" checked={$mouseTremorEffect} onchange={() => { if ($grayWorldEffect) grayWorldEffect.set(false); mouseTremorEffect.update(v => !v); }} />
       <span class="toggle-box"></span>
       <span class="toggle-label">Mouse Tremor: <span class="toggle-state">{$mouseTremorEffect ? 'on' : 'off'}</span></span>
     </label>
 
     <label class="bg-effect-toggle">
-      <input type="checkbox" bind:checked={$floodEffect} />
+      <input type="checkbox" checked={$floodEffect} onchange={() => { if ($grayWorldEffect) grayWorldEffect.set(false); floodEffect.update(v => !v); }} />
       <span class="toggle-box"></span>
       <span class="toggle-label">Flood: <span class="toggle-state">{$floodEffect ? 'on' : 'off'}</span></span>
     </label>
 
     <label class="bg-effect-toggle">
-      <input type="checkbox" bind:checked={$grayWorldEffect} />
+      <input type="checkbox" checked={$grayWorldEffect} onchange={() => { if (!$grayWorldEffect) { [snowEffect, blackHoleEffect, mouseTremorEffect, floodEffect].forEach(e => e.set(false)); } grayWorldEffect.update(v => !v); }} />
       <span class="toggle-box"></span>
       <span class="toggle-label">Gray World: <span class="toggle-state">{$grayWorldEffect ? 'on' : 'off'}</span></span>
     </label>

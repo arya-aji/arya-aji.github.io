@@ -5,7 +5,7 @@
 
 <svelte:head>
   <title>About Me | Arya Aji Kusuma</title>
-  <meta name="description" content="Developer based in Jakarta, Indonesia. Building useful web apps, geospatial tools, and automation scripts." />
+  <meta name="description" content="I turn ideas and insights into real products — geospatial tools, web apps, and data dashboards. Based in Jakarta, Indonesia." />
 </svelte:head>
 
 <Navbar />
@@ -30,7 +30,7 @@
             <a href="https://github.com/arya-aji" target="_blank" rel="noopener noreferrer" class="inline-link">(@arya-aji)</a>
             — a developer based in
             <a href="https://maps.google.com/?q=Jakarta" target="_blank" rel="noopener noreferrer" class="inline-link">Jakarta, Indonesia</a>.
-            I enjoy building projects that are useful and have a real impact.
+            I help turn ideas and insights into real, impactful products — from concept to launch.
           </p>
 
           <p>
@@ -45,7 +45,7 @@
 
           <p>
             Outside of coding, I'm interested in geospatial technology, data analysis, and
-            always eager to learn new things. Feel free to reach out if you'd like to chat!
+            always eager to learn new things. Got an idea you'd like to bring to life? Let's talk.
           </p>
         </div>
 

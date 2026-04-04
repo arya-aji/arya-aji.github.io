@@ -6,23 +6,20 @@
   <div class="container hero-inner">
     <div class="hero-text-col">
       <h1 class="hero-heading">
-        Hey! I'm <span class="accent-name">Arya Aji Kusuma</span>
+        I Turn <span class="accent-name">Ideas & Insights</span><br />Into Your Dream Project
       </h1>
 
       <p class="hero-bio">
-        I'm a developer based in
+        Hey, I'm <strong>Arya Aji Kusuma</strong> — a developer based in
         <a
           href="https://maps.app.goo.gl/jakarta"
           target="_blank"
           rel="noopener noreferrer"
           class="bio-link">Jakarta, Indonesia</a
-        >. I enjoy building useful web apps and tools, ranging from geospatial
-        dashboards and e-voting systems to automation scripts. Currently active
-        in the areas of
-        <span class="bio-link">geospatial</span>,
-        <span class="bio-link">data</span>, and
-        <span class="bio-link">web development</span>. Feel free to reach out if
-        you'd like to collaborate!
+        >. I transform raw concepts into polished products — from
+        <span class="bio-link">geospatial dashboards</span> and
+        <span class="bio-link">data-driven tools</span> to
+        <span class="bio-link">full-stack web apps</span>. Got an idea? Let's build it.
       </p>
 
       <div class="social-links">

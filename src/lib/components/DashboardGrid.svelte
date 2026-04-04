@@ -13,13 +13,31 @@
 
   let localTime = $state('');
 
+  const otherEffects = [snowEffect, blackHoleEffect, mouseTremorEffect, floodEffect];
+
+  function toggleGrayWorld() {
+    if ($grayWorldEffect) {
+      grayWorldEffect.set(false);
+    } else {
+      otherEffects.forEach(e => e.set(false));
+      grayWorldEffect.set(true);
+    }
+  }
+
+  function toggleEffect(effect: typeof snowEffect) {
+    if ($grayWorldEffect) grayWorldEffect.set(false);
+    effect.update(v => !v);
+  }
+
   function activateRandom() {
-    const effects = [snowEffect, blackHoleEffect, mouseTremorEffect, floodEffect, grayWorldEffect];
-    // Turn off all effects first
-    effects.forEach(e => e.set(false));
-    // Pick a random one and activate it
-    const pick = effects[Math.floor(Math.random() * effects.length)];
-    pick.set(true);
+    const allEffects = [...otherEffects, grayWorldEffect];
+    allEffects.forEach(e => e.set(false));
+    const pick = allEffects[Math.floor(Math.random() * allEffects.length)];
+    if (pick === grayWorldEffect) {
+      grayWorldEffect.set(true);
+    } else {
+      pick.set(true);
+    }
   }
   
   let mapElement: HTMLElement | undefined = $state();
@@ -126,10 +144,10 @@
           <CalendarDays size={16} />
           <span class="card-title">Let's Connect</span>
         </div>
-        <p class="connect-text">Always open to interesting projects and conversations.</p>
+        <p class="connect-text">Got an idea? Let's turn it into your next dream project.</p>
         <a href="mailto:aryaaku999@gmail.com" class="btn btn-accent connect-btn">
           <CalendarDays size={16} />
-          Book a Chat
+          Let's Build It
         </a>
       </div>
 
@@ -168,7 +186,7 @@
           <button
             class="fun-effect-btn"
             class:active={$snowEffect}
-            onclick={() => snowEffect.update(v => !v)}
+            onclick={() => toggleEffect(snowEffect)}
           >
             <span class="fun-effect-icon">❄️</span>
             <span class="fun-effect-label">Snow</span>
@@ -177,7 +195,7 @@
           <button
             class="fun-effect-btn"
             class:active={$blackHoleEffect}
-            onclick={() => blackHoleEffect.update(v => !v)}
+            onclick={() => toggleEffect(blackHoleEffect)}
           >
             <span class="fun-effect-icon">🕳️</span>
             <span class="fun-effect-label">Black Hole</span>
@@ -186,7 +204,7 @@
           <button
             class="fun-effect-btn"
             class:active={$mouseTremorEffect}
-            onclick={() => mouseTremorEffect.update(v => !v)}
+            onclick={() => toggleEffect(mouseTremorEffect)}
           >
             <span class="fun-effect-icon">📳</span>
             <span class="fun-effect-label">Tremor</span>
@@ -195,16 +213,16 @@
           <button
             class="fun-effect-btn"
             class:active={$floodEffect}
-            onclick={() => floodEffect.update(v => !v)}
+            onclick={() => toggleEffect(floodEffect)}
           >
             <span class="fun-effect-icon">🌊</span>
             <span class="fun-effect-label">Flood</span>
           </button>
 
           <button
-            class="fun-effect-btn"
+            class="fun-effect-btn gray-world-btn"
             class:active={$grayWorldEffect}
-            onclick={() => grayWorldEffect.update(v => !v)}
+            onclick={toggleGrayWorld}
           >
             <span class="fun-effect-icon">🩶</span>
             <span class="fun-effect-label">Gray World</span>
@@ -507,6 +525,50 @@
 
   .random-btn:hover {
     border-style: solid;
+  }
+
+  /* Rainbow border when Gray World is active */
+  :global(html.gray-world) .gray-world-btn.active {
+    position: relative;
+    border-color: transparent !important;
+    background: transparent !important;
+    overflow: hidden;
+    filter: none !important;
+    z-index: 0;
+    border-radius: 12px;
+  }
+
+  :global(html.gray-world) .gray-world-btn.active::before {
+    content: '';
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    width: 200%;
+    height: 200%;
+    background: conic-gradient(
+      #ff0000, #ff8800, #ffff00, #00ff00, #0088ff, #8800ff, #ff0088, #ff0000
+    );
+    animation: rainbow-spin 2s linear infinite;
+    z-index: -2;
+  }
+
+  :global(html.gray-world) .gray-world-btn.active::after {
+    content: '';
+    position: absolute;
+    inset: 3px;
+    border-radius: 9px;
+    background: #ffffff;
+    z-index: -1;
+  }
+
+  :global(html.gray-world) .gray-world-btn.active .fun-effect-icon,
+  :global(html.gray-world) .gray-world-btn.active .fun-effect-label {
+    color: #000000 !important;
+  }
+
+  @keyframes rainbow-spin {
+    from { transform: translate(-50%, -50%) rotate(0deg); }
+    to { transform: translate(-50%, -50%) rotate(360deg); }
   }
 
   .fun-status {

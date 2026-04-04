@@ -236,7 +236,7 @@
 
 <svelte:head>
   <title>Arya Aji Kusuma</title>
-  <meta name="description" content="Arya Aji Kusuma - Developer from Jakarta, Indonesia. Building web applications, tools, and geospatial systems." />
+  <meta name="description" content="Turning ideas and insights into dream projects — web apps, geospatial dashboards, and data-driven tools." />
   <meta name="viewport" content="width=device-width, initial-scale=1" />
 </svelte:head>
 
@@ -362,28 +362,66 @@
 
   /* --- Gray World Effect --- */
   :global(html.gray-world) {
-    filter: grayscale(1) !important;
+    /* Grayscale achieved via color overrides below; no html-level filter
+       so the Gray World button can show a colorful rainbow border */
   }
 
-  :global(html.gray-world img),
-  :global(html.gray-world svg),
-  :global(html.gray-world video),
-  :global(html.gray-world canvas),
-  :global(html.gray-world picture),
-  :global(html.gray-world .leaflet-container-root) {
-    visibility: hidden !important;
+  :global(html.gray-world body) {
+    background: #ffffff !important;
   }
 
   :global(html.gray-world *) {
+    color: #000000 !important;
+    border-color: #000000 !important;
+    background-color: #ffffff !important;
     border-image: none !important;
     background-image: none !important;
     box-shadow: none !important;
     text-shadow: none !important;
   }
 
+  :global(html.gray-world .gray-world-btn.active) {
+    border-color: transparent !important;
+    background-color: transparent !important;
+  }
+
+  :global(html.gray-world .gray-world-btn.active::before) {
+    background-color: transparent !important;
+    background-image: conic-gradient(
+      #ff0000, #ff8800, #ffff00, #00ff00, #0088ff, #8800ff, #ff0088, #ff0000
+    ) !important;
+  }
+
+  :global(html.gray-world img),
+  :global(html.gray-world picture) {
+    filter: grayscale(1) contrast(2) !important;
+    visibility: visible !important;
+    background-color: transparent !important;
+  }
+
+  :global(html.gray-world svg) {
+    color: #000000 !important;
+    fill: #000000 !important;
+    stroke: #000000 !important;
+    visibility: visible !important;
+    background-color: transparent !important;
+  }
+
+  :global(html.gray-world video),
+  :global(html.gray-world canvas),
+  :global(html.gray-world .leaflet-container-root) {
+    visibility: hidden !important;
+  }
+
+  :global(html.gray-world a) {
+    color: #000000 !important;
+    text-decoration: underline !important;
+  }
+
   :global(html.gray-world .accent-dot),
   :global(html.gray-world .dot),
   :global(html.gray-world .status-dot) {
-    opacity: 0.3 !important;
+    background: #000000 !important;
+    opacity: 1 !important;
   }
 </style>

@@ -34,7 +34,7 @@
     <div class="section-header">
       <h2 class="section-title">
         <Star size={22} />
-        Featured Projects
+        Ideas, Realized
       </h2>
       <div class="slider-controls">
         <button class="slider-btn" onclick={prevSlide} aria-label="Previous project">

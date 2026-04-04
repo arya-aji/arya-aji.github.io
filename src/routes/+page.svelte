@@ -197,8 +197,8 @@
 </script>
 
 <svelte:head>
-  <title>Arya Aji Kusuma | Software Engineer</title>
-  <meta name="description" content="Portfolio of Arya Aji Kusuma — Software Engineer building web apps, dashboards, and SaaS products." />
+  <title>Arya Aji Kusuma | Turning Ideas Into Dream Projects</title>
+  <meta name="description" content="I turn ideas and insights into dream projects — web apps, geospatial dashboards, and data-driven tools. Let's build something together." />
 </svelte:head>
 
 <Navbar />
