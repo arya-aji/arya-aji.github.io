@@ -16,8 +16,8 @@
           target="_blank"
           rel="noopener noreferrer"
           class="bio-link">Jakarta, Indonesia</a
-        >. I'm passionate about turning ideas into reality — taking raw concepts
-        all the way to execution. Whether it's
+        >. I'm passionate about turning ideas into reality — leveraging modern
+        tools including AI to move fast from concept to execution. Whether it's
         <span class="bio-link">geospatial dashboards</span>,
         <span class="bio-link">data-driven tools</span>, or
         <span class="bio-link">full-stack web apps</span> — I build things that work

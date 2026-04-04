@@ -47,8 +47,10 @@
 
           <p>
             Beyond coding, I'm drawn to geospatial technology, data analysis,
-            and exploring new ways to solve real problems with software. If you have
-            an idea — big or small — I'd love to help turn it into something real. Let's talk.
+            and exploring new ways to solve real problems with software. I also embrace
+            AI tools as part of my workflow — they help me iterate faster and deliver
+            better results. If you have an idea — big or small — I'd love to help
+            turn it into something real. Let's talk.
           </p>
         </div>
 
