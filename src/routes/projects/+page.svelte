@@ -97,9 +97,9 @@
                     <div class="terminal-content">
                       <div class="terminal-preview">
                         {#if highlight.image}
-                          <div class="preview-placeholder has-image" aria-label="Project Preview" style="background-image: url('{highlight.image}'); background-size: cover; background-position: center;"></div>
+                          <div class="preview-placeholder has-image" role="img" aria-label="Project Preview" style="background-image: url('{highlight.image}'); background-size: cover; background-position: center;"></div>
                         {:else}
-                          <div class="preview-placeholder" aria-label="Project Preview">
+                          <div class="preview-placeholder" role="img" aria-label="Project Preview">
                             <svg width="40" height="40" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round">
                               <rect x="3" y="3" width="18" height="18" rx="2" ry="2"/>
                               <circle cx="8.5" cy="8.5" r="1.5"/>

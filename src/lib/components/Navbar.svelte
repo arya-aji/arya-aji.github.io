@@ -104,7 +104,7 @@
 {/if}
 
 <!-- Right-side navigation panel -->
-<div class="nav-panel" class:open={navPanelOpen} aria-hidden={!navPanelOpen}>
+<div class="nav-panel" class:open={navPanelOpen} inert={!navPanelOpen}>
   <!-- Header -->
   <div class="panel-header">
     <span class="panel-title">Navigation</span>
@@ -581,7 +581,7 @@
     font-size: 0.72rem;
     font-weight: 700;
     letter-spacing: 0.1em;
-    color: var(--ctp-overlay0);
+    color: var(--ctp-overlay2);
     padding: 8px 12px 4px;
     font-family: "Montserrat", sans-serif;
   }
