@@ -3,6 +3,7 @@
   import type { ThemeFlavor, AccentColor } from '$lib/stores/theme';
   import { Palette, CalendarDays, MapPin, Sparkles, FileText, FolderGit2, ArrowRight, Tag } from 'lucide-svelte';
   import { onMount } from 'svelte';
+  import type L from 'leaflet';
   import { projects, tagColors } from '$lib/data/projects';
   import { fetchPosts } from '$lib/utils/posts';
   import type { BlogPost } from '$lib/utils/posts';
@@ -40,24 +41,14 @@
     }
   }
   
-  let mapElement: HTMLElement | undefined = $state();
-  let mapInstance: any;
+  import { accentHexMap } from '$lib/data/colors';
+  import { formatLocalTime } from '$lib/utils/time';
 
-  const accentColorMap: Record<string, string> = {
-    rosewater: '#dc8a78', flamingo: '#dd7878', pink: '#ea76cb', mauve: '#8839ef',
-    red: '#d20f39', maroon: '#e64553', peach: '#fe640b', yellow: '#df8e1d',
-    green: '#40a02b', teal: '#179299', sky: '#04a5e5', sapphire: '#209fb5',
-    blue: '#1e66f5', lavender: '#7287fd'
-  };
+  let mapElement: HTMLElement | undefined = $state();
+  let mapInstance: L.Map | undefined;
 
   function updateTime() {
-    const now = new Date();
-    localTime = now.toLocaleTimeString('en-US', {
-      hour: '2-digit',
-      minute: '2-digit',
-      second: '2-digit',
-      hour12: false
-    });
+    localTime = formatLocalTime();
   }
 
   onMount(() => {
@@ -71,19 +62,22 @@
 
     if (typeof window !== 'undefined' && mapElement) {
       (async () => {
-        const L = await import('leaflet');
-        await import('leaflet/dist/leaflet.css');
-        if (!isMounted) return;
-        
-        mapInstance = L.map(mapElement, {
-          zoomControl: false,
-          attributionControl: false
-          // default behavior enables dragging & touchZoom
-        }).setView([-6.1754, 106.8272], 12);
+        try {
+          const L = await import('leaflet');
+          await import('leaflet/dist/leaflet.css');
+          if (!isMounted) return;
+          
+          mapInstance = L.map(mapElement, {
+            zoomControl: false,
+            attributionControl: false
+          }).setView([-6.1754, 106.8272], 12);
 
-        L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
-          maxZoom: 19
-        }).addTo(mapInstance);
+          L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
+            maxZoom: 19
+          }).addTo(mapInstance);
+        } catch {
+          // Leaflet failed to load — map will show empty
+        }
       })();
     }
 
@@ -125,7 +119,7 @@
             <button
               class="accent-dot"
               class:active={$accent === color}
-              style="background: {accentColorMap[color]}"
+              style="background: {accentHexMap[color]}"
               onclick={() => accent.set(color)}
               aria-label="Set accent to {color}"
             ></button>

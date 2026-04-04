@@ -19,66 +19,72 @@ export const fetchPosts = async (): Promise<BlogPost[]> => {
 
   const allPosts = await Promise.all(
     iterablePostFiles.map(async ([path, resolver]) => {
-      const { metadata } = await resolver() as { metadata: Record<string, any> };
-      
-      const parts = path.split('/');
-      const filename = parts[parts.length - 1];
-      const slug = filename.replace('.md', '');
+      try {
+        const { metadata } = await resolver() as { metadata: Record<string, any> };
+        
+        const parts = path.split('/');
+        const filename = parts[parts.length - 1];
+        const slug = filename.replace('.md', '');
 
-      const meta: Record<string, PostMetadata> = {};
-      const availableLangs: string[] = [];
+        const meta: Record<string, PostMetadata> = {};
+        const availableLangs: string[] = [];
 
-      const image = metadata.image || undefined;
+        const image = metadata.image || undefined;
 
-      // Check ID
-      if (metadata.title_id) {
-          meta['id'] = {
-              title: metadata.title_id,
-              date: metadata.date,
-              dateDisplay: metadata.dateDisplay_id || metadata.dateDisplay || metadata.date,
-              summary: metadata.summary_id,
-              tags: metadata.tags || [],
-              image
-          };
-          availableLangs.push('id');
+        // Check ID
+        if (metadata.title_id) {
+            meta['id'] = {
+                title: metadata.title_id,
+                date: metadata.date,
+                dateDisplay: metadata.dateDisplay_id || metadata.dateDisplay || metadata.date,
+                summary: metadata.summary_id,
+                tags: metadata.tags || [],
+                image
+            };
+            availableLangs.push('id');
+        }
+
+        // Check EN
+        if (metadata.title_en) {
+            meta['en'] = {
+                title: metadata.title_en,
+                date: metadata.date,
+                dateDisplay: metadata.dateDisplay_en || metadata.dateDisplay || metadata.date,
+                summary: metadata.summary_en,
+                tags: metadata.tags || [],
+                image
+            };
+            availableLangs.push('en');
+        }
+
+        // Fallback if no localized prefixes exist
+        if (availableLangs.length === 0 && metadata.title) {
+            meta['id'] = {
+                title: metadata.title,
+                date: metadata.date,
+                dateDisplay: metadata.dateDisplay || metadata.date,
+                summary: metadata.summary,
+                tags: metadata.tags || [],
+                image
+            };
+            availableLangs.push('id');
+        }
+        
+        return {
+            slug,
+            meta,
+            availableLangs
+        } satisfies BlogPost;
+      } catch {
+        return null;
       }
-
-      // Check EN
-      if (metadata.title_en) {
-          meta['en'] = {
-              title: metadata.title_en,
-              date: metadata.date,
-              dateDisplay: metadata.dateDisplay_en || metadata.dateDisplay || metadata.date,
-              summary: metadata.summary_en,
-              tags: metadata.tags || [],
-              image
-          };
-          availableLangs.push('en');
-      }
-
-      // Fallback if no localized prefixes exist
-      if (availableLangs.length === 0 && metadata.title) {
-          meta['id'] = {
-              title: metadata.title,
-              date: metadata.date,
-              dateDisplay: metadata.dateDisplay || metadata.date,
-              summary: metadata.summary,
-              tags: metadata.tags || [],
-              image
-          };
-          availableLangs.push('id');
-      }
-      
-      return {
-          slug,
-          meta,
-          availableLangs
-      } satisfies BlogPost;
     })
   );
 
+  const validPosts = allPosts.filter((p): p is BlogPost => p !== null);
+
   // Sort by date (newest first)
-  const sortedPosts = allPosts.sort((a, b) => {
+  const sortedPosts = validPosts.sort((a, b) => {
     const dateA = new Date(a.meta.id?.date || Object.values(a.meta)[0]?.date).getTime();
     const dateB = new Date(b.meta.id?.date || Object.values(b.meta)[0]?.date).getTime();
     return dateB - dateA;

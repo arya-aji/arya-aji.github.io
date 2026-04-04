@@ -14,16 +14,24 @@ const BG_EFFECT_KEY = 'ctp-bg-effect';
 
 const SNOW_EFFECT_KEY = 'ctp-snow-effect';
 
-function getInitial<T>(key: string, fallback: T): T {
+function getInitial<T extends string>(key: string, fallback: T, valid: readonly T[]): T {
   if (browser) {
     const stored = localStorage.getItem(key);
-    if (stored) return stored as T;
+    if (stored && (valid as readonly string[]).includes(stored)) return stored as T;
   }
   return fallback;
 }
 
-export const theme = writable<ThemeFlavor>(getInitial(THEME_KEY, 'mocha'));
-export const accent = writable<AccentColor>(getInitial(ACCENT_KEY, 'peach'));
+const VALID_THEMES: readonly ThemeFlavor[] = ['latte', 'frappe', 'macchiato', 'mocha'];
+const VALID_ACCENTS: readonly AccentColor[] = [
+  'rosewater', 'flamingo', 'pink', 'mauve',
+  'red', 'maroon', 'peach', 'yellow',
+  'green', 'teal', 'sky', 'sapphire',
+  'blue', 'lavender'
+];
+
+export const theme = writable<ThemeFlavor>(getInitial(THEME_KEY, 'mocha', VALID_THEMES));
+export const accent = writable<AccentColor>(getInitial(ACCENT_KEY, 'peach', VALID_ACCENTS));
 export const bgEffect = writable<boolean>(
   browser ? localStorage.getItem(BG_EFFECT_KEY) !== 'false' : true
 );
@@ -58,12 +66,7 @@ if (browser) {
   });
 }
 
-export const ACCENT_COLORS: AccentColor[] = [
-  'rosewater', 'flamingo', 'pink', 'mauve',
-  'red', 'maroon', 'peach', 'yellow',
-  'green', 'teal', 'sky', 'sapphire',
-  'blue', 'lavender'
-];
+export const ACCENT_COLORS: readonly AccentColor[] = VALID_ACCENTS;
 
 export const THEME_FLAVORS: { value: ThemeFlavor; label: string }[] = [
   { value: 'latte', label: 'Latte' },

@@ -8,6 +8,20 @@
 @import '@fontsource/montserrat/700.css';
 @import './catppuccin.css';
 
+/* --- Design Tokens --- */
+:root {
+  --radius-sm: 4px;
+  --radius-md: 8px;
+  --radius-lg: 12px;
+  --radius-xl: 18px;
+  --radius-full: 50%;
+  --radius-pill: 999px;
+
+  --transition-fast: 0.15s ease;
+  --transition-default: 0.2s ease;
+  --transition-slow: 0.3s ease;
+}
+
 /* --- Reset & Base --- */
 *,
 *::before,

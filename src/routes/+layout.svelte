@@ -2,6 +2,9 @@
   import '$lib/styles/global.css';
   import { theme, accent, bgEffect, snowEffect, mouseTremorEffect, floodEffect, grayWorldEffect } from '$lib/stores/theme';
   import { onMount } from 'svelte';
+  import { afterNavigate } from '$app/navigation';
+  import { page } from '$app/stores';
+  import { EFFECTS } from '$lib/config';
   import type { Snippet } from 'svelte';
 
   let { children }: { children: Snippet } = $props();
@@ -14,14 +17,15 @@
   let lastY = 0;
   let speed = 0;
 
+  let cachedTremorTargets: HTMLElement[] | null = null;
+
   function getTremorTargets(): HTMLElement[] {
-    return Array.from(
+    if (cachedTremorTargets) return cachedTremorTargets;
+    cachedTremorTargets = Array.from(
       document.querySelectorAll<HTMLElement>(
         [
           'nav.navbar', '.footer',
-          // Home
           '.hero', '.featured-projects', '.dash-card', '.dashboard .container', '.section-header',
-          // All other pages: target direct children of page-main and common elements
           '.page-main > *', '.page-main .container > *',
           '.post-card', '.post-article',
           '.grid-card', '.slider-slide',
@@ -29,6 +33,11 @@
         ].join(', ')
       )
     );
+    return cachedTremorTargets;
+  }
+
+  function invalidateTremorCache() {
+    cachedTremorTargets = null;
   }
 
   function onPointerMove(e: MouseEvent | PointerEvent) {
@@ -45,17 +54,17 @@
     const dy = t.clientY - lastY;
     lastX = t.clientX;
     lastY = t.clientY;
-    speed = Math.min(Math.sqrt(dx * dx + dy * dy), 120);
+    speed = Math.min(Math.sqrt(dx * dx + dy * dy), EFFECTS.tremor.maxSpeed);
   }
 
   function onScroll() {
-    speed = Math.min(speed + 15, 120);
+    speed = Math.min(speed + EFFECTS.tremor.scrollBoost, EFFECTS.tremor.maxSpeed);
   }
 
   function tremorLoop() {
     if (!tremorActive) return;
 
-    const intensity = speed / 120;
+    const intensity = speed / EFFECTS.tremor.maxSpeed;
     const targets = getTremorTargets();
 
     targets.forEach(el => {
@@ -63,13 +72,13 @@
         el.style.transform = '';
         return;
       }
-      const tx = (Math.random() - 0.5) * intensity * 12;
-      const ty = (Math.random() - 0.5) * intensity * 12;
-      const rot = (Math.random() - 0.5) * intensity * 3;
+      const tx = (Math.random() - 0.5) * intensity * EFFECTS.tremor.translationScale;
+      const ty = (Math.random() - 0.5) * intensity * EFFECTS.tremor.translationScale;
+      const rot = (Math.random() - 0.5) * intensity * EFFECTS.tremor.rotationScale;
       el.style.transform = `translate(${tx}px,${ty}px) rotate(${rot}deg)`;
     });
 
-    speed *= 0.92;
+    speed *= EFFECTS.tremor.decayRate;
     tremorRafId = requestAnimationFrame(tremorLoop);
   }
 
@@ -91,6 +100,10 @@
     window.removeEventListener('scroll', onScroll);
     getTremorTargets().forEach(el => { el.style.transform = ''; });
   }
+
+  afterNavigate(() => {
+    invalidateTremorCache();
+  });
 
   onMount(() => {
     document.documentElement.setAttribute('data-theme', $theme);
@@ -139,7 +152,7 @@
     if (!floodActive) return;
 
     if (floodLevel < 110) {
-      floodLevel += 0.3;
+      floodLevel += EFFECTS.flood.riseRate;
     }
 
     const waterTop = window.innerHeight * (1 - floodLevel / 100);
@@ -151,13 +164,15 @@
       if (elCenter > waterTop) {
         let entry = floodDriftEls.find(d => d.el === el);
         if (!entry) {
+          const [sMin, sMax] = EFFECTS.flood.speedRange;
+          const [vMin, vMax] = EFFECTS.flood.verticalDriftRange;
           entry = {
             el,
             origTransform: el.style.transform || '',
             dx: (Math.random() - 0.5) * 2,
-            dy: -0.3 - Math.random() * 0.5,
+            dy: -(vMin + Math.random() * (vMax - vMin)),
             rot: (Math.random() - 0.5) * 0.4,
-            speed: 0.6 + Math.random() * 0.6
+            speed: sMin + Math.random() * (sMax - sMin)
           };
           floodDriftEls.push(entry);
         }
@@ -166,8 +181,8 @@
         entry.dy = -0.2 - Math.random() * 0.3;
         entry.rot += (Math.random() - 0.5) * 0.2;
 
-        entry.dx = Math.max(-3, Math.min(3, entry.dx));
-        entry.rot = Math.max(-8, Math.min(8, entry.rot));
+        entry.dx = Math.max(-EFFECTS.flood.driftClamp.x, Math.min(EFFECTS.flood.driftClamp.x, entry.dx));
+        entry.rot = Math.max(-EFFECTS.flood.driftClamp.rotation, Math.min(EFFECTS.flood.driftClamp.rotation, entry.rot));
 
         const currentTransform = el.style.transform || '';
         const match = currentTransform.match(/translate\(([-\d.]+)px,\s*([-\d.]+)px\)/);
@@ -235,10 +250,42 @@
 </script>
 
 <svelte:head>
+  <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
+  <link rel="canonical" href="https://arya-aji.github.io{$page.url.pathname}" />
   <title>Arya Aji Kusuma</title>
   <meta name="description" content="Turning ideas and insights into dream projects — web apps, geospatial dashboards, and data-driven tools." />
   <meta name="viewport" content="width=device-width, initial-scale=1" />
+
+  <!-- Open Graph -->
+  <meta property="og:type" content="website" />
+  <meta property="og:title" content="Arya Aji Kusuma | Turning Ideas Into Dream Projects" />
+  <meta property="og:description" content="I turn ideas and insights into dream projects — web apps, geospatial dashboards, and data-driven tools. Let's build something together." />
+  <meta property="og:url" content="https://arya-aji.github.io{$page.url.pathname}" />
+  <meta property="og:image" content="https://arya-aji.github.io/photo.png" />
+  <meta property="og:site_name" content="Arya Aji Kusuma" />
+
+  <!-- Twitter Card -->
+  <meta name="twitter:card" content="summary_large_image" />
+  <meta name="twitter:title" content="Arya Aji Kusuma | Turning Ideas Into Dream Projects" />
+  <meta name="twitter:description" content="I turn ideas and insights into dream projects — web apps, geospatial dashboards, and data-driven tools." />
+  <meta name="twitter:image" content="https://arya-aji.github.io/photo.png" />
+
+  <!-- JSON-LD Person -->
+  {@html `<script type="application/ld+json">${JSON.stringify({
+    "@context": "https://schema.org",
+    "@type": "Person",
+    "name": "Arya Aji Kusuma",
+    "url": "https://arya-aji.github.io",
+    "image": "https://arya-aji.github.io/photo.png",
+    "jobTitle": "Software Developer",
+    "sameAs": [
+      "https://github.com/arya-aji",
+      "https://linkedin.com/in/arya-aji-kusuma"
+    ]
+  })}</script>`}
 </svelte:head>
+
+<a href="#main-content" class="skip-link">Skip to content</a>
 
 {#if $bgEffect}
   <div class="bg-effect">
@@ -250,15 +297,15 @@
 
 {#if $snowEffect}
   <div class="snow-container" aria-hidden="true">
-    {#each Array(60) as _, i}
+    {#each Array(EFFECTS.snow.count) as _, i}
       <div
         class="snowflake"
         style="
           left: {Math.random() * 100}%;
-          animation-duration: {4 + Math.random() * 6}s;
-          animation-delay: {Math.random() * 5}s;
-          opacity: {0.4 + Math.random() * 0.6};
-          font-size: {6 + Math.random() * 12}px;
+          animation-duration: {EFFECTS.snow.durationRange[0] + Math.random() * (EFFECTS.snow.durationRange[1] - EFFECTS.snow.durationRange[0])}s;
+          animation-delay: {Math.random() * EFFECTS.snow.delayMax}s;
+          opacity: {EFFECTS.snow.opacityRange[0] + Math.random() * (EFFECTS.snow.opacityRange[1] - EFFECTS.snow.opacityRange[0])};
+          font-size: {EFFECTS.snow.sizeRange[0] + Math.random() * (EFFECTS.snow.sizeRange[1] - EFFECTS.snow.sizeRange[0])}px;
         "
       >❄</div>
     {/each}
@@ -274,11 +321,29 @@
   </div>
 {/if}
 
-<div class="app" class:mounted>
+<div id="main-content" class="app" class:mounted>
   {@render children()}
 </div>
 
 <style>
+  .skip-link {
+    position: absolute;
+    top: -100%;
+    left: 50%;
+    transform: translateX(-50%);
+    background: var(--accent);
+    color: var(--ctp-crust);
+    padding: 0.5rem 1.5rem;
+    border-radius: 0 0 8px 8px;
+    font-weight: 600;
+    z-index: 10000;
+    text-decoration: none;
+    transition: top 0.2s;
+  }
+  .skip-link:focus {
+    top: 0;
+  }
+
   .app {
     opacity: 0;
     transition: opacity 0.3s ease;

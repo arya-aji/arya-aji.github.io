@@ -2,6 +2,8 @@
   import Navbar from '$lib/components/Navbar.svelte';
   import Footer from '$lib/components/Footer.svelte';
   import { ChevronLeft, ChevronRight } from 'lucide-svelte';
+  import { tagColors } from '$lib/data/colors';
+  import { PAGINATION } from '$lib/config';
 
   let { data } = $props();
   
@@ -12,29 +14,8 @@
     return { ...post, activeMeta: meta };
   }));
 
-  const tagColors: Record<string, string> = {
-    aws: 'var(--ctp-peach)',
-    lambda: 'var(--ctp-yellow)',
-    python: 'var(--ctp-blue)',
-    docker: 'var(--ctp-sapphire)',
-    debugging: 'var(--ctp-red)',
-    cdk: 'var(--ctp-mauve)',
-    sso: 'var(--ctp-lavender)',
-    meta: 'var(--ctp-teal)',
-    'web-dev': 'var(--ctp-green)',
-    sveltekit: 'var(--ctp-flamingo)',
-    fastapi: 'var(--ctp-green)',
-    async: 'var(--ctp-sky)',
-    streaming: 'var(--ctp-sapphire)',
-    agno: 'var(--ctp-mauve)',
-    'ai-streaming': 'var(--ctp-pink)',
-    cancellation: 'var(--ctp-red)',
-    redis: 'var(--ctp-red)',
-    async2: 'var(--ctp-sky)'
-  };
-
   let currentPage = $state(1);
-  const itemsPerPage = 4; // Display 4 posts per page
+  const itemsPerPage = PAGINATION.posts;
   
   let totalPages = $derived(Math.ceil(langPosts.length / itemsPerPage));
   let paginatedPosts = $derived(langPosts.slice((currentPage - 1) * itemsPerPage, currentPage * itemsPerPage));
@@ -114,6 +95,7 @@
               <img
                 src={post.activeMeta.image}
                 alt={post.activeMeta.title}
+                loading="lazy"
                 onerror={(e) => { const img = e.currentTarget; img.onerror = null; img.parentElement.style.display = 'none'; img.parentElement.nextElementSibling.style.display = 'flex'; }}
               />
             </div>
@@ -125,6 +107,7 @@
               <img
                 src="/posts/{post.slug}/cover.svg"
                 alt={post.activeMeta.title}
+                loading="lazy"
                 onerror={(e) => handleCoverError(e.currentTarget)}
               />
             </div>

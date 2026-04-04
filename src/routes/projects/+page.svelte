@@ -4,12 +4,13 @@
   import { Star, Tag, ExternalLink, ChevronLeft, ChevronRight } from 'lucide-svelte';
   import { projects, tagColors } from '$lib/data/projects';
   import type { Project } from '$lib/data/projects';
+  import { PAGINATION } from '$lib/config';
 
   const sliderProjects = projects.slice(0, 10);
 
   let currentIndex = $state(0);
   let currentPage = $state(1);
-  const itemsPerPage = 6;
+  const itemsPerPage = PAGINATION.projects;
   
   let totalPages = $derived(Math.ceil(projects.length / itemsPerPage));
   let paginatedGridProjects = $derived(projects.slice((currentPage - 1) * itemsPerPage, currentPage * itemsPerPage));

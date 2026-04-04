@@ -1,20 +1,12 @@
 <script lang="ts">
   import { onMount } from 'svelte';
+  import { formatLocalTime } from '$lib/utils/time';
 
   let localTime = $state('00:00:00');
 
   onMount(() => {
-    function updateTime() {
-      const now = new Date();
-      localTime = now.toLocaleTimeString('en-US', {
-        hour: '2-digit',
-        minute: '2-digit',
-        second: '2-digit',
-        hour12: false
-      });
-    }
-    updateTime();
-    const interval = setInterval(updateTime, 1000);
+    localTime = formatLocalTime();
+    const interval = setInterval(() => { localTime = formatLocalTime(); }, 1000);
     return () => clearInterval(interval);
   });
 </script>

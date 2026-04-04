@@ -170,28 +170,4 @@ export const projects: Project[] = [
   image: project.image || '/placeholder.jpg'
 }));
 
-export const tagColors: Record<string, string> = {
-  svelte: 'var(--ctp-peach)',
-  geospasial: 'var(--ctp-green)',
-  bps: 'var(--ctp-blue)',
-  'data-viz': 'var(--ctp-mauve)',
-  typescript: 'var(--ctp-sky)',
-  dashboard: 'var(--ctp-flamingo)',
-  analytics: 'var(--ctp-sapphire)',
-  vercel: 'var(--ctp-text)',
-  python: 'var(--ctp-yellow)',
-  automation: 'var(--ctp-blue)',
-  mobile: 'var(--ctp-teal)',
-  scripting: 'var(--ctp-pink)',
-  'data-visualization': 'var(--ctp-maroon)',
-  javascript: 'var(--ctp-yellow)',
-  'e-voting': 'var(--ctp-red)',
-  web: 'var(--ctp-blue)',
-  polling: 'var(--ctp-sky)',
-  geocoding: 'var(--ctp-green)',
-  productivity: 'var(--ctp-teal)',
-  'github-pages': 'var(--ctp-overlay2)',
-  sveltekit: 'var(--ctp-flamingo)',
-  portfolio: 'var(--ctp-lavender)',
-  catppuccin: 'var(--ctp-mauve)'
-};
+export { tagColors } from '$lib/data/colors';

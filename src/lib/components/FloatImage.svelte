@@ -10,7 +10,7 @@
 </script>
 
 <figure class="float-image float-{position}" style="--img-width: {width}">
-  <img {src} {alt} />
+  <img {src} {alt} loading="lazy" />
   {#if alt}
     <figcaption>{alt}</figcaption>
   {/if}

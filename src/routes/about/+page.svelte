@@ -18,7 +18,7 @@
     <!-- Hero row: photo left, text right -->
     <div class="hero-row">
       <div class="photo-col">
-        <img src="/photo.png" alt="Arya Aji Kusuma" class="photo-img" />
+        <img src="/photo.png" alt="Arya Aji Kusuma" class="photo-img" loading="lazy" />
         <div class="photo-caption">Arya Aji Kusuma</div>
         <div class="photo-sub">Jakarta, Indonesia · Developer</div>
       </div>

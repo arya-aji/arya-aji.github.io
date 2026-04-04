@@ -1,19 +1,27 @@
 <script lang="ts">
   import { Star, Tag, ExternalLink, ChevronLeft, ChevronRight } from 'lucide-svelte';
 
+  import type { Project } from '$lib/data/projects';
+
   import { projects as allProjects, tagColors } from '$lib/data/projects';
 
   const projects = allProjects.slice(0, 3);
 
   let mouseX = $state(0);
   let mouseY = $state(0);
-  let hoveredProjectObj: any = $state(null);
+  let hoveredProjectObj: Project | null = $state(null);
   let currentIndex = $state(0);
+  let mouseRafPending = false;
 
-  function handleMouseMove(e: MouseEvent, project: any) {
-    mouseX = e.clientX;
-    mouseY = e.clientY;
-    hoveredProjectObj = project;
+  function handleMouseMove(e: MouseEvent, project: Project) {
+    if (mouseRafPending) return;
+    mouseRafPending = true;
+    requestAnimationFrame(() => {
+      mouseX = e.clientX;
+      mouseY = e.clientY;
+      hoveredProjectObj = project;
+      mouseRafPending = false;
+    });
   }
 
   function handleMouseLeave() {

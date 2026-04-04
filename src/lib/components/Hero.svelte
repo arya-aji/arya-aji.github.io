@@ -185,12 +185,6 @@
     opacity: 0.8;
   }
 
-  .ref-link {
-    color: var(--accent);
-    font-size: 0.75rem;
-    text-decoration: none;
-  }
-
   .social-links {
     display: flex;
     align-items: center;

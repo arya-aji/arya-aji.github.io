@@ -25,9 +25,6 @@
 
   const moreLinks = [
     { href: "/resume", label: "Resume", external: false, wip: true },
-    // { href: '/tutorials', label: 'Tutorials', external: false, wip: true },
-    // { href: '/notes',     label: 'Notes',     external: false, wip: true },
-    // { href: '/terminal',  label: 'Terminal',  external: false, wip: true }
   ];
 
   // Breadcrumb
@@ -47,24 +44,15 @@
     navPanelOpen = false;
   }
 
+  function handleKeydown(e: KeyboardEvent) {
+    if (e.key === 'Escape' && navPanelOpen) closePanel();
+  }
+
   // Accent color CSS var lookup (for swatch preview)
-  const accentVarMap: Record<AccentColor, string> = {
-    rosewater: "#f5e0dc",
-    flamingo: "#f2cdcd",
-    pink: "#f5c2e7",
-    mauve: "#cba6f7",
-    red: "#f38ba8",
-    maroon: "#eba0ac",
-    peach: "#fab387",
-    yellow: "#f9e2af",
-    green: "#a6e3a1",
-    teal: "#94e2d5",
-    sky: "#89dceb",
-    sapphire: "#74c7ec",
-    blue: "#89b4fa",
-    lavender: "#b4befe",
-  };
+  import { accentSwatchMap } from '$lib/data/colors';
 </script>
+
+<svelte:window onkeydown={handleKeydown} />
 
 <nav class="navbar">
   <div class="navbar-inner">
@@ -112,9 +100,7 @@
 
 <!-- Backdrop -->
 {#if navPanelOpen}
-  <!-- svelte-ignore a11y_click_events_have_key_events -->
-  <!-- svelte-ignore a11y_no_static_element_interactions -->
-  <div class="panel-backdrop" onclick={closePanel}></div>
+  <button class="panel-backdrop" onclick={closePanel} aria-label="Close navigation panel"></button>
 {/if}
 
 <!-- Right-side navigation panel -->
@@ -170,7 +156,7 @@
         <button
           class="accent-swatch"
           class:active={$accent === color}
-          style="background: {accentVarMap[color]};"
+          style="background: {accentSwatchMap[color]};"
           onclick={() => accent.set(color as AccentColor)}
           aria-label={color}
           title={color}
@@ -398,6 +384,9 @@
     background: rgba(0, 0, 0, 0.45);
     z-index: 299;
     animation: fade-in 0.2s ease;
+    border: none;
+    padding: 0;
+    cursor: default;
   }
   @keyframes fade-in {
     from {
