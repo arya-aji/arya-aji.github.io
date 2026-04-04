@@ -1,38 +1,65 @@
 <script lang="ts">
-  import { theme, accent, bgEffect, snowEffect, blackHoleEffect, mouseTremorEffect, floodEffect, grayWorldEffect, ACCENT_COLORS, THEME_FLAVORS } from '$lib/stores/theme';
-  import type { ThemeFlavor, AccentColor } from '$lib/stores/theme';
-  import { Palette, CalendarDays, MapPin, Sparkles, FileText, FolderGit2, ArrowRight, Tag } from 'lucide-svelte';
-  import { onMount } from 'svelte';
-  import type L from 'leaflet';
-  import { projects, tagColors } from '$lib/data/projects';
-  import { fetchPosts } from '$lib/utils/posts';
-  import type { BlogPost } from '$lib/utils/posts';
+  import {
+    theme,
+    accent,
+    bgEffect,
+    snowEffect,
+    blackHoleEffect,
+    mouseTremorEffect,
+    floodEffect,
+    grayWorldEffect,
+    ACCENT_COLORS,
+    THEME_FLAVORS,
+  } from "$lib/stores/theme";
+  import type { ThemeFlavor, AccentColor } from "$lib/stores/theme";
+  import {
+    Palette,
+    CalendarDays,
+    MapPin,
+    Sparkles,
+    FileText,
+    FolderGit2,
+    ArrowRight,
+    Tag,
+  } from "lucide-svelte";
+  import { onMount } from "svelte";
+  import type L from "leaflet";
+  import { projects, tagColors } from "$lib/data/projects";
+  import { fetchPosts } from "$lib/utils/posts";
+  import type { BlogPost } from "$lib/utils/posts";
 
-  const latestProject = [...projects].sort((a, b) => new Date(b.date).getTime() - new Date(a.date).getTime())[0];
+  const latestProject = [...projects].sort(
+    (a, b) => new Date(b.date).getTime() - new Date(a.date).getTime(),
+  )[0];
 
   let latestPost: BlogPost | null = $state(null);
 
-  let localTime = $state('');
+  let localTime = $state("");
 
-  const otherEffects = [snowEffect, blackHoleEffect, mouseTremorEffect, floodEffect];
+  const otherEffects = [
+    snowEffect,
+    blackHoleEffect,
+    mouseTremorEffect,
+    floodEffect,
+  ];
 
   function toggleGrayWorld() {
     if ($grayWorldEffect) {
       grayWorldEffect.set(false);
     } else {
-      otherEffects.forEach(e => e.set(false));
+      otherEffects.forEach((e) => e.set(false));
       grayWorldEffect.set(true);
     }
   }
 
   function toggleEffect(effect: typeof snowEffect) {
     if ($grayWorldEffect) grayWorldEffect.set(false);
-    effect.update(v => !v);
+    effect.update((v) => !v);
   }
 
   function activateRandom() {
     const allEffects = [...otherEffects, grayWorldEffect];
-    allEffects.forEach(e => e.set(false));
+    allEffects.forEach((e) => e.set(false));
     const pick = allEffects[Math.floor(Math.random() * allEffects.length)];
     if (pick === grayWorldEffect) {
       grayWorldEffect.set(true);
@@ -40,9 +67,9 @@
       pick.set(true);
     }
   }
-  
-  import { accentHexMap } from '$lib/data/colors';
-  import { formatLocalTime } from '$lib/utils/time';
+
+  import { accentHexMap } from "$lib/data/colors";
+  import { formatLocalTime } from "$lib/utils/time";
 
   let mapElement: HTMLElement | undefined = $state();
   let mapInstance: L.Map | undefined;
@@ -56,24 +83,24 @@
     const interval = setInterval(updateTime, 1000);
     let isMounted = true;
 
-    fetchPosts().then(posts => {
+    fetchPosts().then((posts) => {
       if (posts.length > 0) latestPost = posts[0];
     });
 
-    if (typeof window !== 'undefined' && mapElement) {
+    if (typeof window !== "undefined" && mapElement) {
       (async () => {
         try {
-          const L = await import('leaflet');
-          await import('leaflet/dist/leaflet.css');
+          const L = await import("leaflet");
+          await import("leaflet/dist/leaflet.css");
           if (!isMounted) return;
-          
+
           mapInstance = L.map(mapElement, {
             zoomControl: false,
-            attributionControl: false
+            attributionControl: false,
           }).setView([-6.1754, 106.8272], 12);
 
-          L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
-            maxZoom: 19
+          L.tileLayer("https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png", {
+            maxZoom: 19,
           }).addTo(mapInstance);
         } catch {
           // Leaflet failed to load — map will show empty
@@ -92,15 +119,12 @@
 <section class="dashboard section" id="dashboard">
   <div class="container">
     <div class="dashboard-grid">
-
       <!-- Theme Card -->
       <div class="card dash-card theme-card">
         <div class="card-header">
           <Palette size={16} />
           <span class="card-title">Theme</span>
         </div>
-
-
 
         <div class="theme-buttons">
           {#each THEME_FLAVORS as flavor}
@@ -128,7 +152,11 @@
 
         <label class="bg-toggle">
           <input type="checkbox" bind:checked={$bgEffect} />
-          <span>Background effect: <span class="toggle-state" class:on={$bgEffect}>{$bgEffect ? 'on' : 'off'}</span></span>
+          <span
+            >Background effect: <span class="toggle-state" class:on={$bgEffect}
+              >{$bgEffect ? "on" : "off"}</span
+            ></span
+          >
         </label>
       </div>
 
@@ -138,14 +166,19 @@
           <CalendarDays size={16} />
           <span class="card-title">Let's Connect</span>
         </div>
-        <p class="connect-text">Got an idea? Let's turn it into your next dream project.</p>
-        <a href="mailto:aryaaku999@gmail.com" class="btn btn-accent connect-btn">
+        <p class="connect-text">
+          Got an idea? Let's turn it into your next dream project.
+        </p>
+        <a
+          href="mailto:aryaaku999@gmail.com"
+          class="btn btn-accent connect-btn"
+        >
           <CalendarDays size={16} />
           Let's Build It
         </a>
       </div>
 
-            <!-- Location Card -->
+      <!-- Location Card -->
       <div class="card dash-card location-card">
         <div class="card-header">
           <MapPin size={16} />
@@ -157,7 +190,10 @@
           <div
             bind:this={mapElement}
             class="leaflet-container-root"
-            style="width: 100%; height: 100%; filter: grayscale(1) opacity(0.85) {$theme !== 'latte' ? 'invert(0.9) hue-rotate(180deg)' : ''};"
+            style="width: 100%; height: 100%; filter: grayscale(1) opacity(0.85) {$theme !==
+            'latte'
+              ? 'invert(0.9) hue-rotate(180deg)'
+              : ''};"
           ></div>
         </div>
 
@@ -222,10 +258,7 @@
             <span class="fun-effect-label">Gray World</span>
           </button>
 
-          <button
-            class="fun-effect-btn random-btn"
-            onclick={activateRandom}
-          >
+          <button class="fun-effect-btn random-btn" onclick={activateRandom}>
             <span class="fun-effect-icon">🎲</span>
             <span class="fun-effect-label">Random</span>
           </button>
@@ -255,7 +288,8 @@
           <span class="card-title">Latest Post</span>
         </div>
         {#if latestPost}
-          {@const meta = latestPost.meta['id'] || Object.values(latestPost.meta)[0]}
+          {@const meta =
+            latestPost.meta["en"] || Object.values(latestPost.meta)[0]}
           <a href="/posts/{latestPost.slug}" class="latest-link">
             <h3 class="latest-name">{meta.title}</h3>
             <p class="latest-desc">{meta.summary}</p>
@@ -283,14 +317,23 @@
           <span class="card-title">Latest Project</span>
         </div>
         {#if latestProject}
-          <a href={latestProject.github || `/projects/${latestProject.slug}`} target={latestProject.github ? '_blank' : undefined} rel={latestProject.github ? 'noopener noreferrer' : undefined} class="latest-link">
+          <a
+            href={latestProject.github || `/projects/${latestProject.slug}`}
+            target={latestProject.github ? "_blank" : undefined}
+            rel={latestProject.github ? "noopener noreferrer" : undefined}
+            class="latest-link"
+          >
             <h3 class="latest-name">{latestProject.title}</h3>
             <p class="latest-desc">{latestProject.description}</p>
             <div class="latest-footer">
               <span class="latest-date">{latestProject.dateDisplay}</span>
               <div class="latest-tags">
                 {#each latestProject.tags.slice(0, 3) as tag}
-                  <span class="mini-tag" style="--tag-color: {tagColors[tag] || 'var(--accent)'}">{tag}</span>
+                  <span
+                    class="mini-tag"
+                    style="--tag-color: {tagColors[tag] || 'var(--accent)'}"
+                    >{tag}</span
+                  >
                 {/each}
               </div>
             </div>
@@ -346,7 +389,7 @@
     border: 1px solid var(--ctp-surface1);
     background: transparent;
     color: var(--ctp-subtext0);
-    font-family: 'Montserrat', sans-serif;
+    font-family: "Montserrat", sans-serif;
     font-size: 0.78rem;
     font-weight: 500;
     cursor: pointer;
@@ -388,7 +431,9 @@
 
   .accent-dot.active {
     border-color: var(--ctp-text);
-    box-shadow: 0 0 0 2px var(--ctp-base), 0 0 0 4px var(--ctp-text);
+    box-shadow:
+      0 0 0 2px var(--ctp-base),
+      0 0 0 4px var(--ctp-text);
     transform: scale(1.1);
   }
 
@@ -441,8 +486,6 @@
     overflow: hidden;
   }
 
-
-
   .location-footer {
     display: flex;
     align-items: center;
@@ -458,7 +501,7 @@
   .location-time {
     font-size: 0.8rem;
     color: var(--ctp-subtext0);
-    font-family: 'JetBrains Mono', 'Fira Code', monospace;
+    font-family: "JetBrains Mono", "Fira Code", monospace;
   }
 
   /* --- Fun Zone Card --- */
@@ -505,7 +548,7 @@
     font-size: 0.72rem;
     font-weight: 500;
     color: var(--ctp-subtext0);
-    font-family: 'JetBrains Mono', 'Fira Code', monospace;
+    font-family: "JetBrains Mono", "Fira Code", monospace;
   }
 
   .fun-effect-btn.active .fun-effect-label {
@@ -533,21 +576,28 @@
   }
 
   :global(html.gray-world) .gray-world-btn.active::before {
-    content: '';
+    content: "";
     position: absolute;
     top: 50%;
     left: 50%;
     width: 200%;
     height: 200%;
     background: conic-gradient(
-      #ff0000, #ff8800, #ffff00, #00ff00, #0088ff, #8800ff, #ff0088, #ff0000
+      #ff0000,
+      #ff8800,
+      #ffff00,
+      #00ff00,
+      #0088ff,
+      #8800ff,
+      #ff0088,
+      #ff0000
     );
     animation: rainbow-spin 2s linear infinite;
     z-index: -2;
   }
 
   :global(html.gray-world) .gray-world-btn.active::after {
-    content: '';
+    content: "";
     position: absolute;
     inset: 3px;
     border-radius: 9px;
@@ -561,8 +611,12 @@
   }
 
   @keyframes rainbow-spin {
-    from { transform: translate(-50%, -50%) rotate(0deg); }
-    to { transform: translate(-50%, -50%) rotate(360deg); }
+    from {
+      transform: translate(-50%, -50%) rotate(0deg);
+    }
+    to {
+      transform: translate(-50%, -50%) rotate(360deg);
+    }
   }
 
   .fun-status {
@@ -632,7 +686,7 @@
   .latest-date {
     font-size: 0.75rem;
     color: var(--ctp-overlay1);
-    font-family: 'JetBrains Mono', 'Fira Code', monospace;
+    font-family: "JetBrains Mono", "Fira Code", monospace;
     white-space: nowrap;
   }
 
@@ -649,7 +703,7 @@
     border-radius: 999px;
     border: 1px solid var(--tag-color, var(--ctp-surface2));
     color: var(--tag-color, var(--ctp-subtext0));
-    font-family: 'JetBrains Mono', 'Fira Code', monospace;
+    font-family: "JetBrains Mono", "Fira Code", monospace;
   }
 
   .latest-empty {
