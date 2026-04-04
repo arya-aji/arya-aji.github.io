@@ -7,6 +7,7 @@ export interface Project {
   dateDisplay: string;
   description: string;
   longDesc?: string;
+  idea?: string;
   tags: string[];
   stars?: number;
   contributors?: number;
@@ -28,6 +29,7 @@ export const projects: Project[] = [
     dateDisplay: 'Oct 2025',
     description: 'A geospatial monitoring app for BPS Jakarta Pusat. Tracks and visualizes statistical work area data in real-time. Built to handle large coordinate datasets swiftly and reliably.',
     longDesc: 'Aplikasi Geospasial Monitoring Wilkerstat untuk BPS Jakarta Pusat. Memantau dan memvisualisasikan data wilayah kerja statistik secara real-time. Dibangun menggunakan Svelte, sistem ini dapat mengolah koordinat spasial besar dengan cepat dan andal secara interaktif.',
+    idea: 'Make an app that simplify geospatial monitoring for statistical work areas',
     stars: 0,
     contributors: 1,
     tags: ['svelte', 'geospasial', 'monitoring', 'bps', 'vercel'],
@@ -47,6 +49,7 @@ export const projects: Project[] = [
     dateDisplay: 'Jan 2026',
     description: 'Automation script for MatchaPro Mobile. Built with Python to automate repetitive workflows and data entry processes within the mobile application environment efficiently.',
     longDesc: 'Automation script for MatchaPro Mobile. Built with Python to automate repetitive workflows and data entry processes within the mobile application environment efficiently. Significantly reduces manual work hours.',
+    idea: 'Make a script that automate repetitive mobile data entry workflows',
     stars: 0,
     contributors: 1,
     tags: ['python', 'automation', 'mobile', 'scripting'],
@@ -154,6 +157,7 @@ export const projects: Project[] = [
     dateDisplay: 'Apr 2026',
     description: 'This very portfolio website! Built natively with SvelteKit, TypeScript, and a highly customizable Catppuccin color theme system supporting multiple variants.',
     longDesc: 'The source code powering this exact portfolio website. Engineered natively using modern SvelteKit and TypeScript frameworks. Equipped with a meticulously designed, highly customizable implementation of the Catppuccin color themes natively injected via CSS vars.',
+    idea: 'Make a portfolio website that feels alive and fun to explore',
     stars: 0,
     contributors: 1,
     tags: ['svelte', 'sveltekit', 'typescript', 'portfolio', 'catppuccin'],

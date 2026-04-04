@@ -5,7 +5,7 @@
 
 <svelte:head>
   <title>About Me | Arya Aji Kusuma</title>
-  <meta name="description" content="I turn ideas and insights into real products — geospatial tools, web apps, and data dashboards. Based in Jakarta, Indonesia." />
+  <meta name="description" content="I'm passionate about turning ideas into reality — from concepts to execution. Developer based in Jakarta, building geospatial tools, web apps, and data dashboards." />
 </svelte:head>
 
 <Navbar />
@@ -30,22 +30,25 @@
             <a href="https://github.com/arya-aji" target="_blank" rel="noopener noreferrer" class="inline-link">(@arya-aji)</a>
             — a developer based in
             <a href="https://maps.google.com/?q=Jakarta" target="_blank" rel="noopener noreferrer" class="inline-link">Jakarta, Indonesia</a>.
-            I help turn ideas and insights into real, impactful products — from concept to launch.
+            I'm passionate about turning ideas into reality — bridging the gap between
+            concepts and execution to build products that truly make a difference.
           </p>
 
           <p>
-            Some of my notable projects include
+            From a simple sketch on paper to a fully deployed application, I love
+            the entire journey. Some projects I've brought to life include
             <a href="https://geomon.vercel.app" target="_blank" rel="noopener noreferrer" class="inline-link">Geomon</a>,
             a geospatial monitoring app for BPS Jakarta Pusat,
             <a href="https://sbr-dashboard.vercel.app" target="_blank" rel="noopener noreferrer" class="inline-link">SBR Dashboard</a>,
-            a TypeScript-based data visualization dashboard, and
+            a data visualization dashboard, and
             <a href="https://github.com/arya-aji/automation" target="_blank" rel="noopener noreferrer" class="inline-link">automation scripts</a>
-            in Python to streamline work processes.
+            that streamline repetitive workflows.
           </p>
 
           <p>
-            Outside of coding, I'm interested in geospatial technology, data analysis, and
-            always eager to learn new things. Got an idea you'd like to bring to life? Let's talk.
+            Beyond coding, I'm drawn to geospatial technology, data analysis,
+            and exploring new ways to solve real problems with software. If you have
+            an idea — big or small — I'd love to help turn it into something real. Let's talk.
           </p>
         </div>
 

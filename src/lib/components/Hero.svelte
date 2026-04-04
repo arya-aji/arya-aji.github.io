@@ -16,10 +16,12 @@
           target="_blank"
           rel="noopener noreferrer"
           class="bio-link">Jakarta, Indonesia</a
-        >. I transform raw concepts into polished products — from
-        <span class="bio-link">geospatial dashboards</span> and
-        <span class="bio-link">data-driven tools</span> to
-        <span class="bio-link">full-stack web apps</span>. Got an idea? Let's build it.
+        >. I'm passionate about turning ideas into reality — taking raw concepts
+        all the way to execution. Whether it's
+        <span class="bio-link">geospatial dashboards</span>,
+        <span class="bio-link">data-driven tools</span>, or
+        <span class="bio-link">full-stack web apps</span> — I build things that work
+        and make a difference. Got an idea? Let's build it.
       </p>
 
       <div class="social-links">

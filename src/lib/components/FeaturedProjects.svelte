@@ -98,6 +98,11 @@
               <!-- Right side: Information and Actions -->
               <div class="project-info-side">
                 <div class="project-info-content">
+                  {#if project.idea}
+                    <div class="project-idea">
+                      <span class="idea-keyword">idea</span> <span class="idea-eq">=</span> <span class="idea-value">"{project.idea}"</span>
+                    </div>
+                  {/if}
                   <h3 class="project-name">
                     {project.name.charAt(0).toUpperCase() + project.name.slice(1)}
                   </h3>
@@ -151,6 +156,33 @@
     justify-content: space-between;
     align-items: center;
     margin-bottom: 24px;
+  }
+
+  /* Idea line on project card */
+  .project-idea {
+    font-family: 'JetBrains Mono', 'Fira Code', monospace;
+    font-size: 0.82rem;
+    line-height: 1.5;
+    margin-bottom: 8px;
+    padding: 6px 10px;
+    background: var(--ctp-mantle);
+    border-left: 3px solid var(--accent);
+    border-radius: 0 6px 6px 0;
+    word-break: break-word;
+  }
+
+  .idea-keyword {
+    color: var(--accent);
+    font-weight: 700;
+  }
+
+  .idea-eq {
+    color: var(--ctp-subtext0);
+  }
+
+  .idea-value {
+    color: var(--ctp-text);
+    font-style: italic;
   }
 
   .slider-controls {
