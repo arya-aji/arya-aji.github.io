@@ -142,6 +142,10 @@
 </section>
 
 <style>
+  .featured-projects {
+    overflow: hidden;
+  }
+
   .section-header {
     display: flex;
     justify-content: space-between;
@@ -474,14 +478,37 @@
   }
 
   @media (max-width: 992px) {
+    .slider-slide {
+      min-width: 0;
+      width: 100%;
+    }
+
     .project-card-wrapper {
       grid-template-columns: 1fr;
+      max-width: 100%;
     }
     
     .project-visual-side {
       border-right: none;
       border-bottom: 1px solid var(--ctp-surface0);
       padding: 16px;
+      min-width: 0;
+    }
+
+    .terminal-header {
+      justify-content: flex-start;
+      gap: 12px;
+    }
+
+    .terminal-dots {
+      position: static;
+      flex-shrink: 0;
+    }
+
+    .repo-name-header {
+      overflow: hidden;
+      text-overflow: ellipsis;
+      white-space: nowrap;
     }
     
     .terminal-preview {
@@ -490,6 +517,16 @@
     
     .project-info-side {
       padding: 24px;
+      min-width: 0;
+      overflow: hidden;
+    }
+
+    .project-name {
+      word-break: break-word;
+    }
+
+    .project-long-desc {
+      word-break: break-word;
     }
 
     .project-actions {

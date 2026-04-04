@@ -1,7 +1,7 @@
 <script lang="ts">
-  import { theme, accent, bgEffect, snowEffect, blackHoleEffect, mouseTremorEffect, ACCENT_COLORS, THEME_FLAVORS } from '$lib/stores/theme';
+  import { theme, accent, bgEffect, snowEffect, blackHoleEffect, mouseTremorEffect, floodEffect, grayWorldEffect, ACCENT_COLORS, THEME_FLAVORS } from '$lib/stores/theme';
   import type { ThemeFlavor, AccentColor } from '$lib/stores/theme';
-  import { Palette, CalendarDays, MapPin, Sparkles, FileText, FolderGit2, ArrowRight, Tag, Snowflake, CircleDot, Activity } from 'lucide-svelte';
+  import { Palette, CalendarDays, MapPin, Sparkles, FileText, FolderGit2, ArrowRight, Tag } from 'lucide-svelte';
   import { onMount } from 'svelte';
   import { projects, tagColors } from '$lib/data/projects';
   import { fetchPosts } from '$lib/utils/posts';
@@ -12,6 +12,15 @@
   let latestPost: BlogPost | null = $state(null);
 
   let localTime = $state('');
+
+  function activateRandom() {
+    const effects = [snowEffect, blackHoleEffect, mouseTremorEffect, floodEffect, grayWorldEffect];
+    // Turn off all effects first
+    effects.forEach(e => e.set(false));
+    // Pick a random one and activate it
+    const pick = effects[Math.floor(Math.random() * effects.length)];
+    pick.set(true);
+  }
   
   let mapElement: HTMLElement | undefined = $state();
   let mapInstance: any;
@@ -155,32 +164,76 @@
           <span class="card-title">Fun Zone</span>
         </div>
 
-        <button class="btn {$snowEffect ? 'btn-accent' : 'btn-ghost'} fun-btn" onclick={() => snowEffect.update(v => !v)}>
-          <Snowflake size={18} />
-          Let it snow
-        </button>
+        <div class="fun-effects">
+          <button
+            class="fun-effect-btn"
+            class:active={$snowEffect}
+            onclick={() => snowEffect.update(v => !v)}
+          >
+            <span class="fun-effect-icon">❄️</span>
+            <span class="fun-effect-label">Snow</span>
+          </button>
 
-        <button class="btn {$blackHoleEffect ? 'btn-accent' : 'btn-ghost'} fun-btn" onclick={() => blackHoleEffect.update(v => !v)}>
-          <CircleDot size={18} />
-          Black Hole
-        </button>
+          <button
+            class="fun-effect-btn"
+            class:active={$blackHoleEffect}
+            onclick={() => blackHoleEffect.update(v => !v)}
+          >
+            <span class="fun-effect-icon">🕳️</span>
+            <span class="fun-effect-label">Black Hole</span>
+          </button>
 
-        <button class="btn {$mouseTremorEffect ? 'btn-accent' : 'btn-ghost'} fun-btn" onclick={() => mouseTremorEffect.update(v => !v)}>
-          <Activity size={18} />
-          Mouse Tremor
-        </button>
+          <button
+            class="fun-effect-btn"
+            class:active={$mouseTremorEffect}
+            onclick={() => mouseTremorEffect.update(v => !v)}
+          >
+            <span class="fun-effect-icon">📳</span>
+            <span class="fun-effect-label">Tremor</span>
+          </button>
 
-        <p class="fun-hint">
-          {#if $blackHoleEffect}
+          <button
+            class="fun-effect-btn"
+            class:active={$floodEffect}
+            onclick={() => floodEffect.update(v => !v)}
+          >
+            <span class="fun-effect-icon">🌊</span>
+            <span class="fun-effect-label">Flood</span>
+          </button>
+
+          <button
+            class="fun-effect-btn"
+            class:active={$grayWorldEffect}
+            onclick={() => grayWorldEffect.update(v => !v)}
+          >
+            <span class="fun-effect-icon">🩶</span>
+            <span class="fun-effect-label">Gray World</span>
+          </button>
+
+          <button
+            class="fun-effect-btn random-btn"
+            onclick={activateRandom}
+          >
+            <span class="fun-effect-icon">🎲</span>
+            <span class="fun-effect-label">Random</span>
+          </button>
+        </div>
+
+        <div class="fun-status">
+          {#if $floodEffect}
+            🌊 Water is rising...
+          {:else if $grayWorldEffect}
+            🩶 Color has left the world...
+          {:else if $blackHoleEffect}
             🕳️ Cards are being consumed...
           {:else if $mouseTremorEffect}
             📳 Move your mouse faster!
           {:else if $snowEffect}
             ❄️ It's snowing!
           {:else}
-            Try toggling some fun effects!
+            ✨ Try toggling some effects!
           {/if}
-        </p>
+        </div>
       </div>
 
       <!-- Latest Post Card -->
@@ -397,18 +450,69 @@
   }
 
   /* --- Fun Zone Card --- */
-  .funzone-card {
-    align-items: flex-start;
-    justify-content: flex-start;
+  .fun-effects {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 8px;
+    margin-bottom: 16px;
+    flex: 1;
   }
 
-  .fun-btn {
-    margin-bottom: 12px;
+  .fun-effect-btn {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    gap: 8px;
+    padding: 16px 8px;
+    border-radius: 12px;
+    border: 1px solid var(--ctp-surface1);
+    background: var(--ctp-crust);
+    cursor: pointer;
+    transition: all 0.2s ease;
+    outline: none;
   }
 
-  .fun-hint {
-    font-size: 0.75rem;
+  .fun-effect-btn:hover {
+    border-color: var(--accent);
+    background: color-mix(in srgb, var(--accent) 8%, var(--ctp-crust));
+    transform: translateY(-2px);
+  }
+
+  .fun-effect-btn.active {
+    border-color: var(--accent);
+    background: color-mix(in srgb, var(--accent) 15%, var(--ctp-crust));
+    box-shadow: 0 0 12px color-mix(in srgb, var(--accent) 25%, transparent);
+  }
+
+  .fun-effect-icon {
+    font-size: 1.4rem;
+  }
+
+  .fun-effect-label {
+    font-size: 0.72rem;
+    font-weight: 500;
     color: var(--ctp-subtext0);
+    font-family: 'JetBrains Mono', 'Fira Code', monospace;
+  }
+
+  .fun-effect-btn.active .fun-effect-label {
+    color: var(--accent);
+    font-weight: 600;
+  }
+
+  .random-btn {
+    border-style: dashed;
+  }
+
+  .random-btn:hover {
+    border-style: solid;
+  }
+
+  .fun-status {
+    font-size: 0.78rem;
+    color: var(--ctp-subtext0);
+    margin-top: auto;
   }
 
   /* --- Latest Post / Project Cards --- */

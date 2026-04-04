@@ -34,6 +34,8 @@ export const snowEffect = writable<boolean>(
 // Transient effects — not persisted to localStorage
 export const blackHoleEffect = writable<boolean>(false);
 export const mouseTremorEffect = writable<boolean>(false);
+export const floodEffect = writable<boolean>(false);
+export const grayWorldEffect = writable<boolean>(false);
 
 // Persist to localStorage
 if (browser) {

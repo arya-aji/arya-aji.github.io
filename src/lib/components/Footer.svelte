@@ -186,15 +186,31 @@
 
   @media (max-width: 768px) {
     .footer-bar {
-      flex-wrap: wrap;
+      flex-direction: column;
       height: auto;
-      padding: 12px 0;
-      gap: 12px;
+      padding: 14px 0;
+      gap: 10px;
+    }
+
+    .footer-left {
+      width: 100%;
+      justify-content: center;
+    }
+
+    .status {
+      display: none;
     }
 
     .footer-right {
-      flex-wrap: wrap;
-      gap: 12px;
+      width: 100%;
+      justify-content: center;
+      gap: 14px;
+    }
+
+    .footer-time,
+    .footer-views,
+    .commit-hash {
+      display: none;
     }
   }
 </style>

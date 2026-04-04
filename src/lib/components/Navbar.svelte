@@ -8,6 +8,8 @@
     snowEffect,
     blackHoleEffect,
     mouseTremorEffect,
+    floodEffect,
+    grayWorldEffect,
     ACCENT_COLORS,
     THEME_FLAVORS,
   } from "$lib/stores/theme";
@@ -239,6 +241,18 @@
       <input type="checkbox" bind:checked={$mouseTremorEffect} />
       <span class="toggle-box"></span>
       <span class="toggle-label">Mouse Tremor: <span class="toggle-state">{$mouseTremorEffect ? 'on' : 'off'}</span></span>
+    </label>
+
+    <label class="bg-effect-toggle">
+      <input type="checkbox" bind:checked={$floodEffect} />
+      <span class="toggle-box"></span>
+      <span class="toggle-label">Flood: <span class="toggle-state">{$floodEffect ? 'on' : 'off'}</span></span>
+    </label>
+
+    <label class="bg-effect-toggle">
+      <input type="checkbox" bind:checked={$grayWorldEffect} />
+      <span class="toggle-box"></span>
+      <span class="toggle-label">Gray World: <span class="toggle-state">{$grayWorldEffect ? 'on' : 'off'}</span></span>
     </label>
   </div>
 </div>
