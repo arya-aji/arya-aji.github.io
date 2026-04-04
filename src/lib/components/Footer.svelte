@@ -186,15 +186,8 @@
 
   @media (max-width: 768px) {
     .footer-bar {
-      flex-direction: column;
       height: auto;
-      padding: 14px 0;
-      gap: 10px;
-    }
-
-    .footer-left {
-      width: 100%;
-      justify-content: center;
+      padding: 12px 0;
     }
 
     .status {
@@ -202,8 +195,6 @@
     }
 
     .footer-right {
-      width: 100%;
-      justify-content: center;
       gap: 14px;
     }
 
