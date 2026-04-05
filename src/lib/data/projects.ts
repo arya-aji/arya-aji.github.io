@@ -162,7 +162,7 @@ export const projects: Project[] = [
     contributors: 1,
     tags: ['svelte', 'sveltekit', 'typescript', 'portfolio', 'catppuccin'],
     href: 'https://github.com/arya-aji',
-    github: 'https://github.com/arya-aji/web-portfolio',
+    github: 'https://github.com/arya-aji/arya-aji.github.io',
     featured: true
   }
 ].map(project => ({

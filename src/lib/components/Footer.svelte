@@ -34,7 +34,7 @@
         <span class="footer-views">infinite views</span>
 
         <a
-          href="https://github.com/arya-aji/web-portfolio"
+          href="https://github.com/arya-aji/arya-aji.github.io"
           target="_blank"
           rel="noopener noreferrer"
           class="commit-hash"
