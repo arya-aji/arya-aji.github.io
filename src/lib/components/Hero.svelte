@@ -1,5 +1,18 @@
 <script lang="ts">
   import { ArrowRight } from "lucide-svelte";
+  import { onMount } from "svelte";
+
+  let taglineEl: HTMLElement;
+  let taglineVisible = $state(false);
+
+  onMount(() => {
+    const observer = new IntersectionObserver(
+      ([entry]) => { if (entry.isIntersecting) taglineVisible = true; },
+      { threshold: 0.3 }
+    );
+    if (taglineEl) observer.observe(taglineEl);
+    return () => observer.disconnect();
+  });
 </script>
 
 <section class="hero" id="hero">
@@ -120,18 +133,72 @@
     </div>
     <!-- /hero-text-col -->
   </div>
+
+  <div class="scroll-indicator" aria-hidden="true">
+    <svg class="scroll-arrow" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+      <polyline points="6 9 12 15 18 9"></polyline>
+    </svg>
+  </div>
+</section>
+
+<section class="ideas-realized">
+  <div class="container">
+    <p class="tagline" class:visible={taglineVisible} bind:this={taglineEl}>
+      Ideas, Realized.
+    </p>
+  </div>
 </section>
 
 <style>
   .hero {
-    padding: 80px 0 40px;
+    min-height: 100vh;
+    padding: 80px 0 0;
+    display: flex;
+    flex-direction: column;
   }
 
   .hero-inner {
+    flex: 1;
     display: flex;
     align-items: center;
     justify-content: space-between;
     gap: 40px;
+  }
+
+  .scroll-indicator {
+    display: flex;
+    justify-content: center;
+    padding: 24px 0 32px;
+  }
+
+  .scroll-arrow {
+    color: var(--ctp-overlay1);
+    animation: bounce 1.8s ease-in-out infinite;
+  }
+
+  @keyframes bounce {
+    0%, 100% { transform: translateY(0); opacity: 0.5; }
+    50% { transform: translateY(8px); opacity: 1; }
+  }
+
+  .ideas-realized {
+    padding: 80px 0 60px;
+  }
+
+  .tagline {
+    font-size: clamp(2.5rem, 8vw, 6rem);
+    font-weight: 800;
+    color: var(--ctp-text);
+    letter-spacing: -0.02em;
+    line-height: 1.1;
+    opacity: 0;
+    transform: translateY(40px);
+    transition: opacity 0.8s ease, transform 0.8s ease;
+  }
+
+  .tagline.visible {
+    opacity: 1;
+    transform: translateY(0);
   }
 
   .hero-text-col {
@@ -321,7 +388,7 @@
 
   @media (max-width: 768px) {
     .hero {
-      padding: 48px 0 24px;
+      padding: 48px 0 0;
     }
 
     .hero-heading {
@@ -330,6 +397,10 @@
 
     .hero-bio {
       font-size: 0.95rem;
+    }
+
+    .ideas-realized {
+      padding: 48px 0 40px;
     }
   }
 </style>
