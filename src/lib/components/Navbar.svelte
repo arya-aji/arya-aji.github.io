@@ -45,11 +45,11 @@
   }
 
   function handleKeydown(e: KeyboardEvent) {
-    if (e.key === 'Escape' && navPanelOpen) closePanel();
+    if (e.key === "Escape" && navPanelOpen) closePanel();
   }
 
   // Accent color CSS var lookup (for swatch preview)
-  import { accentSwatchMap } from '$lib/data/colors';
+  import { accentSwatchMap } from "$lib/data/colors";
 </script>
 
 <svelte:window onkeydown={handleKeydown} />
@@ -100,7 +100,11 @@
 
 <!-- Backdrop -->
 {#if navPanelOpen}
-  <button class="panel-backdrop" onclick={closePanel} aria-label="Close navigation panel"></button>
+  <button
+    class="panel-backdrop"
+    onclick={closePanel}
+    aria-label="Close navigation panel"
+  ></button>
 {/if}
 
 <!-- Right-side navigation panel -->
@@ -202,7 +206,7 @@
   <div class="panel-divider"></div>
 
   <!-- Fun Zone -->
-  <div class="panel-section">
+  <!-- <div class="panel-section">
     <div class="section-label">
       <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
         <path d="m12 3-1.912 5.813a2 2 0 0 1-1.275 1.275L3 12l5.813 1.912a2 2 0 0 1 1.275 1.275L12 21l1.912-5.813a2 2 0 0 1 1.275-1.275L21 12l-5.813-1.912a2 2 0 0 1-1.275-1.275L12 3Z"/>
@@ -240,7 +244,7 @@
       <span class="toggle-box"></span>
       <span class="toggle-label">Gray World: <span class="toggle-state">{$grayWorldEffect ? 'on' : 'off'}</span></span>
     </label>
-  </div>
+  </div> -->
 </div>
 
 <style>
