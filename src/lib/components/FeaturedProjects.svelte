@@ -4,6 +4,7 @@
   import type { Project } from '$lib/data/projects';
 
   import { projects as allProjects, tagColors } from '$lib/data/projects';
+  import CaseStudyModal from '$lib/components/CaseStudyModal.svelte';
 
   const projects = allProjects.slice(0, 3);
 
@@ -12,6 +13,7 @@
   let hoveredProjectObj: Project | null = $state(null);
   let currentIndex = $state(0);
   let mouseRafPending = false;
+  let caseStudyProject: Project | null = $state(null);
 
   function handleMouseMove(e: MouseEvent, project: Project) {
     if (mouseRafPending) return;
@@ -128,6 +130,10 @@
                 </div>
 
                 <div class="project-actions">
+                  <button class="action-btn case-study" onclick={() => caseStudyProject = project}>
+                    <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M2 3h6a4 4 0 0 1 4 4v14a3 3 0 0 0-3-3H2z"/><path d="M22 3h-6a4 4 0 0 0-4 4v14a3 3 0 0 1 3-3h7z"/></svg>
+                    Case Study
+                  </button>
                   {#if project.github}
                     <a href={project.github} target="_blank" rel="noopener noreferrer" class="action-btn outline">
                       <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-github"><path d="M15 22v-4a4.8 4.8 0 0 0-1-3.26c3-.3 6-1.5 6-6.4a5.1 5.1 0 0 0-1.4-3.6 4.9 4.9 0 0 0-.1-3.5s-1.1-.3-3.6 1.4a12.8 12.8 0 0 0-7 0C4.1 1.7 3 2 3 2a4.9 4.9 0 0 0-.1 3.5A5.1 5.1 0 0 0 1.5 9.1c0 4.9 3 6.1 6 6.4-.4.4-.8 1.1-.8 2.2V22"/><path d="M9 20c-4.5 1.5-5-2.5-7-3"/></svg>
@@ -153,6 +159,10 @@
     <div class="floating-video-popup" style="--x: {mouseX + 20}px; --y: {mouseY + 20}px; background-image: url('{hoveredProjectObj.gif || hoveredProjectObj.image}');"></div>
   {/if}
 </section>
+
+{#if caseStudyProject}
+  <CaseStudyModal project={caseStudyProject} onclose={() => caseStudyProject = null} />
+{/if}
 
 <style>
   .featured-projects {
@@ -491,6 +501,20 @@
   .action-btn.outline:hover {
     border-color: var(--accent);
     color: var(--accent);
+    transform: translateY(-2px);
+  }
+
+  .action-btn.case-study {
+    background: color-mix(in srgb, var(--accent) 10%, var(--ctp-surface0));
+    color: var(--accent);
+    border: 1.5px solid color-mix(in srgb, var(--accent) 30%, transparent);
+    cursor: pointer;
+    font-family: inherit;
+  }
+
+  .action-btn.case-study:hover {
+    background: color-mix(in srgb, var(--accent) 18%, var(--ctp-surface0));
+    border-color: var(--accent);
     transform: translateY(-2px);
   }
 
