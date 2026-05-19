@@ -59,7 +59,9 @@
   <div class="navbar-inner">
     <!-- Logo + breadcrumb -->
     <div class="logo-path">
-      <a href="/" class="logo-home" aria-label="Home">~</a>
+      <a href="/" class="logo-home" aria-label="Home">
+        <img src="/logo.png" alt="Logo" class="nav-logo" />
+      </a>
       <span class="bc-sep">/</span>
       {#each crumbs as crumb, i}
         {#if i === crumbs.length - 1}
@@ -283,9 +285,16 @@
     flex-shrink: 0;
   }
   .logo-home {
+    display: flex;
+    align-items: center;
     color: var(--ctp-text);
     text-decoration: none;
-    transition: color 0.2s;
+    transition: opacity 0.2s;
+  }
+  .nav-logo {
+    height: 24px;
+    width: auto;
+    object-fit: contain;
   }
   .logo-home:hover {
     color: var(--accent);

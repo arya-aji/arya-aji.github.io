@@ -250,7 +250,7 @@
 </script>
 
 <svelte:head>
-  <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
+  <link rel="icon" type="image/png" href="/logo.png" />
   <link rel="canonical" href="https://arya-aji.github.io{$page.url.pathname}" />
   <title>Arya Aji Kusuma</title>
   <meta name="description" content="Turning ideas and insights into dream projects — web apps, geospatial dashboards, and data-driven tools." />
