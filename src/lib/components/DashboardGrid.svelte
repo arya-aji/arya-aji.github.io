@@ -170,7 +170,7 @@
           Got an idea? Let's turn it into your next dream project.
         </p>
         <a
-          href="mailto:aryaaku999@gmail.com"
+          href="mailto:hello@aryaaji.com"
           class="btn btn-accent connect-btn"
         >
           <CalendarDays size={16} />
