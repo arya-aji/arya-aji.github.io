@@ -99,35 +99,13 @@
 
       <div class="work-history">
         <a
-          href="https://geomon.vercel.app"
+          href="https://github.com/arya-aji/blur-your-whatsapp"
           target="_blank"
           rel="noopener noreferrer"
           class="work-item current"
         >
-          <div class="work-icon stan-icon">🗺</div>
-          <span class="work-name">geomon</span>
-        </a>
-        <span class="work-sep">/</span>
-        <a
-          href="https://sbr-dashboard.vercel.app"
-          target="_blank"
-          rel="noopener noreferrer"
-          class="work-item past"
-        >
-          <div class="work-icon sb-icon">📊</div>
-          <span class="work-name">sbr-dashboard</span>
-          <span class="work-label">(Past)</span>
-        </a>
-        <span class="work-sep">/</span>
-        <a
-          href="https://github.com/arya-aji/polly-vote"
-          target="_blank"
-          rel="noopener noreferrer"
-          class="work-item past"
-        >
-          <div class="work-icon hc-icon">🗳</div>
-          <span class="work-name">polly-vote</span>
-          <span class="work-label">(Past)</span>
+          <img src="/assets/blur-my-whatsapp.png" alt="Blur Your Whatsapp Logo" class="work-icon" style="object-fit: contain; padding: 2px; border-radius: 6px; background: var(--ctp-surface0);" />
+          <span class="work-name">blur-your-whatsapp</span>
         </a>
       </div>
     </div>

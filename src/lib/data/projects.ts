@@ -42,7 +42,7 @@ export const projects: Project[] = [
     date: '2026-05-19',
     dateDisplay: 'May 2026',
     description: 'Chrome extension to maximize WhatsApp privacy in public places. Blurs chats, names, groups, and images. 100% local, no data sent to servers, and completely free.',
-    longDesc: 'Ekstensi Chrome untuk memaksimalkan privasi WhatsApp Web di tempat umum. Memungkinkan pengguna untuk melakukan blur pada chat, nama, grup, gambar, dan elemen lainnya. Beroperasi 100% secara lokal tanpa ada pengiriman data ke server, menjaga keamanan dan privasi pengguna sepenuhnya. Dan tentunya, ekstensi ini gratis.',
+    longDesc: 'A Chrome extension designed to maximize WhatsApp Web privacy in public spaces. It enables users to selectively blur chats, names, groups, images, and other sensitive elements. The extension operates 100% locally with absolutely no data transmitted to external servers, ensuring complete security and privacy. And of course, it is completely free.',
     idea: 'Maximize WhatsApp privacy in public places with zero data collection',
     problem: 'Using WhatsApp Web in public spaces exposes personal chats, group names, and sensitive images to shoulder surfers. Existing solutions either require subscriptions or send telemetry data to third-party servers.',
     solution: 'Built a lightweight Chrome extension that injects CSS to selectively blur WhatsApp Web elements (messages, contact names, profile pictures). The blur is removed only on hover. All logic runs locally in the browser with absolutely no external data transmission.',

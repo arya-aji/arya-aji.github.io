@@ -103,7 +103,7 @@
                     <div class="terminal-content">
                       <div class="terminal-preview">
                         {#if highlight.image}
-                          <div class="preview-placeholder has-image" role="img" aria-label="Project Preview" style="background-image: url('{highlight.image}'); background-size: cover; background-position: center;"></div>
+                          <div class="preview-placeholder has-image" role="img" aria-label="Project Preview" style="background-image: url('{highlight.image}'); background-size: cover; background-position: center top;"></div>
                         {:else}
                           <div class="preview-placeholder" role="img" aria-label="Project Preview">
                             <svg width="40" height="40" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round">
@@ -150,8 +150,8 @@
                     </button>
                     {#if highlight.href}
                       <a href={highlight.href} target="_blank" rel="noopener noreferrer" class="action-btn outline">
-                        <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-github"><path d="M15 22v-4a4.8 4.8 0 0 0-1-3.26c3-.3 6-1.5 6-6.4a5.1 5.1 0 0 0-1.4-3.6 4.9 4.9 0 0 0-.1-3.5s-1.1-.3-3.6 1.4a12.8 12.8 0 0 0-7 0C4.1 1.7 3 2 3 2a4.9 4.9 0 0 0-.1 3.5A5.1 5.1 0 0 0 1.5 9.1c0 4.9 3 6.1 6 6.4-.4.4-.8 1.1-.8 2.2V22"/><path d="M9 20c-4.5 1.5-5-2.5-7-3"/></svg>
-                        Repository
+                        <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M6 2 3 6v14a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2V6l-3-4Z"/><path d="M3 6h18"/><path d="M16 10a4 4 0 0 1-8 0"/></svg>
+                        Store Link
                       </a>
                     {/if}
                     {#if highlight.live}
