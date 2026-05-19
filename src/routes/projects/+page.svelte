@@ -144,9 +144,13 @@
                   </div>
 
                   <div class="project-actions">
-                    <button class="action-btn case-study" onclick={() => caseStudyProject = highlight}>
+                    <a href="/projects/{highlight.slug}" class="action-btn outline">
                       <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M2 3h6a4 4 0 0 1 4 4v14a3 3 0 0 0-3-3H2z"/><path d="M22 3h-6a4 4 0 0 0-4 4v14a3 3 0 0 1 3-3h7z"/></svg>
-                      Case Study
+                      View Details
+                    </a>
+                    <button class="action-btn case-study" onclick={() => caseStudyProject = highlight}>
+                      <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 2v20"/><path d="M17 5H9.5a3.5 3.5 0 0 0 0 7h5a3.5 3.5 0 0 1 0 7H6"/></svg>
+                      Quick Glance
                     </button>
                     {#if highlight.href}
                       <a href={highlight.href} target="_blank" rel="noopener noreferrer" class="action-btn outline">
