@@ -6,7 +6,7 @@
   import { projects as allProjects, tagColors } from '$lib/data/projects';
   import CaseStudyModal from '$lib/components/CaseStudyModal.svelte';
 
-  const projects = allProjects.slice(0, 3);
+  const projects = allProjects.filter(p => p.featured);
 
   let mouseX = $state(0);
   let mouseY = $state(0);
@@ -31,10 +31,12 @@
   }
 
   function nextSlide() {
+    if (projects.length <= 1) return;
     currentIndex = (currentIndex + 1) % projects.length;
   }
 
   function prevSlide() {
+    if (projects.length <= 1) return;
     currentIndex = (currentIndex - 1 + projects.length) % projects.length;
   }
 </script>
@@ -46,23 +48,25 @@
         <Star size={22} />
         Ideas, Realized
       </h2>
-      <div class="slider-controls">
-        <button class="slider-btn" onclick={prevSlide} aria-label="Previous project">
-          <ChevronLeft size={20} />
-        </button>
-        <div class="slider-dots-top">
-          {#each projects as _, i}
-            <button 
-              class="slider-dot {i === currentIndex ? 'active' : ''}" 
-              onclick={() => currentIndex = i}
-              aria-label="Go to project {i + 1}"
-            ></button>
-          {/each}
+      {#if projects.length > 1}
+        <div class="slider-controls">
+          <button class="slider-btn" onclick={prevSlide} aria-label="Previous project">
+            <ChevronLeft size={20} />
+          </button>
+          <div class="slider-dots-top">
+            {#each projects as _, i}
+              <button 
+                class="slider-dot {i === currentIndex ? 'active' : ''}" 
+                onclick={() => currentIndex = i}
+                aria-label="Go to project {i + 1}"
+              ></button>
+            {/each}
+          </div>
+          <button class="slider-btn" onclick={nextSlide} aria-label="Next project">
+            <ChevronRight size={20} />
+          </button>
         </div>
-        <button class="slider-btn" onclick={nextSlide} aria-label="Next project">
-          <ChevronRight size={20} />
-        </button>
-      </div>
+      {/if}
     </div>
 
     <div class="slider-viewport">
@@ -137,7 +141,7 @@
                   {#if project.github}
                     <a href={project.github} target="_blank" rel="noopener noreferrer" class="action-btn outline">
                       <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-github"><path d="M15 22v-4a4.8 4.8 0 0 0-1-3.26c3-.3 6-1.5 6-6.4a5.1 5.1 0 0 0-1.4-3.6 4.9 4.9 0 0 0-.1-3.5s-1.1-.3-3.6 1.4a12.8 12.8 0 0 0-7 0C4.1 1.7 3 2 3 2a4.9 4.9 0 0 0-.1 3.5A5.1 5.1 0 0 0 1.5 9.1c0 4.9 3 6.1 6 6.4-.4.4-.8 1.1-.8 2.2V22"/><path d="M9 20c-4.5 1.5-5-2.5-7-3"/></svg>
-                      View Source
+                      View Realized
                     </a>
                   {/if}
                   {#if project.live}

@@ -32,10 +32,12 @@
   }
 
   function nextSlide() {
+    if (sliderProjects.length <= 1) return;
     currentIndex = (currentIndex + 1) % sliderProjects.length;
   }
 
   function prevSlide() {
+    if (sliderProjects.length <= 1) return;
     currentIndex = (currentIndex - 1 + sliderProjects.length) % sliderProjects.length;
   }
 </script>
@@ -54,25 +56,27 @@
 
     <!-- Top Slider (up to 10 projects) -->
     {#if sliderProjects.length > 0}
-      <div class="slider-header-controls">
-        <div class="slider-controls">
-          <button class="slider-btn" onclick={prevSlide} aria-label="Previous project">
-            <ChevronLeft size={20} />
-          </button>
-          <div class="slider-dots-top">
-            {#each sliderProjects as _, i}
-              <button 
-                class="slider-dot {i === currentIndex ? 'active' : ''}" 
-                onclick={() => currentIndex = i}
-                aria-label="Go to project {i + 1}"
-              ></button>
-            {/each}
+      {#if sliderProjects.length > 1}
+        <div class="slider-header-controls">
+          <div class="slider-controls">
+            <button class="slider-btn" onclick={prevSlide} aria-label="Previous project">
+              <ChevronLeft size={20} />
+            </button>
+            <div class="slider-dots-top">
+              {#each sliderProjects as _, i}
+                <button 
+                  class="slider-dot {i === currentIndex ? 'active' : ''}" 
+                  onclick={() => currentIndex = i}
+                  aria-label="Go to project {i + 1}"
+                ></button>
+              {/each}
+            </div>
+            <button class="slider-btn" onclick={nextSlide} aria-label="Next project">
+              <ChevronRight size={20} />
+            </button>
           </div>
-          <button class="slider-btn" onclick={nextSlide} aria-label="Next project">
-            <ChevronRight size={20} />
-          </button>
         </div>
-      </div>
+      {/if}
 
       <div class="slider-viewport">
         <div class="slider-track" style="transform: translateX(-{currentIndex * 100}%);">
