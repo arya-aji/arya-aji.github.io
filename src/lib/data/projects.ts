@@ -52,7 +52,7 @@ export const projects: Project[] = [
     goal: 'To provide a seamless, secure, and privacy-focused solution for WhatsApp Web users in public environments, ensuring sensitive data remains hidden without compromising usability or requiring external servers.',
     privacyPolicy: '<h3>Data Collection</h3><p>Blur Your WhatsApp does <strong>not collect, transmit, sell, or share</strong> any personal data. Period.</p><h3>Local Processing</h3><p>The extension runs entirely locally in your browser. It applies visual privacy masking effects directly on WhatsApp Web. It reads page elements on <em>web.whatsapp.com</em> strictly to apply blur/mask styles to chat text, names, avatars, previews, images, media drawers, or the whole WhatsApp Web interface.</p><h3>Storage</h3><p>User preferences—such as enabled controls and mask strength—are stored using Chrome\'s local storage. These preferences are used only to restore your selected privacy settings upon reopening the browser.</p><h3>Third-Party Services</h3><p>Blur Your WhatsApp does <strong>not use</strong> remote code, analytics, tracking, advertising SDKs, or external servers. Your data stays on your machine.</p><h3>Affiliation</h3><p>Blur Your WhatsApp is an independent open-source browser extension and is not affiliated with, endorsed by, or sponsored by WhatsApp, Meta, or any related company.</p>',
     tags: ['chrome-extension', 'javascript', 'privacy', 'css'],
-    href: 'https://chromewebstore.google.com/detail/fjniailddieogadfhmkikgbegllicjpo',
+    href: 'https://chromewebstore.google.com/detail/blur-your-whatsapp/fjniailddieogadfhmkikgbegllicjpo',
     image: '/blur-wa-1.png',
     banner: '/assets/banner-blur-my-whatsapp.png',
     gif: '/blur-wa-2.png',
