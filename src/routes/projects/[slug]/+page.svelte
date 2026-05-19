@@ -43,11 +43,6 @@
             <ExternalLink size={18} /> Live Demo
           </a>
         {/if}
-        {#if project.href}
-          <a href={project.href} target="_blank" rel="noopener noreferrer" class="btn outline">
-            <ExternalLink size={18} /> Store Link
-          </a>
-        {/if}
         {#if project.privacyPolicy}
           <a href="/projects/{project.slug}/privacy-policy" class="btn secondary">
             <ShieldCheck size={18} /> Privacy Policy

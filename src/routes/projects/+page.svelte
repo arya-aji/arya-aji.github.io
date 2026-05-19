@@ -152,12 +152,6 @@
                       <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 2v20"/><path d="M17 5H9.5a3.5 3.5 0 0 0 0 7h5a3.5 3.5 0 0 1 0 7H6"/></svg>
                       Quick Glance
                     </button>
-                    {#if highlight.href}
-                      <a href={highlight.href} target="_blank" rel="noopener noreferrer" class="action-btn outline">
-                        <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M6 2 3 6v14a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2V6l-3-4Z"/><path d="M3 6h18"/><path d="M16 10a4 4 0 0 1-8 0"/></svg>
-                        Store Link
-                      </a>
-                    {/if}
                     {#if highlight.live}
                       <a href={highlight.live} target="_blank" rel="noopener noreferrer" class="action-btn primary">
                         <ExternalLink size={18} /> Live Demo
@@ -213,11 +207,6 @@
                   <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M2 3h6a4 4 0 0 1 4 4v14a3 3 0 0 0-3-3H2z"/><path d="M22 3h-6a4 4 0 0 0-4 4v14a3 3 0 0 1 3-3h7z"/></svg>
                   Case Study
                 </button>
-                {#if project.href}
-                  <a href={project.href} target="_blank" rel="noopener noreferrer" class="grid-ext-link" aria-label="Open repository">
-                    <ExternalLink size={14} />
-                  </a>
-                {/if}
               </div>
             </div>
           </div>

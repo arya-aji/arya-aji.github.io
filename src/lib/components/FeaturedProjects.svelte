@@ -136,18 +136,12 @@
                 <div class="project-actions">
                   <a href="/projects/{project.slug}" class="action-btn outline">
                     <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M2 3h6a4 4 0 0 1 4 4v14a3 3 0 0 0-3-3H2z"/><path d="M22 3h-6a4 4 0 0 0-4 4v14a3 3 0 0 1 3-3h7z"/></svg>
-                    View Details
+                    Details
                   </a>
                   <button class="action-btn case-study" onclick={() => caseStudyProject = project}>
                     <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 2v20"/><path d="M17 5H9.5a3.5 3.5 0 0 0 0 7h5a3.5 3.5 0 0 1 0 7H6"/></svg>
                     Quick Glance
                   </button>
-                  {#if project.github}
-                    <a href={project.github} target="_blank" rel="noopener noreferrer" class="action-btn outline">
-                      <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-github"><path d="M15 22v-4a4.8 4.8 0 0 0-1-3.26c3-.3 6-1.5 6-6.4a5.1 5.1 0 0 0-1.4-3.6 4.9 4.9 0 0 0-.1-3.5s-1.1-.3-3.6 1.4a12.8 12.8 0 0 0-7 0C4.1 1.7 3 2 3 2a4.9 4.9 0 0 0-.1 3.5A5.1 5.1 0 0 0 1.5 9.1c0 4.9 3 6.1 6 6.4-.4.4-.8 1.1-.8 2.2V22"/><path d="M9 20c-4.5 1.5-5-2.5-7-3"/></svg>
-                      View Realized
-                    </a>
-                  {/if}
                   {#if project.live}
                     <a href={project.live} target="_blank" rel="noopener noreferrer" class="action-btn primary">
                       <ExternalLink size={18} /> Live Demo

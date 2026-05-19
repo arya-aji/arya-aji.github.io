@@ -35,7 +35,7 @@
 
   // Terminal-style typed output lines
   let lines = $derived([
-    `$ curl https://arya-aji.dev${$page.url?.pathname ?? "/???"}`,
+    `$ curl https://aryaaji.com${$page.url?.pathname ?? "/???"}`,
     `> HTTP/${status}`,
     `> X-Error: ${msg.title}`,
     `> Content-Type: text/html`,
