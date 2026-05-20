@@ -7,10 +7,10 @@
 
   let { data } = $props();
   
-  let currentLang = $state('id');
+  let currentLang = $state('en');
 
   let langPosts = $derived(data.posts.map((post: any) => {
-    const meta = post.meta[currentLang] || post.meta['id'] || Object.values(post.meta)[0];
+    const meta = post.meta[currentLang] || post.meta['en'] || post.meta['id'] || Object.values(post.meta)[0];
     return { ...post, activeMeta: meta };
   }));
 

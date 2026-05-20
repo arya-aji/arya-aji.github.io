@@ -81,5 +81,9 @@ export const tagColors: Record<string, string> = {
   productivity: 'var(--ctp-teal)',
   'github-pages': 'var(--ctp-overlay2)',
   portfolio: 'var(--ctp-lavender)',
-  catppuccin: 'var(--ctp-mauve)'
+  catppuccin: 'var(--ctp-mauve)',
+  'landing-page': 'var(--ctp-sky)',
+  'admin-panel': 'var(--ctp-green)',
+  cms: 'var(--ctp-peach)',
+  'content-management': 'var(--ctp-lavender)'
 };

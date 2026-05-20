@@ -21,7 +21,7 @@ export const load = async ({ params, url }) => {
         };
 
         if (!lang) {
-           lang = availableLangs.id ? 'id' : 'en';
+           lang = availableLangs.en ? 'en' : 'id';
         }
 
         const activeMeta = {
