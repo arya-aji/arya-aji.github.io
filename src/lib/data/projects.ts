@@ -38,56 +38,6 @@ export interface Project {
 
 export const projects: Project[] = [
   {
-    slug: "mlp-my-landing-page",
-    title: "MLP My Landing Page",
-    name: "mlp-my-landing-page",
-    org: "arya-aji",
-    date: "2026-05-20",
-    dateDisplay: "May 2026",
-    description:
-      "A configurable landing page platform where users can manage frontend text and page content from an admin dashboard, reducing the need for developer involvement on every content update.",
-    longDesc:
-      "MLP My Landing Page is a landing page example designed around content autonomy. It lets users adjust the visible frontend copy from an admin page, so routine content changes can happen quickly without waiting for a developer to edit and redeploy the interface.",
-    idea: "Give non-developer users a landing page they can update from admin controls instead of code changes",
-    problem:
-      "Landing page content often changes faster than the development cycle. Small updates to headlines, descriptions, calls to action, and section copy can create unnecessary developer dependency and slow down business iteration.",
-    solution:
-      "Built a landing page flow with admin-managed content fields, allowing frontend text to be adjusted from a controlled admin interface while the public page reflects those updates consistently.",
-    goal: "To minimize developer involvement for routine content updates and give users a practical way to keep landing page messaging fresh from a simple admin experience.",
-    challenges: [
-      {
-        title: "Editable content without breaking the page layout",
-        how: "Structured the page around predictable content fields so users can update text while the frontend keeps a consistent visual hierarchy.",
-      },
-      {
-        title: "Balancing flexibility and simplicity",
-        how: "Focused admin controls on the copy users most frequently need to change, keeping the update flow practical instead of turning it into a heavy CMS.",
-      },
-    ],
-    results: [
-      {
-        metric: "Admin-first",
-        label: "Content updates from dashboard",
-      },
-      {
-        metric: "Less dev work",
-        label: "Routine copy changes need fewer code edits",
-      },
-    ],
-    tags: [
-      "landing-page",
-      "admin-panel",
-      "cms",
-      "content-management",
-      "vercel",
-    ],
-    href: "https://landing-port-neon.vercel.app/",
-    live: "https://landing-port-neon.vercel.app/",
-    image: "/assets/mlp.png",
-    banner: "/assets/banner-mlp.png",
-    featured: true,
-  },
-  {
     slug: "blur-your-whatsapp",
     title: "Blur Your Whatsapp",
     name: "blur-your-whatsapp",
