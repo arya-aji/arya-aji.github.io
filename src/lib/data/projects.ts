@@ -63,6 +63,30 @@ export const projects: Project[] = [
     gif: "/assets/blur-my-whatsapp.png",
     featured: true,
   },
+  {
+    slug: "simakui",
+    title: "SIMAK UI Pascasarjana Tryout",
+    name: "simakui",
+    org: "arya-aji",
+    date: "2026-05-27",
+    dateDisplay: "May 2026",
+    description:
+      "A mobile-first simulation tryout platform for SIMAK UI Pascasarjana with active timer, detailed result analysis, LLM-based seed package generator, and Midtrans snaps payment.",
+    longDesc:
+      "A complete Next.js MVP designed for SIMAK UI Pascasarjana 2026 aspirants. This platform replicates real exam constraints with a strict mobile-first test taking flow, live timer tracking, doubt flag markings, and automated autosave. Upon completion, candidates receive immediate diagnostic analytics and in-depth explanation keys. Behind the scenes, it utilizes an AI generation engine via OpenRouter/Sumopod to programmatically bootstrap exam sets (seeding 140 comprehensive questions at a time) and is integrated with Midtrans for seamless credit topping-up.",
+    idea: "Simulated exam environments and automated high-quality question generators for SIMAK UI Pascasarjana",
+    problem:
+      "Candidates preparing for graduate-level UI entry tests lack affordable, mobile-first simulation platforms, while test managers face complex, time-consuming requirements when drafting realistic question banks.",
+    solution:
+      "Built a Next.js platform integrating Better-Auth, Prisma, and PostgreSQL. Incorporated an AI agent system powered by OpenAI/Sumopod/OpenRouter to parse syllabus structures and programmatically generate realistic exam packs in batches. Hooked up Midtrans Snap SDK for secure local payment workflows.",
+    goal: "To deliver an exceptionally smooth, realistic preparation tool for SIMAK UI candidates while offering admins a robust toolset to dynamically generate, customize, and monetize premium test material.",
+    tags: ["nextjs", "typescript", "prisma", "postgresql", "better-auth", "midtrans", "llm"],
+    live: "https://tryout.aryaaji.com",
+    image: "/assets/simakui.webp",
+    banner: "/assets/simakui.webp",
+    gif: "/assets/simakui.webp",
+    featured: true,
+  },
 ].map((project) => ({
   ...project,
   image: project.image || "/placeholder.jpg",
