@@ -37,8 +37,8 @@
             class="bio-link">Jakarta, Indonesia</a
           >. I'm passionate about turning ideas into reality — leveraging modern
           tools including AI to move fast from concept to execution. Whether it's
-          <span class="bio-link">geospatial dashboards</span>,
-          <span class="bio-link">data-driven tools</span>, or
+          <span class="bio-link">SaaS platforms</span>,
+          <span class="bio-link">browser extensions</span>, or
           <span class="bio-link">full-stack web apps</span> — I build things that work
           and make a difference. Got an idea? Let's build it.
         {:else}
@@ -49,8 +49,8 @@
             rel="noopener noreferrer"
             class="bio-link">Jakarta, Indonesia</a
           >. Saya berdedikasi tinggi dalam mengubah ide menjadi kenyataan — memanfaatkan perangkat modern termasuk AI untuk bergerak cepat dari konsep ke eksekusi. Baik itu
-          <span class="bio-link">dashboard geospasial</span>,
-          <span class="bio-link">aplikasi data</span>, maupun
+          <span class="bio-link">platform SaaS</span>,
+          <span class="bio-link">browser extension</span>, maupun
           <span class="bio-link">aplikasi web full-stack</span> — saya membangun sistem yang andal dan berdampak nyata. Punya ide menarik? Mari kita wujudkan!
         {/if}
       </p>

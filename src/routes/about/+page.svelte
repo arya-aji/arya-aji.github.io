@@ -6,7 +6,7 @@
 
 <svelte:head>
   <title>{$language === 'EN' ? 'About Me' : 'Tentang Saya'} | Arya Aji Kusuma</title>
-  <meta name="description" content="I'm passionate about turning ideas into reality — from concepts to execution. Developer based in Jakarta, building geospatial tools, web apps, and data dashboards." />
+  <meta name="description" content="I'm Arya Aji Kusuma — a developer from Jakarta building SaaS platforms, browser extensions, and full-stack web apps. Passionate about turning ideas into real, working products." />
 </svelte:head>
 
 <Navbar />
@@ -37,22 +37,18 @@
           </p>
 
           <p>
-            From a simple sketch on paper to a fully deployed application, I love
-            the entire journey. Some projects I've brought to life include
-            <a href="https://geomon.vercel.app" target="_blank" rel="noopener noreferrer" class="inline-link">Geomon</a>,
-            a geospatial monitoring app for BPS Jakarta Pusat,
-            <a href="https://sbr-dashboard.vercel.app" target="_blank" rel="noopener noreferrer" class="inline-link">SBR Dashboard</a>,
-            a data visualization dashboard, and
-            <a href="https://github.com/arya-aji/automation" target="_blank" rel="noopener noreferrer" class="inline-link">automation scripts</a>
-            that streamline repetitive workflows.
+            From a rough idea to a fully deployed product, I enjoy the entire journey. Right now I'm building
+            <a href="https://tryout.aryaaji.com" target="_blank" rel="noopener noreferrer" class="inline-link">Siap Kuliah UI (SKUI)</a>,
+            a mobile-first SaaS exam simulator for SIMAK UI aspirants, and
+            <a href="https://github.com/arya-aji/blur-your-whatsapp" target="_blank" rel="noopener noreferrer" class="inline-link">Blur Your WhatsApp</a>,
+            a privacy-focused browser extension for WhatsApp Web.
           </p>
 
           <p>
-            Beyond coding, I'm drawn to geospatial technology, data analysis,
-            and exploring new ways to solve real problems with software. I also embrace
-            AI tools as part of my workflow — they help me iterate faster and deliver
-            better results. If you have an idea — big or small — I'd love to help
-            turn it into something real. Let's talk.
+            Beyond my own projects, I work as a software developer in a government institution — building
+            full-stack web applications, automation tools, and AI-integrated systems that streamline
+            real workflows at scale. I embrace AI as part of my toolkit — it helps me
+            iterate faster and deliver better results. If you have an idea, let's turn it into something real.
           </p>
           {:else}
           <p>
@@ -65,22 +61,18 @@
           </p>
 
           <p>
-            Dari sketsa sederhana di atas kertas hingga aplikasi yang sudah terdeploy, saya menikmati
-            seluruh prosesnya. Beberapa proyek yang telah saya wujudkan antara lain
-            <a href="https://geomon.vercel.app" target="_blank" rel="noopener noreferrer" class="inline-link">Geomon</a>,
-            aplikasi pemantauan geospasial untuk BPS Jakarta Pusat,
-            <a href="https://sbr-dashboard.vercel.app" target="_blank" rel="noopener noreferrer" class="inline-link">SBR Dashboard</a>,
-            dashboard visualisasi data, dan
-            <a href="https://github.com/arya-aji/automation" target="_blank" rel="noopener noreferrer" class="inline-link">skrip otomasi</a>
-            yang menyederhanakan alur kerja berulang.
+            Dari ide kasar hingga produk yang terdeploy, saya menikmati seluruh prosesnya. Saat ini saya sedang membangun
+            <a href="https://tryout.aryaaji.com" target="_blank" rel="noopener noreferrer" class="inline-link">Siap Kuliah UI (SKUI)</a>,
+            platform SaaS simulasi ujian mobile-first untuk calon mahasiswa SIMAK UI, dan
+            <a href="https://github.com/arya-aji/blur-your-whatsapp" target="_blank" rel="noopener noreferrer" class="inline-link">Blur Your WhatsApp</a>,
+            ekstensi browser yang berfokus pada privasi untuk WhatsApp Web.
           </p>
 
           <p>
-            Di luar coding, saya tertarik pada teknologi geospasial, analisis data,
-            dan mengeksplorasi cara-cara baru untuk memecahkan masalah nyata dengan perangkat lunak. Saya juga mengadopsi
-            alat AI sebagai bagian dari alur kerja saya — membantu saya beriterasi lebih cepat dan memberikan
-            hasil yang lebih baik. Punya ide — besar atau kecil — saya ingin membantu
-            mewujudkannya. Ayo ngobrol.
+            Di luar proyek pribadi, saya bekerja sebagai pengembang perangkat lunak di instansi pemerintahan — membangun
+            aplikasi web full-stack, alat otomasi, dan sistem terintegrasi AI yang menyederhanakan
+            alur kerja nyata dalam skala besar. Saya menjadikan AI bagian dari toolkit saya — membantu
+            beriterasi lebih cepat dan menghasilkan produk yang lebih baik. Punya ide? Mari kita wujudkan bersama.
           </p>
           {/if}
         </div>
