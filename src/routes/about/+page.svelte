@@ -1,10 +1,11 @@
 <script lang="ts">
   import Navbar from '$lib/components/Navbar.svelte';
   import Footer from '$lib/components/Footer.svelte';
+  import { language } from '$lib/stores/language';
 </script>
 
 <svelte:head>
-  <title>About Me | Arya Aji Kusuma</title>
+  <title>{$language === 'EN' ? 'About Me' : 'Tentang Saya'} | Arya Aji Kusuma</title>
   <meta name="description" content="I'm passionate about turning ideas into reality — from concepts to execution. Developer based in Jakarta, building geospatial tools, web apps, and data dashboards." />
 </svelte:head>
 
@@ -13,7 +14,7 @@
 <main class="page-main">
   <div class="container">
 
-    <h1 class="page-title">About Me</h1>
+    <h1 class="page-title">{$language === 'EN' ? 'About Me' : 'Tentang Saya'}</h1>
 
     <!-- Hero row: photo left, text right -->
     <div class="hero-row">
@@ -25,6 +26,7 @@
 
       <div class="text-col">
         <div class="about-body">
+          {#if $language === 'EN'}
           <p>
             Hey! I'm Arya Aji Kusuma
             <a href="https://github.com/arya-aji" target="_blank" rel="noopener noreferrer" class="inline-link">(@arya-aji)</a>
@@ -52,10 +54,39 @@
             better results. If you have an idea — big or small — I'd love to help
             turn it into something real. Let's talk.
           </p>
+          {:else}
+          <p>
+            Halo! Saya Arya Aji Kusuma
+            <a href="https://github.com/arya-aji" target="_blank" rel="noopener noreferrer" class="inline-link">(@arya-aji)</a>
+            — seorang developer berbasis di
+            <a href="https://maps.google.com/?q=Jakarta" target="_blank" rel="noopener noreferrer" class="inline-link">Jakarta, Indonesia</a>.
+            Saya berdedikasi tinggi dalam mengubah ide menjadi kenyataan — menjembatani kesenjangan antara
+            konsep dan eksekusi untuk membangun produk yang benar-benar membuat perbedaan.
+          </p>
+
+          <p>
+            Dari sketsa sederhana di atas kertas hingga aplikasi yang sudah terdeploy, saya menikmati
+            seluruh prosesnya. Beberapa proyek yang telah saya wujudkan antara lain
+            <a href="https://geomon.vercel.app" target="_blank" rel="noopener noreferrer" class="inline-link">Geomon</a>,
+            aplikasi pemantauan geospasial untuk BPS Jakarta Pusat,
+            <a href="https://sbr-dashboard.vercel.app" target="_blank" rel="noopener noreferrer" class="inline-link">SBR Dashboard</a>,
+            dashboard visualisasi data, dan
+            <a href="https://github.com/arya-aji/automation" target="_blank" rel="noopener noreferrer" class="inline-link">skrip otomasi</a>
+            yang menyederhanakan alur kerja berulang.
+          </p>
+
+          <p>
+            Di luar coding, saya tertarik pada teknologi geospasial, analisis data,
+            dan mengeksplorasi cara-cara baru untuk memecahkan masalah nyata dengan perangkat lunak. Saya juga mengadopsi
+            alat AI sebagai bagian dari alur kerja saya — membantu saya beriterasi lebih cepat dan memberikan
+            hasil yang lebih baik. Punya ide — besar atau kecil — saya ingin membantu
+            mewujudkannya. Ayo ngobrol.
+          </p>
+          {/if}
         </div>
 
         <div class="social-links">
-          <a href="https://github.com/arya-aji" target="_blank" rel="noopener noreferrer" class="social-btn">
+          <a href="https://github.com/arya-aji" target="_blank" rel="noopener noreferrer" class="social-btn" aria-label="GitHub">
             <svg width="16" height="16" viewBox="0 0 24 24" fill="currentColor"><path d="M12 0c-6.626 0-12 5.373-12 12 0 5.302 3.438 9.8 8.207 11.387.599.111.793-.261.793-.577v-2.234c-3.338.726-4.033-1.416-4.033-1.416-.546-1.387-1.333-1.756-1.333-1.756-1.089-.745.083-.729.083-.729 1.205.084 1.839 1.237 1.839 1.237 1.07 1.834 2.807 1.304 3.492.997.107-.775.418-1.305.762-1.604-2.665-.305-5.467-1.334-5.467-5.931 0-1.311.469-2.381 1.236-3.221-.124-.303-.535-1.524.117-3.176 0 0 1.008-.322 3.301 1.23.957-.266 1.983-.399 3.003-.404 1.02.005 2.047.138 3.006.404 2.291-1.552 3.297-1.23 3.297-1.23.653 1.653.242 2.874.118 3.176.77.84 1.235 1.911 1.235 3.221 0 4.609-2.807 5.624-5.479 5.921.43.372.823 1.102.823 2.222v3.293c0 .319.192.694.801.576 4.765-1.589 8.199-6.086 8.199-11.386 0-6.627-5.373-12-12-12z"/></svg>
             GitHub
           </a>

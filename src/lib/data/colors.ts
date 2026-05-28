@@ -85,5 +85,11 @@ export const tagColors: Record<string, string> = {
   'landing-page': 'var(--ctp-sky)',
   'admin-panel': 'var(--ctp-green)',
   cms: 'var(--ctp-peach)',
-  'content-management': 'var(--ctp-lavender)'
+  'content-management': 'var(--ctp-lavender)',
+  nextjs: 'var(--ctp-text)',
+  postgresql: 'var(--ctp-blue)',
+  prisma: 'var(--ctp-teal)',
+  'better-auth': 'var(--ctp-mauve)',
+  midtrans: 'var(--ctp-green)',
+  llm: 'var(--ctp-pink)',
 };

@@ -1,6 +1,7 @@
 <script lang="ts">
   import { ArrowRight } from "lucide-svelte";
   import { onMount } from "svelte";
+  import { language } from "$lib/stores/language";
 
   let taglineEl: HTMLElement;
   let taglineVisible = $state(false);
@@ -19,22 +20,39 @@
   <div class="container hero-inner">
     <div class="hero-text-col">
       <h1 class="hero-heading">
-        I Turn <span class="accent-name">Ideas & Insights</span><br />Into Your Dream Project
+        {#if $language === "EN"}
+          I Turn <span class="accent-name">Ideas & Insights</span><br />Into Your Dream Project
+        {:else}
+          Saya Mengubah <span class="accent-name">Ide & Gagasan</span><br />Menjadi Proyek Impian Anda
+        {/if}
       </h1>
 
       <p class="hero-bio">
-        Hey, I'm <strong>Arya Aji Kusuma</strong> — a developer based in
-        <a
-          href="https://maps.app.goo.gl/jakarta"
-          target="_blank"
-          rel="noopener noreferrer"
-          class="bio-link">Jakarta, Indonesia</a
-        >. I'm passionate about turning ideas into reality — leveraging modern
-        tools including AI to move fast from concept to execution. Whether it's
-        <span class="bio-link">geospatial dashboards</span>,
-        <span class="bio-link">data-driven tools</span>, or
-        <span class="bio-link">full-stack web apps</span> — I build things that work
-        and make a difference. Got an idea? Let's build it.
+        {#if $language === "EN"}
+          Hey, I'm <strong>Arya Aji Kusuma</strong> — a developer based in
+          <a
+            href="https://maps.app.goo.gl/jakarta"
+            target="_blank"
+            rel="noopener noreferrer"
+            class="bio-link">Jakarta, Indonesia</a
+          >. I'm passionate about turning ideas into reality — leveraging modern
+          tools including AI to move fast from concept to execution. Whether it's
+          <span class="bio-link">geospatial dashboards</span>,
+          <span class="bio-link">data-driven tools</span>, or
+          <span class="bio-link">full-stack web apps</span> — I build things that work
+          and make a difference. Got an idea? Let's build it.
+        {:else}
+          Halo, saya <strong>Arya Aji Kusuma</strong> — seorang developer yang berbasis di
+          <a
+            href="https://maps.app.goo.gl/jakarta"
+            target="_blank"
+            rel="noopener noreferrer"
+            class="bio-link">Jakarta, Indonesia</a
+          >. Saya berdedikasi tinggi dalam mengubah ide menjadi kenyataan — memanfaatkan perangkat modern termasuk AI untuk bergerak cepat dari konsep ke eksekusi. Baik itu
+          <span class="bio-link">dashboard geospasial</span>,
+          <span class="bio-link">aplikasi data</span>, maupun
+          <span class="bio-link">aplikasi web full-stack</span> — saya membangun sistem yang andal dan berdampak nyata. Punya ide menarik? Mari kita wujudkan!
+        {/if}
       </p>
 
       <div class="social-links">

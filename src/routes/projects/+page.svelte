@@ -6,6 +6,7 @@
   import { projects, tagColors } from '$lib/data/projects';
   import type { Project } from '$lib/data/projects';
   import { PAGINATION } from '$lib/config';
+  import { language } from '$lib/stores/language';
 
   const sliderProjects = projects.slice(0, 10);
 
@@ -43,7 +44,7 @@
 </script>
 
 <svelte:head>
-  <title>Projects | Arya Aji Kusuma</title>
+  <title>{$language === 'EN' ? 'Projects' : 'Proyek'} | Arya Aji Kusuma</title>
   <meta name="description" content="Projects built by Arya Aji Kusuma — from geospatial dashboards to automation tools." />
 </svelte:head>
 
@@ -51,8 +52,8 @@
 
 <main class="page-main">
   <div class="container">
-    <h1 class="page-title">Projects</h1>
-    <p class="page-subtitle">{projects.length} projects built over the years. Click any to learn more.</p>
+    <h1 class="page-title">{$language === 'EN' ? 'Projects' : 'Proyek'}</h1>
+    <p class="page-subtitle">{projects.length} {$language === 'EN' ? 'projects built over the years. Click any to learn more.' : 'proyek yang telah dibangun. Klik salah satu untuk info lebih lanjut.'}</p>
 
     <!-- Top Slider (up to 10 projects) -->
     {#if sliderProjects.length > 0}
@@ -146,15 +147,15 @@
                   <div class="project-actions">
                     <a href="/projects/{highlight.slug}" class="action-btn outline">
                       <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M2 3h6a4 4 0 0 1 4 4v14a3 3 0 0 0-3-3H2z"/><path d="M22 3h-6a4 4 0 0 0-4 4v14a3 3 0 0 1 3-3h7z"/></svg>
-                      View Details
+                      {$language === 'EN' ? 'View Details' : 'Lihat Detail'}
                     </a>
                     <button class="action-btn case-study" onclick={() => caseStudyProject = highlight}>
                       <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 2v20"/><path d="M17 5H9.5a3.5 3.5 0 0 0 0 7h5a3.5 3.5 0 0 1 0 7H6"/></svg>
-                      Glance
+                      {$language === 'EN' ? 'Glance' : 'Lihat Sekilas'}
                     </button>
                     {#if highlight.live}
                       <a href={highlight.live} target="_blank" rel="noopener noreferrer" class="action-btn primary">
-                        <ExternalLink size={18} /> Demo
+                        <ExternalLink size={18} /> {$language === 'EN' ? 'Demo' : 'Demo'}
                       </a>
                     {/if}
                   </div>
@@ -168,7 +169,7 @@
 
     <!-- Grid List for All Projects -->
     {#if projects.length > 0}
-      <h2 class="grid-section-title">All Projects</h2>
+      <h2 class="grid-section-title">{$language === 'EN' ? 'All Projects' : 'Semua Proyek'}</h2>
       <div class="projects-grid">
         {#each paginatedGridProjects as project}
           <!-- svelte-ignore a11y_no_static_element_interactions -->
@@ -205,7 +206,7 @@
               <div class="card-actions">
                 <button class="grid-case-btn" onclick={() => caseStudyProject = project} title="View Case Study">
                   <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M2 3h6a4 4 0 0 1 4 4v14a3 3 0 0 0-3-3H2z"/><path d="M22 3h-6a4 4 0 0 0-4 4v14a3 3 0 0 1 3-3h7z"/></svg>
-                  Case Study
+                  {$language === 'EN' ? 'Case Study' : 'Studi Kasus'}
                 </button>
               </div>
             </div>
@@ -216,12 +217,12 @@
       <!-- Pagination Controls -->
       {#if totalPages > 1}
         <div class="pagination">
-          <button 
-            class="page-btn" 
-            disabled={currentPage === 1} 
+          <button
+            class="page-btn"
+            disabled={currentPage === 1}
             onclick={() => currentPage--}
           >
-            <ChevronLeft size={16} /> Previous
+            <ChevronLeft size={16} /> {$language === 'EN' ? 'Previous' : 'Sebelumnya'}
           </button>
           
           <div class="page-numbers">
@@ -235,12 +236,12 @@
             {/each}
           </div>
 
-          <button 
-            class="page-btn" 
-            disabled={currentPage === totalPages} 
+          <button
+            class="page-btn"
+            disabled={currentPage === totalPages}
             onclick={() => currentPage++}
           >
-            Next <ChevronRight size={16} />
+            {$language === 'EN' ? 'Next' : 'Berikutnya'} <ChevronRight size={16} />
           </button>
         </div>
       {/if}

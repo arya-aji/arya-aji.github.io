@@ -3,10 +3,11 @@
   import Footer from "$lib/components/Footer.svelte";
   import ContactForm from "$lib/components/ContactForm.svelte";
   import { Mail, MessageCircle, Clock } from "lucide-svelte";
+  import { language } from "$lib/stores/language";
 </script>
 
 <svelte:head>
-  <title>Contact | Arya Aji Kusuma</title>
+  <title>{$language === 'EN' ? 'Contact' : 'Kontak'} | Arya Aji Kusuma</title>
   <meta name="description" content="Get in touch with Aji. Submit your project brief, category, and budget estimates securely." />
 </svelte:head>
 
@@ -14,25 +15,27 @@
 
 <main class="contact-page container pt-32 pb-32">
   <div class="contact-intro">
-    <span class="eyebrow">Connect</span>
-    <h1>Ready to build your next dream project?</h1>
+    <span class="eyebrow">{$language === 'EN' ? 'Connect' : 'Hubungi'}</span>
+    <h1>{$language === 'EN' ? 'Ready to build your next dream project?' : 'Siap membangun proyek impian Anda berikutnya?'}</h1>
     <p>
-      Let's collaborate to turn your unique goals into beautiful, scalable web applications, landing pages, or automated enterprise systems.
+      {$language === 'EN'
+        ? "Let's collaborate to turn your unique goals into beautiful, scalable web applications, landing pages, or automated enterprise systems."
+        : 'Mari berkolaborasi untuk mewujudkan tujuan unik Anda menjadi aplikasi web yang indah dan skalabel, landing page, atau sistem enterprise yang terotomasi.'}
     </p>
 
     <div class="intake-guides">
       <div class="guide-item">
         <Clock size={18} class="guide-icon" />
         <div>
-          <h3>24-Hour Review</h3>
-          <p>I review every incoming brief and respond with an estimate within 24 business hours.</p>
+          <h3>{$language === 'EN' ? '24-Hour Review' : 'Tinjauan 24 Jam'}</h3>
+          <p>{$language === 'EN' ? 'I review every incoming brief and respond with an estimate within 24 business hours.' : 'Saya meninjau setiap brief yang masuk dan merespons dengan estimasi dalam 24 jam kerja.'}</p>
         </div>
       </div>
       <div class="guide-item">
         <Mail size={18} class="guide-icon" />
         <div>
-          <h3>Direct Email</h3>
-          <p>Submissions go straight to my secure inbox at <strong>hello@aryaaji.com</strong>.</p>
+          <h3>{$language === 'EN' ? 'Direct Email' : 'Email Langsung'}</h3>
+          <p>{$language === 'EN' ? 'Submissions go straight to my secure inbox at' : 'Pengiriman langsung ke inbox aman saya di'} <strong>hello@aryaaji.com</strong>.</p>
         </div>
       </div>
     </div>

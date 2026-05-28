@@ -31,12 +31,13 @@ export interface Project {
   github?: string;
   live?: string;
   featured?: boolean;
+  visible?: boolean;
   image?: string;
   banner?: string;
   gif?: string;
 }
 
-export const projects: Project[] = [
+export const allProjects: Project[] = [
   {
     slug: "skui",
     title: "Siap Kuliah UI (SKUI)",
@@ -60,10 +61,98 @@ export const projects: Project[] = [
     banner: "/assets/simakui.webp",
     gif: "/assets/simakui.webp",
     featured: true,
-  }
+    visible: true,
+  },
+  {
+    slug: "geomon",
+    title: "Geomon",
+    name: "geomon",
+    org: "arya-aji",
+    date: "2024-08-01",
+    dateDisplay: "Aug 2024",
+    description:
+      "A geospatial monitoring web application built for BPS Jakarta Pusat to track and visualize field survey activities across districts in real time.",
+    longDesc:
+      "Geomon is a full-stack geospatial monitoring platform developed for BPS (Badan Pusat Statistik) Jakarta Pusat. The application enables supervisors to monitor field enumerator positions, track survey completion rates per district, and visualize geographic data through an interactive map interface. Built with a Python FastAPI backend and a Svelte frontend, it integrates Leaflet for map rendering and PostgreSQL for spatial data storage.",
+    idea: "Real-time geospatial monitoring of BPS field survey activities to improve efficiency and oversight.",
+    problem:
+      "BPS Jakarta Pusat supervisors had no centralized tool to monitor field enumerator progress, leading to delayed reporting and difficulty identifying coverage gaps across districts.",
+    solution:
+      "Developed a full-stack web app with interactive Leaflet maps, enumerator tracking, and district-level progress dashboards. Deployed within the BPS internal network for secure access.",
+    goal: "To give BPS supervisors real-time visibility into field operations and geographic survey coverage.",
+    tags: ["python", "fastapi", "svelte", "geospasial", "bps", "dashboard"],
+    live: "https://geomon.vercel.app",
+    featured: false,
+  },
+  {
+    slug: "sbr-dashboard",
+    title: "SBR Dashboard",
+    name: "sbr-dashboard",
+    org: "arya-aji",
+    date: "2023-11-01",
+    dateDisplay: "Nov 2023",
+    description:
+      "A data visualization dashboard for analyzing and presenting statistical survey results with interactive charts, filters, and exportable reports.",
+    longDesc:
+      "SBR Dashboard is a data visualization web application designed to transform raw statistical survey data into actionable insights. The dashboard features interactive charts, cross-tabulation tools, dynamic filtering by demographic variables, and PDF/Excel export capabilities. Built to support analyst workflows within a government statistical environment.",
+    idea: "Turn raw survey tabulations into interactive, shareable visual reports for statistical analysts.",
+    problem:
+      "Analysts spent hours manually creating charts and tables in spreadsheet software — a repetitive process with inconsistent formatting and no interactivity.",
+    solution:
+      "Built a web-based dashboard with dynamic chart generation, customizable filters, and one-click report exports. Integrated directly with the existing data pipeline.",
+    goal: "To streamline the reporting workflow for statistical analysts and improve data communication quality.",
+    tags: ["python", "javascript", "data-viz", "dashboard", "analytics", "automation"],
+    live: "https://sbr-dashboard.vercel.app",
+    featured: false,
+  },
+  {
+    slug: "blur-your-whatsapp",
+    title: "Blur Your WhatsApp",
+    name: "blur-your-whatsapp",
+    org: "arya-aji",
+    date: "2024-03-01",
+    dateDisplay: "Mar 2024",
+    description:
+      "A lightweight browser extension that blurs WhatsApp Web chat previews and contact names for privacy when sharing your screen.",
+    longDesc:
+      "Blur Your WhatsApp is a browser extension that adds a privacy layer to WhatsApp Web by blurring chat list previews, contact names, and message snippets. Designed for people who share their screen during meetings or work in public spaces, it activates with a single click and can be toggled on or off instantly without refreshing the page.",
+    idea: "A one-click privacy toggle for WhatsApp Web to protect sensitive conversations during screen sharing.",
+    problem:
+      "Professionals sharing screens in meetings or recordings frequently expose private WhatsApp conversations, contact names, and message previews unintentionally.",
+    solution:
+      "Built a minimal browser extension using vanilla JavaScript and CSS injection that selectively blurs WhatsApp Web UI elements with a toggle — no permissions beyond activeTab required.",
+    goal: "To provide a frictionless, install-and-forget privacy tool for WhatsApp Web users who frequently share their screens.",
+    tags: ["javascript", "scripting", "productivity", "web"],
+    github: "https://github.com/arya-aji/blur-your-whatsapp",
+    featured: false,
+    visible: true,
+  },
+  {
+    slug: "automation-scripts",
+    title: "Automation Scripts",
+    name: "automation",
+    org: "arya-aji",
+    date: "2023-06-01",
+    dateDisplay: "Jun 2023",
+    description:
+      "A collection of Python automation scripts built to eliminate repetitive government data processing tasks — from Excel transformations to scheduled report generation.",
+    longDesc:
+      "A growing library of Python scripts developed to automate repetitive workflows in a government statistical context. Tasks covered include bulk Excel transformation and cleaning, automated PDF report generation from templates, scheduled data pulls from internal APIs, and batch file management. Each script is documented and parameterized for reuse across different datasets and periods.",
+    idea: "Eliminate hours of manual data processing with reusable, well-documented automation scripts.",
+    problem:
+      "Staff spent significant time on repetitive tasks — merging spreadsheets, reformatting reports, and manually running the same procedures month after month.",
+    solution:
+      "Wrote modular Python scripts with clear parameters and documentation. Scripts handle data cleaning, transformation, and output generation automatically with minimal input.",
+    goal: "To reduce manual effort, minimize human error, and free up analyst time for higher-value work.",
+    tags: ["python", "automation", "scripting", "analytics"],
+    github: "https://github.com/arya-aji/automation",
+    featured: false,
+  },
 ].map((project) => ({
   ...project,
   image: project.image || "/placeholder.jpg",
 }));
+
+export const projects = allProjects.filter(p => p.visible === true);
 
 export { tagColors } from "$lib/data/colors";

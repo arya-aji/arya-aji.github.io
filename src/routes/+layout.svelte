@@ -84,6 +84,7 @@
 
   function startTremor() {
     if (tremorActive) return;
+    if (window.matchMedia('(prefers-reduced-motion: reduce)').matches) return;
     tremorActive = true;
     lastX = 0; lastY = 0; speed = 0;
     window.addEventListener('pointermove', onPointerMove);
@@ -210,6 +211,7 @@
 
   function startFlood() {
     if (floodActive) return;
+    if (window.matchMedia('(prefers-reduced-motion: reduce)').matches) return;
     floodActive = true;
     floodLevel = 0;
     floodDriftEls = [];

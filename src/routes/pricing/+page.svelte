@@ -10,55 +10,80 @@
   } from "lucide-svelte";
   import Navbar from "$lib/components/Navbar.svelte";
   import Footer from "$lib/components/Footer.svelte";
+  import { language } from "$lib/stores/language";
 
   // State toggles
   let selectedCurrency = $state<"USD" | "IDR">("IDR");
   let expandedCards = $state<Record<number, boolean>>({});
 
-  const pricing = [
+  const pricing = $derived([
     {
       id: 1,
-      title: "Premium Landing Page",
+      title: $language === 'EN' ? "Premium Landing Page" : "Landing Page Premium",
       priceUSD: "$899",
       priceIDR: "Rp 16.000.000",
-      detail: "Custom designed to maximize conversions, build credibility, and generate leads.",
-      features: [
+      detail: $language === 'EN'
+        ? "Custom designed to maximize conversions, build credibility, and generate leads."
+        : "Dirancang khusus untuk memaksimalkan konversi, membangun kredibilitas, dan menghasilkan prospek.",
+      features: $language === 'EN' ? [
         "Up to 3 custom-designed pages",
         "Fully responsive on all screen sizes",
         "On-page SEO basics integrated",
         "Lead capture forms & analytical setups"
+      ] : [
+        "Hingga 3 halaman desain kustom",
+        "Responsif penuh di semua ukuran layar",
+        "SEO on-page dasar terintegrasi",
+        "Form lead capture & pengaturan analitik"
       ],
-      terms: [
+      terms: $language === 'EN' ? [
         "50% down payment upfront, 50% before final deployment.",
         "Includes 2 minor revision rounds within agreed scope.",
         "Refunds do not apply after design/custom coding begins.",
         "Delivery timeline is estimated at 5-10 business days."
+      ] : [
+        "50% uang muka di awal, 50% sebelum deployment final.",
+        "Termasuk 2 putaran revisi minor dalam lingkup yang disepakati.",
+        "Refund tidak berlaku setelah desain/koding kustom dimulai.",
+        "Estimasi waktu pengerjaan 5-10 hari kerja."
       ],
-      ctaText: "Get Started",
+      ctaText: $language === 'EN' ? "Get Started" : "Mulai Sekarang",
       ctaHref: "mailto:hello@aryaaji.com?subject=Premium%20Landing%20Page%20Inquiry"
     },
     {
       id: 2,
-      title: "Custom Web Application",
+      title: $language === 'EN' ? "Custom Web Application" : "Aplikasi Web Kustom",
       priceUSD: "$2,999+",
       priceIDR: "Rp 50.000.000+",
-      detail: "Tailored full stack applications built around your exact business process.",
-      features: [
+      detail: $language === 'EN'
+        ? "Tailored full stack applications built around your exact business process."
+        : "Aplikasi full stack yang disesuaikan dengan proses bisnis Anda yang tepat.",
+      features: $language === 'EN' ? [
         "End-to-end full stack web build",
         "Secure checkout & Midtrans gateways",
         "Integrations with external tools & APIs",
         "6 months of priority ongoing support"
+      ] : [
+        "Pembangunan web full stack end-to-end",
+        "Checkout aman & gateway Midtrans",
+        "Integrasi dengan alat & API eksternal",
+        "6 bulan dukungan prioritas berkelanjutan"
       ],
-      terms: [
+      terms: $language === 'EN' ? [
         "50% down payment upfront, 50% before handover.",
         "Includes 2 minor revision rounds for UI & core workflows.",
         "Support runs for 6 months post-deployment.",
         "Refunds are reviewed based on completed milestones."
+      ] : [
+        "50% uang muka di awal, 50% sebelum serah terima.",
+        "Termasuk 2 putaran revisi minor untuk UI & alur kerja inti.",
+        "Dukungan berjalan selama 6 bulan pasca-deployment.",
+        "Refund ditinjau berdasarkan milestone yang telah selesai."
       ],
-      ctaText: "Request a Quote",
+      ctaText: $language === 'EN' ? "Request a Quote" : "Minta Penawaran",
       ctaHref: "https://wa.me/6281998884422?text=Hello%20Aji,%20I'm%20interested%20in%20building%20a%20Custom%20Web%20Application."
     }
-  ];
+  ]);
 
   function toggleCardExpand(id: number) {
     expandedCards[id] = !expandedCards[id];
@@ -66,7 +91,7 @@
 </script>
 
 <svelte:head>
-  <title>Services & Pricing | Arya Aji Kusuma</title>
+  <title>{$language === 'EN' ? 'Services & Pricing' : 'Layanan & Harga'} | Arya Aji Kusuma</title>
   <meta
     name="description"
     content="Professional development services with transparent starting estimates, dual-currency toggles, and clear terms."
@@ -80,15 +105,17 @@
   <section class="hero-section">
     <div class="container hero-grid">
       <div class="hero-copy">
-        <span class="eyebrow">Pricing</span>
-        <h1>Transparent rates for premium web builds.</h1>
+        <span class="eyebrow">{$language === 'EN' ? 'Pricing' : 'Harga'}</span>
+        <h1>{$language === 'EN' ? 'Transparent rates for premium web builds.' : 'Tarif transparan untuk web premium.'}</h1>
         <p>
-          Simplified, direct estimates tailored for landing pages and custom web applications. Review features and integrated terms of service directly in each package card.
+          {$language === 'EN'
+            ? 'Simplified, direct estimates tailored for landing pages and custom web applications. Review features and integrated terms of service directly in each package card.'
+            : 'Estimasi sederhana dan langsung yang disesuaikan untuk landing page dan aplikasi web kustom. Tinjau fitur dan syarat layanan terintegrasi langsung di setiap kartu paket.'}
         </p>
         <div class="hero-actions">
           <a href="/contact" class="btn primary">
             <Mail size={17} />
-            Go to Contact Form
+            {$language === 'EN' ? 'Go to Contact Form' : 'Ke Formulir Kontak'}
           </a>
           <a
             href="https://wa.me/6281998884422"
@@ -97,7 +124,7 @@
             class="btn secondary"
           >
             <MessageCircle size={17} />
-            Chat on WhatsApp
+            {$language === 'EN' ? 'Chat on WhatsApp' : 'Chat di WhatsApp'}
           </a>
         </div>
       </div>
@@ -130,8 +157,8 @@
     <div class="container">
       <div class="pricing-controls">
         <div class="section-header-compact">
-          <span class="section-kicker">Choose Currency</span>
-          <h2>Select your preferred billing currency:</h2>
+          <span class="section-kicker">{$language === 'EN' ? 'Choose Currency' : 'Pilih Mata Uang'}</span>
+          <h2>{$language === 'EN' ? 'Select your preferred billing currency:' : 'Pilih mata uang tagihan yang Anda inginkan:'}</h2>
         </div>
         
         <!-- Premium Slider Switch Toggle -->
@@ -172,12 +199,12 @@
             </div>
 
             <!-- Features & Terms Expandable Toggle -->
-            <button 
+            <button
               type="button"
               class="expand-toggle-btn"
               onclick={() => toggleCardExpand(item.id)}
             >
-              <span>{isExpanded ? 'Hide' : 'View'} Features & Terms</span>
+              <span>{isExpanded ? ($language === 'EN' ? 'Hide' : 'Sembunyikan') : ($language === 'EN' ? 'View' : 'Lihat')} {$language === 'EN' ? 'Features & Terms' : 'Fitur & Syarat'}</span>
               {#if isExpanded}
                 <ChevronUp size={16} />
               {:else}
@@ -188,7 +215,7 @@
             {#if isExpanded}
               <div class="expanded-content">
                 <div class="features-section">
-                  <h4>What's Included</h4>
+                  <h4>{$language === 'EN' ? "What's Included" : 'Yang Termasuk'}</h4>
                   <ul class="features-list">
                     {#each item.features as feature}
                       <li>
@@ -200,7 +227,7 @@
                 </div>
 
                 <div class="terms-section">
-                  <h4>Terms of Service</h4>
+                  <h4>{$language === 'EN' ? 'Terms of Service' : 'Syarat Layanan'}</h4>
                   <ul class="terms-list">
                     {#each item.terms as term}
                       <li>
@@ -221,7 +248,9 @@
       </div>
 
       <p class="price-note">
-        All transaction values are charged and processed in Indonesian Rupiah. USD pricing serves as a benchmark reference for global clients. Final rates align to detailed scopes.
+        {$language === 'EN'
+          ? 'All transaction values are charged and processed in Indonesian Rupiah. USD pricing serves as a benchmark reference for global clients. Final rates align to detailed scopes.'
+          : 'Semua nilai transaksi dikenakan biaya dan diproses dalam Rupiah Indonesia. Harga USD berfungsi sebagai referensi tolok ukur untuk klien global. Tarif final mengikuti lingkup detail.'}
       </p>
     </div>
   </section>
@@ -230,50 +259,54 @@
   <section class="section saas-section" id="saas-pricing">
     <div class="container">
       <div class="saas-header">
-        <span class="section-kicker">Self-Serve SaaS Products</span>
-        <h2>My SaaS Products & Retail Packages</h2>
+        <span class="section-kicker">{$language === 'EN' ? 'Self-Serve SaaS Products' : 'Produk SaaS Mandiri'}</span>
+        <h2>{$language === 'EN' ? 'My SaaS Products & Retail Packages' : 'Produk SaaS & Paket Retail Saya'}</h2>
         <p class="saas-intro">
-          Review digital credit bundles and starter plans for active web applications built and operated by me. Transactions are fully processed via secure local payment gateways.
+          {$language === 'EN'
+            ? 'Review digital credit bundles and starter plans for active web applications built and operated by me. Transactions are fully processed via secure local payment gateways.'
+            : 'Tinjau paket kredit digital dan paket starter untuk aplikasi web aktif yang dibangun dan dioperasikan oleh saya. Transaksi sepenuhnya diproses melalui gateway pembayaran lokal yang aman.'}
         </p>
       </div>
 
       <div class="saas-card-wrapper">
         <div class="saas-card-header">
-          <div class="saas-badge">Active Product</div>
+          <div class="saas-badge">{$language === 'EN' ? 'Active Product' : 'Produk Aktif'}</div>
           <h3>Siap Kuliah UI (SKUI) — Exam Simulator</h3>
           <p class="saas-desc">
-            A premium, mobile-first preparation platform for graduate (Pascasarjana) and undergraduate entry exams with dynamic timer simulators, answer analyses, and automatic question seeding.
+            {$language === 'EN'
+              ? 'A premium, mobile-first preparation platform for graduate (Pascasarjana) and undergraduate entry exams with dynamic timer simulators, answer analyses, and automatic question seeding.'
+              : 'Platform persiapan mobile-first premium untuk ujian masuk pascasarjana dan sarjana dengan simulator timer dinamis, analisis jawaban, dan seeding soal otomatis.'}
           </p>
         </div>
 
         <div class="saas-bundle-grid">
           <div class="bundle-box">
-            <span class="bundle-name">Starter Pack</span>
+            <span class="bundle-name">{$language === 'EN' ? 'Starter Pack' : 'Paket Starter'}</span>
             <div class="bundle-price">Rp 15.000</div>
-            <p class="bundle-desc">Akses kredit belajar yang cukup untuk pengerjaan <strong>3 tryout lengkap</strong> di platform SKUI.</p>
+            <p class="bundle-desc">{$language === 'EN' ? 'Learning credit access sufficient for completing <strong>3 full tryouts</strong> on the SKUI platform.' : 'Akses kredit belajar yang cukup untuk pengerjaan <strong>3 tryout lengkap</strong> di platform SKUI.'}</p>
           </div>
-          
+
           <div class="bundle-box popular">
-            <div class="popular-tag">Most Popular</div>
-            <span class="bundle-name">Standard Pack</span>
+            <div class="popular-tag">{$language === 'EN' ? 'Most Popular' : 'Paling Populer'}</div>
+            <span class="bundle-name">{$language === 'EN' ? 'Standard Pack' : 'Paket Standard'}</span>
             <div class="bundle-price">Rp 30.000</div>
-            <p class="bundle-desc">Akses kredit belajar yang cukup untuk pengerjaan <strong>12 tryout lengkap</strong> di platform SKUI.</p>
+            <p class="bundle-desc">{$language === 'EN' ? 'Learning credit access sufficient for completing <strong>12 full tryouts</strong> on the SKUI platform.' : 'Akses kredit belajar yang cukup untuk pengerjaan <strong>12 tryout lengkap</strong> di platform SKUI.'}</p>
           </div>
 
           <div class="bundle-box">
-            <span class="bundle-name">Pro Pack</span>
+            <span class="bundle-name">{$language === 'EN' ? 'Pro Pack' : 'Paket Pro'}</span>
             <div class="bundle-price">Rp 50.000</div>
-            <p class="bundle-desc">Akses kredit belajar terbaik dan paling hemat, cukup untuk pengerjaan <strong>25 tryout lengkap</strong> di platform SKUI.</p>
+            <p class="bundle-desc">{$language === 'EN' ? 'Best-value learning credit access, sufficient for completing <strong>25 full tryouts</strong> on the SKUI platform.' : 'Akses kredit belajar terbaik dan paling hemat, cukup untuk pengerjaan <strong>25 tryout lengkap</strong> di platform SKUI.'}</p>
           </div>
         </div>
 
         <div class="saas-card-footer">
           <div class="saas-trust-badges">
-            <span class="trust-badge">🛡️ Secured by Midtrans</span>
-            <span class="trust-badge">⚡ Instant Digital Delivery</span>
+            <span class="trust-badge">🛡️ {$language === 'EN' ? 'Secured by Midtrans' : 'Diamankan oleh Midtrans'}</span>
+            <span class="trust-badge">⚡ {$language === 'EN' ? 'Instant Digital Delivery' : 'Pengiriman Digital Instan'}</span>
           </div>
           <a href="https://tryout.aryaaji.com" target="_blank" rel="noopener noreferrer" class="btn primary saas-cta-btn">
-            Buy Credits on SKUI App
+            {$language === 'EN' ? 'Buy Credits on SKUI App' : 'Beli Kredit di Aplikasi SKUI'}
           </a>
         </div>
       </div>
@@ -284,17 +317,19 @@
   <section class="section contact-section" id="contact">
     <div class="container contact-wrap-simplified">
       <div class="contact-header-text">
-        <span class="section-kicker">Get in Touch</span>
-        <h2>Ready to build something amazing?</h2>
+        <span class="section-kicker">{$language === 'EN' ? 'Get in Touch' : 'Hubungi Kami'}</span>
+        <h2>{$language === 'EN' ? 'Ready to build something amazing?' : 'Siap membangun sesuatu yang luar biasa?'}</h2>
         <p>
-          Let's collaborate to bring your ideas to life. Submit your requirements securely via the direct intake form, or start a chat directly on WhatsApp.
+          {$language === 'EN'
+            ? "Let's collaborate to bring your ideas to life. Submit your requirements securely via the direct intake form, or start a chat directly on WhatsApp."
+            : 'Mari berkolaborasi untuk mewujudkan ide Anda. Kirimkan kebutuhan Anda dengan aman melalui formulir intake langsung, atau mulai chat langsung di WhatsApp.'}
         </p>
       </div>
-      
+
       <div class="contact-actions-promo">
         <a href="/contact" class="btn primary contact-promo-btn">
           <Mail size={17} />
-          Go to Contact Form
+          {$language === 'EN' ? 'Go to Contact Form' : 'Ke Formulir Kontak'}
         </a>
         <a
           href="https://wa.me/6281998884422"
@@ -303,7 +338,7 @@
           class="btn secondary whatsapp-promo-btn"
         >
           <MessageCircle size={17} />
-          Chat on WhatsApp
+          {$language === 'EN' ? 'Chat on WhatsApp' : 'Chat di WhatsApp'}
         </a>
       </div>
 

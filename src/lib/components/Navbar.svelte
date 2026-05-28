@@ -14,19 +14,20 @@
     THEME_FLAVORS,
   } from "$lib/stores/theme";
   import type { ThemeFlavor, AccentColor } from "$lib/stores/theme";
+  import { language } from "$lib/stores/language";
 
   let navPanelOpen = $state(false);
 
-  const navLinks = [
-    { href: "/about", label: "About" },
-    { href: "/pricing", label: "Pricing" },
-    { href: "/projects", label: "Projects" },
-    { href: "/contact", label: "Contact" },
-  ];
+  let navLinks = $derived([
+    { href: "/about", label: $language === "EN" ? "About" : "Tentang" },
+    { href: "/pricing", label: $language === "EN" ? "Pricing" : "Harga" },
+    { href: "/projects", label: $language === "EN" ? "Projects" : "Proyek" },
+    { href: "/contact", label: $language === "EN" ? "Contact" : "Kontak" },
+  ]);
 
-  const moreLinks = [
-    { href: "/resume", label: "Resume", external: false, wip: true },
-  ];
+  let moreLinks = $derived([
+    { href: "/resume", label: $language === "EN" ? "Resume" : "Resume", external: false, wip: true },
+  ]);
 
   // Breadcrumb
   let segments = $derived(
@@ -185,6 +186,46 @@
 
   <div class="panel-divider"></div>
 
+  <!-- Language Section -->
+  <div class="panel-section">
+    <div class="section-label">
+      <svg
+        width="14"
+        height="14"
+        viewBox="0 0 24 24"
+        fill="none"
+        stroke="currentColor"
+        stroke-width="2"
+        stroke-linecap="round"
+        stroke-linejoin="round"
+        style="margin-right: 2px;"
+      >
+        <circle cx="12" cy="12" r="10" /><path d="M12 2a14.5 14.5 0 0 0 0 20 14.5 14.5 0 0 0 0-20" /><path d="M2 12h20" />
+      </svg>
+      Language
+    </div>
+    <div class="lang-panel-switch">
+      <button
+        type="button"
+        class="lang-panel-btn"
+        class:active={$language === "EN"}
+        onclick={() => language.set("EN")}
+      >
+        English
+      </button>
+      <button
+        type="button"
+        class="lang-panel-btn"
+        class:active={$language === "ID"}
+        onclick={() => language.set("ID")}
+      >
+        Bahasa Indonesia
+      </button>
+    </div>
+  </div>
+
+  <div class="panel-divider"></div>
+
   <!-- Main nav links -->
   <div class="panel-nav">
     {#each navLinks as link}
@@ -208,47 +249,29 @@
 
   <div class="panel-divider"></div>
 
-  <!-- Fun Zone -->
-  <!-- <div class="panel-section">
-    <div class="section-label">
-      <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
-        <path d="m12 3-1.912 5.813a2 2 0 0 1-1.275 1.275L3 12l5.813 1.912a2 2 0 0 1 1.275 1.275L12 21l1.912-5.813a2 2 0 0 1 1.275-1.275L21 12l-5.813-1.912a2 2 0 0 1-1.275-1.275L12 3Z"/>
-        <path d="M5 3v4"/><path d="M19 17v4"/><path d="M3 5h4"/><path d="M17 19h4"/>
-      </svg>
-      Fun Zone
-    </div>
-
-    <label class="bg-effect-toggle">
-      <input type="checkbox" checked={$snowEffect} onchange={() => { if ($grayWorldEffect) grayWorldEffect.set(false); snowEffect.update(v => !v); }} />
-      <span class="toggle-box"></span>
-      <span class="toggle-label">Let it snow: <span class="toggle-state">{$snowEffect ? 'on' : 'off'}</span></span>
-    </label>
-
-    <label class="bg-effect-toggle">
-      <input type="checkbox" checked={$blackHoleEffect} onchange={() => { if ($grayWorldEffect) grayWorldEffect.set(false); blackHoleEffect.update(v => !v); }} />
-      <span class="toggle-box"></span>
-      <span class="toggle-label">Black Hole: <span class="toggle-state">{$blackHoleEffect ? 'on' : 'off'}</span></span>
-    </label>
-
-    <label class="bg-effect-toggle">
-      <input type="checkbox" checked={$mouseTremorEffect} onchange={() => { if ($grayWorldEffect) grayWorldEffect.set(false); mouseTremorEffect.update(v => !v); }} />
-      <span class="toggle-box"></span>
-      <span class="toggle-label">Mouse Tremor: <span class="toggle-state">{$mouseTremorEffect ? 'on' : 'off'}</span></span>
-    </label>
-
-    <label class="bg-effect-toggle">
-      <input type="checkbox" checked={$floodEffect} onchange={() => { if ($grayWorldEffect) grayWorldEffect.set(false); floodEffect.update(v => !v); }} />
-      <span class="toggle-box"></span>
-      <span class="toggle-label">Flood: <span class="toggle-state">{$floodEffect ? 'on' : 'off'}</span></span>
-    </label>
-
-    <label class="bg-effect-toggle">
-      <input type="checkbox" checked={$grayWorldEffect} onchange={() => { if (!$grayWorldEffect) { [snowEffect, blackHoleEffect, mouseTremorEffect, floodEffect].forEach(e => e.set(false)); } grayWorldEffect.update(v => !v); }} />
-      <span class="toggle-box"></span>
-      <span class="toggle-label">Gray World: <span class="toggle-state">{$grayWorldEffect ? 'on' : 'off'}</span></span>
-    </label>
-  </div> -->
 </div>
+
+<!-- Floating Glassmorphic Language Switcher (Aesthetic Placement) -->
+<button
+  type="button"
+  class="floating-lang-switcher"
+  onclick={() => language.update(l => l === "EN" ? "ID" : "EN")}
+  aria-label="Toggle language"
+>
+  <svg
+    width="14"
+    height="14"
+    viewBox="0 0 24 24"
+    fill="none"
+    stroke="currentColor"
+    stroke-width="2"
+    stroke-linecap="round"
+    stroke-linejoin="round"
+  >
+    <circle cx="12" cy="12" r="10" /><path d="M12 2a14.5 14.5 0 0 0 0 20 14.5 14.5 0 0 0 0-20" /><path d="M2 12h20" />
+  </svg>
+  <span>{$language}</span>
+</button>
 
 <style>
   /* ─── Navbar ─────────────────────────────────────────── */
@@ -613,5 +636,96 @@
     color: var(--accent);
     opacity: 1;
     padding-left: 16px;
+  }
+
+  /* --- Language Swapper --- */
+  .lang-btn {
+    font-family: "JetBrains Mono", monospace !important;
+    font-size: 0.82rem !important;
+    font-weight: 700 !important;
+    letter-spacing: 0.05em;
+    color: var(--accent) !important;
+    padding: 6px 12px !important;
+    border-radius: 6px !important;
+    background: color-mix(in srgb, var(--accent) 8%, transparent) !important;
+    border: 1px solid color-mix(in srgb, var(--accent) 20%, transparent) !important;
+    cursor: pointer;
+    transition: all 0.2s ease;
+    margin-right: 6px;
+  }
+  
+  .lang-btn:hover {
+    background: var(--accent) !important;
+    color: var(--ctp-base) !important;
+  }
+
+  .lang-panel-switch {
+    display: flex;
+    gap: 8px;
+    margin-bottom: 12px;
+  }
+
+  .lang-panel-btn {
+    flex: 1;
+    padding: 8px 12px;
+    border-radius: 6px;
+    font-size: 0.8rem;
+    font-weight: 600;
+    background: var(--ctp-surface0);
+    border: 1px solid transparent;
+    color: var(--ctp-subtext1);
+    cursor: pointer;
+    transition: all 0.2s ease;
+    font-family: inherit;
+  }
+
+  .lang-panel-btn:hover {
+    border-color: var(--accent);
+    color: var(--ctp-text);
+  }
+
+  .lang-panel-btn.active {
+    background: transparent;
+    border-color: var(--accent);
+    color: var(--ctp-text);
+  }
+
+  /* --- Floating Language Switcher --- */
+  .floating-lang-switcher {
+    position: fixed;
+    bottom: 24px;
+    right: 24px;
+    z-index: 150;
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    padding: 10px 14px;
+    border-radius: 99px;
+    background: color-mix(in srgb, var(--ctp-crust) 65%, transparent);
+    backdrop-filter: blur(12px);
+    -webkit-backdrop-filter: blur(12px);
+    border: 1px solid color-mix(in srgb, var(--ctp-surface0) 40%, transparent);
+    color: var(--ctp-text);
+    font-family: "JetBrains Mono", monospace;
+    font-size: 0.8rem;
+    font-weight: 700;
+    cursor: pointer;
+    box-shadow: 0 8px 30px rgba(0, 0, 0, 0.15);
+    transition: all 0.25s cubic-bezier(0.4, 0, 0.2, 1);
+  }
+
+  .floating-lang-switcher:hover {
+    border-color: var(--accent);
+    color: var(--accent);
+    transform: translateY(-2px) scale(1.05);
+    box-shadow: 0 12px 36px color-mix(in srgb, var(--accent) 15%, transparent);
+  }
+
+  @media (max-width: 640px) {
+    .floating-lang-switcher {
+      bottom: 20px;
+      right: 20px;
+      padding: 8px 12px;
+    }
   }
 </style>

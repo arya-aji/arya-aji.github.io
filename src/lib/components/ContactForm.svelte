@@ -1,5 +1,8 @@
 <script lang="ts">
-  import { Send, CheckCircle2, AlertCircle, Loader2 } from "lucide-svelte";
+  import { Send, AlertCircle, Loader2 } from "lucide-svelte";
+  import { language } from "$lib/stores/language";
+  import { PUBLIC_WEB3FORMS_KEY } from '$env/static/public';
+  import { goto } from '$app/navigation';
 
   let name = $state("");
   let email = $state("");
@@ -8,7 +11,6 @@
   let message = $state("");
 
   let loading = $state(false);
-  let success = $state(false);
   let errorMsg = $state("");
 
   const budgets = [
@@ -18,18 +20,20 @@
     { value: "50m+", label: "Rp 50M+" }
   ];
 
-  const projectTypes = [
-    { value: "landing-page", label: "Premium Landing Page" },
-    { value: "web-app", label: "Custom Web Application" },
-    { value: "automation", label: "Enterprise & Workflow Automation" },
-    { value: "maintenance", label: "Application Maintenance" },
-    { value: "other", label: "Other Business Inquiry" }
-  ];
+  let projectTypes = $derived([
+    { value: "landing-page", label: $language === 'EN' ? "Premium Landing Page" : "Landing Page Premium" },
+    { value: "web-app", label: $language === 'EN' ? "Custom Web Application" : "Aplikasi Web Kustom" },
+    { value: "automation", label: $language === 'EN' ? "Enterprise & Workflow Automation" : "Otomasi Enterprise & Alur Kerja" },
+    { value: "maintenance", label: $language === 'EN' ? "Application Maintenance" : "Pemeliharaan Aplikasi" },
+    { value: "other", label: $language === 'EN' ? "Other Business Inquiry" : "Pertanyaan Bisnis Lainnya" }
+  ]);
 
   async function handleSubmit(event: Event) {
     event.preventDefault();
     if (!name || !email || !message) {
-      errorMsg = "Harap lengkapi semua kolom yang wajib diisi.";
+      errorMsg = $language === 'EN'
+        ? "Please fill in all required fields."
+        : "Harap lengkapi semua kolom yang wajib diisi.";
       return;
     }
 
@@ -37,10 +41,8 @@
     errorMsg = "";
 
     try {
-      // Menggunakan Web3Forms (layanan pengiriman form gratis langsung ke email Anda)
-      // Akses key ini khusus dikonfigurasi untuk meneruskan form ke hello@aryaaji.com
       const formData = new FormData();
-      formData.append("access_key", "c0627798-e7bc-49cb-ba6c-2f960f274a44"); // Anda dapat menggantinya dengan key Anda sendiri dari web3forms.com secara gratis
+      formData.append("access_key", PUBLIC_WEB3FORMS_KEY);
       formData.append("subject", `New Project Inquiry from ${name}`);
       formData.append("name", name);
       formData.append("email", email);
@@ -57,15 +59,14 @@
       const data = await response.json();
 
       if (data.success) {
-        success = true;
-        name = "";
-        email = "";
-        message = "";
+        goto('/thank-you');
       } else {
-        throw new Error(data.message || "Gagal mengirim pesan.");
+        throw new Error(data.message || ($language === 'EN' ? "Failed to send message." : "Gagal mengirim pesan."));
       }
     } catch (err: any) {
-      errorMsg = err.message || "Terjadi kesalahan sistem. Silakan coba lagi atau hubungi via WhatsApp.";
+      errorMsg = err.message || ($language === 'EN'
+        ? "A system error occurred. Please try again or contact via WhatsApp."
+        : "Terjadi kesalahan sistem. Silakan coba lagi atau hubungi via WhatsApp.");
     } finally {
       loading = false;
     }
@@ -73,24 +74,7 @@
 </script>
 
 <div class="contact-form-container">
-  {#if success}
-    <div class="success-card">
-      <div class="success-icon">
-        <CheckCircle2 size={40} />
-      </div>
-      <h3>Pesan Terkirim!</h3>
-      <p>
-        Terima kasih, <strong>{name || "rekan"}</strong>. Detail kebutuhan proyek Anda telah terkirim secara instan ke email saya di <strong>hello@aryaaji.com</strong>.
-      </p>
-      <p class="follow-up-note">
-        Saya akan meninjau singkat brief Anda dan memberikan estimasi awal dalam waktu maksimal 24 jam.
-      </p>
-      <button class="btn secondary reset-btn" onclick={() => success = false} type="button">
-        Kirim Pesan Lain
-      </button>
-    </div>
-  {:else}
-    <form onsubmit={handleSubmit} class="contact-form">
+  <form onsubmit={handleSubmit} class="contact-form">
       {#if errorMsg}
         <div class="error-banner">
           <AlertCircle size={18} />
@@ -100,32 +84,32 @@
 
       <div class="form-row">
         <div class="form-group">
-          <label for="form-name">Nama Lengkap <span class="required">*</span></label>
-          <input 
-            type="text" 
-            id="form-name" 
-            bind:value={name} 
-            placeholder="Aji Kusuma" 
-            required 
+          <label for="form-name">{$language === 'EN' ? 'Full Name' : 'Nama Lengkap'} <span class="required">*</span></label>
+          <input
+            type="text"
+            id="form-name"
+            bind:value={name}
+            placeholder="Aji Kusuma"
+            required
             disabled={loading}
           />
         </div>
 
         <div class="form-group">
-          <label for="form-email">Alamat Email <span class="required">*</span></label>
-          <input 
-            type="email" 
-            id="form-email" 
-            bind:value={email} 
-            placeholder="aji@company.com" 
-            required 
+          <label for="form-email">{$language === 'EN' ? 'Email Address' : 'Alamat Email'} <span class="required">*</span></label>
+          <input
+            type="email"
+            id="form-email"
+            bind:value={email}
+            placeholder="aji@company.com"
+            required
             disabled={loading}
           />
         </div>
       </div>
 
       <div class="form-group">
-        <label for="form-type">Kategori Layanan</label>
+        <label for="form-type">{$language === 'EN' ? 'Service Category' : 'Kategori Layanan'}</label>
         <select id="form-type" bind:value={projectType} disabled={loading}>
           {#each projectTypes as type}
             <option value={type.value}>{type.label}</option>
@@ -134,7 +118,7 @@
       </div>
 
       <div class="form-group">
-        <label>Estimasi Budget Proyek</label>
+        <label>{$language === 'EN' ? 'Project Budget Estimate' : 'Estimasi Budget Proyek'}</label>
         <div class="budget-swatches">
           {#each budgets as b}
             <button
@@ -151,13 +135,15 @@
       </div>
 
       <div class="form-group">
-        <label for="form-message">Deskripsi Brief Singkat Proyek <span class="required">*</span></label>
-        <textarea 
-          id="form-message" 
-          bind:value={message} 
-          rows="5" 
-          placeholder="Jelaskan secara singkat fitur utama, target audiens, dan deadline proyek Anda..." 
-          required 
+        <label for="form-message">{$language === 'EN' ? 'Brief Project Description' : 'Deskripsi Brief Singkat Proyek'} <span class="required">*</span></label>
+        <textarea
+          id="form-message"
+          bind:value={message}
+          rows="5"
+          placeholder={$language === 'EN'
+            ? "Briefly describe the main features, target audience, and project deadline..."
+            : "Jelaskan secara singkat fitur utama, target audiens, dan deadline proyek Anda..."}
+          required
           disabled={loading}
         ></textarea>
       </div>
@@ -165,14 +151,13 @@
       <button type="submit" class="btn primary submit-btn" disabled={loading}>
         {#if loading}
           <Loader2 size={17} class="spinner-icon" />
-          <span>Mengirim...</span>
+          <span>{$language === 'EN' ? 'Sending...' : 'Mengirim...'}</span>
         {:else}
           <Send size={17} />
-          <span>Kirim Penawaran Proyek</span>
+          <span>{$language === 'EN' ? 'Send Project Inquiry' : 'Kirim Penawaran Proyek'}</span>
         {/if}
       </button>
     </form>
-  {/if}
 </div>
 
 <style>
@@ -184,54 +169,6 @@
     max-width: 720px;
     margin: 0 auto;
     box-shadow: 0 16px 40px rgba(0, 0, 0, 0.1);
-  }
-
-  .success-card {
-    text-align: center;
-    padding: 24px 0;
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    gap: 16px;
-  }
-
-  .success-icon {
-    color: var(--ctp-green);
-    background: color-mix(in srgb, var(--ctp-green) 12%, transparent);
-    width: 72px;
-    height: 72px;
-    border-radius: 50%;
-    display: grid;
-    place-items: center;
-    margin-bottom: 8px;
-  }
-
-  .success-card h3 {
-    font-size: 1.6rem;
-    font-weight: 700;
-    color: var(--ctp-text);
-    margin: 0;
-  }
-
-  .success-card p {
-    color: var(--ctp-subtext0);
-    font-size: 1.05rem;
-    line-height: 1.7;
-    margin: 0;
-    max-width: 500px;
-  }
-
-  .follow-up-note {
-    font-size: 0.9rem !important;
-    color: var(--ctp-overlay1) !important;
-    background: var(--ctp-base);
-    padding: 12px 18px;
-    border-radius: 8px;
-    border: 1px dashed var(--ctp-surface1);
-  }
-
-  .reset-btn {
-    margin-top: 12px;
   }
 
   .contact-form {
