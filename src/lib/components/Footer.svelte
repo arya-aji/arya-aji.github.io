@@ -22,6 +22,10 @@
           <span class="status-dot"></span>
           <span>All Services <span class="status-nominal">Nominal</span></span>
         </span>
+        <span class="footer-separator">|</span>
+        <a href="/terms" class="footer-link">Terms</a>
+        <a href="/privacy" class="footer-link">Privacy</a>
+        <a href="/refund" class="footer-link">Refund</a>
       </div>
 
       <!-- Right -->
@@ -172,6 +176,25 @@
   }
 
   .footer-socials a:hover {
+    color: var(--accent);
+    opacity: 1;
+  }
+
+  .footer-separator {
+    color: var(--ctp-surface2);
+    font-size: 0.78rem;
+    font-family: 'JetBrains Mono', 'Fira Code', monospace;
+  }
+
+  .footer-link {
+    font-size: 0.78rem;
+    color: var(--ctp-subtext0);
+    font-family: 'JetBrains Mono', 'Fira Code', monospace;
+    text-decoration: none;
+    transition: color 0.2s;
+  }
+
+  .footer-link:hover {
     color: var(--accent);
     opacity: 1;
   }
