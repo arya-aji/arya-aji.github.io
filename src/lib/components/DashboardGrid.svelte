@@ -17,7 +17,7 @@
     CalendarDays,
     MapPin,
     Sparkles,
-    FileText,
+
     FolderGit2,
     ArrowRight,
     Tag,
@@ -25,14 +25,13 @@
   import { onMount } from "svelte";
   import type L from "leaflet";
   import { projects, tagColors } from "$lib/data/projects";
-  import { fetchPosts } from "$lib/utils/posts";
-  import type { BlogPost } from "$lib/utils/posts";
+
 
   const latestProject = [...projects].sort(
     (a, b) => new Date(b.date).getTime() - new Date(a.date).getTime(),
   )[0];
 
-  let latestPost: BlogPost | null = $state(null);
+
 
   let localTime = $state("");
 
@@ -83,9 +82,7 @@
     const interval = setInterval(updateTime, 1000);
     let isMounted = true;
 
-    fetchPosts().then((posts) => {
-      if (posts.length > 0) latestPost = posts[0];
-    });
+
 
     if (typeof window !== "undefined" && mapElement) {
       (async () => {
@@ -281,46 +278,17 @@
         </div>
       </div>
 
-      <!-- Latest Post Card -->
-      <div class="card dash-card latest-card span-2">
-        <div class="card-header">
-          <FileText size={16} />
-          <span class="card-title">Latest Post</span>
-        </div>
-        {#if latestPost}
-          {@const meta =
-            latestPost.meta["en"] || Object.values(latestPost.meta)[0]}
-          <a href="/posts/{latestPost.slug}" class="latest-link">
-            <h3 class="latest-name">{meta.title}</h3>
-            <p class="latest-desc">{meta.summary}</p>
-            <div class="latest-footer">
-              <span class="latest-date">{meta.dateDisplay}</span>
-              <div class="latest-tags">
-                {#each meta.tags.slice(0, 3) as tag}
-                  <span class="mini-tag">{tag}</span>
-                {/each}
-              </div>
-            </div>
-          </a>
-        {:else}
-          <p class="latest-empty">No posts yet.</p>
-        {/if}
-        <a href="/posts" class="latest-view-all">
-          View all posts <ArrowRight size={14} />
-        </a>
-      </div>
-
-      <!-- Latest Project Card -->
-      <div class="card dash-card latest-card span-2">
+      <!-- Latest SaaS Card -->
+      <div class="card dash-card latest-card span-4">
         <div class="card-header">
           <FolderGit2 size={16} />
-          <span class="card-title">Latest Project</span>
+          <span class="card-title">My Latest SaaS</span>
         </div>
         {#if latestProject}
           <a
-            href={latestProject.github || `/projects/${latestProject.slug}`}
-            target={latestProject.github ? "_blank" : undefined}
-            rel={latestProject.github ? "noopener noreferrer" : undefined}
+            href={latestProject.live || latestProject.github || `/projects/${latestProject.slug}`}
+            target="_blank"
+            rel="noopener noreferrer"
             class="latest-link"
           >
             <h3 class="latest-name">{latestProject.title}</h3>
@@ -328,7 +296,7 @@
             <div class="latest-footer">
               <span class="latest-date">{latestProject.dateDisplay}</span>
               <div class="latest-tags">
-                {#each latestProject.tags.slice(0, 3) as tag}
+                {#each latestProject.tags.slice(0, 4) as tag}
                   <span
                     class="mini-tag"
                     style="--tag-color: {tagColors[tag] || 'var(--accent)'}"
@@ -340,7 +308,7 @@
           </a>
         {/if}
         <a href="/projects" class="latest-view-all">
-          View all projects <ArrowRight size={14} />
+          View all products <ArrowRight size={14} />
         </a>
       </div>
     </div>

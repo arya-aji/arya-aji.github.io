@@ -1,6 +1,10 @@
 import { error } from '@sveltejs/kit';
 import { projects } from '$lib/data/projects';
-import type { PageLoad } from './$types';
+import type { PageLoad, EntryGenerator } from './$types';
+
+export const entries: EntryGenerator = () => {
+  return projects.map(p => ({ slug: p.slug }));
+};
 
 export const load: PageLoad = ({ params }) => {
   const project = projects.find(p => p.slug === params.slug);

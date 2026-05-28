@@ -38,55 +38,29 @@ export interface Project {
 
 export const projects: Project[] = [
   {
-    slug: "blur-your-whatsapp",
-    title: "Blur Your Whatsapp",
-    name: "blur-your-whatsapp",
+    slug: "skui",
+    title: "Siap Kuliah UI (SKUI)",
+    name: "skui",
     org: "arya-aji",
-    date: "2026-05-19",
+    date: "2026-05-28",
     dateDisplay: "May 2026",
     description:
-      "Chrome extension to maximize WhatsApp privacy in public places. Blurs chats, names, groups, and images. 100% local, no data sent to servers, and completely free.",
+      "A premium, mobile-first simulation tryout platform for SIMAK UI Pascasarjana and undergraduate entry exams, featuring active timer tracking, in-depth explanation keys, and automated question seeding.",
     longDesc:
-      "A Chrome extension designed to maximize WhatsApp Web privacy in public spaces. It enables users to selectively blur chats, names, groups, images, and other sensitive elements. The extension operates 100% locally with absolutely no data transmitted to external servers, ensuring complete security and privacy. And of course, it is completely free.",
-    idea: "Maximize WhatsApp privacy in public places with zero data collection",
+      "Siap Kuliah UI (SKUI) is a high-performance preparation SaaS designed for SIMAK UI and UTBK aspirants. Replicating real-world exam conditions, the platform features a strict mobile-first test taking flow, live timer tracking, doubt flag markings, and automated autosave. Candidates receive immediate diagnostic analytics and comprehensive answer explanations. The backend integrates Better-Auth, Prisma, and PostgreSQL with a programmatic question seeder and secure Midtrans payments.",
+    idea: "Mobile-first mock exam simulation and automated high-quality question generators for SIMAK UI and UTBK.",
     problem:
-      "Using WhatsApp Web in public spaces exposes personal chats, group names, and sensitive images to shoulder surfers. Existing solutions either require subscriptions or send telemetry data to third-party servers.",
+      "Aspirants struggle to access high-quality, mobile-friendly simulator engines matching real SIMAK UI constraints, while admins spend immense effort seeding realistic question banks manually.",
     solution:
-      "Built a lightweight Chrome extension that injects CSS to selectively blur WhatsApp Web elements (messages, contact names, profile pictures). The blur is removed only on hover. All logic runs locally in the browser with absolutely no external data transmission.",
-    goal: "To provide a seamless, secure, and privacy-focused solution for WhatsApp Web users in public environments, ensuring sensitive data remains hidden without compromising usability or requiring external servers.",
-    privacyPolicy:
-      "<h3>Data Collection</h3><p>Blur Your WhatsApp does <strong>not collect, transmit, sell, or share</strong> any personal data. Period.</p><h3>Local Processing</h3><p>The extension runs entirely locally in your browser. It applies visual privacy masking effects directly on WhatsApp Web. It reads page elements on <em>web.whatsapp.com</em> strictly to apply blur/mask styles to chat text, names, avatars, previews, images, media drawers, or the whole WhatsApp Web interface.</p><h3>Storage</h3><p>User preferences—such as enabled controls and mask strength—are stored using Chrome's local storage. These preferences are used only to restore your selected privacy settings upon reopening the browser.</p><h3>Third-Party Services</h3><p>Blur Your WhatsApp does <strong>not use</strong> remote code, analytics, tracking, advertising SDKs, or external servers. Your data stays on your machine.</p><h3>Affiliation</h3><p>Blur Your WhatsApp is an independent open-source browser extension and is not affiliated with, endorsed by, or sponsored by WhatsApp, Meta, or any related company.</p>",
-    tags: ["chrome-extension", "javascript", "privacy", "css"],
-    href: "https://chromewebstore.google.com/detail/blur-your-whatsapp/fjniailddieogadfhmkikgbegllicjpo",
-    image: "/assets/blur-my-whatsapp.png",
-    banner: "/assets/banner-blur-my-whatsapp.png",
-    gif: "/assets/blur-my-whatsapp.png",
-    featured: true,
-  },
-  {
-    slug: "simakui",
-    title: "SIMAK UI Pascasarjana Tryout",
-    name: "simakui",
-    org: "arya-aji",
-    date: "2026-05-27",
-    dateDisplay: "May 2026",
-    description:
-      "A mobile-first simulation tryout platform for SIMAK UI Pascasarjana with active timer, detailed result analysis, LLM-based seed package generator, and Midtrans snaps payment.",
-    longDesc:
-      "A complete Next.js MVP designed for SIMAK UI Pascasarjana 2026 aspirants. This platform replicates real exam constraints with a strict mobile-first test taking flow, live timer tracking, doubt flag markings, and automated autosave. Upon completion, candidates receive immediate diagnostic analytics and in-depth explanation keys. Behind the scenes, it utilizes an AI generation engine via OpenRouter/Sumopod to programmatically bootstrap exam sets (seeding 140 comprehensive questions at a time) and is integrated with Midtrans for seamless credit topping-up.",
-    idea: "Simulated exam environments and automated high-quality question generators for SIMAK UI Pascasarjana",
-    problem:
-      "Candidates preparing for graduate-level UI entry tests lack affordable, mobile-first simulation platforms, while test managers face complex, time-consuming requirements when drafting realistic question banks.",
-    solution:
-      "Built a Next.js platform integrating Better-Auth, Prisma, and PostgreSQL. Incorporated an AI agent system powered by OpenAI/Sumopod/OpenRouter to parse syllabus structures and programmatically generate realistic exam packs in batches. Hooked up Midtrans Snap SDK for secure local payment workflows.",
-    goal: "To deliver an exceptionally smooth, realistic preparation tool for SIMAK UI candidates while offering admins a robust toolset to dynamically generate, customize, and monetize premium test material.",
+      "Built a robust SaaS simulator using Next.js, Prisma, and PostgreSQL. Integrated an LLM seeder to automatically draft complete 140-question exam packs, and implemented secure local payment flows using the Midtrans Snap SDK.",
+    goal: "To empower students with a seamless, highly realistic prep engine while giving admins robust tools to generate, customize, and monetize premium test material.",
     tags: ["nextjs", "typescript", "prisma", "postgresql", "better-auth", "midtrans", "llm"],
     live: "https://tryout.aryaaji.com",
     image: "/assets/simakui.webp",
     banner: "/assets/simakui.webp",
     gif: "/assets/simakui.webp",
     featured: true,
-  },
+  }
 ].map((project) => ({
   ...project,
   image: project.image || "/placeholder.jpg",

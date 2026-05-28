@@ -1,0 +1,144 @@
+<script lang="ts">
+  import Navbar from "$lib/components/Navbar.svelte";
+  import Footer from "$lib/components/Footer.svelte";
+  import ContactForm from "$lib/components/ContactForm.svelte";
+  import { Mail, MessageCircle, Clock } from "lucide-svelte";
+</script>
+
+<svelte:head>
+  <title>Contact | Arya Aji Kusuma</title>
+  <meta name="description" content="Get in touch with Aji. Submit your project brief, category, and budget estimates securely." />
+</svelte:head>
+
+<Navbar />
+
+<main class="contact-page container pt-32 pb-32">
+  <div class="contact-intro">
+    <span class="eyebrow">Connect</span>
+    <h1>Ready to build your next dream project?</h1>
+    <p>
+      Let's collaborate to turn your unique goals into beautiful, scalable web applications, landing pages, or automated enterprise systems.
+    </p>
+
+    <div class="intake-guides">
+      <div class="guide-item">
+        <Clock size={18} class="guide-icon" />
+        <div>
+          <h3>24-Hour Review</h3>
+          <p>I review every incoming brief and respond with an estimate within 24 business hours.</p>
+        </div>
+      </div>
+      <div class="guide-item">
+        <Mail size={18} class="guide-icon" />
+        <div>
+          <h3>Direct Email</h3>
+          <p>Submissions go straight to my secure inbox at <strong>hello@aryaaji.com</strong>.</p>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="form-wrapper">
+    <ContactForm />
+  </div>
+</main>
+
+<Footer />
+
+<style>
+  .contact-page {
+    max-width: 1120px;
+    margin: 0 auto;
+    min-height: calc(100vh - 64px);
+    display: grid;
+    grid-template-columns: 1fr 1.2fr;
+    gap: 48px;
+    align-items: center;
+    padding-top: 120px;
+    padding-bottom: 80px;
+  }
+
+  .contact-intro {
+    max-width: 480px;
+  }
+
+  .eyebrow {
+    display: inline-flex;
+    align-items: center;
+    font-family: "JetBrains Mono", monospace;
+    font-size: 0.78rem;
+    font-weight: 600;
+    color: var(--accent);
+    margin-bottom: 12px;
+  }
+
+  .contact-intro h1 {
+    font-size: 2.8rem;
+    line-height: 1.15;
+    font-weight: 800;
+    color: var(--ctp-text);
+    margin: 0 0 20px 0;
+  }
+
+  .contact-intro p {
+    color: var(--ctp-subtext1);
+    font-size: 1.05rem;
+    line-height: 1.8;
+    margin: 0 0 36px 0;
+  }
+
+  .intake-guides {
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+    border-top: 1px solid var(--ctp-surface0);
+    padding-top: 28px;
+  }
+
+  .guide-item {
+    display: flex;
+    gap: 16px;
+    align-items: flex-start;
+  }
+
+  .guide-icon {
+    color: var(--accent);
+    flex-shrink: 0;
+    margin-top: 4px;
+  }
+
+  .guide-item h3 {
+    font-size: 1rem;
+    font-weight: 700;
+    color: var(--ctp-text);
+    margin: 0 0 4px 0;
+  }
+
+  .guide-item p {
+    font-size: 0.9rem;
+    color: var(--ctp-subtext0);
+    line-height: 1.5;
+    margin: 0;
+  }
+
+  .form-wrapper {
+    width: 100%;
+  }
+
+  @media (max-width: 960px) {
+    .contact-page {
+      grid-template-columns: 1fr;
+      gap: 40px;
+      padding-top: 100px;
+      padding-bottom: 48px;
+    }
+
+    .contact-intro {
+      max-width: 100%;
+    }
+
+    .contact-intro h1 {
+      font-size: 2.2rem;
+    }
+  }
+</style>
