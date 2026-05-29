@@ -59,10 +59,15 @@
     align-items: center;
     padding-top: 120px;
     padding-bottom: 80px;
+    overflow-x: hidden;
+    box-sizing: border-box;
   }
 
   .contact-intro {
     max-width: 480px;
+    min-width: 0;
+    overflow-wrap: break-word;
+    word-break: break-word;
   }
 
   .eyebrow {
@@ -76,7 +81,7 @@
   }
 
   .contact-intro h1 {
-    font-size: 2.8rem;
+    font-size: clamp(1.8rem, 4vw, 2.8rem);
     line-height: 1.15;
     font-weight: 800;
     color: var(--ctp-text);
@@ -126,6 +131,8 @@
 
   .form-wrapper {
     width: 100%;
+    min-width: 0;
+    overflow: hidden;
   }
 
   @media (max-width: 960px) {
@@ -142,6 +149,14 @@
 
     .contact-intro h1 {
       font-size: 2.2rem;
+    }
+  }
+
+  @media (max-width: 480px) {
+    .contact-page {
+      gap: 28px;
+      padding-top: 80px;
+      padding-bottom: 32px;
     }
   }
 </style>
