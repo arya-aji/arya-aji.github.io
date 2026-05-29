@@ -47,8 +47,8 @@
         "Refund tidak berlaku setelah desain/koding kustom dimulai.",
         "Estimasi waktu pengerjaan 5-10 hari kerja."
       ],
-      ctaText: $language === 'EN' ? "Get Started" : "Mulai Sekarang",
-      ctaHref: "mailto:hello@aryaaji.com?subject=Premium%20Landing%20Page%20Inquiry"
+      waHref: "https://wa.me/6281998884422?text=Hello%20Aji,%20I'm%20interested%20in%20the%20Premium%20Landing%20Page%20package.",
+      emailHref: "mailto:hello@aryaaji.com?subject=Premium%20Landing%20Page%20Inquiry"
     },
     {
       id: 2,
@@ -80,8 +80,8 @@
         "Dukungan berjalan selama 6 bulan pasca-deployment.",
         "Refund ditinjau berdasarkan milestone yang telah selesai."
       ],
-      ctaText: $language === 'EN' ? "Request a Quote" : "Minta Penawaran",
-      ctaHref: "https://wa.me/6281998884422?text=Hello%20Aji,%20I'm%20interested%20in%20building%20a%20Custom%20Web%20Application."
+      waHref: "https://wa.me/6281998884422?text=Hello%20Aji,%20I'm%20interested%20in%20building%20a%20Custom%20Web%20Application.",
+      emailHref: "mailto:hello@aryaaji.com?subject=Custom%20Web%20Application%20Inquiry"
     }
   ]);
 
@@ -240,9 +240,16 @@
               </div>
             {/if}
 
-            <a href={item.ctaHref} class="btn primary cta-btn">
-              {item.ctaText}
-            </a>
+            <div class="card-actions">
+              <a href={item.waHref} target="_blank" rel="noopener noreferrer" class="btn primary cta-btn">
+                <MessageCircle size={17} />
+                WhatsApp
+              </a>
+              <a href={item.emailHref} class="btn secondary cta-btn">
+                <Mail size={17} />
+                Email
+              </a>
+            </div>
           </article>
         {/each}
       </div>
@@ -702,9 +709,14 @@
     flex-shrink: 0;
   }
 
-  .cta-btn {
-    width: 100%;
+  .card-actions {
+    display: flex;
+    gap: 8px;
     margin-top: auto;
+  }
+
+  .cta-btn {
+    flex: 1;
   }
 
   .price-note {

@@ -8,6 +8,11 @@ function getInitialLanguage(): Language {
   if (browser) {
     const stored = localStorage.getItem(LANGUAGE_KEY);
     if (stored === 'EN' || stored === 'ID') return stored as Language;
+    
+    // Auto-detect browser language
+    if (navigator.language && navigator.language.toLowerCase().startsWith('id')) {
+      return 'ID';
+    }
   }
   return 'EN';
 }
