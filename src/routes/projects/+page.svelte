@@ -830,6 +830,10 @@
   }
 
   @media (max-width: 992px) {
+    .floating-video-popup {
+      display: none !important;
+    }
+
     .slider-slide {
       min-width: 0;
       width: 100%;

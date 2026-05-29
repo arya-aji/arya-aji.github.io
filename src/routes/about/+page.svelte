@@ -20,8 +20,10 @@
     <div class="hero-row">
       <div class="photo-col">
         <img src="/photo.png" alt="Arya Aji Kusuma" class="photo-img" loading="lazy" />
-        <div class="photo-caption">Arya Aji Kusuma</div>
-        <div class="photo-sub">Jakarta, Indonesia · Developer</div>
+        <div class="photo-info-wrapper">
+          <div class="photo-caption">Arya Aji Kusuma</div>
+          <div class="photo-sub">Jakarta, Indonesia · Developer</div>
+        </div>
       </div>
 
       <div class="text-col">
@@ -241,6 +243,13 @@
       flex-direction: row;
       align-items: center;
       gap: 16px;
+    }
+
+    .photo-info-wrapper {
+      display: flex;
+      flex-direction: column;
+      align-items: flex-start;
+      gap: 4px;
     }
 
     .photo-img {

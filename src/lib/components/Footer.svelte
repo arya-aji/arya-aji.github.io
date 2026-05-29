@@ -23,9 +23,11 @@
           <span>All Services <span class="status-nominal">Nominal</span></span>
         </span>
         <span class="footer-separator">|</span>
-        <a href="/terms" class="footer-link">Terms</a>
-        <a href="/privacy" class="footer-link">Privacy</a>
-        <a href="/refund" class="footer-link">Refund</a>
+        <div class="footer-links">
+          <a href="/terms" class="footer-link">Terms</a>
+          <a href="/privacy" class="footer-link">Privacy</a>
+          <a href="/refund" class="footer-link">Refund</a>
+        </div>
       </div>
 
       <!-- Right -->
@@ -186,6 +188,12 @@
     font-family: 'JetBrains Mono', 'Fira Code', monospace;
   }
 
+  .footer-links {
+    display: flex;
+    align-items: center;
+    gap: 16px;
+  }
+
   .footer-link {
     font-size: 0.78rem;
     color: var(--ctp-subtext0);
@@ -217,6 +225,37 @@
     .footer-views,
     .commit-hash {
       display: none;
+    }
+  }
+
+  @media (max-width: 520px) {
+    .footer-bar {
+      flex-direction: column;
+      align-items: center;
+      gap: 14px;
+      padding: 24px 0;
+      height: auto;
+    }
+
+    .footer-left {
+      flex-direction: column;
+      gap: 10px;
+      align-items: center;
+      text-align: center;
+    }
+
+    .footer-separator {
+      display: none;
+    }
+
+    .footer-links {
+      gap: 16px;
+      justify-content: center;
+    }
+
+    .footer-right {
+      justify-content: center;
+      width: 100%;
     }
   }
 </style>

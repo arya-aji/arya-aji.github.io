@@ -356,6 +356,13 @@
     color: var(--accent);
   }
 
+  @media (max-width: 640px) {
+    .logo-path .bc-link,
+    .logo-path .bc-sep:nth-of-type(n+2) {
+      display: none;
+    }
+  }
+
   /* ─── Desktop nav links ──────────────────────────────── */
   .nav-links {
     display: flex;

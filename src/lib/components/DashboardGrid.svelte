@@ -90,9 +90,14 @@
           await import("leaflet/dist/leaflet.css");
           if (!isMounted) return;
 
+          const isMobile = window.innerWidth < 640;
           mapInstance = L.map(mapElement, {
             zoomControl: false,
             attributionControl: false,
+            dragging: !isMobile,
+            touchZoom: !isMobile,
+            scrollWheelZoom: false,
+            doubleClickZoom: false,
           }).setView([-6.1754, 106.8272], 12);
 
           L.tileLayer("https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png", {
