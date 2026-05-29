@@ -706,7 +706,7 @@
   .latest-tags {
     display: flex;
     gap: 5px;
-    flex-wrap: nowrap;
+    flex-wrap: wrap;
   }
 
   .mini-tag {
@@ -752,6 +752,21 @@
     }
     .latest-footer {
       width: 100%;
+      flex-wrap: wrap;
+      gap: 8px;
+    }
+    .accent-grid {
+      gap: 6px;
+    }
+    .accent-dot {
+      width: 24px;
+      height: 24px;
+    }
+  }
+
+  @media (max-width: 480px) {
+    .fun-effects {
+      grid-template-columns: repeat(2, 1fr);
     }
   }
 </style>
