@@ -55,28 +55,44 @@ p_info2 = doc2.add_paragraph()
 p_info2.add_run('Merchant: ').bold = True
 p_info2.add_run('Arya Aji Kusuma (tryout.aryaaji.com)')
 
-doc2.add_heading('Langkah 1: Pilihan Produk', level=2)
+doc2.add_heading('Langkah 1: Pengunjung Melihat Produk', level=2)
 s1 = doc2.add_paragraph()
 s1.add_run('Keterangan: ').bold = True
-s1.add_run('User mengunjungi web aplikasi (https://tryout.aryaaji.com) dan memilih Paket Kredit yang tersedia pada tabel harga.\n\n')
-run_s1 = s1.add_run('[HAPUS TEKS INI DAN MASUKKAN SCREENSHOT TABEL HARGA SKUI DI SINI]')
+s1.add_run('User mengunjungi web aplikasi (https://tryout.aryaaji.com) dan melihat informasi produk serta menekan tombol Login/Daftar.\n\n')
+run_s1 = s1.add_run('[HAPUS TEKS INI DAN MASUKKAN SCREENSHOT HALAMAN UTAMA SKUI DI SINI]')
 run_s1.bold = True
 run_s1.font.color.rgb = RGBColor(255, 0, 0)
 
-doc2.add_heading('Langkah 2: Checkout', level=2)
+doc2.add_heading('Langkah 2: Proses Login ke Aplikasi', level=2)
 s2 = doc2.add_paragraph()
 s2.add_run('Keterangan: ').bold = True
-s2.add_run('User mengklik tombol beli dan sistem menampilkan form checkout/login di dalam web SKUI.\n\n')
-run_s2 = s2.add_run('[HAPUS TEKS INI DAN MASUKKAN SCREENSHOT FORM CHECKOUT DI WEB SKUI DI SINI]')
+s2.add_run('User melakukan login ke dalam platform Siap Kuliah UI.\n\n')
+run_s2 = s2.add_run('[HAPUS TEKS INI DAN MASUKKAN SCREENSHOT HALAMAN LOGIN SKUI DI SINI]')
 run_s2.bold = True
 run_s2.font.color.rgb = RGBColor(255, 0, 0)
 
-doc2.add_heading('Langkah 3: Pembayaran via Snap API', level=2)
+doc2.add_heading('Langkah 3: Masuk ke Menu Wallet', level=2)
 s3 = doc2.add_paragraph()
 s3.add_run('Keterangan: ').bold = True
-s3.add_run('Muncul popup pembayaran Midtrans Snap di layar secara langsung, dan user memilih metode pembayaran yang diinginkan.\n\n')
-run_s3 = s3.add_run('[HAPUS TEKS INI DAN MASUKKAN SCREENSHOT POPUP SNAP MIDTRANS DI SINI]')
+s3.add_run('Setelah login, user masuk ke menu Wallet (Dompet) untuk melakukan Top Up Kredit.\n\n')
+run_s3 = s3.add_run('[HAPUS TEKS INI DAN MASUKKAN SCREENSHOT MENU WALLET DI DALAM SKUI DI SINI]')
 run_s3.bold = True
 run_s3.font.color.rgb = RGBColor(255, 0, 0)
+
+doc2.add_heading('Langkah 4: Memilih Paket dan Checkout', level=2)
+s4 = doc2.add_paragraph()
+s4.add_run('Keterangan: ').bold = True
+s4.add_run('User memilih nominal/paket kredit yang ingin di-Top Up, kemudian sistem menampilkan rincian harga untuk diproses (Checkout).\n\n')
+run_s4 = s4.add_run('[HAPUS TEKS INI DAN MASUKKAN SCREENSHOT PILIHAN PAKET TOP UP KREDIT DI SINI]')
+run_s4.bold = True
+run_s4.font.color.rgb = RGBColor(255, 0, 0)
+
+doc2.add_heading('Langkah 5: Pembayaran via Snap API', level=2)
+s5 = doc2.add_paragraph()
+s5.add_run('Keterangan: ').bold = True
+s5.add_run('Muncul popup pembayaran Midtrans Snap di layar secara langsung, dan user memilih metode pembayaran yang diinginkan.\n\n')
+run_s5 = s5.add_run('[HAPUS TEKS INI DAN MASUKKAN SCREENSHOT POPUP SNAP MIDTRANS DI SINI]')
+run_s5.bold = True
+run_s5.font.color.rgb = RGBColor(255, 0, 0)
 
 doc2.save('c:/Shared/Coding/arya-aji.github.io/Alur_Transaksi_SaaS_Snap.docx')
