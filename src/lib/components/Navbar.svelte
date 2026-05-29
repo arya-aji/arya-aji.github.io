@@ -20,7 +20,7 @@
 
   let navLinks = $derived([
     { href: "/about", label: $language === "EN" ? "About" : "Tentang" },
-    { href: "/pricing", label: $language === "EN" ? "Pricing" : "Harga" },
+    { href: "/pricing", label: $language === "EN" ? "Services & Pricing" : "Layanan & Produk" },
     { href: "/projects", label: $language === "EN" ? "Projects" : "Proyek" },
     { href: "/contact", label: $language === "EN" ? "Contact" : "Kontak" },
   ]);
