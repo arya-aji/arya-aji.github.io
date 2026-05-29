@@ -20,8 +20,8 @@
     {
       id: 1,
       title: $language === 'EN' ? "Premium Landing Page" : "Landing Page Premium",
-      priceUSD: "$899",
-      priceIDR: "Rp 16.000.000",
+      priceUSD: "$599",
+      priceIDR: "Rp 10.000.000",
       detail: $language === 'EN'
         ? "Custom designed to maximize conversions, build credibility, and generate leads."
         : "Dirancang khusus untuk memaksimalkan konversi, membangun kredibilitas, dan menghasilkan prospek.",
