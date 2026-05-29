@@ -90,7 +90,7 @@
           await import("leaflet/dist/leaflet.css");
           if (!isMounted) return;
 
-          const isMobile = window.innerWidth < 640;
+          const isMobile = window.innerWidth < 768;
           mapInstance = L.map(mapElement, {
             zoomControl: false,
             attributionControl: false,
@@ -741,7 +741,7 @@
     }
   }
 
-  @media (max-width: 640px) {
+  @media (max-width: 768px) {
     .dashboard-grid {
       grid-template-columns: 1fr;
     }
@@ -764,7 +764,7 @@
     }
   }
 
-  @media (max-width: 480px) {
+  @media (max-width: 520px) {
     .fun-effects {
       grid-template-columns: repeat(2, 1fr);
     }
