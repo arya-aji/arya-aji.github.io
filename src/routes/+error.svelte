@@ -2,40 +2,60 @@
   import { page } from "$app/stores";
   import Navbar from "$lib/components/Navbar.svelte";
   import Footer from "$lib/components/Footer.svelte";
+  import { language } from "$lib/stores/language";
 
   const messages: Record<
-    number,
-    { title: string; desc: string; hint: string }
+    "EN" | "ID",
+    Record<number, { title: string; desc: string; hint: string }>
   > = {
-    404: {
-      title: "Page Not Found",
-      desc: "The page you're looking for doesn't exist or has been moved.",
-      hint: "Check the URL or head back home.",
+    EN: {
+      404: {
+        title: "Page Not Found",
+        desc: "The page you're looking for doesn't exist or has been moved.",
+        hint: "Check the URL or head back home.",
+      },
+      500: {
+        title: "Internal Server Error",
+        desc: "Something went wrong on our end. This one is on us.",
+        hint: "Try refreshing the page, or come back later.",
+      },
+      403: {
+        title: "Forbidden",
+        desc: "You don't have permission to access this page.",
+        hint: "If you believe this is a mistake, please get in touch.",
+      },
     },
-    500: {
-      title: "Internal Server Error",
-      desc: "Something went wrong on our end. This one is on us.",
-      hint: "Try refreshing the page, or come back later.",
-    },
-    403: {
-      title: "Forbidden",
-      desc: "You don't have permission to access this page.",
-      hint: "If you believe this is a mistake, please get in touch.",
+    ID: {
+      404: {
+        title: "Halaman Tidak Ditemukan",
+        desc: "Halaman yang Anda cari tidak ada atau telah dipindahkan.",
+        hint: "Periksa kembali URL atau kembali ke halaman utama.",
+      },
+      500: {
+        title: "Kesalahan Server Internal",
+        desc: "Terjadi kesalahan pada server kami. Ini adalah kendala di pihak kami.",
+        hint: "Coba refresh halaman ini, atau kembali lagi nanti.",
+      },
+      403: {
+        title: "Akses Ditolak",
+        desc: "Anda tidak memiliki izin untuk mengakses halaman ini.",
+        hint: "Jika Anda yakin ini adalah kesalahan, silakan hubungi kami.",
+      },
     },
   };
 
   let status = $derived($page.status ?? 404);
   let msg = $derived(
-    messages[status] ?? {
-      title: "Unexpected Error",
-      desc: $page.error?.message ?? "An unexpected error occurred.",
-      hint: "Try going back or returning to the home page.",
+    messages[$language][status] ?? {
+      title: $language === "EN" ? "Unexpected Error" : "Kesalahan Tidak Terduga",
+      desc: $page.error?.message ?? ($language === "EN" ? "An unexpected error occurred." : "Terjadi kesalahan yang tidak terduga."),
+      hint: $language === "EN" ? "Try going back or returning to the home page." : "Coba kembali atau kembali ke halaman utama.",
     },
   );
 
   // Terminal-style typed output lines
   let lines = $derived([
-    `$ curl https://aryaaji.com${$page.url?.pathname ?? "/???"}`,
+    `$ curl ${$page.url?.origin ?? "https://aryaaji.com"}${$page.url?.pathname ?? "/???"}`,
     `> HTTP/${status}`,
     `> X-Error: ${msg.title}`,
     `> Content-Type: text/html`,
@@ -44,6 +64,7 @@
     `  ${msg.hint}`,
   ]);
 </script>
+
 
 <svelte:head>
   <title>{status} — {msg.title} | Arya Aji Kusuma</title>
@@ -116,7 +137,7 @@
               points="9 22 9 12 15 12 15 22"
             />
           </svg>
-          Go Home
+          {$language === 'EN' ? 'Go Home' : 'Kembali ke Beranda'}
         </a>
         <button class="btn-secondary" onclick={() => history.back()}>
           <svg
@@ -131,9 +152,11 @@
           >
             <path d="m12 19-7-7 7-7" /><path d="M19 12H5" />
           </svg>
-          Go Back
+          {$language === 'EN' ? 'Go Back' : 'Kembali'}
         </button>
-        <a href="/projects" class="btn-ghost">Browse Projects →</a>
+        <a href="/projects" class="btn-ghost">
+          {$language === 'EN' ? 'Browse Projects →' : 'Lihat Proyek →'}
+        </a>
       </div>
     </div>
   </div>
