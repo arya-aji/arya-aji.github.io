@@ -70,6 +70,7 @@
     border-top: 1px solid var(--ctp-surface0);
     margin-top: 40px;
     background: var(--ctp-mantle);
+    overflow-x: hidden;
   }
 
   .footer-inner {
@@ -85,12 +86,15 @@
     justify-content: space-between;
     height: 48px;
     gap: 16px;
+    flex-wrap: wrap;
   }
 
   .footer-left {
     display: flex;
     align-items: center;
     gap: 16px;
+    flex-wrap: wrap;
+    min-width: 0;
   }
 
   .copyright {
@@ -126,6 +130,8 @@
     display: flex;
     align-items: center;
     gap: 16px;
+    flex-wrap: wrap;
+    min-width: 0;
   }
 
   .footer-time {

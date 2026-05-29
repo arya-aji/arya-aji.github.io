@@ -169,6 +169,7 @@
 <style>
   .featured-projects {
     overflow: hidden;
+    max-width: 100vw;
   }
 
   .section-header {
@@ -288,6 +289,7 @@
     border: 1px solid var(--ctp-surface0);
     transition: all 0.3s ease;
     min-height: 380px;
+    min-width: 0;
   }
 
   .project-card-wrapper:hover {

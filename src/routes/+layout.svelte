@@ -349,6 +349,7 @@
   .app {
     opacity: 0;
     transition: opacity 0.3s ease;
+    overflow-x: hidden;
   }
   .app.mounted {
     opacity: 1;

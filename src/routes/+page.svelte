@@ -225,6 +225,8 @@
 <style>
   main {
     min-height: calc(100vh - 64px);
+    overflow-x: hidden;
+    max-width: 100vw;
   }
 
   .blackhole-overlay {

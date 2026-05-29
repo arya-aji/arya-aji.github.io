@@ -141,13 +141,14 @@
     padding: 80px 0 0;
     display: flex;
     flex-direction: column;
+    overflow-x: hidden;
   }
 
   .hero-inner {
     flex: 1;
     display: flex;
     align-items: center;
-    justify-content: space-between;
+    justify-content: flex-start;
     gap: 40px;
   }
 

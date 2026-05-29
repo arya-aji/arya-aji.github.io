@@ -332,6 +332,7 @@
     display: grid;
     grid-template-columns: repeat(4, 1fr);
     gap: 16px;
+    overflow: hidden;
   }
 
   .dash-card {
@@ -339,6 +340,8 @@
     display: flex;
     flex-direction: column;
     min-height: 240px;
+    min-width: 0;
+    overflow: hidden;
   }
 
   .card-header {

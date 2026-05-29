@@ -285,6 +285,7 @@
     border-bottom: 1px solid
       color-mix(in srgb, var(--ctp-surface0) 50%, transparent);
     transition: background 0.3s ease;
+    overflow: hidden;
   }
 
   .navbar-inner {
