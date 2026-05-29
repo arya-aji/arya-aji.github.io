@@ -634,6 +634,7 @@
     display: flex;
     flex-direction: column;
     gap: 10px;
+    overflow: hidden;
   }
 
   .latest-link {
@@ -644,6 +645,8 @@
     background: var(--ctp-crust);
     border: 1px solid var(--ctp-surface0);
     transition: all 0.2s ease;
+    overflow: hidden;
+    min-width: 0;
   }
 
   .latest-link:hover {
@@ -663,6 +666,8 @@
     align-items: center;
     gap: 20px;
     padding: 14px 18px;
+    min-width: 0;
+    overflow: hidden;
   }
 
   .latest-main {
@@ -696,7 +701,9 @@
     display: flex;
     align-items: center;
     gap: 10px;
-    flex-shrink: 0;
+    flex-shrink: 1;
+    min-width: 0;
+    overflow: hidden;
   }
 
   .latest-date {
@@ -710,6 +717,8 @@
     display: flex;
     gap: 5px;
     flex-wrap: wrap;
+    overflow: hidden;
+    min-width: 0;
   }
 
   .mini-tag {
