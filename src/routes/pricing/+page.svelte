@@ -283,20 +283,20 @@
           <div class="bundle-box">
             <span class="bundle-name">{$language === 'EN' ? 'Starter Pack' : 'Paket Starter'}</span>
             <div class="bundle-price">Rp 15.000</div>
-            <p class="bundle-desc">{$language === 'EN' ? 'Learning credit access sufficient for completing <strong>3 full tryouts</strong> on the SKUI platform.' : 'Akses kredit belajar yang cukup untuk pengerjaan <strong>3 tryout lengkap</strong> di platform SKUI.'}</p>
+            <p class="bundle-desc">{@html $language === 'EN' ? 'Learning credit access sufficient for completing <strong>3 full tryouts</strong> on the SKUI platform.' : 'Akses kredit belajar yang cukup untuk pengerjaan <strong>3 tryout lengkap</strong> di platform SKUI.'}</p>
           </div>
 
           <div class="bundle-box popular">
             <div class="popular-tag">{$language === 'EN' ? 'Most Popular' : 'Paling Populer'}</div>
             <span class="bundle-name">{$language === 'EN' ? 'Standard Pack' : 'Paket Standard'}</span>
             <div class="bundle-price">Rp 30.000</div>
-            <p class="bundle-desc">{$language === 'EN' ? 'Learning credit access sufficient for completing <strong>12 full tryouts</strong> on the SKUI platform.' : 'Akses kredit belajar yang cukup untuk pengerjaan <strong>12 tryout lengkap</strong> di platform SKUI.'}</p>
+            <p class="bundle-desc">{@html $language === 'EN' ? 'Learning credit access sufficient for completing <strong>12 full tryouts</strong> on the SKUI platform.' : 'Akses kredit belajar yang cukup untuk pengerjaan <strong>12 tryout lengkap</strong> di platform SKUI.'}</p>
           </div>
 
           <div class="bundle-box">
             <span class="bundle-name">{$language === 'EN' ? 'Pro Pack' : 'Paket Pro'}</span>
             <div class="bundle-price">Rp 50.000</div>
-            <p class="bundle-desc">{$language === 'EN' ? 'Best-value learning credit access, sufficient for completing <strong>25 full tryouts</strong> on the SKUI platform.' : 'Akses kredit belajar terbaik dan paling hemat, cukup untuk pengerjaan <strong>25 tryout lengkap</strong> di platform SKUI.'}</p>
+            <p class="bundle-desc">{@html $language === 'EN' ? 'Best-value learning credit access, sufficient for completing <strong>25 full tryouts</strong> on the SKUI platform.' : 'Akses kredit belajar terbaik dan paling hemat, cukup untuk pengerjaan <strong>25 tryout lengkap</strong> di platform SKUI.'}</p>
           </div>
         </div>
 
