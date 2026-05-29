@@ -375,18 +375,40 @@
   @media (max-width: 768px) {
     .hero {
       padding: 48px 0 0;
+      min-height: auto;
+    }
+
+    .hero-inner {
+      padding-top: 16px;
+      padding-bottom: 16px;
     }
 
     .hero-heading {
-      font-size: 2rem;
+      font-size: 1.75rem;
+      margin-bottom: 16px;
     }
 
     .hero-bio {
-      font-size: 0.95rem;
+      font-size: 0.9rem;
+      line-height: 1.6;
+      margin-bottom: 20px;
+      display: -webkit-box;
+      -webkit-line-clamp: 4;
+      -webkit-box-orient: vertical;
+      overflow: hidden;
+    }
+
+    .social-links {
+      gap: 8px;
+      margin-bottom: 24px;
     }
 
     .ideas-realized {
-      padding: 48px 0 40px;
+      padding: 32px 0 28px;
+    }
+
+    .scroll-indicator {
+      padding: 12px 0 20px;
     }
   }
 </style>

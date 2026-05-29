@@ -267,6 +267,16 @@ a:hover {
   }
 }
 
+@media (max-width: 480px) {
+  .container {
+    padding: 0 12px;
+  }
+
+  .section {
+    padding: 24px 0;
+  }
+}
+
 /* --- Reduced Motion Accessibility --- */
 @media (prefers-reduced-motion: reduce) {
   *,

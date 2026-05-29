@@ -582,21 +582,27 @@
     }
     
     .terminal-preview {
-      min-height: 200px;
+      min-height: 160px;
     }
     
     .project-info-side {
-      padding: 24px;
+      padding: 16px;
       min-width: 0;
       overflow: hidden;
     }
 
     .project-name {
       word-break: break-word;
+      font-size: 1.25rem;
     }
 
     .project-long-desc {
       word-break: break-word;
+      font-size: 0.9rem;
+      -webkit-line-clamp: 3;
+      display: -webkit-box;
+      -webkit-box-orient: vertical;
+      overflow: hidden;
     }
 
     .project-actions {

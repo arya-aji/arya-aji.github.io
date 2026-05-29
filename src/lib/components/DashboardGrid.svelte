@@ -744,6 +744,15 @@
   @media (max-width: 768px) {
     .dashboard-grid {
       grid-template-columns: 1fr;
+      gap: 12px;
+    }
+    .dash-card {
+      min-height: auto;
+      padding: 16px;
+    }
+    .map-container {
+      height: 160px;
+      flex: none;
     }
     .latest-link-inner {
       flex-direction: column;
