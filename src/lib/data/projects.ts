@@ -37,9 +37,34 @@ export interface Project {
   image?: string;
   banner?: string;
   gif?: string;
+  category: "extension" | "fullstack" | "dashboard" | "automation";
 }
 
 export const allProjects: Project[] = [
+  {
+    slug: "minitube-pip",
+    title: "MiniTube PiP",
+    name: "minitube-pip",
+    org: "arya-aji",
+    date: "2026-06-05",
+    dateDisplay: "Jun 2026",
+    description:
+      "A browser extension that enables YouTube and other video platforms to launch in Picture-in-Picture mode with a single click.",
+    longDesc:
+      "MiniTube PiP is a lightweight browser extension that forces video elements into Picture-in-Picture mode, enabling users to watch videos while multitasking. It bypasses custom player blocks and integrates seamlessly with popular video sites.",
+    idea: "One-click Picture-in-Picture mode for YouTube and other video elements.",
+    problem:
+      "Users want to browse other sites or work while watching YouTube videos, but the native Picture-in-Picture option is often buried in submenus or blocked by custom players.",
+    solution:
+      "Built a browser extension that programmatically requests Picture-in-Picture for video players with a simple toolbar trigger or hotkey.",
+    goal: "To provide a seamless, hassle-free Picture-in-Picture multitasking experience across all video platforms.",
+    tags: ["javascript", "extension", "productivity", "video", "web"],
+    github: "https://github.com/arya-aji/minitube-pip",
+    live: "https://extension.aryaaji.com/minitube",
+    featured: true,
+    visible: true,
+    category: "extension",
+  },
   {
     slug: "skui",
     title: "Siap Kuliah UI (SKUI)",
@@ -64,6 +89,7 @@ export const allProjects: Project[] = [
     gif: "/assets/simakui.webp",
     featured: true,
     visible: true,
+    category: "fullstack",
   },
   {
     slug: "geomon",
@@ -85,6 +111,8 @@ export const allProjects: Project[] = [
     tags: ["python", "fastapi", "svelte", "geospasial", "bps", "dashboard"],
     live: "https://geomon.vercel.app",
     featured: false,
+    visible: true,
+    category: "dashboard",
   },
   {
     slug: "sbr-dashboard",
@@ -106,6 +134,8 @@ export const allProjects: Project[] = [
     tags: ["python", "javascript", "data-viz", "dashboard", "analytics", "automation"],
     live: "https://sbr-dashboard.vercel.app",
     featured: false,
+    visible: true,
+    category: "dashboard",
   },
   {
     slug: "blur-your-whatsapp",
@@ -132,6 +162,7 @@ export const allProjects: Project[] = [
     gif: "/assets/banner-blur-my-whatsapp.png",
     featured: false,
     visible: true,
+    category: "extension",
   },
   {
     slug: "automation-scripts",
@@ -153,6 +184,8 @@ export const allProjects: Project[] = [
     tags: ["python", "automation", "scripting", "analytics"],
     github: "https://github.com/arya-aji/automation",
     featured: false,
+    visible: true,
+    category: "automation",
   },
 ].map((project) => ({
   ...project,

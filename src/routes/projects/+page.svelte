@@ -14,9 +14,23 @@
   let currentPage = $state(1);
   const itemsPerPage = PAGINATION.projects;
   let caseStudyProject: Project | null = $state(null);
+
+  let selectedCategory = $state<"all" | "extension" | "fullstack" | "dashboard" | "automation">("all");
+
+  let filteredProjects = $derived(
+    selectedCategory === "all"
+      ? projects
+      : projects.filter(p => p.category === selectedCategory)
+  );
   
-  let totalPages = $derived(Math.ceil(projects.length / itemsPerPage));
-  let paginatedGridProjects = $derived(projects.slice((currentPage - 1) * itemsPerPage, currentPage * itemsPerPage));
+  let totalPages = $derived(Math.ceil(filteredProjects.length / itemsPerPage));
+  let paginatedGridProjects = $derived(filteredProjects.slice((currentPage - 1) * itemsPerPage, currentPage * itemsPerPage));
+
+  $effect(() => {
+    if (selectedCategory) {
+      currentPage = 1;
+    }
+  });
 
   let mouseX = $state(0);
   let mouseY = $state(0);
@@ -169,7 +183,38 @@
 
     <!-- Grid List for All Projects -->
     {#if projects.length > 0}
-      <h2 class="grid-section-title">{$language === 'EN' ? 'All Projects' : 'Semua Proyek'}</h2>
+      <div class="projects-filter-bar">
+        <h2 class="grid-section-title">
+          {#if selectedCategory === 'all'}
+            {$language === 'EN' ? 'All Projects' : 'Semua Proyek'}
+          {:else if selectedCategory === 'extension'}
+            {$language === 'EN' ? 'Browser Extensions' : 'Ekstensi Browser'}
+          {:else if selectedCategory === 'fullstack'}
+            {$language === 'EN' ? 'Fullstack Apps' : 'Aplikasi Fullstack'}
+          {:else if selectedCategory === 'dashboard'}
+            {$language === 'EN' ? 'Dashboards' : 'Dashboard'}
+          {:else if selectedCategory === 'automation'}
+            {$language === 'EN' ? 'Automation' : 'Automasi'}
+          {/if}
+        </h2>
+        <div class="filter-tabs">
+          <button class="filter-tab-btn" class:active={selectedCategory === 'all'} onclick={() => selectedCategory = 'all'}>
+            {$language === 'EN' ? 'All' : 'Semua'}
+          </button>
+          <button class="filter-tab-btn" class:active={selectedCategory === 'extension'} onclick={() => selectedCategory = 'extension'}>
+            {$language === 'EN' ? 'Extensions' : 'Ekstensi'}
+          </button>
+          <button class="filter-tab-btn" class:active={selectedCategory === 'fullstack'} onclick={() => selectedCategory = 'fullstack'}>
+            Fullstack
+          </button>
+          <button class="filter-tab-btn" class:active={selectedCategory === 'dashboard'} onclick={() => selectedCategory = 'dashboard'}>
+            Dashboard
+          </button>
+          <button class="filter-tab-btn" class:active={selectedCategory === 'automation'} onclick={() => selectedCategory = 'automation'}>
+            {$language === 'EN' ? 'Automation' : 'Automasi'}
+          </button>
+        </div>
+      </div>
       <div class="projects-grid">
         {#each paginatedGridProjects as project}
           <!-- svelte-ignore a11y_no_static_element_interactions -->
@@ -987,6 +1032,63 @@
       width: 32px;
       height: 32px;
       font-size: 0.8rem;
+    }
+  }
+
+  /* --- Filter Bar & Tabs --- */
+  .projects-filter-bar {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 24px;
+    padding-top: 24px;
+    border-top: 1px solid var(--ctp-surface0);
+    flex-wrap: wrap;
+    gap: 16px;
+  }
+
+  .projects-filter-bar .grid-section-title {
+    margin-bottom: 0;
+    padding-top: 0;
+    border-top: none;
+  }
+
+  .filter-tabs {
+    display: flex;
+    gap: 8px;
+    flex-wrap: wrap;
+  }
+
+  .filter-tab-btn {
+    padding: 8px 16px;
+    border-radius: 8px;
+    background: var(--ctp-surface0);
+    border: 1px solid var(--ctp-surface1);
+    color: var(--ctp-text);
+    font-weight: 600;
+    font-size: 0.85rem;
+    cursor: pointer;
+    transition: all 0.2s ease;
+    font-family: 'Montserrat', sans-serif;
+  }
+
+  .filter-tab-btn:hover {
+    border-color: var(--accent);
+    color: var(--accent);
+    background: color-mix(in srgb, var(--accent) 5%, var(--ctp-surface0));
+  }
+
+  .filter-tab-btn.active {
+    background: var(--accent);
+    color: var(--ctp-crust);
+    border-color: var(--accent);
+  }
+
+  @media (max-width: 768px) {
+    .projects-filter-bar {
+      flex-direction: column;
+      align-items: flex-start;
+      gap: 12px;
     }
   }
 </style>

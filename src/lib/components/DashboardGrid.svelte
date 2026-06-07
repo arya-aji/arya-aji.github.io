@@ -180,47 +180,6 @@
         </a>
       </div>
 
-      <!-- Extension Hub Card -->
-      <div class="card dash-card extension-card">
-        <div class="card-header">
-          <Puzzle size={16} />
-          <span class="card-title">{externalLinks.extensions.label}</span>
-        </div>
-
-        <p class="extension-text">
-          Browser-extension products now live under a dedicated subdomain.
-        </p>
-
-        <div class="service-map">
-          {#each serviceMap as service, i}
-            <a
-              href={service.url}
-              target="_blank"
-              rel="noopener noreferrer"
-              class="service-node"
-              class:active-node={service.domain === externalLinks.extensions.domain}
-              title={service.description}
-            >
-              <span class="service-label">{service.label}</span>
-              <span class="service-domain">{service.domain}</span>
-            </a>
-            {#if i < serviceMap.length - 1}
-              <span class="service-arrow">-&gt;</span>
-            {/if}
-          {/each}
-        </div>
-
-        <a
-          href={externalLinks.extensions.url}
-          target="_blank"
-          rel="noopener noreferrer"
-          class="btn btn-accent extension-btn"
-        >
-          <Puzzle size={16} />
-          Open Extension Hub
-        </a>
-      </div>
-
       <!-- Location Card -->
       <div class="card dash-card location-card">
         <div class="card-header">
