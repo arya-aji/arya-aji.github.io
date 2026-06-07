@@ -3,10 +3,10 @@
 
   import type { Project } from '$lib/data/projects';
 
-  import { projects as allProjects, tagColors } from '$lib/data/projects';
+  import { tagColors } from '$lib/data/projects';
   import CaseStudyModal from '$lib/components/CaseStudyModal.svelte';
 
-  const projects = allProjects.filter(p => p.featured);
+  let { projects = [] }: { projects: Project[] } = $props();
 
   let mouseX = $state(0);
   let mouseY = $state(0);

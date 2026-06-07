@@ -194,4 +194,29 @@ export const allProjects: Project[] = [
 
 export const projects = allProjects.filter(p => p.visible === true);
 
+export async function fetchProjects(fetchFn?: typeof fetch): Promise<Project[]> {
+  const f = fetchFn || fetch;
+  const apiKey = "e40a02c0d8d21c3b8839efcbdecd839ef42c";
+  const url = "https://data.aryaaji.com/api/projects";
+  try {
+    const res = await f(url, {
+      headers: {
+        "x-api-key": apiKey
+      }
+    });
+    if (!res.ok) throw new Error(`API returned status ${res.status}`);
+    const data = await res.json();
+    return data.map((p: any) => ({
+      ...p,
+      image: p.thumbnailUrl || "/placeholder.jpg",
+      live: p.demoUrl || undefined,
+      github: p.githubUrl || undefined,
+      visible: true
+    }));
+  } catch (err) {
+    console.error("Error fetching projects from API, falling back to static projects list:", err);
+    return projects;
+  }
+}
+
 export { tagColors } from "$lib/data/colors";

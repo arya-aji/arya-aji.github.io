@@ -23,15 +23,17 @@
   } from "lucide-svelte";
   import { onMount } from "svelte";
   import type L from "leaflet";
-  import { projects, tagColors } from "$lib/data/projects";
+  import type { Project } from "$lib/data/projects";
+  import { tagColors } from "$lib/data/projects";
   import { externalLinks, serviceMap } from "$lib/data/externalLinks";
 
+  let { projects = [] }: { projects: Project[] } = $props();
 
-  const latestProjects = [...projects].sort(
-    (a, b) => new Date(b.date).getTime() - new Date(a.date).getTime()
+  let latestProjects = $derived(
+    [...projects].sort(
+      (a, b) => new Date(b.date).getTime() - new Date(a.date).getTime()
+    )
   );
-
-
 
   let localTime = $state("");
 

@@ -1,13 +1,15 @@
 import { error } from '@sveltejs/kit';
-import { projects } from '$lib/data/projects';
+import { fetchProjects } from '$lib/data/projects';
 import type { PageLoad, EntryGenerator } from './$types';
 
-export const entries: EntryGenerator = () => {
-  return projects.map(p => ({ slug: p.slug }));
+export const entries: EntryGenerator = async () => {
+  const projectsList = await fetchProjects();
+  return projectsList.map(p => ({ slug: p.slug }));
 };
 
-export const load: PageLoad = ({ params }) => {
-  const project = projects.find(p => p.slug === params.slug);
+export const load: PageLoad = async ({ params, fetch }) => {
+  const projectsList = await fetchProjects(fetch);
+  const project = projectsList.find(p => p.slug === params.slug);
 
   if (!project) {
     throw error(404, 'Project not found');

@@ -3,12 +3,15 @@
   import Footer from '$lib/components/Footer.svelte';
   import CaseStudyModal from '$lib/components/CaseStudyModal.svelte';
   import { Star, Tag, ExternalLink, ChevronLeft, ChevronRight } from 'lucide-svelte';
-  import { projects, tagColors } from '$lib/data/projects';
+  import { tagColors } from '$lib/data/projects';
   import type { Project } from '$lib/data/projects';
   import { PAGINATION } from '$lib/config';
   import { language } from '$lib/stores/language';
 
-  const sliderProjects = projects.slice(0, 10);
+  let { data } = $props<{ data: { projects: Project[] } }>();
+  let projects = $derived(data.projects);
+
+  let sliderProjects = $derived(projects.slice(0, 10));
 
   let currentIndex = $state(0);
   let currentPage = $state(1);
@@ -20,7 +23,7 @@
   let filteredProjects = $derived(
     selectedCategory === "all"
       ? projects
-      : projects.filter(p => p.category === selectedCategory)
+      : projects.filter((p: Project) => p.category === selectedCategory)
   );
   
   let totalPages = $derived(Math.ceil(filteredProjects.length / itemsPerPage));

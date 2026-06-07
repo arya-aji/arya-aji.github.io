@@ -6,6 +6,10 @@
   import Footer from '$lib/components/Footer.svelte';
   import { blackHoleEffect } from '$lib/stores/theme';
   import { onMount } from 'svelte';
+  import type { Project } from '$lib/data/projects';
+
+  let { data } = $props<{ data: { projects: Project[] } }>();
+  let featuredProjects = $derived(data.projects.filter((p: Project) => p.featured));
 
   let mounted = $state(false);
 
@@ -205,8 +209,8 @@
 
 <main>
   <Hero />
-  <FeaturedProjects />
-  <DashboardGrid />
+  <FeaturedProjects projects={featuredProjects} />
+  <DashboardGrid projects={data.projects} />
 </main>
 
 <Footer />
