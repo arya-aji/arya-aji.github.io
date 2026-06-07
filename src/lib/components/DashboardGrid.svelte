@@ -306,9 +306,14 @@
               class="latest-link"
             >
               <div class="latest-link-inner">
-                <div class="latest-main">
-                  <h3 class="latest-name">{project.title}</h3>
-                  <p class="latest-desc">{project.description}</p>
+                <div class="latest-main" style="display: flex; align-items: flex-start; gap: 8px;">
+                  {#if project.logo}
+                    <img src={project.logo} alt="" style="width: 24px; height: 24px; border-radius: 4px; object-fit: cover; border: 1px solid var(--ctp-surface1); flex-shrink: 0; margin-top: 2px;" />
+                  {/if}
+                  <div>
+                    <h3 class="latest-name" style="margin: 0 0 4px 0;">{project.title}</h3>
+                    <p class="latest-desc">{project.description}</p>
+                  </div>
                 </div>
                 <div class="latest-footer">
                   <span class="latest-date">{project.dateDisplay}</span>

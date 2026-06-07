@@ -35,6 +35,7 @@ export interface Project {
   featured?: boolean;
   visible?: boolean;
   image?: string;
+  logo?: string;
   banner?: string;
   gif?: string;
   category: "extension" | "fullstack" | "dashboard" | "automation";
@@ -58,7 +59,8 @@ export async function fetchProjects(fetchFn?: typeof fetch): Promise<Project[]> 
     const data = await res.json();
     return data.map((p: any) => ({
       ...p,
-      image: p.thumbnailUrl || "/placeholder.jpg",
+      image: p.banner || p.gif || p.thumbnailUrl || "/placeholder.jpg",
+      logo: p.thumbnailUrl || "",
       live: p.demoUrl || undefined,
       github: p.githubUrl || undefined,
       visible: true

@@ -139,8 +139,11 @@
                 <!-- Right side: Information and Actions -->
                 <div class="project-info-side">
                   <div class="project-info-content">
-                    <div class="title-row">
-                      <h3 class="highlight-name">{highlight.title}</h3>
+                    <div class="title-row" style="display: flex; align-items: center; gap: 12px; margin-bottom: 8px;">
+                      {#if highlight.logo}
+                        <img src={highlight.logo} alt="" style="width: 38px; height: 38px; border-radius: 8px; object-fit: cover; border: 1px solid var(--ctp-surface1); flex-shrink: 0;" />
+                      {/if}
+                      <h3 class="highlight-name" style="margin: 0;">{highlight.title}</h3>
                       {#if highlight.stars}
                         <span class="stars">
                           <Star size={16} fill="currentColor" />
@@ -224,8 +227,11 @@
             onmouseleave={handleMouseLeave}
           >
             <div class="card-header">
-              <div class="card-title-row">
-                <h2 class="grid-project-name">{project.title}</h2>
+              <div class="card-title-row" style="display: flex; align-items: center; gap: 10px; margin-bottom: 6px;">
+                {#if project.logo}
+                  <img src={project.logo} alt="" style="width: 30px; height: 30px; border-radius: 6px; object-fit: cover; border: 1px solid var(--ctp-surface1); flex-shrink: 0;" />
+                {/if}
+                <h2 class="grid-project-name" style="margin: 0;">{project.title}</h2>
                 {#if project.stars}
                   <span class="grid-stars">
                     <Star size={12} fill="currentColor" />
