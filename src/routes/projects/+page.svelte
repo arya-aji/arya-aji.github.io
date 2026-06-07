@@ -204,10 +204,26 @@
                 {/if}
               </div>
               <div class="card-actions">
+                <a href="/projects/{project.slug}" class="grid-case-btn" title="View Details">
+                  <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M2 3h6a4 4 0 0 1 4 4v14a3 3 0 0 0-3-3H2z"/><path d="M22 3h-6a4 4 0 0 0-4 4v14a3 3 0 0 1 3-3h7z"/></svg>
+                  {$language === 'EN' ? 'Details' : 'Detail'}
+                </a>
                 <button class="grid-case-btn" onclick={() => caseStudyProject = project} title="View Case Study">
                   <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M2 3h6a4 4 0 0 1 4 4v14a3 3 0 0 0-3-3H2z"/><path d="M22 3h-6a4 4 0 0 0-4 4v14a3 3 0 0 1 3-3h7z"/></svg>
                   {$language === 'EN' ? 'Case Study' : 'Studi Kasus'}
                 </button>
+                {#if project.live}
+                  <a
+                    href={project.live}
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    class="grid-ext-link"
+                    title="Open live site"
+                    aria-label="Open {project.title}"
+                  >
+                    <ExternalLink size={16} />
+                  </a>
+                {/if}
               </div>
             </div>
           </div>
@@ -739,6 +755,7 @@
     font-family: inherit;
     transition: all 0.15s;
     white-space: nowrap;
+    text-decoration: none;
   }
 
   .grid-case-btn:hover {

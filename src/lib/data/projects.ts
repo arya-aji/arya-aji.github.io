@@ -1,3 +1,5 @@
+import { externalLinks } from "$lib/data/externalLinks";
+
 export interface Challenge {
   title: string;
   how: string;
@@ -122,8 +124,12 @@ export const allProjects: Project[] = [
     solution:
       "Built a minimal browser extension using vanilla JavaScript and CSS injection that selectively blurs WhatsApp Web UI elements with a toggle — no permissions beyond activeTab required.",
     goal: "To provide a frictionless, install-and-forget privacy tool for WhatsApp Web users who frequently share their screens.",
-    tags: ["javascript", "scripting", "productivity", "web"],
+    tags: ["javascript", "extension", "privacy", "productivity", "web"],
     github: "https://github.com/arya-aji/blur-your-whatsapp",
+    live: externalLinks.extensions.url,
+    image: "/assets/blur-my-whatsapp.png",
+    banner: "/assets/banner-blur-my-whatsapp.png",
+    gif: "/assets/banner-blur-my-whatsapp.png",
     featured: false,
     visible: true,
   },

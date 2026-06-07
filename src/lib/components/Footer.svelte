@@ -1,6 +1,7 @@
 <script lang="ts">
   import { onMount } from 'svelte';
   import { formatLocalTime } from '$lib/utils/time';
+  import { externalLinks } from '$lib/data/externalLinks';
 
   let localTime = $state('00:00:00');
 
@@ -27,6 +28,7 @@
           <a href="/terms" class="footer-link">Terms</a>
           <a href="/privacy" class="footer-link">Privacy</a>
           <a href="/refund" class="footer-link">Refund</a>
+          <a href={externalLinks.extensions.url} target="_blank" rel="noopener noreferrer" class="footer-link">Extensions</a>
         </div>
       </div>
 

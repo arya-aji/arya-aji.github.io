@@ -15,6 +15,7 @@
   } from "$lib/stores/theme";
   import type { ThemeFlavor, AccentColor } from "$lib/stores/theme";
   import { language } from "$lib/stores/language";
+  import { externalLinks } from "$lib/data/externalLinks";
 
   let navPanelOpen = $state(false);
 
@@ -26,6 +27,7 @@
   ]);
 
   let moreLinks = $derived([
+    { href: externalLinks.extensions.url, label: $language === "EN" ? "Extension Hub" : "Hub Ekstensi", external: true, wip: false },
     { href: "/resume", label: $language === "EN" ? "Resume" : "Resume", external: false, wip: true },
   ]);
 
@@ -241,7 +243,12 @@
   <div class="panel-nav">
     <span class="panel-section-label">MORE</span>
     {#each moreLinks as link}
-      <a href={link.href} class="panel-link" onclick={closePanel}
+      <a
+        href={link.href}
+        class="panel-link"
+        target={link.external ? "_blank" : undefined}
+        rel={link.external ? "noopener noreferrer" : undefined}
+        onclick={closePanel}
         >{link.label}</a
       >
     {/each}

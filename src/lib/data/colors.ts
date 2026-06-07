@@ -79,6 +79,8 @@ export const tagColors: Record<string, string> = {
   polling: 'var(--ctp-sky)',
   geocoding: 'var(--ctp-green)',
   productivity: 'var(--ctp-teal)',
+  extension: 'var(--ctp-lavender)',
+  privacy: 'var(--ctp-green)',
   'github-pages': 'var(--ctp-overlay2)',
   portfolio: 'var(--ctp-lavender)',
   catppuccin: 'var(--ctp-mauve)',

@@ -17,13 +17,14 @@
     CalendarDays,
     MapPin,
     Sparkles,
-
+    Puzzle,
     FolderGit2,
     ArrowRight,
   } from "lucide-svelte";
   import { onMount } from "svelte";
   import type L from "leaflet";
   import { projects, tagColors } from "$lib/data/projects";
+  import { externalLinks, serviceMap } from "$lib/data/externalLinks";
 
 
   const latestProjects = [...projects].sort(
@@ -179,6 +180,47 @@
         </a>
       </div>
 
+      <!-- Extension Hub Card -->
+      <div class="card dash-card extension-card">
+        <div class="card-header">
+          <Puzzle size={16} />
+          <span class="card-title">{externalLinks.extensions.label}</span>
+        </div>
+
+        <p class="extension-text">
+          Browser-extension products now live under a dedicated subdomain.
+        </p>
+
+        <div class="service-map">
+          {#each serviceMap as service, i}
+            <a
+              href={service.url}
+              target="_blank"
+              rel="noopener noreferrer"
+              class="service-node"
+              class:active-node={service.domain === externalLinks.extensions.domain}
+              title={service.description}
+            >
+              <span class="service-label">{service.label}</span>
+              <span class="service-domain">{service.domain}</span>
+            </a>
+            {#if i < serviceMap.length - 1}
+              <span class="service-arrow">-&gt;</span>
+            {/if}
+          {/each}
+        </div>
+
+        <a
+          href={externalLinks.extensions.url}
+          target="_blank"
+          rel="noopener noreferrer"
+          class="btn btn-accent extension-btn"
+        >
+          <Puzzle size={16} />
+          Open Extension Hub
+        </a>
+      </div>
+
       <!-- Location Card -->
       <div class="card dash-card location-card">
         <div class="card-header">
@@ -282,12 +324,12 @@
         </div>
       </div>
 
-      <!-- Latest SaaS Card — 4-column grid -->
+      <!-- Latest Builds Card -->
       <div class="card dash-card latest-card span-full">
         <div class="card-header latest-card-header">
           <div class="card-header-left">
             <FolderGit2 size={16} />
-            <span class="card-title">My Latest SaaS</span>
+            <span class="card-title">Latest Builds</span>
           </div>
           <a href="/projects" class="latest-view-all">
             View all <ArrowRight size={13} />
@@ -452,6 +494,83 @@
   }
 
   .connect-btn {
+    text-decoration: none;
+    width: 100%;
+    margin-top: auto;
+  }
+
+  /* --- Extension Hub Card --- */
+  .extension-card {
+    grid-column: span 2;
+  }
+
+  .extension-text {
+    font-size: 0.85rem;
+    color: var(--ctp-subtext0);
+    line-height: 1.5;
+    margin-bottom: 16px;
+  }
+
+  .service-map {
+    display: flex;
+    align-items: stretch;
+    gap: 8px;
+    margin-bottom: 16px;
+    min-width: 0;
+  }
+
+  .service-node {
+    flex: 1;
+    min-width: 0;
+    display: flex;
+    flex-direction: column;
+    gap: 4px;
+    padding: 10px;
+    border-radius: 10px;
+    border: 1px solid var(--ctp-surface1);
+    background: var(--ctp-crust);
+    color: inherit;
+    text-decoration: none;
+    transition: all 0.2s ease;
+  }
+
+  .service-node:hover {
+    border-color: var(--accent);
+    background: color-mix(in srgb, var(--accent) 8%, var(--ctp-crust));
+    opacity: 1;
+  }
+
+  .service-node.active-node {
+    border-color: color-mix(in srgb, var(--accent) 60%, var(--ctp-surface1));
+    background: color-mix(in srgb, var(--accent) 12%, var(--ctp-crust));
+  }
+
+  .service-label {
+    font-size: 0.78rem;
+    font-weight: 700;
+    color: var(--ctp-text);
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+  }
+
+  .service-domain {
+    font-size: 0.68rem;
+    color: var(--ctp-overlay1);
+    font-family: "JetBrains Mono", "Fira Code", monospace;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+  }
+
+  .service-arrow {
+    display: flex;
+    align-items: center;
+    color: var(--ctp-overlay0);
+    font-family: "JetBrains Mono", "Fira Code", monospace;
+  }
+
+  .extension-btn {
     text-decoration: none;
     width: 100%;
     margin-top: auto;
@@ -751,6 +870,10 @@
     .dashboard-grid {
       grid-template-columns: repeat(2, 1fr);
     }
+
+    .extension-card {
+      grid-column: 1 / -1;
+    }
   }
 
   @media (max-width: 768px) {
@@ -775,6 +898,13 @@
       width: 100%;
       flex-wrap: wrap;
       gap: 8px;
+    }
+    .service-map {
+      flex-direction: column;
+    }
+    .service-arrow {
+      justify-content: center;
+      transform: rotate(90deg);
     }
     .accent-grid {
       gap: 6px;
