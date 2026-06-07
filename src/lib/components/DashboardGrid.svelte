@@ -30,9 +30,9 @@
   let { projects = [] }: { projects: Project[] } = $props();
 
   let latestProjects = $derived(
-    [...projects].sort(
-      (a, b) => new Date(b.date).getTime() - new Date(a.date).getTime()
-    )
+    [...projects]
+      .sort((a, b) => new Date(b.date).getTime() - new Date(a.date).getTime())
+      .slice(0, 4)
   );
 
   let localTime = $state("");
