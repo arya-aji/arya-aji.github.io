@@ -300,7 +300,7 @@
         <div class="latest-grid">
           {#each latestProjects as project}
             <a
-              href={project.live || project.github || `/projects/${project.slug}`}
+              href={project.live || project.github || '#'}
               target={project.live || project.github ? '_blank' : undefined}
               rel={project.live || project.github ? 'noopener noreferrer' : undefined}
               class="latest-link"
