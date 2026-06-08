@@ -308,7 +308,7 @@
               <div class="latest-link-inner">
                 <div class="latest-main" style="display: flex; align-items: flex-start; gap: 8px;">
                   {#if project.logo}
-                    <img src={project.logo} alt="" style="width: 24px; height: 24px; border-radius: 4px; object-fit: cover; border: 1px solid var(--ctp-surface1); flex-shrink: 0; margin-top: 2px;" />
+                    <img src={project.logo} alt="" style="width: 24px; height: 24px; border-radius: 4px; object-fit: contain; background: #ffffff; padding: 2px; border: 1px solid var(--ctp-surface1); flex-shrink: 0; margin-top: 2px;" />
                   {/if}
                   <div>
                     <h3 class="latest-name" style="margin: 0 0 4px 0;">{project.title}</h3>

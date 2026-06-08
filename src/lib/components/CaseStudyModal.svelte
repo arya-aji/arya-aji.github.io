@@ -48,7 +48,7 @@
       </div>
       <div class="modal-title-row" style="display: flex; align-items: center; gap: 12px; margin-bottom: 14px;">
         {#if project.logo}
-          <img src={project.logo} alt="" style="width: 36px; height: 36px; border-radius: 8px; object-fit: cover; border: 1px solid var(--ctp-surface1); flex-shrink: 0;" />
+          <img src={project.logo} alt="" style="width: 36px; height: 36px; border-radius: 8px; object-fit: contain; background: #ffffff; padding: 3px; border: 1px solid var(--ctp-surface1); flex-shrink: 0;" />
         {/if}
         <h2 class="modal-title" style="margin: 0;">{project.title}</h2>
       </div>

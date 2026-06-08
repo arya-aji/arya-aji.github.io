@@ -155,7 +155,7 @@
                   <div class="project-info-content">
                     <div class="title-row" style="display: flex; align-items: center; gap: 12px; margin-bottom: 8px;">
                       {#if highlight.logo}
-                        <img src={highlight.logo} alt="" style="width: 38px; height: 38px; border-radius: 8px; object-fit: cover; border: 1px solid var(--ctp-surface1); flex-shrink: 0;" />
+                        <img src={highlight.logo} alt="" style="width: 38px; height: 38px; border-radius: 8px; object-fit: contain; background: #ffffff; padding: 3px; border: 1px solid var(--ctp-surface1); flex-shrink: 0;" />
                       {/if}
                       <h3 class="highlight-name" style="margin: 0;">{highlight.title}</h3>
                       {#if highlight.stars}
@@ -243,7 +243,7 @@
             <div class="card-header">
               <div class="card-title-row" style="display: flex; align-items: center; gap: 10px; margin-bottom: 6px;">
                 {#if project.logo}
-                  <img src={project.logo} alt="" style="width: 30px; height: 30px; border-radius: 6px; object-fit: cover; border: 1px solid var(--ctp-surface1); flex-shrink: 0;" />
+                  <img src={project.logo} alt="" style="width: 30px; height: 30px; border-radius: 6px; object-fit: contain; background: #ffffff; padding: 2px; border: 1px solid var(--ctp-surface1); flex-shrink: 0;" />
                 {/if}
                 <h2 class="grid-project-name" style="margin: 0;">{project.title}</h2>
                 {#if project.stars}
