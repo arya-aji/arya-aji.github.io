@@ -8,8 +8,22 @@
   import { PAGINATION } from '$lib/config';
   import { language } from '$lib/stores/language';
 
+  import { onMount } from 'svelte';
+  import { fetchProjects } from '$lib/data/projects';
+
   let { data } = $props<{ data: { projects: Project[] } }>();
-  let projects = $derived(data.projects);
+  let projects = $state<Project[]>(data.projects);
+
+  onMount(async () => {
+    try {
+      const live = await fetchProjects();
+      if (live && live.length > 0) {
+        projects = live;
+      }
+    } catch (err) {
+      console.error('Failed to fetch live projects:', err);
+    }
+  });
 
   let sliderProjects = $derived(projects.slice(0, 10));
 
