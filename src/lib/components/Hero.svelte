@@ -1,19 +1,6 @@
 <script lang="ts">
   import { ArrowRight } from "lucide-svelte";
-  import { onMount } from "svelte";
   import { language } from "$lib/stores/language";
-
-  let taglineEl: HTMLElement;
-  let taglineVisible = $state(false);
-
-  onMount(() => {
-    const observer = new IntersectionObserver(
-      ([entry]) => { if (entry.isIntersecting) taglineVisible = true; },
-      { threshold: 0.3 }
-    );
-    if (taglineEl) observer.observe(taglineEl);
-    return () => observer.disconnect();
-  });
 </script>
 
 <section class="hero" id="hero">
@@ -125,14 +112,6 @@
   </div>
 </section>
 
-<section class="ideas-realized">
-  <div class="container">
-    <p class="tagline" class:visible={taglineVisible} bind:this={taglineEl}>
-      Ideas, Realized.
-    </p>
-  </div>
-</section>
-
 <style>
   .hero {
     min-height: 100vh;
@@ -164,26 +143,6 @@
   @keyframes bounce {
     0%, 100% { transform: translateY(0); opacity: 0.5; }
     50% { transform: translateY(8px); opacity: 1; }
-  }
-
-  .ideas-realized {
-    padding: 80px 0 60px;
-  }
-
-  .tagline {
-    font-size: clamp(2.5rem, 8vw, 6rem);
-    font-weight: 800;
-    color: var(--ctp-text);
-    letter-spacing: -0.02em;
-    line-height: 1.1;
-    opacity: 0;
-    transform: translateY(40px);
-    transition: opacity 0.8s ease, transform 0.8s ease;
-  }
-
-  .tagline.visible {
-    opacity: 1;
-    transform: translateY(0);
   }
 
   .hero-text-col {
@@ -380,7 +339,7 @@
 
   @media (max-width: 768px) {
     .hero {
-      padding: 48px 0 0;
+      padding: 80px 0 0;
       min-height: auto;
     }
 
@@ -409,9 +368,6 @@
       margin-bottom: 24px;
     }
 
-    .ideas-realized {
-      padding: 32px 0 28px;
-    }
 
     .scroll-indicator {
       padding: 12px 0 20px;

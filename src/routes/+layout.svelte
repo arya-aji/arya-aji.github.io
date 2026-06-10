@@ -325,15 +325,23 @@
   </div>
 {/if}
 
-<Navbar />
+<div class="layout-container">
+  <Navbar />
 
-<div id="main-content" class="app" class:mounted>
-  {@render children()}
+  <div id="main-content" class="app" class:mounted>
+    {@render children()}
+  </div>
+
+  <Footer />
 </div>
 
-<Footer />
-
 <style>
+  .layout-container {
+    display: flex;
+    flex-direction: column;
+    min-height: 100vh;
+  }
+
   .skip-link {
     position: absolute;
     top: -100%;
@@ -356,6 +364,7 @@
     opacity: 0;
     transition: opacity 0.3s ease;
     overflow-x: hidden;
+    flex: 1 0 auto;
   }
   .app.mounted {
     opacity: 1;

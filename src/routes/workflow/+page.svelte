@@ -169,8 +169,6 @@
     <!-- Bottom tagline -->
     <div class="closing">
       <div class="closing-icon">✦</div>
-      <p class="closing-text">Ideas, Realized.</p>
-      <p class="closing-sub">Repeat.</p>
     </div>
 
   </div>

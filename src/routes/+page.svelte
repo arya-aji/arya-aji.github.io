@@ -1,7 +1,6 @@
 <script lang="ts">
   import Hero from '$lib/components/Hero.svelte';
   import FeaturedProjects from '$lib/components/FeaturedProjects.svelte';
-  import DashboardGrid from '$lib/components/DashboardGrid.svelte';
   import type { Project } from '$lib/data/projects';
 
   let { data } = $props<{ data: { projects: Project[] } }>();
@@ -16,7 +15,6 @@
 <main>
   <Hero />
   <FeaturedProjects projects={featuredProjects} />
-  <DashboardGrid projects={data.projects} />
 </main>
 
 <style>
