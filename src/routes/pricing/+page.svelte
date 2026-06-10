@@ -258,59 +258,69 @@
     </div>
   </section>
 
-  <!-- Dedicated SaaS & Retail Section (Separated from Premium Agency Services) -->
+  <!-- Dedicated SaaS Showcase Section (Separated from Premium Agency Services) -->
   <section class="section saas-section" id="saas-pricing">
     <div class="container">
       <div class="saas-header">
-        <span class="section-kicker">{$language === 'EN' ? 'Self-Serve SaaS Products' : 'Produk SaaS Mandiri'}</span>
-        <h2>{$language === 'EN' ? 'My SaaS Products & Retail Packages' : 'Produk SaaS & Paket Retail Saya'}</h2>
+        <span class="section-kicker">{$language === 'EN' ? 'Showcase Product & SaaS' : 'Showcase Produk & SaaS'}</span>
+        <h2>{$language === 'EN' ? 'Siap Kuliah UI (SKUI) — Exam Simulator' : 'Siap Kuliah UI (SKUI) — Simulator Ujian'}</h2>
         <p class="saas-intro">
           {$language === 'EN'
-            ? 'Review digital credit bundles and starter plans for active web applications built and operated by me. Transactions are fully processed via secure local payment gateways.'
-            : 'Tinjau paket kredit digital dan paket starter untuk aplikasi web aktif yang dibangun dan dioperasikan oleh saya. Transaksi sepenuhnya diproses melalui gateway pembayaran lokal yang aman.'}
+            ? 'A premium, mobile-first preparation platform built to simulate graduate and undergraduate entrance exams. It represents a fully integrated product with dynamic testing mechanics and automated billing.'
+            : 'Platform persiapan mobile-first premium yang dibangun untuk mensimulasikan ujian masuk pascasarjana dan sarjana. Ini mewakili produk yang terintegrasi penuh dengan mekanisme pengujian dinamis dan penagihan otomatis.'}
         </p>
       </div>
 
       <div class="saas-card-wrapper">
-        <div class="saas-card-header">
-          <div class="saas-badge">{$language === 'EN' ? 'Active Product' : 'Produk Aktif'}</div>
-          <h3>Siap Kuliah UI (SKUI) — Exam Simulator</h3>
-          <p class="saas-desc">
-            {$language === 'EN'
-              ? 'A premium, mobile-first preparation platform for graduate (Pascasarjana) and undergraduate entry exams with dynamic timer simulators, answer analyses, and automatic question seeding.'
-              : 'Platform persiapan mobile-first premium untuk ujian masuk pascasarjana dan sarjana dengan simulator timer dinamis, analisis jawaban, dan seeding soal otomatis.'}
-          </p>
-        </div>
+        <div class="saas-showcase-grid">
+          <div class="saas-details-col">
+            <div class="saas-badge">{$language === 'EN' ? 'Self-Built SaaS Case' : 'Studi Kasus SaaS Mandiri'}</div>
+            <h3>{$language === 'EN' ? 'Production Architecture' : 'Arsitektur Produksi'}</h3>
+            <p class="saas-long-desc">
+              {$language === 'EN'
+                ? 'SKUI is designed to solve real-world exam prep problems for over thousands of active users. It features an automated payment gateway, robust question seeding engines, and analytics dashboards.'
+                : 'SKUI dirancang untuk memecahkan masalah persiapan ujian dunia nyata bagi ribuan pengguna aktif. Ini memiliki fitur gateway pembayaran otomatis, mesin seeding pertanyaan yang kuat, dan dashboard analitik.'}
+            </p>
+            
+            <div class="saas-tech-stack">
+              <span class="tech-tag">Next.js</span>
+              <span class="tech-tag">FastAPI</span>
+              <span class="tech-tag">PostgreSQL</span>
+              <span class="tech-tag">Midtrans API</span>
+              <span class="tech-tag">TailwindCSS</span>
+            </div>
 
-        <div class="saas-bundle-grid">
-          <div class="bundle-box">
-            <span class="bundle-name">{$language === 'EN' ? 'Starter Pack' : 'Paket Starter'}</span>
-            <div class="bundle-price">Rp 15.000</div>
-            <p class="bundle-desc">{@html $language === 'EN' ? 'Learning credit access sufficient for completing <strong>3 full tryouts</strong> on the SKUI platform.' : 'Akses kredit belajar yang cukup untuk pengerjaan <strong>3 tryout lengkap</strong> di platform SKUI.'}</p>
+            <ul class="saas-features-bullets">
+              <li>
+                <CheckCircle2 size={16} class="feature-icon" />
+                <span>{$language === 'EN' ? 'Dynamic timer simulators with strict time tracking' : 'Simulator timer dinamis dengan pelacakan waktu yang ketat'}</span>
+              </li>
+              <li>
+                <CheckCircle2 size={16} class="feature-icon" />
+                <span>{$language === 'EN' ? 'Automated digital voucher delivery & coupon engines' : 'Pengiriman voucher digital otomatis & mesin kupon'}</span>
+              </li>
+              <li>
+                <CheckCircle2 size={16} class="feature-icon" />
+                <span>{$language === 'EN' ? 'Real-time performance analytics for study tracking' : 'Analisis performa real-time untuk pelacakan belajar'}</span>
+              </li>
+            </ul>
           </div>
 
-          <div class="bundle-box popular">
-            <div class="popular-tag">{$language === 'EN' ? 'Most Popular' : 'Paling Populer'}</div>
-            <span class="bundle-name">{$language === 'EN' ? 'Standard Pack' : 'Paket Standard'}</span>
-            <div class="bundle-price">Rp 30.000</div>
-            <p class="bundle-desc">{@html $language === 'EN' ? 'Learning credit access sufficient for completing <strong>12 full tryouts</strong> on the SKUI platform.' : 'Akses kredit belajar yang cukup untuk pengerjaan <strong>12 tryout lengkap</strong> di platform SKUI.'}</p>
-          </div>
+          <div class="saas-action-col">
+            <div class="saas-cta-panel">
+              <h4>{$language === 'EN' ? 'Explore the Product' : 'Eksplorasi Produk'}</h4>
+              <p>{$language === 'EN' ? 'Visit tryout.aryaaji.com directly to see how I scale SaaS databases, build secure payment pipelines, and manage active web systems.' : 'Kunjungi langsung tryout.aryaaji.com untuk melihat bagaimana saya menskalakan database SaaS, membangun pipa pembayaran yang aman, dan mengelola sistem web aktif.'}</p>
+              
+              <a href="https://tryout.aryaaji.com" target="_blank" rel="noopener noreferrer" class="btn primary saas-cta-btn">
+                {$language === 'EN' ? 'Visit SKUI App' : 'Kunjungi Aplikasi SKUI'}
+              </a>
 
-          <div class="bundle-box">
-            <span class="bundle-name">{$language === 'EN' ? 'Pro Pack' : 'Paket Pro'}</span>
-            <div class="bundle-price">Rp 50.000</div>
-            <p class="bundle-desc">{@html $language === 'EN' ? 'Best-value learning credit access, sufficient for completing <strong>25 full tryouts</strong> on the SKUI platform.' : 'Akses kredit belajar terbaik dan paling hemat, cukup untuk pengerjaan <strong>25 tryout lengkap</strong> di platform SKUI.'}</p>
+              <div class="saas-trust-badges">
+                <span class="trust-badge">🛡️ {$language === 'EN' ? 'Secured by Midtrans' : 'Diamankan oleh Midtrans'}</span>
+                <span class="trust-badge">⚡ {$language === 'EN' ? 'Instant Seeding' : 'Penyediaan Instan'}</span>
+              </div>
+            </div>
           </div>
-        </div>
-
-        <div class="saas-card-footer">
-          <div class="saas-trust-badges">
-            <span class="trust-badge">🛡️ {$language === 'EN' ? 'Secured by Midtrans' : 'Diamankan oleh Midtrans'}</span>
-            <span class="trust-badge">⚡ {$language === 'EN' ? 'Instant Digital Delivery' : 'Pengiriman Digital Instan'}</span>
-          </div>
-          <a href="https://tryout.aryaaji.com" target="_blank" rel="noopener noreferrer" class="btn primary saas-cta-btn">
-            {$language === 'EN' ? 'Buy Credits on SKUI App' : 'Beli Kredit di Aplikasi SKUI'}
-          </a>
         </div>
       </div>
     </div>
@@ -799,14 +809,22 @@
     box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
   }
 
-  .saas-card-header {
-    margin-bottom: 32px;
-    border-bottom: 1px solid var(--ctp-surface0);
-    padding-bottom: 24px;
+  .saas-showcase-grid {
+    display: grid;
+    grid-template-columns: 1.2fr 1fr;
+    gap: 40px;
+    align-items: start;
+  }
+
+  .saas-details-col {
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
   }
 
   .saas-badge {
     display: inline-flex;
+    align-self: flex-start;
     padding: 4px 12px;
     font-size: 0.7rem;
     font-weight: 700;
@@ -816,106 +834,100 @@
     background: color-mix(in srgb, var(--accent) 12%, transparent);
     border: 1px solid color-mix(in srgb, var(--accent) 25%, transparent);
     border-radius: 999px;
-    margin-bottom: 12px;
     font-family: "JetBrains Mono", monospace;
   }
 
-  .saas-card-header h3 {
-    font-size: 1.5rem;
+  .saas-details-col h3 {
+    font-size: 1.6rem;
     color: var(--ctp-text);
     font-weight: 800;
-    margin-bottom: 10px;
   }
 
-  .saas-desc {
-    color: var(--ctp-subtext0);
+  .saas-long-desc {
+    color: var(--ctp-subtext1);
     font-size: 0.95rem;
-    line-height: 1.6;
-    max-width: 820px;
+    line-height: 1.7;
   }
 
-  .saas-bundle-grid {
-    display: grid;
-    grid-template-columns: repeat(3, 1fr);
-    gap: 20px;
-    margin-bottom: 36px;
+  .saas-tech-stack {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 8px;
   }
 
-  .bundle-box {
-    background: var(--ctp-mantle);
-    border: 1px solid var(--ctp-surface0);
-    border-radius: 14px;
-    padding: 24px;
+  .tech-tag {
+    font-family: "JetBrains Mono", monospace;
+    font-size: 0.72rem;
+    font-weight: 600;
+    padding: 3px 10px;
+    border-radius: 6px;
+    background: color-mix(in srgb, var(--accent) 8%, var(--ctp-crust));
+    color: var(--accent);
+    border: 1px solid color-mix(in srgb, var(--accent) 20%, transparent);
+  }
+
+  .saas-features-bullets {
+    list-style: none;
+    padding: 0;
+    margin: 0;
     display: flex;
     flex-direction: column;
-    align-items: center;
-    text-align: center;
-    position: relative;
-    transition: all 0.25s ease;
+    gap: 12px;
   }
 
-  .bundle-box:hover {
-    border-color: var(--accent);
-    transform: translateY(-2px);
+  .saas-features-bullets li {
+    display: flex;
+    align-items: flex-start;
+    gap: 10px;
   }
 
-  .bundle-box.popular {
-    border-color: color-mix(in srgb, var(--accent) 45%, var(--ctp-surface1));
-    background: color-mix(in srgb, var(--accent) 3%, var(--ctp-base));
-  }
-
-  .popular-tag {
-    position: absolute;
-    top: -12px;
-    background: var(--accent);
-    color: var(--ctp-base);
-    font-size: 0.7rem;
-    font-weight: 700;
-    text-transform: uppercase;
-    letter-spacing: 0.03em;
-    padding: 3px 10px;
-    border-radius: 999px;
-  }
-
-  .bundle-name {
-    font-size: 0.88rem;
-    font-weight: 700;
-    color: var(--ctp-subtext1);
-    text-transform: uppercase;
-    letter-spacing: 0.05em;
-    margin-bottom: 12px;
-    font-family: "JetBrains Mono", monospace;
-  }
-
-  .bundle-price {
-    font-size: 1.8rem;
-    font-weight: 800;
-    color: var(--accent);
-    margin-bottom: 12px;
-  }
-
-  .bundle-desc {
+  .saas-features-bullets li span {
     color: var(--ctp-subtext0);
-    font-size: 0.85rem;
+    font-size: 0.9rem;
     line-height: 1.5;
   }
 
-  .saas-card-footer {
+  .saas-action-col {
     display: flex;
-    align-items: center;
-    justify-content: space-between;
-    gap: 24px;
-    border-top: 1px solid var(--ctp-surface0);
-    padding-top: 24px;
+    flex-direction: column;
+  }
+
+  .saas-cta-panel {
+    background: var(--ctp-mantle);
+    border: 1px solid var(--ctp-surface0);
+    border-radius: 16px;
+    padding: 32px;
+    display: flex;
+    flex-direction: column;
+    gap: 16px;
+  }
+
+  .saas-cta-panel h4 {
+    font-size: 1.1rem;
+    font-weight: 700;
+    color: var(--ctp-text);
+  }
+
+  .saas-cta-panel p {
+    font-size: 0.88rem;
+    color: var(--ctp-subtext0);
+    line-height: 1.6;
+  }
+
+  .saas-cta-btn {
+    width: 100%;
   }
 
   .saas-trust-badges {
     display: flex;
     gap: 16px;
+    justify-content: center;
+    border-top: 1px solid var(--ctp-surface0);
+    padding-top: 16px;
   }
 
   .trust-badge {
-    font-size: 0.8rem;
+    font-size: 0.75rem;
     font-weight: 600;
     color: var(--ctp-subtext1);
     display: flex;
@@ -923,30 +935,10 @@
     gap: 6px;
   }
 
-  .saas-cta-btn {
-    min-width: 220px;
-  }
-
   @media (max-width: 768px) {
-    .saas-bundle-grid {
+    .saas-showcase-grid {
       grid-template-columns: 1fr;
-      gap: 16px;
-    }
-    
-    .saas-card-footer {
-      flex-direction: column;
-      align-items: stretch;
-      gap: 20px;
-      text-align: center;
-    }
-
-    .saas-trust-badges {
-      justify-content: center;
-      flex-wrap: wrap;
-    }
-
-    .saas-cta-btn {
-      width: 100%;
+      gap: 32px;
     }
   }
 

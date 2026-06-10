@@ -131,7 +131,7 @@
                     <div class="terminal-content">
                       <div class="terminal-preview">
                         {#if highlight.image}
-                          <div class="preview-placeholder has-image" role="img" aria-label="Project Preview" style="background-image: url('{highlight.image}'); background-size: cover; background-position: center top;"></div>
+                          <div class="preview-placeholder has-image" role="img" aria-label="Project Preview" style="background-image: url('{highlight.image}');"></div>
                         {:else}
                           <div class="preview-placeholder" role="img" aria-label="Project Preview">
                             <svg width="40" height="40" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round">
@@ -565,7 +565,16 @@
     transition: all 0.3s ease;
   }
 
-  .preview-placeholder.has-image { color: transparent; }
+  .preview-placeholder.has-image {
+    color: transparent;
+    background-size: cover;
+    background-position: top center;
+    transition: background-position 2.5s ease-in-out;
+  }
+
+  .project-card-wrapper:hover .preview-placeholder.has-image {
+    background-position: bottom center;
+  }
 
   .project-card-wrapper:hover .preview-placeholder:not(.has-image) {
     color: var(--accent);
@@ -724,16 +733,16 @@
     top: 0;
     left: 0;
     right: 0;
-    height: 2px;
+    height: 3px;
     background: var(--accent);
     opacity: 0;
     transition: opacity 0.25s ease;
   }
 
   .grid-card:hover {
-    border-color: var(--ctp-surface1);
-    box-shadow: 0 8px 24px rgba(0, 0, 0, 0.1);
-    transform: translateY(-2px);
+    border-color: var(--accent);
+    box-shadow: 0 12px 32px rgba(0, 0, 0, 0.15), 0 0 16px color-mix(in srgb, var(--accent) 8%, transparent);
+    transform: translateY(-4px);
     opacity: 1;
   }
 

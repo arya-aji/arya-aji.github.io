@@ -94,7 +94,7 @@
   .intake-guides {
     display: flex;
     flex-direction: column;
-    gap: 20px;
+    gap: 16px;
     border-top: 1px solid var(--ctp-surface0);
     padding-top: 28px;
   }
@@ -103,6 +103,16 @@
     display: flex;
     gap: 16px;
     align-items: flex-start;
+    background: var(--ctp-mantle);
+    border: 1px solid var(--ctp-surface0);
+    border-radius: 12px;
+    padding: 16px 20px;
+    transition: border-color 0.2s ease, transform 0.2s ease;
+  }
+
+  .guide-item:hover {
+    border-color: color-mix(in srgb, var(--accent) 20%, var(--ctp-surface0));
+    transform: translateX(4px);
   }
 
   .guide-icon {
@@ -112,14 +122,14 @@
   }
 
   .guide-item h3 {
-    font-size: 1rem;
+    font-size: 0.95rem;
     font-weight: 700;
     color: var(--ctp-text);
     margin: 0 0 4px 0;
   }
 
   .guide-item p {
-    font-size: 0.9rem;
+    font-size: 0.82rem;
     color: var(--ctp-subtext0);
     line-height: 1.5;
     margin: 0;

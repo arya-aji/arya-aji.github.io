@@ -27,8 +27,22 @@
   ]);
 
   let moreLinks = $derived([
-    { href: externalLinks.extensions.url, label: $language === "EN" ? "Extension Hub" : "Hub Ekstensi", external: true, wip: false },
-    { href: "/resume", label: $language === "EN" ? "Resume" : "Resume", external: false, wip: true },
+    {
+      href: externalLinks.extensions.url,
+      label: $language === "EN" ? "Extension Hub" : "Hub Ekstensi",
+      desc: $language === "EN" ? "Privacy browser extensions" : "Ekstensi browser privasi",
+      badge: "WebStore",
+      icon: "🔌",
+      external: true
+    },
+    {
+      href: "/resume",
+      label: $language === "EN" ? "Resume" : "Resume",
+      desc: $language === "EN" ? "Printable profile overview" : "Ringkasan profil cetak",
+      badge: "PDF",
+      icon: "📄",
+      external: false
+    },
   ]);
 
   // Breadcrumb
@@ -84,6 +98,13 @@
       {#each navLinks as link}
         <a href={link.href} class="nav-link">{link.label}</a>
       {/each}
+      <button
+        class="nav-link lang-toggle-btn"
+        onclick={() => language.update(l => l === "EN" ? "ID" : "EN")}
+        title={$language === "EN" ? "Switch to Bahasa Indonesia" : "Ubah ke Bahasa Inggris"}
+      >
+        {$language}
+      </button>
       <button
         class="nav-link more-btn"
         onclick={() => (navPanelOpen = true)}
@@ -188,97 +209,44 @@
 
   <div class="panel-divider"></div>
 
-  <!-- Language Section -->
-  <div class="panel-section">
-    <div class="section-label">
-      <svg
-        width="14"
-        height="14"
-        viewBox="0 0 24 24"
-        fill="none"
-        stroke="currentColor"
-        stroke-width="2"
-        stroke-linecap="round"
-        stroke-linejoin="round"
-        style="margin-right: 2px;"
-      >
-        <circle cx="12" cy="12" r="10" /><path d="M12 2a14.5 14.5 0 0 0 0 20 14.5 14.5 0 0 0 0-20" /><path d="M2 12h20" />
-      </svg>
-      Language
+  <!-- Main nav links (Mobile Only) -->
+  <div class="panel-nav-main">
+    <div class="panel-nav">
+      {#each navLinks as link}
+        <a href={link.href} class="panel-link" onclick={closePanel}
+          >{link.label}</a
+        >
+      {/each}
     </div>
-    <div class="lang-panel-switch">
-      <button
-        type="button"
-        class="lang-panel-btn"
-        class:active={$language === "EN"}
-        onclick={() => language.set("EN")}
-      >
-        English
-      </button>
-      <button
-        type="button"
-        class="lang-panel-btn"
-        class:active={$language === "ID"}
-        onclick={() => language.set("ID")}
-      >
-        Bahasa Indonesia
-      </button>
-    </div>
+    <div class="panel-divider"></div>
   </div>
-
-  <div class="panel-divider"></div>
-
-  <!-- Main nav links -->
-  <div class="panel-nav">
-    {#each navLinks as link}
-      <a href={link.href} class="panel-link" onclick={closePanel}
-        >{link.label}</a
-      >
-    {/each}
-  </div>
-
-  <div class="panel-divider"></div>
 
   <!-- More links -->
   <div class="panel-nav">
     <span class="panel-section-label">MORE</span>
-    {#each moreLinks as link}
-      <a
-        href={link.href}
-        class="panel-link"
-        target={link.external ? "_blank" : undefined}
-        rel={link.external ? "noopener noreferrer" : undefined}
-        onclick={closePanel}
-        >{link.label}</a
-      >
-    {/each}
+    <div class="more-cards-grid">
+      {#each moreLinks as link}
+        <a
+          href={link.href}
+          class="more-card"
+          target={link.external ? "_blank" : undefined}
+          rel={link.external ? "noopener noreferrer" : undefined}
+          onclick={closePanel}
+        >
+          <div class="more-card-header">
+            <span class="more-card-icon">{link.icon}</span>
+            <span class="more-card-badge">{link.badge}</span>
+          </div>
+          <span class="more-card-title">{link.label}</span>
+          <span class="more-card-desc">{link.desc}</span>
+        </a>
+      {/each}
+    </div>
   </div>
 
   <div class="panel-divider"></div>
 
 </div>
-
-<!-- Floating Glassmorphic Language Switcher (Aesthetic Placement) -->
-<button
-  type="button"
-  class="floating-lang-switcher"
-  onclick={() => language.update(l => l === "EN" ? "ID" : "EN")}
-  aria-label="Toggle language"
->
-  <svg
-    width="14"
-    height="14"
-    viewBox="0 0 24 24"
-    fill="none"
-    stroke="currentColor"
-    stroke-width="2"
-    stroke-linecap="round"
-    stroke-linejoin="round"
-  >
-    <circle cx="12" cy="12" r="10" /><path d="M12 2a14.5 14.5 0 0 0 0 20 14.5 14.5 0 0 0 0-20" /><path d="M2 12h20" />
-  </svg>
-  <span>{$language}</span>
-</button>
 
 <style>
   /* ─── Navbar ─────────────────────────────────────────── */
@@ -624,7 +592,6 @@
     flex-shrink: 0;
   }
 
-  /* Nav links in panel */
   .panel-nav {
     padding: 8px 12px;
     display: flex;
@@ -654,94 +621,91 @@
     padding-left: 16px;
   }
 
-  /* --- Language Swapper --- */
-  .lang-btn {
+  /* --- Header Language Switcher --- */
+  .lang-toggle-btn {
     font-family: "JetBrains Mono", monospace !important;
     font-size: 0.82rem !important;
     font-weight: 700 !important;
-    letter-spacing: 0.05em;
     color: var(--accent) !important;
     padding: 6px 12px !important;
     border-radius: 6px !important;
     background: color-mix(in srgb, var(--accent) 8%, transparent) !important;
     border: 1px solid color-mix(in srgb, var(--accent) 20%, transparent) !important;
-    cursor: pointer;
     transition: all 0.2s ease;
-    margin-right: 6px;
+    cursor: pointer;
   }
-  
-  .lang-btn:hover {
+
+  .lang-toggle-btn:hover {
     background: var(--accent) !important;
     color: var(--ctp-base) !important;
   }
 
-  .lang-panel-switch {
-    display: flex;
-    gap: 8px;
-    margin-bottom: 12px;
+  /* Mobile links hiding on desktop */
+  .panel-nav-main {
+    display: block;
   }
-
-  .lang-panel-btn {
-    flex: 1;
-    padding: 8px 12px;
-    border-radius: 6px;
-    font-size: 0.8rem;
-    font-weight: 600;
-    background: var(--ctp-surface0);
-    border: 1px solid transparent;
-    color: var(--ctp-subtext1);
-    cursor: pointer;
-    transition: all 0.2s ease;
-    font-family: inherit;
-  }
-
-  .lang-panel-btn:hover {
-    border-color: var(--accent);
-    color: var(--ctp-text);
-  }
-
-  .lang-panel-btn.active {
-    background: transparent;
-    border-color: var(--accent);
-    color: var(--ctp-text);
-  }
-
-  /* --- Floating Language Switcher --- */
-  .floating-lang-switcher {
-    position: fixed;
-    bottom: 24px;
-    right: 24px;
-    z-index: 150;
-    display: flex;
-    align-items: center;
-    gap: 8px;
-    padding: 10px 14px;
-    border-radius: 99px;
-    background: color-mix(in srgb, var(--ctp-crust) 65%, transparent);
-    backdrop-filter: blur(12px);
-    -webkit-backdrop-filter: blur(12px);
-    border: 1px solid color-mix(in srgb, var(--ctp-surface0) 40%, transparent);
-    color: var(--ctp-text);
-    font-family: "JetBrains Mono", monospace;
-    font-size: 0.8rem;
-    font-weight: 700;
-    cursor: pointer;
-    box-shadow: 0 8px 30px rgba(0, 0, 0, 0.15);
-    transition: all 0.25s cubic-bezier(0.4, 0, 0.2, 1);
-  }
-
-  .floating-lang-switcher:hover {
-    border-color: var(--accent);
-    color: var(--accent);
-    transform: translateY(-2px) scale(1.05);
-    box-shadow: 0 12px 36px color-mix(in srgb, var(--accent) 15%, transparent);
-  }
-
-  @media (max-width: 640px) {
-    .floating-lang-switcher {
-      bottom: 20px;
-      right: 20px;
-      padding: 8px 12px;
+  @media (min-width: 769px) {
+    .panel-nav-main {
+      display: none;
     }
+  }
+
+  /* More link cards */
+  .more-cards-grid {
+    display: grid;
+    grid-template-columns: 1fr;
+    gap: 12px;
+    padding: 10px 12px;
+  }
+
+  .more-card {
+    background: var(--ctp-crust);
+    border: 1px solid var(--ctp-surface0);
+    border-radius: 12px;
+    padding: 16px;
+    display: flex;
+    flex-direction: column;
+    gap: 6px;
+    text-decoration: none;
+    transition: all 0.2s cubic-bezier(0.16, 1, 0.3, 1);
+  }
+
+  .more-card:hover {
+    border-color: var(--accent);
+    transform: translateY(-2px);
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+  }
+
+  .more-card-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+  }
+
+  .more-card-icon {
+    font-size: 1.2rem;
+  }
+
+  .more-card-badge {
+    font-size: 0.65rem;
+    font-family: "JetBrains Mono", monospace;
+    font-weight: 700;
+    color: var(--accent);
+    background: color-mix(in srgb, var(--accent) 10%, transparent);
+    border: 1px solid color-mix(in srgb, var(--accent) 25%, transparent);
+    padding: 2px 8px;
+    border-radius: 99px;
+  }
+
+  .more-card-title {
+    font-size: 0.95rem;
+    font-weight: 700;
+    color: var(--ctp-text);
+  }
+
+  .more-card-desc {
+    font-size: 0.78rem;
+    color: var(--ctp-subtext0);
+    line-height: 1.4;
   }
 </style>

@@ -233,7 +233,8 @@
 
   input:focus, select:focus, textarea:focus {
     border-color: var(--accent);
-    box-shadow: 0 0 0 3px color-mix(in srgb, var(--accent) 15%, transparent);
+    box-shadow: 0 0 0 4px color-mix(in srgb, var(--accent) 15%, transparent);
+    background: var(--ctp-mantle);
   }
 
   /* Budget Swatches */
@@ -244,7 +245,7 @@
   }
 
   .budget-swatch-btn {
-    padding: 10px 4px;
+    padding: 12px 6px;
     font-size: 0.82rem;
     font-weight: 600;
     color: var(--ctp-subtext1);
@@ -252,20 +253,22 @@
     border: 1px solid var(--ctp-surface1);
     border-radius: 8px;
     cursor: pointer;
-    transition: all 0.2s ease;
+    transition: all 0.2s cubic-bezier(0.16, 1, 0.3, 1);
     font-family: inherit;
   }
 
   .budget-swatch-btn:hover {
     border-color: var(--accent);
     color: var(--accent);
+    transform: translateY(-1px);
   }
 
   .budget-swatch-btn.active {
     background: var(--accent);
     color: var(--ctp-base);
     border-color: var(--accent);
-    box-shadow: 0 4px 12px color-mix(in srgb, var(--accent) 20%, transparent);
+    box-shadow: 0 4px 12px color-mix(in srgb, var(--accent) 25%, transparent);
+    transform: translateY(-1px) scale(1.02);
   }
 
   .submit-btn {
@@ -279,12 +282,15 @@
     border-radius: 8px;
     cursor: pointer;
     border: none;
-    transition: all 0.2s ease;
+    background: var(--accent);
+    color: var(--ctp-base);
+    transition: all 0.2s cubic-bezier(0.16, 1, 0.3, 1);
   }
 
   .submit-btn:hover:not(:disabled) {
     transform: translateY(-2px);
-    box-shadow: 0 8px 24px color-mix(in srgb, var(--accent) 25%, transparent);
+    box-shadow: 0 8px 24px color-mix(in srgb, var(--accent) 30%, transparent);
+    filter: brightness(1.05);
   }
 
   .submit-btn:disabled {

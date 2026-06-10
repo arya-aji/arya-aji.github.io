@@ -7,7 +7,6 @@
   <meta name="description" content="I'm Arya Aji Kusuma — a developer from Jakarta building SaaS platforms, browser extensions, and full-stack web apps. Passionate about turning ideas into real, working products." />
 </svelte:head>
 
-
 <main class="page-main">
   <div class="container">
 
@@ -16,7 +15,9 @@
     <!-- Hero row: photo left, text right -->
     <div class="hero-row">
       <div class="photo-col">
-        <img src="/photo.png" alt="Arya Aji Kusuma" class="photo-img" loading="lazy" />
+        <div class="photo-wrapper">
+          <img src="/photo.png" alt="Arya Aji Kusuma" class="photo-img" loading="lazy" />
+        </div>
         <div class="photo-info-wrapper">
           <div class="photo-caption">Arya Aji Kusuma</div>
           <div class="photo-sub">Jakarta, Indonesia · Developer</div>
@@ -93,42 +94,74 @@
       </div>
     </div>
 
-
+    <!-- Core Pillars section -->
+    <div class="pillars-section">
+      <h2 class="section-title">
+        {$language === 'EN' ? 'My Core Pillars' : 'Pilar Inti Saya'}
+      </h2>
+      <div class="pillars-grid">
+        <div class="pillar-card">
+          <div class="pillar-icon">🏗️</div>
+          <h3>{$language === 'EN' ? 'Clean Architecture' : 'Arsitektur Bersih'}</h3>
+          <p>
+            {$language === 'EN'
+              ? 'Structuring maintainable, reliable codebases that scale smoothly from prototype to enterprise.'
+              : 'Menyusun basis kode yang andal dan mudah dipelihara yang berkembang lancar dari prototipe hingga skala besar.'}
+          </p>
+        </div>
+        <div class="pillar-card">
+          <div class="pillar-icon">⚙️</div>
+          <h3>{$language === 'EN' ? 'Automation First' : 'Utamakan Otomasi'}</h3>
+          <p>
+            {$language === 'EN'
+              ? 'Eliminating repetitive tasks and manual pipelines using custom scripts and smart schedulers.'
+              : 'Menghilangkan tugas berulang dan alur kerja manual menggunakan skrip kustom dan penjadwal cerdas.'}
+          </p>
+        </div>
+        <div class="pillar-card">
+          <div class="pillar-icon">🤖</div>
+          <h3>{$language === 'EN' ? 'AI-Empowered' : 'Berdaya AI'}</h3>
+          <p>
+            {$language === 'EN'
+              ? 'Integrating generative models and intelligent workflow tools to supercharge development speeds.'
+              : 'Mengintegrasikan model generatif dan alat bantu kerja cerdas untuk mendongkrak kecepatan pengembangan.'}
+          </p>
+        </div>
+      </div>
+    </div>
 
   </div>
 </main>
 
-
 <style>
   .page-main {
     min-height: calc(100vh - 64px);
-    padding: 40px 0 24px;
+    padding: 60px 0 80px;
   }
 
   .container {
-    max-width: 860px;
+    max-width: 900px;
     margin: 0 auto;
     padding: 0 24px;
   }
 
-
-
   /* Title */
   .page-title {
-    font-size: 2.4rem;
-    font-weight: 700;
+    font-size: 2.6rem;
+    font-weight: 800;
     color: var(--ctp-text);
-    margin-bottom: 36px;
+    margin-bottom: 48px;
     line-height: 1.2;
+    letter-spacing: -0.02em;
   }
 
   /* ── Hero row ── */
   .hero-row {
     display: grid;
     grid-template-columns: 220px 1fr;
-    gap: 40px;
+    gap: 48px;
     align-items: start;
-    margin-bottom: 56px;
+    margin-bottom: 64px;
   }
 
   /* Photo column */
@@ -136,7 +169,39 @@
     display: flex;
     flex-direction: column;
     align-items: center;
-    gap: 10px;
+    gap: 12px;
+  }
+
+  .photo-wrapper {
+    position: relative;
+    border-radius: 24px;
+    padding: 4px;
+    background: linear-gradient(135deg, var(--accent), transparent);
+    box-shadow: 0 12px 32px rgba(0, 0, 0, 0.15);
+    transition: transform 0.3s ease;
+  }
+
+  .photo-wrapper::after {
+    content: '';
+    position: absolute;
+    inset: 0;
+    border-radius: 24px;
+    padding: 2px;
+    background: linear-gradient(135deg, var(--accent), var(--ctp-lavender));
+    -webkit-mask: linear-gradient(#fff 0 0) content-box, linear-gradient(#fff 0 0);
+    mask: linear-gradient(#fff 0 0) content-box, linear-gradient(#fff 0 0);
+    -webkit-mask-composite: xor;
+    mask-composite: exclude;
+    opacity: 0.7;
+    transition: opacity 0.3s ease;
+  }
+
+  .photo-wrapper:hover {
+    transform: scale(1.03) translateY(-2px);
+  }
+
+  .photo-wrapper:hover::after {
+    opacity: 1;
   }
 
   .photo-img {
@@ -144,26 +209,22 @@
     aspect-ratio: 1 / 1;
     border-radius: 20px;
     object-fit: cover;
-    border: 2px solid var(--ctp-surface2);
-    transition: all 0.3s ease;
-  }
-
-  .photo-img:hover {
-    border-color: var(--accent);
-    transform: scale(1.02);
+    display: block;
   }
 
   .photo-caption {
-    font-size: 0.9rem;
-    font-weight: 600;
+    font-size: 0.95rem;
+    font-weight: 700;
     color: var(--ctp-text);
+    text-align: center;
   }
 
   .photo-sub {
-    font-size: 0.75rem;
+    font-size: 0.78rem;
     color: var(--ctp-subtext0);
     text-align: center;
     line-height: 1.4;
+    font-family: 'JetBrains Mono', monospace;
   }
 
   /* Text column */
@@ -176,7 +237,7 @@
     display: flex;
     flex-direction: column;
     gap: 18px;
-    margin-bottom: 28px;
+    margin-bottom: 32px;
   }
 
   .about-body p {
@@ -190,13 +251,11 @@
     text-decoration: underline dotted;
     text-underline-offset: 3px;
     text-decoration-thickness: 1px;
-    font-weight: 500;
+    font-weight: 600;
     transition: opacity 0.2s;
   }
 
-  .inline-link:hover { opacity: 0.75; }
-
-
+  .inline-link:hover { opacity: 0.8; }
 
   /* Social buttons */
   .social-links {
@@ -209,36 +268,96 @@
     display: inline-flex;
     align-items: center;
     gap: 8px;
-    padding: 10px 20px;
+    padding: 11px 20px;
     border-radius: 10px;
-    background: var(--ctp-surface0);
+    background: var(--ctp-mantle);
     color: var(--ctp-text);
     text-decoration: none;
-    font-size: 0.875rem;
-    font-weight: 500;
-    border: 1px solid var(--ctp-surface1);
-    transition: all 0.2s ease;
+    font-size: 0.88rem;
+    font-weight: 600;
+    border: 1px solid var(--ctp-surface0);
+    transition: all 0.25s cubic-bezier(0.16, 1, 0.3, 1);
   }
 
   .social-btn:hover {
     border-color: var(--accent);
-    color: var(--accent);
-    background: color-mix(in srgb, var(--accent) 8%, var(--ctp-surface0));
+    color: var(--ctp-base);
+    background: var(--accent);
+    transform: translateY(-2px);
+    box-shadow: 0 6px 16px color-mix(in srgb, var(--accent) 25%, transparent);
     opacity: 1;
   }
 
+  /* ── Pillars Grid ── */
+  .pillars-section {
+    margin-top: 32px;
+    padding-top: 48px;
+    border-top: 1px solid var(--ctp-surface0);
+  }
 
+  .pillars-section .section-title {
+    font-size: 1.25rem;
+    font-weight: 800;
+    color: var(--ctp-text);
+    margin-bottom: 24px;
+    letter-spacing: -0.01em;
+  }
+
+  .pillars-grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 16px;
+  }
+
+  .pillar-card {
+    background: var(--ctp-mantle);
+    border: 1px solid var(--ctp-surface0);
+    border-radius: 16px;
+    padding: 24px;
+    transition: border-color 0.2s ease, transform 0.2s ease;
+  }
+
+  .pillar-card:hover {
+    border-color: color-mix(in srgb, var(--accent) 30%, var(--ctp-surface0));
+    transform: translateY(-3px);
+  }
+
+  .pillar-icon {
+    font-size: 1.5rem;
+    margin-bottom: 16px;
+  }
+
+  .pillar-card h3 {
+    font-size: 1.05rem;
+    font-weight: 700;
+    color: var(--ctp-text);
+    margin: 0 0 8px 0;
+  }
+
+  .pillar-card p {
+    font-size: 0.85rem;
+    color: var(--ctp-subtext0);
+    line-height: 1.6;
+    margin: 0;
+  }
 
   /* Responsive */
+  @media (max-width: 800px) {
+    .pillars-grid {
+      grid-template-columns: 1fr;
+    }
+  }
+
   @media (max-width: 640px) {
     .hero-row {
       grid-template-columns: 1fr;
+      gap: 32px;
     }
 
     .photo-col {
       flex-direction: row;
       align-items: center;
-      gap: 16px;
+      gap: 20px;
     }
 
     .photo-info-wrapper {
@@ -248,7 +367,7 @@
       gap: 4px;
     }
 
-    .photo-img {
+    .photo-wrapper {
       width: 120px;
       flex-shrink: 0;
     }
