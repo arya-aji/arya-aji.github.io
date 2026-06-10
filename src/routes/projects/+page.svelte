@@ -80,7 +80,11 @@
 <main class="page-main">
   <div class="container">
     <h1 class="page-title">{$language === 'EN' ? 'Projects' : 'Proyek'}</h1>
-    <p class="page-subtitle">{projects.length} {$language === 'EN' ? 'projects built over the years. Click any to learn more.' : 'proyek yang telah dibangun. Klik salah satu untuk info lebih lanjut.'}</p>
+    <p class="page-subtitle">
+      {$language === 'EN' 
+        ? 'I have built many projects over the years. Below are the key public ones, while the rest are internal or government projects. Click any to learn more.' 
+        : 'Saya telah membangun banyak proyek selama bertahun-tahun. Berikut adalah proyek publik utama, sedangkan sisanya merupakan proyek internal atau pemerintah. Klik salah satu untuk info lebih lanjut.'}
+    </p>
 
     <!-- Top Slider (up to 10 projects) -->
     {#if sliderProjects.length > 0}
@@ -334,7 +338,7 @@
 <style>
   .page-main {
     min-height: calc(100vh - 64px);
-    padding: 40px 0 24px;
+    padding: 96px 0 24px;
   }
 
   .container {
