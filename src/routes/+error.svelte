@@ -1,7 +1,5 @@
 <script lang="ts">
   import { page } from "$app/stores";
-  import Navbar from "$lib/components/Navbar.svelte";
-  import Footer from "$lib/components/Footer.svelte";
   import { language } from "$lib/stores/language";
 
   const messages: Record<
@@ -70,7 +68,6 @@
   <title>{status} — {msg.title} | Arya Aji Kusuma</title>
 </svelte:head>
 
-<Navbar />
 
 <main class="error-main">
   <div class="container">
@@ -162,7 +159,6 @@
   </div>
 </main>
 
-<Footer />
 
 <style>
   .error-main {

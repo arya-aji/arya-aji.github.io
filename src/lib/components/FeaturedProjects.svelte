@@ -30,6 +30,39 @@
     hoveredProjectObj = null;
   }
 
+  let terminalLogs = $state<Record<string, string[]>>({});
+
+  function triggerSimulation(slug: string, name: string) {
+    if (terminalLogs[slug] && terminalLogs[slug].length > 0) return;
+    terminalLogs[slug] = [];
+    const lines = [
+      `aji@io:~$ cd ${name}`,
+      `aji@io:~/${name}$ npm run build`,
+      `✓ built in 480ms`,
+      `aji@io:~/${name}$ ./start --live`,
+      `🚀 active at localhost:3000`
+    ];
+
+    let i = 0;
+    function printLine() {
+      if (i < lines.length) {
+        terminalLogs[slug] = [...(terminalLogs[slug] || []), lines[i]];
+        i++;
+        setTimeout(printLine, 100 + Math.random() * 80);
+      }
+    }
+    printLine();
+  }
+
+  $effect(() => {
+    if (projects.length > 0) {
+      const activeProject = projects[currentIndex];
+      if (activeProject && (!terminalLogs[activeProject.slug] || terminalLogs[activeProject.slug].length === 0)) {
+        triggerSimulation(activeProject.slug, activeProject.name);
+      }
+    }
+  });
+
   function nextSlide() {
     if (projects.length <= 1) return;
     currentIndex = (currentIndex + 1) % projects.length;
@@ -92,19 +125,30 @@
                     </div>
                   </div>
                   <div class="terminal-content">
-                    <div class="terminal-preview">
-                      {#if project.image}
-                        <div class="preview-placeholder has-image" role="img" aria-label="Project Preview" style="background-image: url('{project.image}'); background-size: contain; background-repeat: no-repeat; background-position: center;"></div>
-                      {:else}
-                        <div class="preview-placeholder" role="img" aria-label="Project Preview">
-                          <svg width="40" height="40" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round">
-                            <rect x="3" y="3" width="18" height="18" rx="2" ry="2"/>
-                            <circle cx="8.5" cy="8.5" r="1.5"/>
-                            <polyline points="21 15 16 10 5 21"/>
-                          </svg>
-                        </div>
+                    <div class="terminal-shell">
+                      {#each (terminalLogs[project.slug] || []) as line}
+                        <div class="shell-line">{line}</div>
+                      {/each}
+                      {#if !(terminalLogs[project.slug]?.length >= 5)}
+                        <div class="shell-cursor">▌</div>
                       {/if}
                     </div>
+
+                    {#if (terminalLogs[project.slug]?.length >= 5)}
+                      <div class="terminal-preview fade-in">
+                        {#if project.image}
+                          <div class="preview-placeholder has-image" role="img" aria-label="Project Preview" style="background-image: url('{project.image}'); background-size: contain; background-repeat: no-repeat; background-position: center;"></div>
+                        {:else}
+                          <div class="preview-placeholder" role="img" aria-label="Project Preview">
+                            <svg width="40" height="40" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round">
+                              <rect x="3" y="3" width="18" height="18" rx="2" ry="2"/>
+                              <circle cx="8.5" cy="8.5" r="1.5"/>
+                              <polyline points="21 15 16 10 5 21"/>
+                            </svg>
+                          </div>
+                        {/if}
+                      </div>
+                    {/if}
                   </div>
                 </div>
               </div>
@@ -281,34 +325,49 @@
     grid-template-columns: 1.15fr 1fr;
     border-radius: 18px;
     overflow: hidden;
-    background: var(--ctp-mantle);
-    border: 1px solid var(--ctp-surface0);
-    transition: all 0.3s ease;
+    background: color-mix(in srgb, var(--ctp-mantle) 80%, transparent);
+    backdrop-filter: blur(12px);
+    -webkit-backdrop-filter: blur(12px);
+    border: 1px solid color-mix(in srgb, var(--ctp-surface0) 50%, transparent);
+    transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
     min-height: 380px;
     min-width: 0;
   }
 
   .project-card-wrapper:hover {
-    border-color: var(--ctp-surface1);
-    box-shadow: 0 12px 40px rgba(0, 0, 0, 0.15);
+    border-color: var(--accent);
+    box-shadow: 0 20px 48px rgba(0, 0, 0, 0.15), 0 0 30px color-mix(in srgb, var(--accent) 5%, transparent);
+    transform: translateY(-2px);
   }
 
   .project-visual-side {
     padding: 24px;
-    background: color-mix(in srgb, var(--ctp-crust) 50%, transparent);
-    border-right: 1px solid var(--ctp-surface0);
+    background: color-mix(in srgb, var(--ctp-crust) 30%, transparent);
+    border-right: 1px solid color-mix(in srgb, var(--ctp-surface0) 50%, transparent);
     display: flex;
     flex-direction: column;
   }
 
   .terminal-card {
-    background: var(--ctp-crust);
+    background: color-mix(in srgb, var(--ctp-crust) 65%, transparent);
+    backdrop-filter: blur(6px);
+    -webkit-backdrop-filter: blur(6px);
     border-radius: 12px;
     display: flex;
     flex-direction: column;
     height: 100%;
-    border: 1px solid var(--ctp-surface0);
-    box-shadow: 0 8px 24px rgba(0,0,0,0.2);
+    border: 1px solid color-mix(in srgb, var(--ctp-surface0) 70%, transparent);
+    box-shadow: 0 12px 32px rgba(0,0,0,0.25);
+    position: relative;
+  }
+
+  .terminal-card::after {
+    content: '';
+    position: absolute;
+    top: 0; left: 0; right: 0;
+    height: 1px;
+    background: linear-gradient(to right, transparent, rgba(255, 255, 255, 0.08), transparent);
+    pointer-events: none;
   }
 
   .terminal-header {
@@ -317,8 +376,8 @@
     justify-content: center;
     position: relative;
     padding: 12px 16px;
-    border-bottom: 1px solid var(--ctp-surface0);
-    background: color-mix(in srgb, var(--ctp-mantle) 50%, transparent);
+    border-bottom: 1px solid color-mix(in srgb, var(--ctp-surface0) 70%, transparent);
+    background: color-mix(in srgb, var(--ctp-mantle) 40%, transparent);
   }
 
   .terminal-dots {
@@ -330,8 +389,9 @@
   
   .repo-name-header {
     font-family: 'JetBrains Mono', 'Fira Code', monospace;
-    font-size: 0.85rem;
+    font-size: 0.82rem;
     color: var(--ctp-subtext1);
+    letter-spacing: 0.02em;
   }
   
   .project-date-badge {
@@ -358,36 +418,54 @@
     flex: 1;
     padding: 16px;
     gap: 16px;
+    position: relative;
+    min-height: 220px;
   }
 
-  .repo-info {
-    flex-shrink: 0;
-  }
-
-  .repo-name {
-    font-family: 'JetBrains Mono', 'Fira Code', monospace;
-    font-size: 1rem;
-    margin-bottom: 8px;
-  }
-
-  .repo-org { color: var(--ctp-subtext0); }
-  .repo-sep { color: var(--ctp-overlay0); }
-  .repo-project { color: var(--accent); font-weight: 600; }
-
-  .repo-desc {
-    font-family: 'JetBrains Mono', 'Fira Code', monospace;
-    font-size: 0.85rem;
+  .terminal-shell {
+    flex: 1;
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 0.72rem;
     color: var(--ctp-subtext0);
-    line-height: 1.6;
+    display: flex;
+    flex-direction: column;
+    gap: 4px;
+    text-align: left;
+  }
+
+  .shell-line {
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+  }
+
+  .shell-cursor {
+    color: var(--accent);
+    animation: shell-blink 1s step-end infinite;
+    display: inline-block;
+  }
+
+  @keyframes shell-blink {
+    50% { opacity: 0; }
   }
 
   .terminal-preview {
-    flex: 1;
-    display: flex;
-    min-height: 160px;
+    position: absolute;
+    inset: 16px;
     background: var(--ctp-surface0);
     border-radius: 8px;
     overflow: hidden;
+    display: flex;
+    z-index: 10;
+  }
+
+  .fade-in {
+    animation: fade-in-preview 0.4s cubic-bezier(0.16, 1, 0.3, 1) forwards;
+  }
+
+  @keyframes fade-in-preview {
+    from { opacity: 0; transform: scale(0.98); }
+    to { opacity: 1; transform: scale(1); }
   }
 
   .preview-placeholder {

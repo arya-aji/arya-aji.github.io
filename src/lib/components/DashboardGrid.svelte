@@ -3,77 +3,21 @@
     theme,
     accent,
     bgEffect,
-    snowEffect,
-    blackHoleEffect,
-    mouseTremorEffect,
-    floodEffect,
-    grayWorldEffect,
     ACCENT_COLORS,
     THEME_FLAVORS,
   } from "$lib/stores/theme";
-  import type { ThemeFlavor, AccentColor } from "$lib/stores/theme";
   import {
     Palette,
     CalendarDays,
     MapPin,
     Sparkles,
-    Puzzle,
-    FolderGit2,
     ArrowRight,
   } from "lucide-svelte";
   import { onMount } from "svelte";
-  import type L from "leaflet";
-  import type { Project } from "$lib/data/projects";
-  import { tagColors } from "$lib/data/projects";
-  import { externalLinks, serviceMap } from "$lib/data/externalLinks";
-
-  let { projects = [] }: { projects: Project[] } = $props();
-
-  let latestProjects = $derived(
-    [...projects]
-      .sort((a, b) => new Date(b.date).getTime() - new Date(a.date).getTime())
-      .slice(0, 4)
-  );
-
-  let localTime = $state("");
-
-  const otherEffects = [
-    snowEffect,
-    blackHoleEffect,
-    mouseTremorEffect,
-    floodEffect,
-  ];
-
-  function toggleGrayWorld() {
-    if ($grayWorldEffect) {
-      grayWorldEffect.set(false);
-    } else {
-      otherEffects.forEach((e) => e.set(false));
-      grayWorldEffect.set(true);
-    }
-  }
-
-  function toggleEffect(effect: typeof snowEffect) {
-    if ($grayWorldEffect) grayWorldEffect.set(false);
-    effect.update((v) => !v);
-  }
-
-  function activateRandom() {
-    const allEffects = [...otherEffects, grayWorldEffect];
-    allEffects.forEach((e) => e.set(false));
-    const pick = allEffects[Math.floor(Math.random() * allEffects.length)];
-    if (pick === grayWorldEffect) {
-      grayWorldEffect.set(true);
-    } else {
-      pick.set(true);
-    }
-  }
-
   import { accentHexMap } from "$lib/data/colors";
   import { formatLocalTime } from "$lib/utils/time";
 
-  let mapElement: HTMLElement | undefined = $state();
-  let mapInstance: L.Map | undefined;
+  let localTime = $state("");
 
   function updateTime() {
     localTime = formatLocalTime();
@@ -82,40 +26,8 @@
   onMount(() => {
     updateTime();
     const interval = setInterval(updateTime, 1000);
-    let isMounted = true;
-
-
-
-    if (typeof window !== "undefined" && mapElement) {
-      (async () => {
-        try {
-          const L = await import("leaflet");
-          await import("leaflet/dist/leaflet.css");
-          if (!isMounted) return;
-
-          const isMobile = window.innerWidth < 768;
-          mapInstance = L.map(mapElement, {
-            zoomControl: false,
-            attributionControl: false,
-            dragging: !isMobile,
-            touchZoom: !isMobile,
-            scrollWheelZoom: false,
-            doubleClickZoom: false,
-          }).setView([-6.1754, 106.8272], 12);
-
-          L.tileLayer("https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png", {
-            maxZoom: 19,
-          }).addTo(mapInstance);
-        } catch {
-          // Leaflet failed to load — map will show empty
-        }
-      })();
-    }
-
     return () => {
-      isMounted = false;
       clearInterval(interval);
-      if (mapInstance) mapInstance.remove();
     };
   });
 </script>
@@ -126,8 +38,8 @@
       <!-- Theme Card -->
       <div class="card dash-card theme-card">
         <div class="card-header">
-          <Palette size={16} />
-          <span class="card-title">Theme</span>
+          <Palette size={16} class="accent-icon" />
+          <span class="card-title">Theme Customizer</span>
         </div>
 
         <div class="theme-buttons">
@@ -156,179 +68,78 @@
 
         <label class="bg-toggle">
           <input type="checkbox" bind:checked={$bgEffect} />
-          <span
-            >Background effect: <span class="toggle-state" class:on={$bgEffect}
-              >{$bgEffect ? "on" : "off"}</span
-            ></span
-          >
+          <span>
+            Background effect: <span class="toggle-state" class:on={$bgEffect}>{$bgEffect ? "on" : "off"}</span>
+          </span>
         </label>
-      </div>
-
-      <!-- Connect Card -->
-      <div class="card dash-card connect-card">
-        <div class="card-header">
-          <CalendarDays size={16} />
-          <span class="card-title">Let's Connect</span>
-        </div>
-        <p class="connect-text">
-          Got an idea? Let's turn it into your next dream project.
-        </p>
-        <a
-          href="mailto:hello@aryaaji.com"
-          class="btn btn-accent connect-btn"
-        >
-          <CalendarDays size={16} />
-          Let's Build It
-        </a>
       </div>
 
       <!-- Location Card -->
       <div class="card dash-card location-card">
         <div class="card-header">
-          <MapPin size={16} />
-          <span class="card-title">Currently Based In</span>
-          <span class="location-pin">📍</span>
+          <MapPin size={16} class="accent-icon" />
+          <span class="card-title">Based In</span>
         </div>
 
-        <div class="map-container">
-          <div
-            bind:this={mapElement}
-            class="leaflet-container-root"
-            style="width: 100%; height: 100%; filter: grayscale(1) opacity(0.85) {$theme !==
-            'latte'
-              ? 'invert(0.9) hue-rotate(180deg)'
-              : ''};"
-          ></div>
+        <div class="location-visual">
+          <!-- Geospatial/Grid aesthetic replacement for heavy Leaflet Map -->
+          <div class="radar-map">
+            <div class="radar-line"></div>
+            <div class="radar-ping"></div>
+            <div class="radar-ring ring-1"></div>
+            <div class="radar-ring ring-2"></div>
+            <div class="radar-ring ring-3"></div>
+            <div class="coordinates">6.2088° S, 106.8456° E</div>
+          </div>
         </div>
 
         <div class="location-footer">
-          <span class="location-name">Jakarta, ID</span>
+          <span class="location-name">Jakarta, Indonesia</span>
           <span class="location-time">
             🌙 {localTime}
           </span>
         </div>
       </div>
 
-      <!-- Fun Zone Card -->
-      <div class="card dash-card funzone-card">
+      <!-- Playground Card -->
+      <div class="card dash-card playground-cta-card">
         <div class="card-header">
-          <Sparkles size={16} />
-          <span class="card-title">Fun Zone</span>
+          <Sparkles size={16} class="accent-icon" />
+          <span class="card-title">Creative Playground</span>
         </div>
-
-        <div class="fun-effects">
-          <button
-            class="fun-effect-btn"
-            class:active={$snowEffect}
-            onclick={() => toggleEffect(snowEffect)}
-          >
-            <span class="fun-effect-icon">❄️</span>
-            <span class="fun-effect-label">Snow</span>
-          </button>
-
-          <button
-            class="fun-effect-btn"
-            class:active={$blackHoleEffect}
-            onclick={() => toggleEffect(blackHoleEffect)}
-          >
-            <span class="fun-effect-icon">🕳️</span>
-            <span class="fun-effect-label">Black Hole</span>
-          </button>
-
-          <button
-            class="fun-effect-btn"
-            class:active={$mouseTremorEffect}
-            onclick={() => toggleEffect(mouseTremorEffect)}
-          >
-            <span class="fun-effect-icon">📳</span>
-            <span class="fun-effect-label">Tremor</span>
-          </button>
-
-          <button
-            class="fun-effect-btn"
-            class:active={$floodEffect}
-            onclick={() => toggleEffect(floodEffect)}
-          >
-            <span class="fun-effect-icon">🌊</span>
-            <span class="fun-effect-label">Flood</span>
-          </button>
-
-          <button
-            class="fun-effect-btn gray-world-btn"
-            class:active={$grayWorldEffect}
-            onclick={toggleGrayWorld}
-          >
-            <span class="fun-effect-icon">🩶</span>
-            <span class="fun-effect-label">Gray World</span>
-          </button>
-
-          <button class="fun-effect-btn random-btn" onclick={activateRandom}>
-            <span class="fun-effect-icon">🎲</span>
-            <span class="fun-effect-label">Random</span>
-          </button>
-        </div>
-
-        <div class="fun-status">
-          {#if $floodEffect}
-            🌊 Water is rising...
-          {:else if $grayWorldEffect}
-            🩶 Color has left the world...
-          {:else if $blackHoleEffect}
-            🕳️ Cards are being consumed...
-          {:else if $mouseTremorEffect}
-            📳 Move your mouse faster!
-          {:else if $snowEffect}
-            ❄️ It's snowing!
-          {:else}
-            ✨ Try toggling some effects!
-          {/if}
-        </div>
+        <p class="playground-text">
+          Experience interactive UI elements, custom animations, and experimental web physics.
+        </p>
+        <a href="/funzone" class="btn btn-accent playground-btn">
+          Enter Playground <ArrowRight size={14} style="margin-left: 4px;" />
+        </a>
       </div>
 
-      <!-- Latest Builds Card -->
-      <div class="card dash-card latest-card span-full">
-        <div class="card-header latest-card-header">
-          <div class="card-header-left">
-            <FolderGit2 size={16} />
-            <span class="card-title">Latest Builds</span>
-          </div>
-          <a href="/projects" class="latest-view-all">
-            View all <ArrowRight size={13} />
-          </a>
+      <!-- Tech Stack (Neofetch) Card -->
+      <div class="card dash-card neofetch-card">
+        <div class="card-header">
+          <Sparkles size={16} class="accent-icon" />
+          <span class="card-title">System Specs & Stack</span>
         </div>
-
-        <div class="latest-grid">
-          {#each latestProjects as project}
-            <a
-              href={project.live || project.github || '#'}
-              target={project.live || project.github ? '_blank' : undefined}
-              rel={project.live || project.github ? 'noopener noreferrer' : undefined}
-              class="latest-link"
-            >
-              <div class="latest-link-inner">
-                <div class="latest-main" style="display: flex; align-items: flex-start; gap: 8px;">
-                  {#if project.logo}
-                    <img src={project.logo} alt="" style="width: 24px; height: 24px; border-radius: 4px; object-fit: contain; background: #ffffff; padding: 2px; border: 1px solid var(--ctp-surface1); flex-shrink: 0; margin-top: 2px;" />
-                  {/if}
-                  <div>
-                    <h3 class="latest-name" style="margin: 0 0 4px 0;">{project.title}</h3>
-                    <p class="latest-desc">{project.description}</p>
-                  </div>
-                </div>
-                <div class="latest-footer">
-                  <span class="latest-date">{project.dateDisplay}</span>
-                  <div class="latest-tags">
-                    {#each project.tags.slice(0, 4) as tag}
-                      <span
-                        class="mini-tag"
-                        style="--tag-color: {tagColors[tag] || 'var(--accent)'}"
-                      >{tag}</span>
-                    {/each}
-                  </div>
-                </div>
-              </div>
-            </a>
-          {/each}
+        <div class="neofetch-terminal">
+          <div class="neofetch-prompt"><span class="prompt-user">aji</span><span class="prompt-at">@</span><span class="prompt-host">io</span>:<span class="prompt-dir">~</span>$ neofetch --skills</div>
+          <div class="neofetch-body">
+            <div class="neofetch-logo">
+              <span>⚡</span>
+              <span>⚙️</span>
+              <span>🛰️</span>
+              <span>🧠</span>
+            </div>
+            <div class="neofetch-info">
+              <div class="info-row"><span class="info-key">OS</span><span class="info-val">SvelteKit SSR (Static)</span></div>
+              <div class="info-row"><span class="info-key">Lang</span><span class="info-val">TypeScript / Node / Python</span></div>
+              <div class="info-row"><span class="info-key">Core</span><span class="info-val">Svelte 5 / Go / API Design</span></div>
+              <div class="info-row"><span class="info-key">Data</span><span class="info-val">PostgreSQL / Redis</span></div>
+              <div class="info-row"><span class="info-key">Geo</span><span class="info-val">Leaflet / GIS / WebGL</span></div>
+              <div class="info-row"><span class="info-key">AI</span><span class="info-val">OpenAI SDK / VectorDB</span></div>
+              <div class="info-row"><span class="info-key">Status</span><span class="info-val active-status">● Ready for Projects</span></div>
+            </div>
+          </div>
         </div>
       </div>
     </div>
@@ -338,18 +149,25 @@
 <style>
   .dashboard-grid {
     display: grid;
-    grid-template-columns: repeat(4, 1fr);
-    gap: 16px;
-    overflow: hidden;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 20px;
   }
 
   .dash-card {
-    padding: 20px;
+    padding: 24px;
+    background: var(--ctp-mantle);
+    border: 1px solid var(--ctp-surface0);
+    border-radius: 16px;
     display: flex;
     flex-direction: column;
     min-height: 240px;
     min-width: 0;
     overflow: hidden;
+    transition: transform 0.2s ease, border-color 0.2s ease;
+  }
+
+  .dash-card:hover {
+    border-color: var(--accent);
   }
 
   .card-header {
@@ -359,7 +177,11 @@
     margin-bottom: 16px;
     color: var(--ctp-text);
     font-weight: 600;
-    font-size: 0.9rem;
+    font-size: 0.95rem;
+  }
+
+  .accent-icon {
+    color: var(--accent);
   }
 
   .card-title {
@@ -375,13 +197,13 @@
   }
 
   .theme-btn {
-    padding: 6px 14px;
+    padding: 6px 12px;
     border-radius: 8px;
     border: 1px solid var(--ctp-surface1);
     background: transparent;
     color: var(--ctp-subtext0);
     font-family: "Montserrat", sans-serif;
-    font-size: 0.78rem;
+    font-size: 0.75rem;
     font-weight: 500;
     cursor: pointer;
     transition: all 0.2s ease;
@@ -402,13 +224,13 @@
   .accent-grid {
     display: grid;
     grid-template-columns: repeat(7, 1fr);
-    gap: 8px;
+    gap: 6px;
     margin-bottom: 16px;
   }
 
   .accent-dot {
-    width: 28px;
-    height: 28px;
+    width: 24px;
+    height: 24px;
     border-radius: 50%;
     border: 2px solid transparent;
     cursor: pointer;
@@ -463,95 +285,131 @@
     text-decoration: none;
     width: 100%;
     margin-top: auto;
+    text-align: center;
+    padding: 10px;
+    border-radius: 8px;
+    font-weight: 600;
+    font-size: 0.88rem;
   }
 
-  /* --- Extension Hub Card --- */
-  .extension-card {
-    grid-column: span 2;
-  }
-
-  .extension-text {
+  /* --- Playground CTA Card --- */
+  .playground-text {
     font-size: 0.85rem;
     color: var(--ctp-subtext0);
     line-height: 1.5;
     margin-bottom: 16px;
   }
 
-  .service-map {
-    display: flex;
-    align-items: stretch;
-    gap: 8px;
-    margin-bottom: 16px;
-    min-width: 0;
-  }
-
-  .service-node {
-    flex: 1;
-    min-width: 0;
-    display: flex;
-    flex-direction: column;
-    gap: 4px;
-    padding: 10px;
-    border-radius: 10px;
-    border: 1px solid var(--ctp-surface1);
-    background: var(--ctp-crust);
-    color: inherit;
-    text-decoration: none;
-    transition: all 0.2s ease;
-  }
-
-  .service-node:hover {
-    border-color: var(--accent);
-    background: color-mix(in srgb, var(--accent) 8%, var(--ctp-crust));
-    opacity: 1;
-  }
-
-  .service-node.active-node {
-    border-color: color-mix(in srgb, var(--accent) 60%, var(--ctp-surface1));
-    background: color-mix(in srgb, var(--accent) 12%, var(--ctp-crust));
-  }
-
-  .service-label {
-    font-size: 0.78rem;
-    font-weight: 700;
-    color: var(--ctp-text);
-    white-space: nowrap;
-    overflow: hidden;
-    text-overflow: ellipsis;
-  }
-
-  .service-domain {
-    font-size: 0.68rem;
-    color: var(--ctp-overlay1);
-    font-family: "JetBrains Mono", "Fira Code", monospace;
-    white-space: nowrap;
-    overflow: hidden;
-    text-overflow: ellipsis;
-  }
-
-  .service-arrow {
-    display: flex;
-    align-items: center;
-    color: var(--ctp-overlay0);
-    font-family: "JetBrains Mono", "Fira Code", monospace;
-  }
-
-  .extension-btn {
+  .playground-btn {
     text-decoration: none;
     width: 100%;
     margin-top: auto;
+    text-align: center;
+    padding: 10px;
+    border-radius: 8px;
+    font-weight: 600;
+    font-size: 0.88rem;
+    display: flex;
+    align-items: center;
+    justify-content: center;
   }
 
-  /* --- Location Card --- */
-  .location-pin {
-    margin-left: auto;
-  }
-
-  .map-container {
+  /* --- Location Visual (Minimal Grid Radar) --- */
+  .location-visual {
     flex: 1;
     margin-bottom: 12px;
     border-radius: 12px;
     overflow: hidden;
+    background: var(--ctp-crust);
+    border: 1px solid var(--ctp-surface0);
+    position: relative;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+
+  .radar-map {
+    position: relative;
+    width: 120px;
+    height: 120px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+
+  .radar-ping {
+    width: 8px;
+    height: 8px;
+    background: var(--accent);
+    border-radius: 50%;
+    position: relative;
+    z-index: 5;
+    box-shadow: 0 0 10px var(--accent);
+  }
+
+  .radar-ring {
+    position: absolute;
+    border: 1px dashed color-mix(in srgb, var(--accent) 20%, transparent);
+    border-radius: 50%;
+    animation: radar-expand 4s infinite linear;
+  }
+
+  .ring-1 {
+    width: 40px;
+    height: 40px;
+    animation-delay: 0s;
+  }
+
+  .ring-2 {
+    width: 80px;
+    height: 80px;
+    animation-delay: 1.3s;
+  }
+
+  .ring-3 {
+    width: 120px;
+    height: 120px;
+    animation-delay: 2.6s;
+  }
+
+  .radar-line {
+    position: absolute;
+    width: 50%;
+    height: 1px;
+    background: linear-gradient(to right, transparent, var(--accent));
+    transform-origin: left center;
+    left: 50%;
+    top: 50%;
+    animation: radar-sweep 5s infinite linear;
+    z-index: 2;
+  }
+
+  .coordinates {
+    position: absolute;
+    bottom: 0px;
+    font-size: 0.65rem;
+    color: var(--ctp-overlay1);
+    font-family: "JetBrains Mono", monospace;
+  }
+
+  @keyframes radar-expand {
+    0% {
+      transform: scale(0.3);
+      opacity: 0.8;
+    }
+    100% {
+      transform: scale(1);
+      opacity: 0;
+    }
+  }
+
+  @keyframes radar-sweep {
+    from {
+      transform: rotate(0deg);
+    }
+    to {
+      transform: rotate(360deg);
+    }
   }
 
   .location-footer {
@@ -572,318 +430,114 @@
     font-family: "JetBrains Mono", "Fira Code", monospace;
   }
 
-  /* --- Fun Zone Card --- */
-  .fun-effects {
-    display: grid;
-    grid-template-columns: repeat(3, 1fr);
-    gap: 8px;
-    margin-bottom: 16px;
+  /* --- Neofetch Widget Style --- */
+  .neofetch-terminal {
     flex: 1;
-  }
-
-  .fun-effect-btn {
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    justify-content: center;
-    gap: 8px;
-    padding: 16px 8px;
-    border-radius: 12px;
-    border: 1px solid var(--ctp-surface1);
-    background: var(--ctp-crust);
-    cursor: pointer;
-    transition: all 0.2s ease;
-    outline: none;
-  }
-
-  .fun-effect-btn:hover {
-    border-color: var(--accent);
-    background: color-mix(in srgb, var(--accent) 8%, var(--ctp-crust));
-    transform: translateY(-2px);
-  }
-
-  .fun-effect-btn.active {
-    border-color: var(--accent);
-    background: color-mix(in srgb, var(--accent) 15%, var(--ctp-crust));
-    box-shadow: 0 0 12px color-mix(in srgb, var(--accent) 25%, transparent);
-  }
-
-  .fun-effect-icon {
-    font-size: 1.4rem;
-  }
-
-  .fun-effect-label {
-    font-size: 0.72rem;
-    font-weight: 500;
-    color: var(--ctp-subtext0);
-    font-family: "JetBrains Mono", "Fira Code", monospace;
-  }
-
-  .fun-effect-btn.active .fun-effect-label {
-    color: var(--accent);
-    font-weight: 600;
-  }
-
-  .random-btn {
-    border-style: dashed;
-  }
-
-  .random-btn:hover {
-    border-style: solid;
-  }
-
-  /* Rainbow border when Gray World is active */
-  :global(html.gray-world) .gray-world-btn.active {
-    position: relative;
-    border-color: transparent !important;
-    background: transparent !important;
-    overflow: hidden;
-    filter: none !important;
-    z-index: 0;
-    border-radius: 12px;
-  }
-
-  :global(html.gray-world) .gray-world-btn.active::before {
-    content: "";
-    position: absolute;
-    top: 50%;
-    left: 50%;
-    width: 200%;
-    height: 200%;
-    background: conic-gradient(
-      #ff0000,
-      #ff8800,
-      #ffff00,
-      #00ff00,
-      #0088ff,
-      #8800ff,
-      #ff0088,
-      #ff0000
-    );
-    animation: rainbow-spin 2s linear infinite;
-    z-index: -2;
-  }
-
-  :global(html.gray-world) .gray-world-btn.active::after {
-    content: "";
-    position: absolute;
-    inset: 3px;
-    border-radius: 9px;
-    background: #ffffff;
-    z-index: -1;
-  }
-
-  :global(html.gray-world) .gray-world-btn.active .fun-effect-icon,
-  :global(html.gray-world) .gray-world-btn.active .fun-effect-label {
-    color: #000000 !important;
-  }
-
-  @keyframes rainbow-spin {
-    from {
-      transform: translate(-50%, -50%) rotate(0deg);
-    }
-    to {
-      transform: translate(-50%, -50%) rotate(360deg);
-    }
-  }
-
-  .fun-status {
-    font-size: 0.78rem;
-    color: var(--ctp-subtext0);
-    margin-top: auto;
-  }
-
-  /* --- Latest SaaS Card --- */
-  .span-full {
-    grid-column: 1 / -1;
-  }
-
-  .latest-card {
-    justify-content: flex-start;
-    min-height: auto;
-  }
-
-  .latest-card-header {
-    justify-content: space-between;
-    width: 100%;
-    margin-bottom: 14px;
-  }
-
-  .card-header-left {
-    display: flex;
-    align-items: center;
-    gap: 8px;
-  }
-
-  .latest-grid {
-    display: flex;
-    flex-direction: column;
-    gap: 10px;
-    overflow: hidden;
-  }
-
-  .latest-link {
-    text-decoration: none;
-    color: inherit;
-    display: block;
-    border-radius: 12px;
+    font-family: "JetBrains Mono", monospace;
     background: var(--ctp-crust);
     border: 1px solid var(--ctp-surface0);
-    transition: all 0.2s ease;
-    overflow: hidden;
-    min-width: 0;
-  }
-
-  .latest-link:hover {
-    border-color: var(--accent);
-    background: color-mix(in srgb, var(--accent) 5%, var(--ctp-crust));
-    transform: translateY(-1px);
-    box-shadow: 0 4px 16px color-mix(in srgb, var(--accent) 10%, transparent);
-    opacity: 1;
-  }
-
-  .latest-link:hover .latest-name {
-    color: var(--accent);
-  }
-
-  .latest-link-inner {
-    display: flex;
-    align-items: center;
-    gap: 20px;
-    padding: 14px 18px;
-    min-width: 0;
-    overflow: hidden;
-  }
-
-  .latest-main {
-    flex: 1;
-    min-width: 0;
+    border-radius: 10px;
+    padding: 14px;
     display: flex;
     flex-direction: column;
-    gap: 4px;
+    gap: 8px;
+    font-size: 0.75rem;
+    line-height: 1.4;
   }
 
-  .latest-name {
-    font-size: 0.92rem;
+  .neofetch-prompt {
     font-weight: 700;
-    color: var(--ctp-text);
-    transition: color 0.2s;
-    white-space: nowrap;
-    overflow: hidden;
-    text-overflow: ellipsis;
-  }
-
-  .latest-desc {
-    font-size: 0.78rem;
     color: var(--ctp-subtext0);
-    line-height: 1.5;
+    margin-bottom: 4px;
+    border-bottom: 1px dashed var(--ctp-surface1);
+    padding-bottom: 6px;
+  }
+
+  .prompt-user {
+    color: var(--accent);
+  }
+
+  .prompt-at {
+    color: var(--ctp-subtext1);
+  }
+
+  .prompt-host {
+    color: var(--ctp-text);
+  }
+
+  .prompt-dir {
+    color: var(--accent);
+  }
+
+  .neofetch-body {
+    display: flex;
+    gap: 16px;
+    align-items: stretch;
+  }
+
+  .neofetch-logo {
+    display: flex;
+    flex-direction: column;
+    justify-content: space-around;
+    align-items: center;
+    width: 36px;
+    background: color-mix(in srgb, var(--accent) 8%, var(--ctp-mantle));
+    border-radius: 6px;
+    padding: 8px 0;
+    border: 1px solid color-mix(in srgb, var(--accent) 15%, transparent);
+    font-size: 1.1rem;
+  }
+
+  .neofetch-info {
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+  }
+
+  .info-row {
+    display: flex;
+    justify-content: space-between;
+    gap: 12px;
+  }
+
+  .info-key {
+    color: var(--accent);
+    font-weight: 700;
+    min-width: 40px;
+  }
+
+  .info-val {
+    color: var(--ctp-subtext0);
+    text-align: right;
     white-space: nowrap;
     overflow: hidden;
     text-overflow: ellipsis;
   }
 
-  .latest-footer {
-    display: flex;
-    align-items: center;
-    gap: 10px;
-    flex-shrink: 1;
-    min-width: 0;
-    overflow: hidden;
+  .active-status {
+    color: var(--ctp-green);
+    font-weight: bold;
+    animation: status-blink 1.5s infinite alternate;
   }
 
-  .latest-date {
-    font-size: 0.7rem;
-    color: var(--ctp-overlay1);
-    font-family: "JetBrains Mono", "Fira Code", monospace;
-    white-space: nowrap;
-  }
-
-  .latest-tags {
-    display: flex;
-    gap: 5px;
-    flex-wrap: wrap;
-    overflow: hidden;
-    min-width: 0;
-  }
-
-  .mini-tag {
-    font-size: 0.65rem;
-    padding: 2px 7px;
-    border-radius: 999px;
-    border: 1px solid var(--tag-color, var(--ctp-surface2));
-    color: var(--tag-color, var(--ctp-subtext0));
-    font-family: "JetBrains Mono", "Fira Code", monospace;
-    white-space: nowrap;
-  }
-
-  .latest-view-all {
-    display: flex;
-    align-items: center;
-    gap: 5px;
-    font-size: 0.78rem;
-    color: var(--accent);
-    text-decoration: none;
-    font-weight: 600;
-    transition: opacity 0.2s;
-    white-space: nowrap;
-  }
-
-  .latest-view-all:hover {
-    opacity: 0.8;
-  }
-
-  @media (max-width: 1024px) {
-    .dashboard-grid {
-      grid-template-columns: repeat(2, 1fr);
-    }
-
-    .extension-card {
-      grid-column: 1 / -1;
-    }
+  @keyframes status-blink {
+    0% { opacity: 0.7; }
+    100% { opacity: 1; }
   }
 
   @media (max-width: 768px) {
     .dashboard-grid {
       grid-template-columns: 1fr;
-      gap: 12px;
+      gap: 16px;
     }
     .dash-card {
       min-height: auto;
-      padding: 16px;
+      padding: 18px;
     }
-    .map-container {
-      height: 160px;
+    .location-visual {
+      height: 130px;
       flex: none;
-    }
-    .latest-link-inner {
-      flex-direction: column;
-      align-items: flex-start;
-      gap: 10px;
-    }
-    .latest-footer {
-      width: 100%;
-      flex-wrap: wrap;
-      gap: 8px;
-    }
-    .service-map {
-      flex-direction: column;
-    }
-    .service-arrow {
-      justify-content: center;
-      transform: rotate(90deg);
-    }
-    .accent-grid {
-      gap: 6px;
-    }
-    .accent-dot {
-      width: 24px;
-      height: 24px;
-    }
-  }
-
-  @media (max-width: 520px) {
-    .fun-effects {
-      grid-template-columns: repeat(2, 1fr);
     }
   }
 </style>

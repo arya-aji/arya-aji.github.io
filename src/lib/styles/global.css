@@ -103,32 +103,36 @@ a:hover {
 
 /* --- Card --- */
 .card {
-  background: var(--ctp-mantle);
-  border: 1px solid var(--ctp-surface0);
+  background: color-mix(in srgb, var(--ctp-mantle) 80%, transparent);
+  backdrop-filter: blur(12px);
+  -webkit-backdrop-filter: blur(12px);
+  border: 1px solid color-mix(in srgb, var(--ctp-surface0) 50%, transparent);
   border-radius: 16px;
   padding: 24px;
-  transition: all 0.3s ease;
+  transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
 }
 
 .card:hover {
-  border-color: var(--ctp-surface1);
-  box-shadow: 0 8px 32px rgba(0, 0, 0, 0.08);
+  border-color: var(--accent);
+  box-shadow: 0 16px 36px rgba(0, 0, 0, 0.12), 0 0 25px color-mix(in srgb, var(--accent) 5%, transparent);
+  transform: translateY(-2px);
 }
 
 /* --- Glassmorphism Card --- */
 .glass-card {
-  background: color-mix(in srgb, var(--ctp-mantle) 80%, transparent);
-  backdrop-filter: blur(12px);
-  -webkit-backdrop-filter: blur(12px);
-  border: 1px solid color-mix(in srgb, var(--ctp-surface0) 60%, transparent);
+  background: color-mix(in srgb, var(--ctp-mantle) 70%, transparent);
+  backdrop-filter: blur(16px);
+  -webkit-backdrop-filter: blur(16px);
+  border: 1px solid color-mix(in srgb, var(--ctp-surface0) 50%, transparent);
   border-radius: 16px;
   padding: 24px;
-  transition: all 0.3s ease;
+  transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
 }
 
 .glass-card:hover {
-  border-color: var(--ctp-surface1);
-  box-shadow: 0 8px 32px rgba(0, 0, 0, 0.1);
+  border-color: var(--accent);
+  box-shadow: 0 20px 40px rgba(0, 0, 0, 0.15), 0 0 30px color-mix(in srgb, var(--accent) 8%, transparent);
+  transform: translateY(-2px);
 }
 
 /* --- Tag Pill --- */

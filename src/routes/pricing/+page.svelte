@@ -8,8 +8,6 @@
     ChevronDown,
     ChevronUp
   } from "lucide-svelte";
-  import Navbar from "$lib/components/Navbar.svelte";
-  import Footer from "$lib/components/Footer.svelte";
   import { language } from "$lib/stores/language";
 
   // State toggles
@@ -97,8 +95,6 @@
     content="Professional development services with transparent starting estimates, dual-currency toggles, and clear terms."
   />
 </svelte:head>
-
-<Navbar />
 
 <main class="services-page">
   <!-- Hero Section -->
@@ -357,7 +353,6 @@
   </section>
 </main>
 
-<Footer />
 
 <style>
   .services-page {

@@ -1,6 +1,4 @@
 <script lang="ts">
-  import Navbar from '$lib/components/Navbar.svelte';
-  import Footer from '$lib/components/Footer.svelte';
   import { language } from '$lib/stores/language';
 </script>
 
@@ -9,7 +7,6 @@
   <meta name="description" content="I'm Arya Aji Kusuma — a developer from Jakarta building SaaS platforms, browser extensions, and full-stack web apps. Passionate about turning ideas into real, working products." />
 </svelte:head>
 
-<Navbar />
 
 <main class="page-main">
   <div class="container">
@@ -101,7 +98,6 @@
   </div>
 </main>
 
-<Footer />
 
 <style>
   .page-main {

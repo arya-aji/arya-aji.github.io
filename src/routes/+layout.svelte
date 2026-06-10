@@ -1,5 +1,7 @@
 <script lang="ts">
   import '$lib/styles/global.css';
+  import Navbar from '$lib/components/Navbar.svelte';
+  import Footer from '$lib/components/Footer.svelte';
   import { theme, accent, bgEffect, snowEffect, mouseTremorEffect, floodEffect, grayWorldEffect } from '$lib/stores/theme';
   import { onMount } from 'svelte';
   import { afterNavigate } from '$app/navigation';
@@ -323,9 +325,13 @@
   </div>
 {/if}
 
+<Navbar />
+
 <div id="main-content" class="app" class:mounted>
   {@render children()}
 </div>
+
+<Footer />
 
 <style>
   .skip-link {

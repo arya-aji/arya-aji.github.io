@@ -1,14 +1,10 @@
-<script lang="ts">
-  import Navbar from "$lib/components/Navbar.svelte";
-  import Footer from "$lib/components/Footer.svelte";
-</script>
+
 
 <svelte:head>
   <title>Refund & Cancellation Policy | Arya Aji Kusuma</title>
   <meta name="description" content="Refund and Cancellation Policy for platforms and services operated under aryaaji.com." />
 </svelte:head>
 
-<Navbar />
 
 <main class="legal-page container pt-32 pb-32">
   <div class="legal-header">
@@ -91,7 +87,6 @@
   </div>
 </main>
 
-<Footer />
 
 <style>
   .legal-page {

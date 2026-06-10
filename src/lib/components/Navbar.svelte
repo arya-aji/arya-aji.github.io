@@ -283,8 +283,10 @@
 <style>
   /* ─── Navbar ─────────────────────────────────────────── */
   .navbar {
-    position: sticky;
+    position: fixed;
     top: 0;
+    left: 0;
+    right: 0;
     z-index: 200;
     background: color-mix(in srgb, var(--ctp-base) 80%, transparent);
     backdrop-filter: blur(16px);
@@ -292,7 +294,6 @@
     border-bottom: 1px solid
       color-mix(in srgb, var(--ctp-surface0) 50%, transparent);
     transition: background 0.3s ease;
-    overflow: hidden;
   }
 
   .navbar-inner {

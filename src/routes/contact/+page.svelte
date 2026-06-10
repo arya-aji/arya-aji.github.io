@@ -1,6 +1,4 @@
 <script lang="ts">
-  import Navbar from "$lib/components/Navbar.svelte";
-  import Footer from "$lib/components/Footer.svelte";
   import ContactForm from "$lib/components/ContactForm.svelte";
   import { Mail, MessageCircle, Clock } from "lucide-svelte";
   import { language } from "$lib/stores/language";
@@ -11,7 +9,6 @@
   <meta name="description" content="Get in touch with Aji. Submit your project brief, category, and budget estimates securely." />
 </svelte:head>
 
-<Navbar />
 
 <main class="contact-page container pt-32 pb-32">
   <div class="contact-intro">
@@ -46,7 +43,6 @@
   </div>
 </main>
 
-<Footer />
 
 <style>
   .contact-page {

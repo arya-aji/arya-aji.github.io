@@ -1,6 +1,4 @@
 <script lang="ts">
-  import Navbar from '$lib/components/Navbar.svelte';
-  import Footer from '$lib/components/Footer.svelte';
   import { language } from '$lib/stores/language';
   import { CheckCircle2, ArrowLeft, Mail } from 'lucide-svelte';
 </script>
@@ -10,8 +8,6 @@
   <meta name="description" content="Pesan Anda sudah terkirim. Terima kasih sudah menghubungi Arya Aji Kusuma." />
   <meta name="robots" content="noindex" />
 </svelte:head>
-
-<Navbar />
 
 <main class="page-main">
   <div class="container">
@@ -52,8 +48,6 @@
     </div>
   </div>
 </main>
-
-<Footer />
 
 <style>
   .page-main {

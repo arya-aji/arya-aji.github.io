@@ -1,6 +1,4 @@
 <script lang="ts">
-  import Navbar from '$lib/components/Navbar.svelte';
-  import Footer from '$lib/components/Footer.svelte';
   import { onMount } from 'svelte';
 
   const steps = [
@@ -100,8 +98,6 @@
   />
 </svelte:head>
 
-<Navbar />
-
 <main class="page-main">
   <div class="container">
 
@@ -179,8 +175,6 @@
 
   </div>
 </main>
-
-<Footer />
 
 <style>
   .page-main {

@@ -1,6 +1,4 @@
 <script lang="ts">
-  import Navbar from '$lib/components/Navbar.svelte';
-  import Footer from '$lib/components/Footer.svelte';
   import { language } from '$lib/stores/language';
   import { MapPin, Mail, Briefcase, GraduationCap, Code2, ExternalLink } from 'lucide-svelte';
 
@@ -114,8 +112,6 @@
   <title>Resume | Arya Aji Kusuma</title>
   <meta name="description" content="Resume of Arya Aji Kusuma — First Expert Computer Technician with 7 years building full-stack applications, automation tools, and AI-integrated systems in government." />
 </svelte:head>
-
-<Navbar />
 
 <main class="page-main">
   <div class="container">
@@ -245,8 +241,6 @@
     </div>
   </div>
 </main>
-
-<Footer />
 
 <style>
   .page-main {

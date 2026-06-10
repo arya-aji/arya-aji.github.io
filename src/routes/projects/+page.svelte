@@ -1,6 +1,4 @@
 <script lang="ts">
-  import Navbar from '$lib/components/Navbar.svelte';
-  import Footer from '$lib/components/Footer.svelte';
   import CaseStudyModal from '$lib/components/CaseStudyModal.svelte';
   import { Star, Tag, ExternalLink, ChevronLeft, ChevronRight } from 'lucide-svelte';
   import { tagColors } from '$lib/data/projects';
@@ -78,8 +76,6 @@
   <title>{$language === 'EN' ? 'Projects' : 'Proyek'} | Arya Aji Kusuma</title>
   <meta name="description" content="Projects built by Arya Aji Kusuma — from geospatial dashboards to automation tools." />
 </svelte:head>
-
-<Navbar />
 
 <main class="page-main">
   <div class="container">
@@ -334,7 +330,6 @@
   <CaseStudyModal project={caseStudyProject} onclose={() => caseStudyProject = null} />
 {/if}
 
-<Footer />
 
 <style>
   .page-main {
@@ -434,9 +429,11 @@
     grid-template-columns: 1fr 1.2fr;
     border-radius: 18px;
     overflow: hidden;
-    background: var(--ctp-mantle);
-    border: 1px solid var(--ctp-surface0);
-    transition: all 0.3s ease;
+    background: color-mix(in srgb, var(--ctp-mantle) 80%, transparent);
+    backdrop-filter: blur(12px);
+    -webkit-backdrop-filter: blur(12px);
+    border: 1px solid color-mix(in srgb, var(--ctp-surface0) 50%, transparent);
+    transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
     min-height: 340px;
     position: relative;
     height: 100%;
@@ -455,8 +452,9 @@
   }
 
   .project-card-wrapper:hover {
-    border-color: var(--ctp-surface1);
-    box-shadow: 0 12px 40px rgba(0, 0, 0, 0.12);
+    border-color: var(--accent);
+    box-shadow: 0 20px 48px rgba(0, 0, 0, 0.15), 0 0 30px color-mix(in srgb, var(--accent) 5%, transparent);
+    transform: translateY(-2px);
   }
 
   .project-card-wrapper:hover::before {
@@ -473,20 +471,32 @@
 
   .project-visual-side {
     padding: 24px;
-    background: color-mix(in srgb, var(--ctp-crust) 50%, transparent);
-    border-right: 1px solid var(--ctp-surface0);
+    background: color-mix(in srgb, var(--ctp-crust) 30%, transparent);
+    border-right: 1px solid color-mix(in srgb, var(--ctp-surface0) 50%, transparent);
     display: flex;
     flex-direction: column;
   }
 
   .terminal-card {
-    background: var(--ctp-crust);
+    background: color-mix(in srgb, var(--ctp-crust) 65%, transparent);
+    backdrop-filter: blur(6px);
+    -webkit-backdrop-filter: blur(6px);
     border-radius: 12px;
     display: flex;
     flex-direction: column;
     height: 100%;
-    border: 1px solid var(--ctp-surface0);
-    box-shadow: 0 8px 24px rgba(0,0,0,0.15);
+    border: 1px solid color-mix(in srgb, var(--ctp-surface0) 70%, transparent);
+    box-shadow: 0 12px 32px rgba(0,0,0,0.25);
+    position: relative;
+  }
+
+  .terminal-card::after {
+    content: '';
+    position: absolute;
+    top: 0; left: 0; right: 0;
+    height: 1px;
+    background: linear-gradient(to right, transparent, rgba(255, 255, 255, 0.08), transparent);
+    pointer-events: none;
   }
 
   .terminal-header {
@@ -495,8 +505,8 @@
     justify-content: center;
     position: relative;
     padding: 12px 16px;
-    border-bottom: 1px solid var(--ctp-surface0);
-    background: color-mix(in srgb, var(--ctp-mantle) 50%, transparent);
+    border-bottom: 1px solid color-mix(in srgb, var(--ctp-surface0) 70%, transparent);
+    background: color-mix(in srgb, var(--ctp-mantle) 40%, transparent);
   }
 
   .terminal-dots {
