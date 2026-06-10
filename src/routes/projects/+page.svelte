@@ -7,19 +7,51 @@
   import { language } from '$lib/stores/language';
 
   import { onMount } from 'svelte';
-  import { fetchProjects } from '$lib/data/projects';
+  import { fetchProjects, projectsCache } from '$lib/data/projects';
+  import { get } from 'svelte/store';
 
   let { data } = $props<{ data: { projects: Project[] } }>();
-  let projects = $state<Project[]>(data.projects);
+  
+  // Try to load from the cached state first
+  const cached = get(projectsCache);
+  let projects = $state<Project[]>(cached.length > 0 ? cached : data.projects);
+  
+  let isLoading = $state(projects.length === 0);
+  let loadingProgress = $state(0);
 
   onMount(async () => {
+    // If projects are already loaded, do not trigger loading animation
+    if (projects.length > 0) {
+      isLoading = false;
+      return;
+    }
+
+    isLoading = true;
+    loadingProgress = 5;
+    
+    // Increment loading progress periodically to give visual progress feedback
+    const interval = setInterval(() => {
+      if (loadingProgress < 90) {
+        loadingProgress += Math.floor(Math.random() * 8) + 4;
+      }
+    }, 120);
+
     try {
       const live = await fetchProjects();
+      clearInterval(interval);
+      loadingProgress = 100;
+      
       if (live && live.length > 0) {
         projects = live;
+        projectsCache.set(live);
       }
     } catch (err) {
+      clearInterval(interval);
       console.error('Failed to fetch live projects:', err);
+    } finally {
+      setTimeout(() => {
+        isLoading = false;
+      }, 250); // smooth entry transition
     }
   });
 
@@ -86,240 +118,272 @@
         : 'Saya telah membangun banyak proyek selama bertahun-tahun. Berikut adalah proyek publik utama, sedangkan sisanya merupakan proyek internal atau pemerintah. Klik salah satu untuk info lebih lanjut.'}
     </p>
 
-    <!-- Top Slider (up to 10 projects) -->
-    {#if sliderProjects.length > 0}
-      {#if sliderProjects.length > 1}
-        <div class="slider-header-controls">
-          <div class="slider-controls">
-            <button class="slider-btn" onclick={prevSlide} aria-label="Previous project">
-              <ChevronLeft size={20} />
-            </button>
-            <div class="slider-dots-top">
-              {#each sliderProjects as _, i}
-                <button 
-                  class="slider-dot {i === currentIndex ? 'active' : ''}" 
-                  onclick={() => currentIndex = i}
-                  aria-label="Go to project {i + 1}"
-                ></button>
-              {/each}
-            </div>
-            <button class="slider-btn" onclick={nextSlide} aria-label="Next project">
-              <ChevronRight size={20} />
-            </button>
+    {#if isLoading}
+      <div class="loader-container">
+        <div class="loader-card">
+          <div class="loader-title">{$language === 'EN' ? 'Loading Projects...' : 'Memuat Proyek...'}</div>
+          <div class="progress-bar-track">
+            <div class="progress-bar-fill" style="width: {loadingProgress}%"></div>
           </div>
+          <div class="progress-text">{loadingProgress}%</div>
         </div>
-      {/if}
-
-      <div class="slider-viewport">
-        <div class="slider-track" style="transform: translateX(-{currentIndex * 100}%);">
-          {#each sliderProjects as highlight}
-            <div class="slider-slide">
-              <!-- svelte-ignore a11y_no_static_element_interactions -->
-              <div class="project-card-wrapper featured" onmousemove={(e) => handleMouseMove(e, highlight)} onmouseleave={handleMouseLeave}>
-                
-                <!-- Left side: Visuals & Terminal -->
-                <div class="project-visual-side">
-                  <div class="terminal-card">
-                    <div class="terminal-header">
-                      <div class="terminal-dots">
-                        <span class="dot red"></span>
-                        <span class="dot yellow"></span>
-                        <span class="dot green"></span>
-                      </div>
-                      <div class="repo-name-header">
-                        <span class="repo-org">arya-aji</span>
-                        <span class="repo-sep"> / </span>
-                        <span class="repo-project">{highlight.slug}</span>
-                      </div>
-                    </div>
-                    <div class="terminal-content">
-                      <div class="terminal-preview">
-                        {#if highlight.image}
-                          <div class="preview-placeholder has-image" role="img" aria-label="Project Preview" style="background-image: url('{highlight.image}');"></div>
-                        {:else}
-                          <div class="preview-placeholder" role="img" aria-label="Project Preview">
-                            <svg width="40" height="40" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round">
-                              <rect x="3" y="3" width="18" height="18" rx="2" ry="2"/>
-                              <circle cx="8.5" cy="8.5" r="1.5"/>
-                              <polyline points="21 15 16 10 5 21"/>
-                            </svg>
-                          </div>
-                        {/if}
-                      </div>
-                    </div>
-                  </div>
-                </div>
-
-                <!-- Right side: Information and Actions -->
-                <div class="project-info-side">
-                  <div class="project-info-content">
-                    <div class="title-row" style="display: flex; align-items: center; gap: 12px; margin-bottom: 8px;">
-                      {#if highlight.logo}
-                        <img src={highlight.logo} alt="" style="width: 38px; height: 38px; border-radius: 8px; object-fit: contain; background: #ffffff; padding: 3px; border: 1px solid var(--ctp-surface1); flex-shrink: 0;" />
-                      {/if}
-                      <h3 class="highlight-name" style="margin: 0;">{highlight.title}</h3>
-                      {#if highlight.stars}
-                        <span class="stars">
-                          <Star size={16} fill="currentColor" />
-                          {highlight.stars.toLocaleString()}
-                        </span>
-                      {/if}
-                    </div>
-                    <div class="project-date-badge">{highlight.dateDisplay}</div>
-                    <p class="project-long-desc">{highlight.description}</p>
-                    
-                    <div class="highlight-tags">
-                      <Tag size={16} class="tag-icon" />
-                      {#each highlight.tags as tag}
-                        <span class="highlight-tag" style="--tag-color: {tagColors[tag] || 'var(--accent)'}">
-                          {tag}
-                        </span>
-                      {/each}
-                    </div>
-                  </div>
-
-                  <div class="project-actions">
-                    <button class="action-btn case-study" onclick={() => caseStudyProject = highlight}>
-                      <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 2v20"/><path d="M17 5H9.5a3.5 3.5 0 0 0 0 7h5a3.5 3.5 0 0 1 0 7H6"/></svg>
-                      {$language === 'EN' ? 'Glance' : 'Lihat Sekilas'}
-                    </button>
-                    {#if highlight.live}
-                      <a href={highlight.live} target="_blank" rel="noopener noreferrer" class="action-btn primary">
-                        <ExternalLink size={18} /> {$language === 'EN' ? 'Demo' : 'Demo'}
-                      </a>
-                    {/if}
-                  </div>
-                </div>
+        
+        <!-- Skeleton Grid -->
+        <div class="skeleton-grid">
+          {#each Array(3) as _}
+            <div class="skeleton-card">
+              <div class="skeleton-header">
+                <div class="skeleton-logo"></div>
+                <div class="skeleton-title-line"></div>
+              </div>
+              <div class="skeleton-body">
+                <div class="skeleton-line"></div>
+                <div class="skeleton-line short"></div>
+              </div>
+              <div class="skeleton-footer">
+                <div class="skeleton-badge"></div>
+                <div class="skeleton-button"></div>
               </div>
             </div>
           {/each}
         </div>
       </div>
-    {/if}
-
-    <!-- Grid List for All Projects -->
-    {#if projects.length > 0}
-      <div class="projects-filter-bar">
-        <h2 class="grid-section-title">
-          {#if selectedCategory === 'all'}
-            {$language === 'EN' ? 'All Projects' : 'Semua Proyek'}
-          {:else if selectedCategory === 'extension'}
-            {$language === 'EN' ? 'Browser Extensions' : 'Ekstensi Browser'}
-          {:else if selectedCategory === 'fullstack'}
-            {$language === 'EN' ? 'Fullstack Apps' : 'Aplikasi Fullstack'}
-          {:else if selectedCategory === 'dashboard'}
-            {$language === 'EN' ? 'Dashboards' : 'Dashboard'}
-          {:else if selectedCategory === 'automation'}
-            {$language === 'EN' ? 'Automation' : 'Automasi'}
-          {/if}
-        </h2>
-        <div class="filter-tabs">
-          <button class="filter-tab-btn" class:active={selectedCategory === 'all'} onclick={() => selectedCategory = 'all'}>
-            {$language === 'EN' ? 'All' : 'Semua'}
-          </button>
-          <button class="filter-tab-btn" class:active={selectedCategory === 'extension'} onclick={() => selectedCategory = 'extension'}>
-            {$language === 'EN' ? 'Extensions' : 'Ekstensi'}
-          </button>
-          <button class="filter-tab-btn" class:active={selectedCategory === 'fullstack'} onclick={() => selectedCategory = 'fullstack'}>
-            Fullstack
-          </button>
-          <button class="filter-tab-btn" class:active={selectedCategory === 'dashboard'} onclick={() => selectedCategory = 'dashboard'}>
-            Dashboard
-          </button>
-          <button class="filter-tab-btn" class:active={selectedCategory === 'automation'} onclick={() => selectedCategory = 'automation'}>
-            {$language === 'EN' ? 'Automation' : 'Automasi'}
-          </button>
-        </div>
-      </div>
-      <div class="projects-grid">
-        {#each paginatedGridProjects as project}
-          <!-- svelte-ignore a11y_no_static_element_interactions -->
-          <div
-            class="grid-card"
-            class:featured-grid={project.featured}
-            onmousemove={(e) => handleMouseMove(e, project)}
-            onmouseleave={handleMouseLeave}
-          >
-            <div class="card-header">
-              <div class="card-title-row" style="display: flex; align-items: center; gap: 10px; margin-bottom: 6px;">
-                {#if project.logo}
-                  <img src={project.logo} alt="" style="width: 30px; height: 30px; border-radius: 6px; object-fit: contain; background: #ffffff; padding: 2px; border: 1px solid var(--ctp-surface1); flex-shrink: 0;" />
-                {/if}
-                <h2 class="grid-project-name" style="margin: 0;">{project.title}</h2>
-                {#if project.stars}
-                  <span class="grid-stars">
-                    <Star size={12} fill="currentColor" />
-                    {project.stars.toLocaleString()}
-                  </span>
-                {/if}
-              </div>
-              <time class="grid-project-date" datetime={project.date}>{project.dateDisplay}</time>
-            </div>
-            <p class="grid-project-desc">{project.description}</p>
-            <div class="card-footer">
-              <div class="grid-project-tags">
-                {#each project.tags.slice(0, 3) as tag}
-                  <span class="grid-tag" style="--tag-color: {tagColors[tag] ?? 'var(--accent)'}">
-                    {tag}
-                  </span>
+    {:else}
+      <!-- Top Slider (up to 10 projects) -->
+      {#if sliderProjects.length > 0}
+        {#if sliderProjects.length > 1}
+          <div class="slider-header-controls">
+            <div class="slider-controls">
+              <button class="slider-btn" onclick={prevSlide} aria-label="Previous project">
+                <ChevronLeft size={20} />
+              </button>
+              <div class="slider-dots-top">
+                {#each sliderProjects as _, i}
+                  <button 
+                    class="slider-dot {i === currentIndex ? 'active' : ''}" 
+                    onclick={() => currentIndex = i}
+                    aria-label="Go to project {i + 1}"
+                  ></button>
                 {/each}
-                {#if project.tags.length > 3}
-                  <span class="tag-more">+{project.tags.length - 3}</span>
-                {/if}
               </div>
-              <div class="card-actions">
-                <button class="grid-case-btn" onclick={() => caseStudyProject = project} title="View Case Study">
-                  <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M2 3h6a4 4 0 0 1 4 4v14a3 3 0 0 0-3-3H2z"/><path d="M22 3h-6a4 4 0 0 0-4 4v14a3 3 0 0 1 3-3h7z"/></svg>
-                  {$language === 'EN' ? 'Case Study' : 'Studi Kasus'}
-                </button>
-                {#if project.live}
-                  <a
-                    href={project.live}
-                    target="_blank"
-                    rel="noopener noreferrer"
-                    class="grid-ext-link"
-                    title="Open live site"
-                    aria-label="Open {project.title}"
-                  >
-                    <ExternalLink size={16} />
-                  </a>
-                {/if}
-              </div>
+              <button class="slider-btn" onclick={nextSlide} aria-label="Next project">
+                <ChevronRight size={20} />
+              </button>
             </div>
           </div>
-        {/each}
-      </div>
-      
-      <!-- Pagination Controls -->
-      {#if totalPages > 1}
-        <div class="pagination">
-          <button
-            class="page-btn"
-            disabled={currentPage === 1}
-            onclick={() => currentPage--}
-          >
-            <ChevronLeft size={16} /> {$language === 'EN' ? 'Previous' : 'Sebelumnya'}
-          </button>
-          
-          <div class="page-numbers">
-            {#each Array(totalPages) as _, i}
-              <button 
-                class="page-num {currentPage === i + 1 ? 'active' : ''}" 
-                onclick={() => currentPage = i + 1}
-              >
-                {i + 1}
-              </button>
+        {/if}
+
+        <div class="slider-viewport">
+          <div class="slider-track" style="transform: translateX(-{currentIndex * 100}%);">
+            {#each sliderProjects as highlight}
+              <div class="slider-slide">
+                <!-- svelte-ignore a11y_no_static_element_interactions -->
+                <div class="project-card-wrapper featured" onmousemove={(e) => handleMouseMove(e, highlight)} onmouseleave={handleMouseLeave}>
+                  
+                  <!-- Left side: Visuals & Terminal -->
+                  <div class="project-visual-side">
+                    <div class="terminal-card">
+                      <div class="terminal-header">
+                        <div class="terminal-dots">
+                          <span class="dot red"></span>
+                          <span class="dot yellow"></span>
+                          <span class="dot green"></span>
+                        </div>
+                        <div class="repo-name-header">
+                          <span class="repo-org">arya-aji</span>
+                          <span class="repo-sep"> / </span>
+                          <span class="repo-project">{highlight.slug}</span>
+                        </div>
+                      </div>
+                      <div class="terminal-content">
+                        <div class="terminal-preview">
+                          {#if highlight.image}
+                            <div class="preview-placeholder has-image" role="img" aria-label="Project Preview" style="background-image: url('{highlight.image}');"></div>
+                          {:else}
+                            <div class="preview-placeholder" role="img" aria-label="Project Preview">
+                              <svg width="40" height="40" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round">
+                                <rect x="3" y="3" width="18" height="18" rx="2" ry="2"/>
+                                <circle cx="8.5" cy="8.5" r="1.5"/>
+                                <polyline points="21 15 16 10 5 21"/>
+                              </svg>
+                            </div>
+                          {/if}
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+
+                  <!-- Right side: Information and Actions -->
+                  <div class="project-info-side">
+                    <div class="project-info-content">
+                      <div class="title-row" style="display: flex; align-items: center; gap: 12px; margin-bottom: 8px;">
+                        {#if highlight.logo}
+                          <img src={highlight.logo} alt="" style="width: 38px; height: 38px; border-radius: 8px; object-fit: contain; background: #ffffff; padding: 3px; border: 1px solid var(--ctp-surface1); flex-shrink: 0;" />
+                        {/if}
+                        <h3 class="highlight-name" style="margin: 0;">{highlight.title}</h3>
+                        {#if highlight.stars}
+                          <span class="stars">
+                            <Star size={16} fill="currentColor" />
+                            {highlight.stars.toLocaleString()}
+                          </span>
+                        {/if}
+                      </div>
+                      <div class="project-date-badge">{highlight.dateDisplay}</div>
+                      <p class="project-long-desc">{highlight.description}</p>
+                      
+                      <div class="highlight-tags">
+                        <Tag size={16} class="tag-icon" />
+                        {#each highlight.tags as tag}
+                          <span class="highlight-tag" style="--tag-color: {tagColors[tag] || 'var(--accent)'}">
+                            {tag}
+                          </span>
+                        {/each}
+                      </div>
+                    </div>
+
+                    <div class="project-actions">
+                      <button class="action-btn case-study" onclick={() => caseStudyProject = highlight}>
+                        <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 2v20"/><path d="M17 5H9.5a3.5 3.5 0 0 0 0 7h5a3.5 3.5 0 0 1 0 7H6"/></svg>
+                        {$language === 'EN' ? 'Glance' : 'Lihat Sekilas'}
+                      </button>
+                      {#if highlight.live}
+                        <a href={highlight.live} target="_blank" rel="noopener noreferrer" class="action-btn primary">
+                          <ExternalLink size={18} /> {$language === 'EN' ? 'Demo' : 'Demo'}
+                        </a>
+                      {/if}
+                    </div>
+                  </div>
+                </div>
+              </div>
             {/each}
           </div>
-
-          <button
-            class="page-btn"
-            disabled={currentPage === totalPages}
-            onclick={() => currentPage++}
-          >
-            {$language === 'EN' ? 'Next' : 'Berikutnya'} <ChevronRight size={16} />
-          </button>
         </div>
+      {/if}
+
+      <!-- Grid List for All Projects -->
+      {#if projects.length > 0}
+        <div class="projects-filter-bar">
+          <h2 class="grid-section-title">
+            {#if selectedCategory === 'all'}
+              {$language === 'EN' ? 'All Projects' : 'Semua Proyek'}
+            {:else if selectedCategory === 'extension'}
+              {$language === 'EN' ? 'Browser Extensions' : 'Ekstensi Browser'}
+            {:else if selectedCategory === 'fullstack'}
+              {$language === 'EN' ? 'Fullstack Apps' : 'Aplikasi Fullstack'}
+            {:else if selectedCategory === 'dashboard'}
+              {$language === 'EN' ? 'Dashboards' : 'Dashboard'}
+            {:else if selectedCategory === 'automation'}
+              {$language === 'EN' ? 'Automation' : 'Automasi'}
+            {/if}
+          </h2>
+          <div class="filter-tabs">
+            <button class="filter-tab-btn" class:active={selectedCategory === 'all'} onclick={() => selectedCategory = 'all'}>
+              {$language === 'EN' ? 'All' : 'Semua'}
+            </button>
+            <button class="filter-tab-btn" class:active={selectedCategory === 'extension'} onclick={() => selectedCategory = 'extension'}>
+              {$language === 'EN' ? 'Extensions' : 'Ekstensi'}
+            </button>
+            <button class="filter-tab-btn" class:active={selectedCategory === 'fullstack'} onclick={() => selectedCategory = 'fullstack'}>
+              Fullstack
+            </button>
+            <button class="filter-tab-btn" class:active={selectedCategory === 'dashboard'} onclick={() => selectedCategory = 'dashboard'}>
+              Dashboard
+            </button>
+            <button class="filter-tab-btn" class:active={selectedCategory === 'automation'} onclick={() => selectedCategory = 'automation'}>
+              {$language === 'EN' ? 'Automation' : 'Automasi'}
+            </button>
+          </div>
+        </div>
+        <div class="projects-grid">
+          {#each paginatedGridProjects as project}
+            <!-- svelte-ignore a11y_no_static_element_interactions -->
+            <div
+              class="grid-card"
+              class:featured-grid={project.featured}
+              onmousemove={(e) => handleMouseMove(e, project)}
+              onmouseleave={handleMouseLeave}
+            >
+              <div class="card-header">
+                <div class="card-title-row" style="display: flex; align-items: center; gap: 10px; margin-bottom: 6px;">
+                  {#if project.logo}
+                    <img src={project.logo} alt="" style="width: 30px; height: 30px; border-radius: 6px; object-fit: contain; background: #ffffff; padding: 2px; border: 1px solid var(--ctp-surface1); flex-shrink: 0;" />
+                  {/if}
+                  <h2 class="grid-project-name" style="margin: 0;">{project.title}</h2>
+                  {#if project.stars}
+                    <span class="grid-stars">
+                      <Star size={12} fill="currentColor" />
+                      {project.stars.toLocaleString()}
+                    </span>
+                  {/if}
+                </div>
+                <time class="grid-project-date" datetime={project.date}>{project.dateDisplay}</time>
+              </div>
+              <p class="grid-project-desc">{project.description}</p>
+              <div class="card-footer">
+                <div class="grid-project-tags">
+                  {#each project.tags.slice(0, 3) as tag}
+                    <span class="grid-tag" style="--tag-color: {tagColors[tag] ?? 'var(--accent)'}">
+                      {tag}
+                    </span>
+                  {/each}
+                  {#if project.tags.length > 3}
+                    <span class="tag-more">+{project.tags.length - 3}</span>
+                  {/if}
+                </div>
+                <div class="card-actions">
+                  <button class="grid-case-btn" onclick={() => caseStudyProject = project} title="View Case Study">
+                    <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M2 3h6a4 4 0 0 1 4 4v14a3 3 0 0 0-3-3H2z"/><path d="M22 3h-6a4 4 0 0 0-4 4v14a3 3 0 0 1 3-3h7z"/></svg>
+                    {$language === 'EN' ? 'Case Study' : 'Studi Kasus'}
+                  </button>
+                  {#if project.live}
+                    <a
+                      href={project.live}
+                      target="_blank"
+                      rel="noopener noreferrer"
+                      class="grid-ext-link"
+                      title="Open live site"
+                      aria-label="Open {project.title}"
+                    >
+                      <ExternalLink size={16} />
+                    </a>
+                  {/if}
+                </div>
+              </div>
+            </div>
+          {/each}
+        </div>
+        
+        <!-- Pagination Controls -->
+        {#if totalPages > 1}
+          <div class="pagination">
+            <button
+              class="page-btn"
+              disabled={currentPage === 1}
+              onclick={() => currentPage--}
+            >
+              <ChevronLeft size={16} /> {$language === 'EN' ? 'Previous' : 'Sebelumnya'}
+            </button>
+            
+            <div class="page-numbers">
+              {#each Array(totalPages) as _, i}
+                <button 
+                  class="page-num {currentPage === i + 1 ? 'active' : ''}" 
+                  onclick={() => currentPage = i + 1}
+                >
+                  {i + 1}
+                </button>
+              {/each}
+            </div>
+
+            <button
+              class="page-btn"
+              disabled={currentPage === totalPages}
+              onclick={() => currentPage++}
+            >
+              {$language === 'EN' ? 'Next' : 'Berikutnya'} <ChevronRight size={16} />
+            </button>
+          </div>
+        {/if}
       {/if}
     {/if}
   </div>
@@ -1127,6 +1191,169 @@
       flex-direction: column;
       align-items: flex-start;
       gap: 12px;
+    }
+  }
+
+  /* --- Loader & Skeletons --- */
+  .loader-container {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 40px;
+    margin-top: 40px;
+    width: 100%;
+  }
+
+  .loader-card {
+    background: var(--ctp-mantle);
+    border: 1px solid var(--ctp-surface0);
+    padding: 24px 32px;
+    border-radius: 16px;
+    width: 100%;
+    max-width: 480px;
+    text-align: center;
+    box-shadow: 0 8px 32px rgba(0, 0, 0, 0.2);
+  }
+
+  .loader-title {
+    font-size: 1.1rem;
+    font-weight: 600;
+    color: var(--ctp-text);
+    margin-bottom: 16px;
+    font-family: 'Montserrat', sans-serif;
+  }
+
+  .progress-bar-track {
+    background: var(--ctp-surface0);
+    height: 8px;
+    border-radius: 999px;
+    overflow: hidden;
+    margin-bottom: 10px;
+    position: relative;
+  }
+
+  .progress-bar-fill {
+    height: 100%;
+    background: linear-gradient(90deg, var(--accent) 0%, var(--ctp-lavender) 100%);
+    box-shadow: 0 0 12px var(--accent);
+    transition: width 0.15s ease-out;
+  }
+
+  .progress-text {
+    font-size: 0.85rem;
+    font-family: 'JetBrains Mono', monospace;
+    color: var(--ctp-overlay0);
+  }
+
+  .skeleton-grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 16px;
+    width: 100%;
+  }
+
+  .skeleton-card {
+    background: var(--ctp-mantle);
+    border: 1px solid var(--ctp-surface0);
+    border-radius: 14px;
+    padding: 22px 24px;
+    height: 200px;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    position: relative;
+    overflow: hidden;
+  }
+
+  .skeleton-card::after {
+    content: '';
+    position: absolute;
+    top: 0; left: 0; right: 0; bottom: 0;
+    background: linear-gradient(
+      90deg,
+      transparent 0%,
+      color-mix(in srgb, var(--ctp-surface1) 20%, transparent) 50%,
+      transparent 100%
+    );
+    transform: translateX(-100%);
+    animation: skeleton-shimmer 1.5s infinite;
+  }
+
+  @keyframes skeleton-shimmer {
+    100% {
+      transform: translateX(100%);
+    }
+  }
+
+  .skeleton-header {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+  }
+
+  .skeleton-logo {
+    width: 30px;
+    height: 30px;
+    border-radius: 6px;
+    background: var(--ctp-surface0);
+  }
+
+  .skeleton-title-line {
+    height: 16px;
+    width: 120px;
+    border-radius: 4px;
+    background: var(--ctp-surface0);
+  }
+
+  .skeleton-body {
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+    margin-top: 16px;
+    flex: 1;
+  }
+
+  .skeleton-line {
+    height: 12px;
+    border-radius: 4px;
+    background: var(--ctp-surface0);
+    width: 100%;
+  }
+
+  .skeleton-line.short {
+    width: 60%;
+  }
+
+  .skeleton-footer {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-top: auto;
+  }
+
+  .skeleton-badge {
+    height: 18px;
+    width: 50px;
+    border-radius: 999px;
+    background: var(--ctp-surface0);
+  }
+
+  .skeleton-button {
+    height: 24px;
+    width: 70px;
+    border-radius: 8px;
+    background: var(--ctp-surface0);
+  }
+
+  @media (max-width: 1024px) {
+    .skeleton-grid {
+      grid-template-columns: repeat(2, 1fr);
+    }
+  }
+
+  @media (max-width: 640px) {
+    .skeleton-grid {
+      grid-template-columns: 1fr;
     }
   }
 </style>
