@@ -49,14 +49,6 @@
           <ArrowRight size={16} style="margin-left: 4px;" />
         </a>
 
-        <a href="#services" class="btn btn-secondary hero-secondary-btn">
-          {#if $language === "EN"}
-            View Services
-          {:else}
-            Lihat Layanan
-          {/if}
-        </a>
-
         <div class="social-links">
           <a
             href="https://github.com/arya-aji"
@@ -100,15 +92,12 @@
               /></svg
             >
           </a>
-          <a href="/resume" class="social-capsule" aria-label="Resume" title="Resume">
+          <a href="/resume" class="social-capsule" aria-label="Resume" title="Resume (CV)">
             <svg width="18" height="18" viewBox="0 0 24 24" fill="currentColor"
               ><path
                 d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8l-6-6zM14 3.5L18.5 8H14V3.5zM8 13h8v2H8v-2zm0 4h8v2H8v-2zm0-8h3v2H8V9z"
               /></svg
             >
-          </a>
-          <a href="/#about" class="social-capsule more-link-capsule" title="About Me">
-            <ArrowRight size={16} />
           </a>
         </div>
       </div>

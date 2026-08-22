@@ -68,21 +68,21 @@ export const allProjects: Project[] = [
   {
     slug: "blur-your-whatsapp",
     title: "Blur Your WhatsApp",
-    name: "blur-your-whatsapp",
+    name: "Blur Your WhatsApp",
     org: "arya-aji",
-    date: "2024-02",
-    dateDisplay: "Feb 2024",
-    description: "Ekstensi browser Chrome untuk menyamarkan pesan dan kontak WhatsApp Web demi menjaga privasi di ruang publik.",
-    longDesc: "Privacy-focused Chrome extension to blur sensitive WhatsApp Web chat details, contact names, and media previews.",
-    problem: "Privasi chat WhatsApp Web sering terekspos saat bekerja di kafe, kantor, atau ruang publik terbuka.",
-    solution: "Membuat ekstensi browser Manifest V3 yang otomatis mengaburkan pesan, foto profil, dan preview media dengan toggle cepat.",
+    date: "2024-03",
+    dateDisplay: "Mar 2024",
+    description: "A lightweight browser extension that blurs WhatsApp Web chat previews and contact names for privacy when sharing your screen.",
+    longDesc: "A lightweight browser extension that blurs WhatsApp Web chat previews and contact names for privacy when sharing your screen.",
+    problem: "Sharing your screen or working in public spaces exposes private WhatsApp Web chats, contact names, and media previews.",
+    solution: "Built a Manifest V3 Chrome extension that instantly applies CSS blur filters across sensitive elements with zero performance overhead.",
     results: [
       { metric: "100%", label: "Privacy Protection" },
-      { metric: "Fast", label: "Zero Latency" }
+      { metric: "0ms", label: "Zero Latency" }
     ],
-    tags: ["Chrome Extension", "JavaScript", "CSS", "Manifest V3"],
+    tags: ["javascript", "extension", "privacy", "productivity", "web"],
     category: "extension",
-    live: "https://extension.aryaaji.com",
+    live: "https://chromewebstore.google.com/detail/blur-your-whatsapp/knhgdpafncoifgmbcfkclhglcifjhpmc",
     github: "https://github.com/arya-aji/blur-your-whatsapp",
     featured: true,
     visible: true,
@@ -105,8 +105,8 @@ export async function fetchProjects(fetchFn?: typeof fetch): Promise<Project[]> 
       }
     });
     if (!res.ok) throw new Error(`API returned status ${res.status}`);
-    const data = await res.json();
-    return data.map((p: any) => ({
+    const apiData = await res.json();
+    const mapped = apiData.map((p: any) => ({
       ...p,
       image: p.banner || p.gif || p.thumbnailUrl || p.image || "/placeholder.jpg",
       logo: p.thumbnailUrl || p.logo || "",
@@ -118,6 +118,11 @@ export async function fetchProjects(fetchFn?: typeof fetch): Promise<Project[]> 
       visible: true,
       category: p.category === "portfolio" ? "fullstack" : p.category
     }));
+
+    // Merge API data with local projects (avoid duplicate slugs)
+    const localSlugs = new Set(projects.map(p => p.slug));
+    const uniqueApi = mapped.filter((p: any) => !localSlugs.has(p.slug));
+    return [...projects, ...uniqueApi];
   } catch (err) {
     console.error("Error fetching projects from API, falling back to static projects list:", err);
     return projects;

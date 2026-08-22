@@ -11,7 +11,7 @@
 </script>
 
 <svelte:head>
-  <title>Arya Aji Kusuma | Full-Stack Builder & Automation Specialist</title>
+  <title>Arya Aji Kusuma | Automation Tools, Chrome Extensions & Web Apps</title>
   <meta name="description" content="Custom Chrome extensions, Python data automation workflows, and lightweight web applications. Available for fixed-price contracts on Upwork." />
 </svelte:head>
 
@@ -19,8 +19,8 @@
   <Hero />
   <ServicesGrid />
   <FeaturedProjects projects={featuredProjects} />
-  <AboutSection />
   <ContactSection />
+  <AboutSection />
 </main>
 
 <style>

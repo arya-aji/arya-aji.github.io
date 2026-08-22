@@ -1,74 +1,71 @@
 <script lang="ts">
-  import ContactForm from "$lib/components/ContactForm.svelte";
   import { Mail, Clock, ShieldCheck, ArrowRight } from "lucide-svelte";
   import { language } from "$lib/stores/language";
 </script>
 
 <section class="contact-section section" id="contact">
   <div class="container">
-    <div class="contact-grid">
-      <!-- Left Side: Pitch & Direct Upwork Card -->
-      <div class="contact-pitch">
+    <div class="contact-card">
+      <div class="contact-header">
         <div class="badge-pill">
           <ShieldCheck size={14} />
           <span>{$language === "EN" ? "Let's Collaborate" : "Mulai Kerja Sama"}</span>
         </div>
 
         <h2 class="section-title">
-          {$language === "EN" 
-            ? "Ready to automate or build your project?" 
-            : "Siap membangun atau mengotomasi proyek Anda?"}
+          {$language === "EN" ? "Let's Collaborate" : "Mari Berkolaborasi"}
         </h2>
 
         <p class="section-desc">
           {$language === "EN"
-            ? "Whether you need a custom Chrome extension, Python data pipeline, or a fast lightweight web app — send a brief or connect directly on Upwork."
-            : "Baik Anda membutuhkan ekstensi Chrome kustom, otomasi data Python, atau web app modern yang cepat — kirim ringkasan kebutuhan Anda atau hubungi langsung via Upwork."}
+            ? "Whether you need a custom Chrome extension, Python data pipeline, or a fast lightweight web app — send a brief directly."
+            : "Baik Anda membutuhkan ekstensi Chrome kustom, pipeline data Python, atau web app modern yang cepat — kirim ringkasan kebutuhan Anda secara langsung."}
         </p>
+      </div>
 
-        <!-- Upwork Escrow Card -->
-        <div class="upwork-highlight-card">
-          <div class="upwork-badge">
-            <ShieldCheck size={16} />
-            <span>{$language === "EN" ? "Recommended Platform" : "Platform Rekomendasi"}</span>
+      <div class="contact-methods-grid">
+        <!-- Upwork Card (Recommended) -->
+        <div class="method-card upwork-card">
+          <div class="method-badge">
+            <ShieldCheck size={15} />
+            <span>{$language === "EN" ? "Recommended" : "Rekomendasi"}</span>
           </div>
-          <h3>{$language === "EN" ? "Hire Directly via Upwork" : "Rekrut Langsung via Upwork"}</h3>
-          <p>
+          <h3 class="method-title">Upwork</h3>
+          <p class="method-desc">
             {$language === "EN"
-              ? "Enjoy milestone protection, secure escrow payments, and clear async deliverables."
-              : "Dapatkan jaminan milestone, pembayaran escrow aman, dan hasil kerja asinkron yang terukur."}
+              ? "Hire directly with milestone protection, secure escrow payments, and async delivery."
+              : "Rekrut langsung dengan proteksi milestone, pembayaran escrow aman, dan hasil kerja asinkron."}
           </p>
           <a
             href="https://upwork.com/freelancers/aryaajik"
             target="_blank"
             rel="noopener noreferrer"
-            class="upwork-direct-btn"
+            class="method-btn upwork-btn"
           >
             <span>{$language === "EN" ? "Open Upwork Profile" : "Buka Profil Upwork"}</span>
             <ArrowRight size={15} />
           </a>
         </div>
 
-        <!-- Quick Assurance Stats -->
-        <div class="intake-assurances">
-          <div class="assurance-item">
-            <Clock size={16} class="icon" />
-            <span>{$language === "EN" ? "24h Response Time" : "Respons dalam 24 Jam"}</span>
+        <!-- Direct Email Card -->
+        <div class="method-card email-card">
+          <div class="method-badge email-badge">
+            <Clock size={15} />
+            <span>{$language === "EN" ? "24h Response" : "Respon 24 Jam"}</span>
           </div>
-          <div class="assurance-item">
-            <Mail size={16} class="icon" />
+          <h3 class="method-title">Direct Email</h3>
+          <p class="method-desc">
+            {$language === "EN"
+              ? "Send your initial project brief or questions straight to my inbox."
+              : "Kirim ringkasan awal proyek atau pertanyaan Anda langsung ke email saya."}
+          </p>
+          <a
+            href="mailto:hello@aryaaji.com"
+            class="method-btn email-btn"
+          >
+            <Mail size={16} />
             <span>hello@aryaaji.com</span>
-          </div>
-        </div>
-      </div>
-
-      <!-- Right Side: Contact Form -->
-      <div class="contact-form-container">
-        <div class="form-card">
-          <h3 class="form-title">
-            {$language === "EN" ? "Send a Project Inquiry" : "Kirim Pesan / Brief Proyek"}
-          </h3>
-          <ContactForm />
+          </a>
         </div>
       </div>
     </div>
@@ -77,20 +74,30 @@
 
 <style>
   .contact-section {
-    padding: 80px 0 100px;
+    padding: 60px 0 70px;
     position: relative;
-    overflow: hidden;
   }
 
-  .contact-grid {
-    display: grid;
-    grid-template-columns: 1fr 1.2fr;
-    gap: 48px;
-    align-items: flex-start;
+  .container {
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 0 24px;
   }
 
-  .contact-pitch {
-    max-width: 520px;
+  .contact-card {
+    background: color-mix(in srgb, var(--ctp-mantle) 80%, transparent);
+    border: 1px solid var(--ctp-surface0);
+    border-radius: 20px;
+    padding: 48px 40px;
+    backdrop-filter: blur(16px);
+    -webkit-backdrop-filter: blur(16px);
+    box-shadow: 0 16px 40px -10px rgba(0, 0, 0, 0.2);
+    text-align: center;
+  }
+
+  .contact-header {
+    max-width: 640px;
+    margin: 0 auto 40px;
   }
 
   .badge-pill {
@@ -111,125 +118,120 @@
     font-size: 2.2rem;
     font-weight: 800;
     color: var(--ctp-text);
-    line-height: 1.2;
-    margin-bottom: 16px;
+    margin: 0 0 14px;
     letter-spacing: -0.02em;
   }
 
   .section-desc {
-    font-size: 1rem;
+    font-size: 1.05rem;
     color: var(--ctp-subtext0);
     line-height: 1.65;
-    margin-bottom: 28px;
+    margin: 0;
   }
 
-  .upwork-highlight-card {
-    background: var(--ctp-mantle);
-    border: 1px solid var(--accent-subtle);
-    border-radius: 14px;
-    padding: 24px;
-    margin-bottom: 28px;
-    position: relative;
-    box-shadow: 0 10px 30px -10px var(--accent-subtle);
+  .contact-methods-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+    gap: 24px;
+    max-width: 840px;
+    margin: 0 auto;
+    text-align: left;
   }
 
-  .upwork-badge {
+  .method-card {
+    background: var(--ctp-crust);
+    border: 1px solid var(--ctp-surface0);
+    border-radius: 16px;
+    padding: 32px 28px;
+    display: flex;
+    flex-direction: column;
+    transition: transform 0.25s ease, border-color 0.25s ease, box-shadow 0.25s ease;
+  }
+
+  .method-card:hover {
+    transform: translateY(-4px);
+    border-color: var(--accent);
+    box-shadow: 0 12px 30px -10px var(--accent-subtle);
+  }
+
+  .upwork-card {
+    border-color: var(--accent-subtle);
+  }
+
+  .method-badge {
     display: inline-flex;
     align-items: center;
     gap: 6px;
     font-size: 0.75rem;
     font-weight: 700;
-    color: var(--accent);
     text-transform: uppercase;
     letter-spacing: 0.05em;
-    margin-bottom: 8px;
+    color: var(--accent);
+    margin-bottom: 12px;
   }
 
-  .upwork-highlight-card h3 {
-    font-size: 1.15rem;
+  .email-badge {
+    color: var(--ctp-subtext1);
+  }
+
+  .method-title {
+    font-size: 1.3rem;
     font-weight: 700;
     color: var(--ctp-text);
-    margin: 0 0 8px;
+    margin: 0 0 10px;
   }
 
-  .upwork-highlight-card p {
-    font-size: 0.88rem;
+  .method-desc {
+    font-size: 0.9rem;
     color: var(--ctp-subtext0);
-    line-height: 1.5;
-    margin: 0 0 16px;
+    line-height: 1.55;
+    margin: 0 0 24px;
+    flex-grow: 1;
   }
 
-  .upwork-direct-btn {
+  .method-btn {
     display: inline-flex;
     align-items: center;
     justify-content: center;
     gap: 8px;
-    padding: 10px 18px;
-    border-radius: 8px;
-    background: var(--accent);
-    color: var(--ctp-base, #1e1e2e);
+    padding: 12px 20px;
+    border-radius: 10px;
     font-weight: 600;
-    font-size: 0.88rem;
+    font-size: 0.92rem;
     text-decoration: none;
     transition: all 0.2s ease;
   }
 
-  .upwork-direct-btn:hover {
-    transform: translateY(-2px);
+  .upwork-btn {
+    background: var(--accent);
+    color: var(--ctp-base, #1e1e2e);
+  }
+
+  .upwork-btn:hover {
     opacity: 0.92;
+    transform: translateY(-2px);
   }
 
-  .intake-assurances {
-    display: flex;
-    gap: 20px;
-    flex-wrap: wrap;
-  }
-
-  .assurance-item {
-    display: flex;
-    align-items: center;
-    gap: 8px;
-    font-size: 0.85rem;
-    color: var(--ctp-subtext1);
-    font-weight: 500;
-  }
-
-  :global(.assurance-item .icon) {
+  .email-btn {
+    background: var(--accent-surface);
     color: var(--accent);
+    border: 1px solid var(--accent-subtle);
   }
 
-  .contact-form-container {
-    width: 100%;
+  .email-btn:hover {
+    background: var(--accent);
+    color: var(--ctp-base, #1e1e2e);
   }
 
-  .form-card {
-    background: var(--card-bg, rgba(255, 255, 255, 0.03));
-    backdrop-filter: blur(16px);
-    -webkit-backdrop-filter: blur(16px);
-    border: 1px solid var(--ctp-surface0);
-    border-radius: 16px;
-    padding: 32px;
-    box-shadow: 0 20px 40px -15px rgba(0, 0, 0, 0.3);
-  }
-
-  .form-title {
-    font-size: 1.25rem;
-    font-weight: 700;
-    color: var(--ctp-text);
-    margin-top: 0;
-    margin-bottom: 24px;
-  }
-
-  @media (max-width: 900px) {
-    .contact-grid {
-      grid-template-columns: 1fr;
-      gap: 40px;
+  @media (max-width: 768px) {
+    .contact-card {
+      padding: 32px 20px;
     }
-    .contact-pitch {
-      max-width: 100%;
+    .section-title {
+      font-size: 1.8rem;
     }
-    .form-card {
-      padding: 24px;
+    .section-desc {
+      font-size: 0.95rem;
     }
   }
 </style>
