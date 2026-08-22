@@ -45,10 +45,8 @@
           </p>
 
           <p>
-            Beyond my own projects, I work as a software developer in a government institution — building
-            full-stack web applications, automation tools, and AI-integrated systems that streamline
-            real workflows at scale. I embrace AI as part of my toolkit — it helps me
-            iterate faster and deliver better results. If you have an idea, let's turn it into something real.
+            Beyond personal projects, I work as a software developer in a government institution — building
+            full-stack web applications, automation tools, and internal systems. If you have an idea, let's turn it into something real.
           </p>
           {:else}
           <p>
@@ -69,10 +67,7 @@
           </p>
 
           <p>
-            Di luar proyek pribadi, saya bekerja sebagai pengembang perangkat lunak di instansi pemerintahan — membangun
-            aplikasi web full-stack, alat otomasi, dan sistem terintegrasi AI yang menyederhanakan
-            alur kerja nyata dalam skala besar. Saya menjadikan AI bagian dari toolkit saya — membantu
-            beriterasi lebih cepat dan menghasilkan produk yang lebih baik. Punya ide? Mari kita wujudkan bersama.
+            Di luar proyek pribadi, saya kerja sebagai software developer di instansi pemerintah — bikin aplikasi full-stack, automation tools, dan sistem internal. Kalau ada ide, yuk dibikin jadi sesuatu yang nyata.
           </p>
           {/if}
         </div>
@@ -94,39 +89,17 @@
       </div>
     </div>
 
-    <!-- Core Pillars section -->
-    <div class="pillars-section">
-      <h2 class="section-title">
-        {$language === 'EN' ? 'My Core Pillars' : 'Pilar Inti Saya'}
-      </h2>
-      <div class="pillars-grid">
-        <div class="pillar-card">
-          <div class="pillar-icon">🏗️</div>
-          <h3>{$language === 'EN' ? 'Clean Architecture' : 'Arsitektur Bersih'}</h3>
-          <p>
-            {$language === 'EN'
-              ? 'Structuring maintainable, reliable codebases that scale smoothly from prototype to enterprise.'
-              : 'Menyusun basis kode yang andal dan mudah dipelihara yang berkembang lancar dari prototipe hingga skala besar.'}
-          </p>
-        </div>
-        <div class="pillar-card">
-          <div class="pillar-icon">⚙️</div>
-          <h3>{$language === 'EN' ? 'Automation First' : 'Utamakan Otomasi'}</h3>
-          <p>
-            {$language === 'EN'
-              ? 'Eliminating repetitive tasks and manual pipelines using custom scripts and smart schedulers.'
-              : 'Menghilangkan tugas berulang dan alur kerja manual menggunakan skrip kustom dan penjadwal cerdas.'}
-          </p>
-        </div>
-        <div class="pillar-card">
-          <div class="pillar-icon">🤖</div>
-          <h3>{$language === 'EN' ? 'AI-Empowered' : 'Berdaya AI'}</h3>
-          <p>
-            {$language === 'EN'
-              ? 'Integrating generative models and intelligent workflow tools to supercharge development speeds.'
-              : 'Mengintegrasikan model generatif dan alat bantu kerja cerdas untuk mendongkrak kecepatan pengembangan.'}
-          </p>
-        </div>
+    <!-- Philosophy block -->
+    <div class="philosophy-section">
+      <div class="philosophy-card">
+        <div class="philosophy-icon">💡</div>
+        <p class="philosophy-text">
+          {#if $language === 'EN'}
+            Building applications from real problems — not from theory. Every project starts with an observation: is there a tedious manual process? A workflow that can be automated? If yes, I build the tool for it.
+          {:else}
+            Bikin aplikasi dari masalah nyata — bukan dari teori. Setiap proyek dimulai dari observasi: ada proses manual yang bikin orang capek? Ada workflow yang bisa diotomatisin? Kalau iya, saya bikin alatnya.
+          {/if}
+        </p>
       </div>
     </div>
 
@@ -288,64 +261,43 @@
     opacity: 1;
   }
 
-  /* ── Pillars Grid ── */
-  .pillars-section {
+  /* ── Philosophy Section ── */
+  .philosophy-section {
     margin-top: 32px;
-    padding-top: 48px;
+    padding-top: 40px;
     border-top: 1px solid var(--ctp-surface0);
   }
 
-  .pillars-section .section-title {
-    font-size: 1.25rem;
-    font-weight: 800;
-    color: var(--ctp-text);
-    margin-bottom: 24px;
-    letter-spacing: -0.01em;
-  }
-
-  .pillars-grid {
-    display: grid;
-    grid-template-columns: repeat(3, 1fr);
-    gap: 16px;
-  }
-
-  .pillar-card {
+  .philosophy-card {
     background: var(--ctp-mantle);
     border: 1px solid var(--ctp-surface0);
     border-radius: 16px;
-    padding: 24px;
+    padding: 24px 28px;
+    display: flex;
+    align-items: flex-start;
+    gap: 18px;
     transition: border-color 0.2s ease, transform 0.2s ease;
+    border-left: 3px solid var(--accent);
   }
 
-  .pillar-card:hover {
-    border-color: color-mix(in srgb, var(--accent) 30%, var(--ctp-surface0));
-    transform: translateY(-3px);
+  .philosophy-card:hover {
+    border-color: color-mix(in srgb, var(--accent) 40%, var(--ctp-surface0));
+    transform: translateY(-2px);
   }
 
-  .pillar-icon {
-    font-size: 1.5rem;
-    margin-bottom: 16px;
+  .philosophy-icon {
+    font-size: 1.6rem;
+    line-height: 1;
+    flex-shrink: 0;
+    margin-top: 2px;
   }
 
-  .pillar-card h3 {
-    font-size: 1.05rem;
-    font-weight: 700;
+  .philosophy-text {
+    font-size: 1.02rem;
     color: var(--ctp-text);
-    margin: 0 0 8px 0;
-  }
-
-  .pillar-card p {
-    font-size: 0.85rem;
-    color: var(--ctp-subtext0);
-    line-height: 1.6;
+    line-height: 1.8;
     margin: 0;
-  }
-
-  /* Responsive */
-  @media (max-width: 800px) {
-    .pillars-grid {
-      grid-template-columns: 1fr;
-    }
+    font-weight: 500;
   }
 
   @media (max-width: 640px) {

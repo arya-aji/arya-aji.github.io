@@ -118,6 +118,68 @@
         : 'Saya telah membangun banyak proyek selama bertahun-tahun. Berikut adalah proyek publik utama, sedangkan sisanya merupakan proyek internal atau pemerintah. Klik salah satu untuk info lebih lanjut.'}
     </p>
 
+    <!-- Dedicated SKUI SaaS Case Study (Moved from Pricing) -->
+    <section class="featured-case-study-section">
+      <div class="featured-case-card">
+        <div class="case-badge-row">
+          <span class="case-badge">{$language === 'EN' ? 'Featured SaaS Case Study' : 'Studi Kasus SaaS Unggulan'}</span>
+          <span class="case-badge-pill">🛡️ Midtrans Verified</span>
+        </div>
+
+        <div class="case-grid">
+          <div class="case-info-col">
+            <h2 class="case-title">Siap Kuliah UI (SKUI) — Exam Simulator</h2>
+            <p class="case-description">
+              {$language === 'EN'
+                ? 'A premium, mobile-first SaaS exam simulation platform built for SIMAK UI aspirants with dynamic time tracking, automated question seeding, and integrated billing.'
+                : 'Platform SaaS simulasi ujian mobile-first premium untuk calon mahasiswa SIMAK UI dengan pelacakan waktu dinamis, seeding soal otomatis, dan sistem pembayaran terintegrasi.'}
+            </p>
+
+            <div class="case-narrative-pills">
+              <div class="narrative-pill-item">
+                <span class="narrative-pill-label">🎯 {$language === 'EN' ? 'Problem' : 'Masalah'}</span>
+                <p>{$language === 'EN' ? 'Candidates lacked authentic exam environments with strict timers and rigorous scoring.' : 'Calon mahasiswa kesulitan latihan simulasi ujian dengan batas waktu ketat dan penilaian akurat seperti aslinya.'}</p>
+              </div>
+              <div class="narrative-pill-item">
+                <span class="narrative-pill-label">⚙️ {$language === 'EN' ? 'Solution' : 'Solusi'}</span>
+                <p>{$language === 'EN' ? 'Built mobile-first app with timer simulator, instant voucher generation, and Midtrans checkout.' : 'Membangun aplikasi mobile-first dengan timer dinamis, voucher instan otomatis, dan gateway Midtrans.'}</p>
+              </div>
+              <div class="narrative-pill-item">
+                <span class="narrative-pill-label">📊 {$language === 'EN' ? 'Result' : 'Hasil'}</span>
+                <p>{$language === 'EN' ? '1,000+ active users with 100% automated transaction processing and real-time study analytics.' : 'Digunakan ribuan pengguna aktif dengan 100% transaksi otomatis dan analitik performa belajar.'}</p>
+              </div>
+            </div>
+
+            <div class="case-tech-tags">
+              <span class="cs-tag">Next.js</span>
+              <span class="cs-tag">FastAPI</span>
+              <span class="cs-tag">PostgreSQL</span>
+              <span class="cs-tag">Midtrans API</span>
+              <span class="cs-tag">TailwindCSS</span>
+            </div>
+          </div>
+
+          <div class="case-action-col">
+            <div class="case-action-card">
+              <div class="case-preview-frame">
+                <img src="/skui.png" alt="Siap Kuliah UI Platform Preview" class="case-preview-img" />
+              </div>
+              <div class="case-action-buttons">
+                <a href="https://tryout.aryaaji.com" target="_blank" rel="noopener noreferrer" class="btn primary case-cta-btn">
+                  <ExternalLink size={16} />
+                  {$language === 'EN' ? 'Visit Live App' : 'Kunjungi Aplikasi'}
+                </a>
+                <a href="https://github.com/arya-aji" target="_blank" rel="noopener noreferrer" class="btn secondary case-cta-btn">
+                  <svg width="16" height="16" viewBox="0 0 24 24" fill="currentColor"><path d="M12 0c-6.626 0-12 5.373-12 12 0 5.302 3.438 9.8 8.207 11.387.599.111.793-.261.793-.577v-2.234c-3.338.726-4.033-1.416-4.033-1.416-.546-1.387-1.333-1.756-1.333-1.756-1.089-.745.083-.729.083-.729 1.205.084 1.839 1.237 1.839 1.237 1.07 1.834 2.807 1.304 3.492.997.107-.775.418-1.305.762-1.604-2.665-.305-5.467-1.334-5.467-5.931 0-1.311.469-2.381 1.236-3.221-.124-.303-.535-1.524.117-3.176 0 0 1.008-.322 3.301 1.23.957-.266 1.983-.399 3.003-.404 1.02.005 2.047.138 3.006.404 2.291-1.552 3.297-1.23 3.297-1.23.653 1.653.242 2.874.118 3.176.77.84 1.235 1.911 1.235 3.221 0 4.609-2.807 5.624-5.479 5.921.43.372.823 1.102.823 2.222v3.293c0 .319.192.694.801.576 4.765-1.589 8.199-6.086 8.199-11.386 0-6.627-5.373-12-12-12z"/></svg>
+                  GitHub
+                </a>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
     {#if isLoading}
       <div class="loader-container">
         <div class="loader-card">
@@ -229,7 +291,18 @@
                         {/if}
                       </div>
                       <div class="project-date-badge">{highlight.dateDisplay}</div>
-                      <p class="project-long-desc">{highlight.description}</p>
+                      
+                      {#if highlight.problem && highlight.solution}
+                        <div class="slider-narrative-box">
+                          <p class="slider-narrative-line"><strong>{$language === 'EN' ? 'Problem:' : 'Masalah:'}</strong> {highlight.problem}</p>
+                          <p class="slider-narrative-line"><strong>{$language === 'EN' ? 'Solution:' : 'Solusi:'}</strong> {highlight.solution}</p>
+                          {#if highlight.results && highlight.results.length > 0}
+                            <p class="slider-narrative-line"><strong>{$language === 'EN' ? 'Result:' : 'Hasil:'}</strong> {highlight.results.map(r => `${r.metric} ${r.label}`).join(' · ')}</p>
+                          {/if}
+                        </div>
+                      {:else}
+                        <p class="project-long-desc">{highlight.description}</p>
+                      {/if}
                       
                       <div class="highlight-tags">
                         <Tag size={16} class="tag-icon" />
@@ -246,6 +319,12 @@
                         <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 2v20"/><path d="M17 5H9.5a3.5 3.5 0 0 0 0 7h5a3.5 3.5 0 0 1 0 7H6"/></svg>
                         {$language === 'EN' ? 'Glance' : 'Lihat Sekilas'}
                       </button>
+                      {#if highlight.github}
+                        <a href={highlight.github} target="_blank" rel="noopener noreferrer" class="action-btn outline">
+                          <svg width="16" height="16" viewBox="0 0 24 24" fill="currentColor"><path d="M12 0c-6.626 0-12 5.373-12 12 0 5.302 3.438 9.8 8.207 11.387.599.111.793-.261.793-.577v-2.234c-3.338.726-4.033-1.416-4.033-1.416-.546-1.387-1.333-1.756-1.333-1.756-1.089-.745.083-.729.083-.729 1.205.084 1.839 1.237 1.839 1.237 1.07 1.834 2.807 1.304 3.492.997.107-.775.418-1.305.762-1.604-2.665-.305-5.467-1.334-5.467-5.931 0-1.311.469-2.381 1.236-3.221-.124-.303-.535-1.524.117-3.176 0 0 1.008-.322 3.301 1.23.957-.266 1.983-.399 3.003-.404 1.02.005 2.047.138 3.006.404 2.291-1.552 3.297-1.23 3.297-1.23.653 1.653.242 2.874.118 3.176.77.84 1.235 1.911 1.235 3.221 0 4.609-2.807 5.624-5.479 5.921.43.372.823 1.102.823 2.222v3.293c0 .319.192.694.801.576 4.765-1.589 8.199-6.086 8.199-11.386 0-6.627-5.373-12-12-12z"/></svg>
+                          GitHub
+                        </a>
+                      {/if}
                       {#if highlight.live}
                         <a href={highlight.live} target="_blank" rel="noopener noreferrer" class="action-btn primary">
                           <ExternalLink size={18} /> {$language === 'EN' ? 'Demo' : 'Demo'}
@@ -267,7 +346,13 @@
             {#if selectedCategory === 'all'}
               {$language === 'EN' ? 'All Projects' : 'Semua Proyek'}
             {:else if selectedCategory === 'extension'}
-              {$language === 'EN' ? 'Browser Extensions' : 'Ekstensi Browser'}
+              <div style="display: flex; align-items: center; gap: 12px; flex-wrap: wrap; display: inline-flex;">
+                <span>{$language === 'EN' ? 'Browser Extensions' : 'Ekstensi Browser'}</span>
+                <a href="https://extension.aryaaji.com" target="_blank" rel="noopener noreferrer" style="font-size: 0.85rem; color: var(--accent); font-weight: 600; display: inline-flex; align-items: center; gap: 4px; text-decoration: none; padding: 4px 12px; border-radius: 99px; background: color-mix(in srgb, var(--accent) 8%, transparent); border: 1px solid color-mix(in srgb, var(--accent) 15%, transparent); transition: all 0.2s;">
+                  {$language === 'EN' ? 'View all extensions' : 'Lihat semua ekstensi'}
+                  <ExternalLink size={12} />
+                </a>
+              </div>
             {:else if selectedCategory === 'fullstack'}
               {$language === 'EN' ? 'Fullstack Apps' : 'Aplikasi Fullstack'}
             {:else if selectedCategory === 'dashboard'}
@@ -303,10 +388,25 @@
               onmousemove={(e) => handleMouseMove(e, project)}
               onmouseleave={handleMouseLeave}
             >
+              <!-- Card media thumbnail / screenshot -->
+              <div class="grid-card-media">
+                {#if project.image}
+                  <div class="grid-media-thumb has-image" style="background-image: url('{project.image}');" role="img" aria-label="{project.title} Preview"></div>
+                {:else}
+                  <div class="grid-media-thumb">
+                    <svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round">
+                      <rect x="3" y="3" width="18" height="18" rx="2" ry="2"/>
+                      <circle cx="8.5" cy="8.5" r="1.5"/>
+                      <polyline points="21 15 16 10 5 21"/>
+                    </svg>
+                  </div>
+                {/if}
+              </div>
+
               <div class="card-header">
                 <div class="card-title-row" style="display: flex; align-items: center; gap: 10px; margin-bottom: 6px;">
                   {#if project.logo}
-                    <img src={project.logo} alt="" style="width: 30px; height: 30px; border-radius: 6px; object-fit: contain; background: #ffffff; padding: 2px; border: 1px solid var(--ctp-surface1); flex-shrink: 0;" />
+                    <img src={project.logo} alt="" style="width: 26px; height: 26px; border-radius: 6px; object-fit: contain; background: #ffffff; padding: 2px; border: 1px solid var(--ctp-surface1); flex-shrink: 0;" />
                   {/if}
                   <h2 class="grid-project-name" style="margin: 0;">{project.title}</h2>
                   {#if project.stars}
@@ -318,7 +418,20 @@
                 </div>
                 <time class="grid-project-date" datetime={project.date}>{project.dateDisplay}</time>
               </div>
-              <p class="grid-project-desc">{project.description}</p>
+
+              <!-- Masalah -> Solusi -> Hasil narrative -->
+              {#if project.problem && project.solution}
+                <div class="grid-narrative-summary">
+                  <p class="narrative-line"><strong class="narrative-tag">{$language === 'EN' ? 'Problem:' : 'Masalah:'}</strong> <span>{project.problem}</span></p>
+                  <p class="narrative-line"><strong class="narrative-tag">{$language === 'EN' ? 'Solution:' : 'Solusi:'}</strong> <span>{project.solution}</span></p>
+                  {#if project.results && project.results.length > 0}
+                    <p class="narrative-line"><strong class="narrative-tag">{$language === 'EN' ? 'Result:' : 'Hasil:'}</strong> <span>{project.results.map(r => `${r.metric} ${r.label}`).join(' · ')}</span></p>
+                  {/if}
+                </div>
+              {:else}
+                <p class="grid-project-desc">{project.description}</p>
+              {/if}
+
               <div class="card-footer">
                 <div class="grid-project-tags">
                   {#each project.tags.slice(0, 3) as tag}
@@ -332,19 +445,31 @@
                 </div>
                 <div class="card-actions">
                   <button class="grid-case-btn" onclick={() => caseStudyProject = project} title="View Case Study">
-                    <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M2 3h6a4 4 0 0 1 4 4v14a3 3 0 0 0-3-3H2z"/><path d="M22 3h-6a4 4 0 0 0-4 4v14a3 3 0 0 1 3-3h7z"/></svg>
+                    <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M2 3h6a4 4 0 0 1 4 4v14a3 3 0 0 0-3-3H2z"/><path d="M22 3h-6a4 4 0 0 0-4 4v14a3 3 0 0 1 3-3h7z"/></svg>
                     {$language === 'EN' ? 'Case Study' : 'Studi Kasus'}
                   </button>
+                  {#if project.github}
+                    <a
+                      href={project.github}
+                      target="_blank"
+                      rel="noopener noreferrer"
+                      class="grid-action-icon-link"
+                      title="View GitHub Repository"
+                      aria-label="GitHub for {project.title}"
+                    >
+                      <svg width="15" height="15" viewBox="0 0 24 24" fill="currentColor"><path d="M12 0c-6.626 0-12 5.373-12 12 0 5.302 3.438 9.8 8.207 11.387.599.111.793-.261.793-.577v-2.234c-3.338.726-4.033-1.416-4.033-1.416-.546-1.387-1.333-1.756-1.333-1.756-1.089-.745.083-.729.083-.729 1.205.084 1.839 1.237 1.839 1.237 1.07 1.834 2.807 1.304 3.492.997.107-.775.418-1.305.762-1.604-2.665-.305-5.467-1.334-5.467-5.931 0-1.311.469-2.381 1.236-3.221-.124-.303-.535-1.524.117-3.176 0 0 1.008-.322 3.301 1.23.957-.266 1.983-.399 3.003-.404 1.02.005 2.047.138 3.006.404 2.291-1.552 3.297-1.23 3.297-1.23.653 1.653.242 2.874.118 3.176.77.84 1.235 1.911 1.235 3.221 0 4.609-2.807 5.624-5.479 5.921.43.372.823 1.102.823 2.222v3.293c0 .319.192.694.801.576 4.765-1.589 8.199-6.086 8.199-11.386 0-6.627-5.373-12-12-12z"/></svg>
+                    </a>
+                  {/if}
                   {#if project.live}
                     <a
                       href={project.live}
                       target="_blank"
                       rel="noopener noreferrer"
-                      class="grid-ext-link"
-                      title="Open live site"
+                      class="grid-action-icon-link"
+                      title="Open Live Demo"
                       aria-label="Open {project.title}"
                     >
-                      <ExternalLink size={16} />
+                      <ExternalLink size={15} />
                     </a>
                   {/if}
                 </div>
@@ -421,7 +546,216 @@
   .page-subtitle {
     font-size: 1.05rem;
     color: var(--ctp-subtext0);
-    margin-bottom: 24px;
+    margin-bottom: 32px;
+  }
+
+  /* --- Featured SaaS Case Study Banner (SKUI) --- */
+  .featured-case-study-section {
+    margin-bottom: 48px;
+  }
+
+  .featured-case-card {
+    background: color-mix(in srgb, var(--ctp-mantle) 85%, transparent);
+    border: 1px solid color-mix(in srgb, var(--accent) 30%, var(--ctp-surface0));
+    border-radius: 20px;
+    padding: 32px 36px;
+    box-shadow: 0 16px 40px rgba(0, 0, 0, 0.2);
+    position: relative;
+    overflow: hidden;
+  }
+
+  .featured-case-card::before {
+    content: '';
+    position: absolute;
+    top: 0; left: 0; right: 0;
+    height: 3px;
+    background: linear-gradient(90deg, var(--accent), var(--ctp-lavender));
+  }
+
+  .case-badge-row {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    margin-bottom: 16px;
+    flex-wrap: wrap;
+  }
+
+  .case-badge {
+    display: inline-flex;
+    align-items: center;
+    padding: 4px 12px;
+    border-radius: 999px;
+    font-size: 0.72rem;
+    font-weight: 700;
+    text-transform: uppercase;
+    letter-spacing: 0.05em;
+    color: var(--accent);
+    background: color-mix(in srgb, var(--accent) 12%, transparent);
+    border: 1px solid color-mix(in srgb, var(--accent) 25%, transparent);
+    font-family: 'JetBrains Mono', monospace;
+  }
+
+  .case-badge-pill {
+    font-size: 0.75rem;
+    font-weight: 600;
+    color: var(--ctp-subtext0);
+    font-family: 'JetBrains Mono', monospace;
+  }
+
+  .case-grid {
+    display: grid;
+    grid-template-columns: 1.3fr 1fr;
+    gap: 36px;
+    align-items: center;
+  }
+
+  .case-title {
+    font-size: 1.8rem;
+    font-weight: 800;
+    color: var(--ctp-text);
+    margin-bottom: 12px;
+    line-height: 1.2;
+    letter-spacing: -0.01em;
+  }
+
+  .case-description {
+    font-size: 0.95rem;
+    color: var(--ctp-subtext1);
+    line-height: 1.7;
+    margin-bottom: 20px;
+  }
+
+  .case-narrative-pills {
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+    margin-bottom: 20px;
+  }
+
+  .narrative-pill-item {
+    background: var(--ctp-crust);
+    border: 1px solid var(--ctp-surface0);
+    border-radius: 10px;
+    padding: 10px 14px;
+    display: flex;
+    flex-direction: column;
+    gap: 4px;
+  }
+
+  .narrative-pill-label {
+    font-size: 0.75rem;
+    font-weight: 700;
+    color: var(--accent);
+    font-family: 'JetBrains Mono', monospace;
+    text-transform: uppercase;
+    letter-spacing: 0.04em;
+  }
+
+  .narrative-pill-item p {
+    font-size: 0.88rem;
+    color: var(--ctp-subtext0);
+    line-height: 1.5;
+    margin: 0;
+  }
+
+  .case-tech-tags {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 8px;
+  }
+
+  .cs-tag {
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 0.72rem;
+    font-weight: 600;
+    padding: 4px 10px;
+    border-radius: 6px;
+    background: color-mix(in srgb, var(--accent) 8%, var(--ctp-crust));
+    color: var(--accent);
+    border: 1px solid color-mix(in srgb, var(--accent) 20%, transparent);
+  }
+
+  .case-action-col {
+    display: flex;
+    flex-direction: column;
+  }
+
+  .case-action-card {
+    background: var(--ctp-crust);
+    border: 1px solid var(--ctp-surface0);
+    border-radius: 16px;
+    padding: 18px;
+    display: flex;
+    flex-direction: column;
+    gap: 16px;
+  }
+
+  .case-preview-frame {
+    border-radius: 10px;
+    overflow: hidden;
+    background: var(--ctp-mantle);
+    border: 1px solid var(--ctp-surface1);
+    height: 180px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+
+  .case-preview-img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    object-position: top center;
+  }
+
+  .case-action-buttons {
+    display: flex;
+    gap: 10px;
+  }
+
+  .case-cta-btn {
+    flex: 1;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    gap: 8px;
+    padding: 10px 16px;
+    border-radius: 8px;
+    font-size: 0.85rem;
+    font-weight: 600;
+    text-decoration: none;
+    cursor: pointer;
+    transition: all 0.2s ease;
+  }
+
+  .btn.primary {
+    background: var(--accent);
+    color: var(--ctp-crust);
+    border: 1px solid var(--accent);
+  }
+
+  .btn.primary:hover {
+    filter: brightness(1.1);
+    transform: translateY(-2px);
+    box-shadow: 0 6px 20px color-mix(in srgb, var(--accent) 25%, transparent);
+  }
+
+  .btn.secondary {
+    background: var(--ctp-surface0);
+    color: var(--ctp-text);
+    border: 1px solid var(--ctp-surface1);
+  }
+
+  .btn.secondary:hover {
+    border-color: var(--accent);
+    color: var(--accent);
+  }
+
+  @media (max-width: 900px) {
+    .case-grid {
+      grid-template-columns: 1fr;
+      gap: 24px;
+    }
   }
 
   /* --- Slider Header Controls --- */
@@ -680,6 +1014,31 @@
     font-size: 0.9rem;
   }
 
+  .slider-narrative-box {
+    display: flex;
+    flex-direction: column;
+    gap: 6px;
+    margin-bottom: 20px;
+    background: var(--ctp-crust);
+    border: 1px solid var(--ctp-surface0);
+    border-radius: 10px;
+    padding: 12px 16px;
+  }
+
+  .slider-narrative-line {
+    font-size: 0.9rem;
+    line-height: 1.6;
+    color: var(--ctp-subtext0);
+    margin: 0;
+  }
+
+  .slider-narrative-line strong {
+    color: var(--accent);
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 0.8rem;
+    text-transform: uppercase;
+  }
+
   .project-long-desc {
     font-size: 1rem;
     color: var(--ctp-subtext0);
@@ -784,10 +1143,10 @@
   .grid-card {
     display: flex;
     flex-direction: column;
-    padding: 22px 24px;
+    padding: 20px 20px 22px;
     background: var(--ctp-mantle);
     border: 1px solid var(--ctp-surface0);
-    border-radius: 14px;
+    border-radius: 16px;
     text-decoration: none;
     color: inherit;
     transition: all 0.25s ease;
@@ -820,6 +1179,34 @@
     border-color: color-mix(in srgb, var(--accent) 30%, var(--ctp-surface0));
   }
   .grid-card.featured-grid::before { opacity: 0.5; }
+
+  /* Grid Card Media Thumbnail */
+  .grid-card-media {
+    width: 100%;
+    height: 140px;
+    border-radius: 10px;
+    overflow: hidden;
+    background: var(--ctp-crust);
+    border: 1px solid var(--ctp-surface0);
+    margin-bottom: 14px;
+  }
+
+  .grid-media-thumb {
+    width: 100%;
+    height: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: var(--ctp-overlay0);
+    background-size: cover;
+    background-position: top center;
+    transition: background-position 2s ease-in-out, transform 0.3s ease;
+  }
+
+  .grid-card:hover .grid-media-thumb.has-image {
+    background-position: bottom center;
+    transform: scale(1.02);
+  }
 
   .card-header { margin-bottom: 10px; }
 
@@ -860,6 +1247,32 @@
     font-family: 'JetBrains Mono', 'Fira Code', monospace;
   }
 
+  /* Grid narrative summary */
+  .grid-narrative-summary {
+    background: color-mix(in srgb, var(--ctp-crust) 70%, transparent);
+    border: 1px solid color-mix(in srgb, var(--ctp-surface0) 60%, transparent);
+    border-radius: 8px;
+    padding: 10px 12px;
+    display: flex;
+    flex-direction: column;
+    gap: 4px;
+    margin-bottom: 14px;
+  }
+
+  .narrative-line {
+    font-size: 0.8rem;
+    line-height: 1.5;
+    color: var(--ctp-subtext0);
+    margin: 0;
+  }
+
+  .narrative-tag {
+    color: var(--accent);
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 0.72rem;
+    text-transform: uppercase;
+  }
+
   .grid-project-desc {
     font-size: 0.85rem;
     color: var(--ctp-subtext0);
@@ -878,12 +1291,13 @@
     justify-content: space-between;
     gap: 8px;
     margin-top: auto;
+    padding-top: 6px;
   }
 
   .card-actions {
     display: flex;
     align-items: center;
-    gap: 8px;
+    gap: 6px;
     flex-shrink: 0;
   }
 
@@ -891,8 +1305,8 @@
     display: inline-flex;
     align-items: center;
     gap: 5px;
-    padding: 4px 10px;
-    border-radius: 8px;
+    padding: 5px 9px;
+    border-radius: 6px;
     font-size: 0.72rem;
     font-weight: 600;
     background: color-mix(in srgb, var(--accent) 10%, var(--ctp-surface0));
@@ -910,16 +1324,25 @@
     border-color: var(--accent);
   }
 
-  .grid-ext-link {
-    display: flex;
+  .grid-action-icon-link {
+    display: inline-flex;
     align-items: center;
-    color: var(--ctp-overlay0);
-    transition: color 0.2s;
-    flex-shrink: 0;
+    justify-content: center;
+    width: 28px;
+    height: 28px;
+    border-radius: 6px;
+    background: var(--ctp-surface0);
+    border: 1px solid var(--ctp-surface1);
+    color: var(--ctp-subtext0);
+    transition: all 0.2s ease;
+    text-decoration: none;
   }
 
-  .grid-ext-link:hover {
+  .grid-action-icon-link:hover {
+    border-color: var(--accent);
     color: var(--accent);
+    background: color-mix(in srgb, var(--accent) 10%, var(--ctp-surface0));
+    transform: translateY(-1px);
   }
 
   .grid-project-tags {

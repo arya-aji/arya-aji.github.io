@@ -11,9 +11,6 @@
         <span class="copyright">© 2026 Arya Aji Kusuma</span>
         <span class="footer-separator">|</span>
         <div class="footer-links">
-          <a href="/terms" class="footer-link">Terms</a>
-          <a href="/privacy" class="footer-link">Privacy</a>
-          <a href="/refund" class="footer-link">Refund</a>
           <a href={externalLinks.extensions.url} target="_blank" rel="noopener noreferrer" class="footer-link">Extensions</a>
         </div>
       </div>

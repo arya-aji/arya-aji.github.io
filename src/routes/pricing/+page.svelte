@@ -50,6 +50,39 @@
     },
     {
       id: 2,
+      title: $language === 'EN' ? "Chrome Extension / Micro-Tool" : "Chrome Extension / Tool Kecil",
+      priceUSD: "$149 - $349",
+      priceIDR: "Rp 3.000.000 - Rp 7.000.000",
+      detail: $language === 'EN'
+        ? "Browser extension or focused micro-tool solving a specific pain point. Fast delivery, fixed scope."
+        : "Extension browser atau alat kecil yang menyelesaikan satu masalah spesifik. Fast delivery, fixed scope.",
+      features: $language === 'EN' ? [
+        "Custom Manifest V3 Chrome extension or micro-tool",
+        "Automated DOM scraping, tab actions, or API connectors",
+        "Storage sync & clean popup / sidepanel UI",
+        "Deployment packaging & store publishing guide"
+      ] : [
+        "Ekstensi Chrome Manifest V3 kustom atau alat mandiri",
+        "Otomasi DOM scraping, aksi tab, atau konektor API",
+        "Sinkronisasi storage & UI popup / sidepanel bersih",
+        "Packaging deployment & panduan publikasi store"
+      ],
+      terms: $language === 'EN' ? [
+        "50% down payment upfront, 50% upon delivery.",
+        "Includes 2 minor revision rounds within agreed scope.",
+        "Estimated delivery timeline is 3-7 business days.",
+        "Web Store developer account fees not included."
+      ] : [
+        "50% uang muka di awal, 50% saat serah terima.",
+        "Termasuk 2 putaran revisi minor dalam lingkup yang disepakati.",
+        "Estimasi waktu pengerjaan 3-7 hari kerja.",
+        "Biaya akun developer Web Store tidak termasuk."
+      ],
+      waHref: "https://wa.me/6281998884422?text=Hello%20Aji,%20I'm%20interested%20in%20a%20Chrome%20Extension%20or%20Micro-Tool.",
+      emailHref: "mailto:hello@aryaaji.com?subject=Chrome%20Extension%20Inquiry"
+    },
+    {
+      id: 3,
       title: $language === 'EN' ? "Custom Web Application" : "Aplikasi Web Kustom",
       priceUSD: "$2,999+",
       priceIDR: "Rp 50.000.000+",
@@ -105,8 +138,8 @@
         <h1>{$language === 'EN' ? 'Transparent rates for premium web builds.' : 'Tarif transparan untuk web premium.'}</h1>
         <p>
           {$language === 'EN'
-            ? 'Simplified, direct estimates tailored for landing pages and custom web applications. Review features and integrated terms of service directly in each package card.'
-            : 'Estimasi sederhana dan langsung yang disesuaikan untuk landing page dan aplikasi web kustom. Tinjau fitur dan syarat layanan terintegrasi langsung di setiap kartu paket.'}
+            ? 'Simplified, direct estimates tailored for landing pages, browser extensions, and custom web applications. Review features and integrated terms of service directly in each package card.'
+            : 'Estimasi sederhana dan langsung yang disesuaikan untuk landing page, ekstensi browser, dan aplikasi web kustom. Tinjau fitur dan syarat layanan terintegrasi langsung di setiap kartu paket.'}
         </p>
         <div class="hero-actions">
           <a href="/contact" class="btn primary">
@@ -255,74 +288,6 @@
           ? 'All transaction values are charged and processed in Indonesian Rupiah. USD pricing serves as a benchmark reference for global clients. Final rates align to detailed scopes.'
           : 'Semua nilai transaksi dikenakan biaya dan diproses dalam Rupiah Indonesia. Harga USD berfungsi sebagai referensi tolok ukur untuk klien global. Tarif final mengikuti lingkup detail.'}
       </p>
-    </div>
-  </section>
-
-  <!-- Dedicated SaaS Showcase Section (Separated from Premium Agency Services) -->
-  <section class="section saas-section" id="saas-pricing">
-    <div class="container">
-      <div class="saas-header">
-        <span class="section-kicker">{$language === 'EN' ? 'Showcase Product & SaaS' : 'Showcase Produk & SaaS'}</span>
-        <h2>{$language === 'EN' ? 'Siap Kuliah UI (SKUI) — Exam Simulator' : 'Siap Kuliah UI (SKUI) — Simulator Ujian'}</h2>
-        <p class="saas-intro">
-          {$language === 'EN'
-            ? 'A premium, mobile-first preparation platform built to simulate graduate and undergraduate entrance exams. It represents a fully integrated product with dynamic testing mechanics and automated billing.'
-            : 'Platform persiapan mobile-first premium yang dibangun untuk mensimulasikan ujian masuk pascasarjana dan sarjana. Ini mewakili produk yang terintegrasi penuh dengan mekanisme pengujian dinamis dan penagihan otomatis.'}
-        </p>
-      </div>
-
-      <div class="saas-card-wrapper">
-        <div class="saas-showcase-grid">
-          <div class="saas-details-col">
-            <div class="saas-badge">{$language === 'EN' ? 'Self-Built SaaS Case' : 'Studi Kasus SaaS Mandiri'}</div>
-            <h3>{$language === 'EN' ? 'Production Architecture' : 'Arsitektur Produksi'}</h3>
-            <p class="saas-long-desc">
-              {$language === 'EN'
-                ? 'SKUI is designed to solve real-world exam prep problems for over thousands of active users. It features an automated payment gateway, robust question seeding engines, and analytics dashboards.'
-                : 'SKUI dirancang untuk memecahkan masalah persiapan ujian dunia nyata bagi ribuan pengguna aktif. Ini memiliki fitur gateway pembayaran otomatis, mesin seeding pertanyaan yang kuat, dan dashboard analitik.'}
-            </p>
-            
-            <div class="saas-tech-stack">
-              <span class="tech-tag">Next.js</span>
-              <span class="tech-tag">FastAPI</span>
-              <span class="tech-tag">PostgreSQL</span>
-              <span class="tech-tag">Midtrans API</span>
-              <span class="tech-tag">TailwindCSS</span>
-            </div>
-
-            <ul class="saas-features-bullets">
-              <li>
-                <CheckCircle2 size={16} class="feature-icon" />
-                <span>{$language === 'EN' ? 'Dynamic timer simulators with strict time tracking' : 'Simulator timer dinamis dengan pelacakan waktu yang ketat'}</span>
-              </li>
-              <li>
-                <CheckCircle2 size={16} class="feature-icon" />
-                <span>{$language === 'EN' ? 'Automated digital voucher delivery & coupon engines' : 'Pengiriman voucher digital otomatis & mesin kupon'}</span>
-              </li>
-              <li>
-                <CheckCircle2 size={16} class="feature-icon" />
-                <span>{$language === 'EN' ? 'Real-time performance analytics for study tracking' : 'Analisis performa real-time untuk pelacakan belajar'}</span>
-              </li>
-            </ul>
-          </div>
-
-          <div class="saas-action-col">
-            <div class="saas-cta-panel">
-              <h4>{$language === 'EN' ? 'Explore the Product' : 'Eksplorasi Produk'}</h4>
-              <p>{$language === 'EN' ? 'Visit tryout.aryaaji.com directly to see how I scale SaaS databases, build secure payment pipelines, and manage active web systems.' : 'Kunjungi langsung tryout.aryaaji.com untuk melihat bagaimana saya menskalakan database SaaS, membangun pipa pembayaran yang aman, dan mengelola sistem web aktif.'}</p>
-              
-              <a href="https://tryout.aryaaji.com" target="_blank" rel="noopener noreferrer" class="btn primary saas-cta-btn">
-                {$language === 'EN' ? 'Visit SKUI App' : 'Kunjungi Aplikasi SKUI'}
-              </a>
-
-              <div class="saas-trust-badges">
-                <span class="trust-badge">🛡️ {$language === 'EN' ? 'Secured by Midtrans' : 'Diamankan oleh Midtrans'}</span>
-                <span class="trust-badge">⚡ {$language === 'EN' ? 'Instant Seeding' : 'Penyediaan Instan'}</span>
-              </div>
-            </div>
-          </div>
-        </div>
-      </div>
     </div>
   </section>
 
@@ -553,9 +518,9 @@
   /* Pricing Cards layout */
   .pricing-grid {
     display: grid;
-    grid-template-columns: repeat(2, 1fr);
+    grid-template-columns: repeat(3, 1fr);
     gap: 24px;
-    max-width: 1000px;
+    max-width: 1200px;
     margin-inline: auto;
   }
 
@@ -774,173 +739,7 @@
     background: color-mix(in srgb, var(--accent) 8%, var(--ctp-base));
   }
 
-  /* --- SaaS Section Styling --- */
-  .saas-section {
-    background: color-mix(in srgb, var(--ctp-crust) 60%, transparent);
-    border-block: 1px solid var(--ctp-surface0);
-  }
 
-  .saas-header {
-    text-align: center;
-    max-width: 720px;
-    margin: 0 auto 40px;
-  }
-
-  .saas-header h2 {
-    color: var(--ctp-text);
-    font-size: 2rem;
-    line-height: 1.2;
-    margin-bottom: 12px;
-  }
-
-  .saas-intro {
-    color: var(--ctp-subtext1);
-    font-size: 1rem;
-    line-height: 1.7;
-  }
-
-  .saas-card-wrapper {
-    background: var(--ctp-base);
-    border: 1px solid var(--ctp-surface0);
-    border-radius: 20px;
-    padding: 40px;
-    max-width: 1000px;
-    margin: 0 auto;
-    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
-  }
-
-  .saas-showcase-grid {
-    display: grid;
-    grid-template-columns: 1.2fr 1fr;
-    gap: 40px;
-    align-items: start;
-  }
-
-  .saas-details-col {
-    display: flex;
-    flex-direction: column;
-    gap: 20px;
-  }
-
-  .saas-badge {
-    display: inline-flex;
-    align-self: flex-start;
-    padding: 4px 12px;
-    font-size: 0.7rem;
-    font-weight: 700;
-    text-transform: uppercase;
-    letter-spacing: 0.05em;
-    color: var(--accent);
-    background: color-mix(in srgb, var(--accent) 12%, transparent);
-    border: 1px solid color-mix(in srgb, var(--accent) 25%, transparent);
-    border-radius: 999px;
-    font-family: "JetBrains Mono", monospace;
-  }
-
-  .saas-details-col h3 {
-    font-size: 1.6rem;
-    color: var(--ctp-text);
-    font-weight: 800;
-  }
-
-  .saas-long-desc {
-    color: var(--ctp-subtext1);
-    font-size: 0.95rem;
-    line-height: 1.7;
-  }
-
-  .saas-tech-stack {
-    display: flex;
-    flex-wrap: wrap;
-    gap: 8px;
-  }
-
-  .tech-tag {
-    font-family: "JetBrains Mono", monospace;
-    font-size: 0.72rem;
-    font-weight: 600;
-    padding: 3px 10px;
-    border-radius: 6px;
-    background: color-mix(in srgb, var(--accent) 8%, var(--ctp-crust));
-    color: var(--accent);
-    border: 1px solid color-mix(in srgb, var(--accent) 20%, transparent);
-  }
-
-  .saas-features-bullets {
-    list-style: none;
-    padding: 0;
-    margin: 0;
-    display: flex;
-    flex-direction: column;
-    gap: 12px;
-  }
-
-  .saas-features-bullets li {
-    display: flex;
-    align-items: flex-start;
-    gap: 10px;
-  }
-
-  .saas-features-bullets li span {
-    color: var(--ctp-subtext0);
-    font-size: 0.9rem;
-    line-height: 1.5;
-  }
-
-  .saas-action-col {
-    display: flex;
-    flex-direction: column;
-  }
-
-  .saas-cta-panel {
-    background: var(--ctp-mantle);
-    border: 1px solid var(--ctp-surface0);
-    border-radius: 16px;
-    padding: 32px;
-    display: flex;
-    flex-direction: column;
-    gap: 16px;
-  }
-
-  .saas-cta-panel h4 {
-    font-size: 1.1rem;
-    font-weight: 700;
-    color: var(--ctp-text);
-  }
-
-  .saas-cta-panel p {
-    font-size: 0.88rem;
-    color: var(--ctp-subtext0);
-    line-height: 1.6;
-  }
-
-  .saas-cta-btn {
-    width: 100%;
-  }
-
-  .saas-trust-badges {
-    display: flex;
-    gap: 16px;
-    justify-content: center;
-    border-top: 1px solid var(--ctp-surface0);
-    padding-top: 16px;
-  }
-
-  .trust-badge {
-    font-size: 0.75rem;
-    font-weight: 600;
-    color: var(--ctp-subtext1);
-    display: flex;
-    align-items: center;
-    gap: 6px;
-  }
-
-  @media (max-width: 768px) {
-    .saas-showcase-grid {
-      grid-template-columns: 1fr;
-      gap: 32px;
-    }
-  }
 
   .signature {
     grid-column: 1 / -1;

@@ -8,29 +8,17 @@
     <div class="hero-text-col">
       <h1 class="hero-heading">
         {#if $language === "EN"}
-          I Turn <span class="accent-name">Ideas & Insights</span><br />Into Your Dream Project
+          I build applications for <span class="accent-name">everyday problems</span>.
         {:else}
-          Saya Mengubah <span class="accent-name">Ide & Gagasan</span><br />Menjadi Proyek Impian Anda
+          Saya bikin aplikasi untuk <span class="accent-name">masalah sehari-hari</span>.
         {/if}
       </h1>
 
       <p class="hero-bio">
         {#if $language === "EN"}
-          Hey, I'm <strong>Arya Aji Kusuma</strong> — a Senior Fullstack Engineer based in
-          <a
-            href="https://maps.app.goo.gl/jakarta"
-            target="_blank"
-            rel="noopener noreferrer"
-            class="bio-link"
-          >Jakarta, Indonesia</a>. I architect high-performance SaaS platforms, robust API integrations, and intelligent AI-powered workflows. I focus on clean code, system scalability, and shipping business value fast.
+          Working in government. Outside office hours, I build applications — from Chrome extensions to an exam platform. 3 products already shipped.
         {:else}
-          Halo, saya <strong>Arya Aji Kusuma</strong> — seorang Senior Fullstack Engineer yang berbasis di
-          <a
-            href="https://maps.app.goo.gl/jakarta"
-            target="_blank"
-            rel="noopener noreferrer"
-            class="bio-link"
-          >Jakarta, Indonesia</a>. Saya merancang arsitektur platform SaaS berkinerja tinggi, integrasi API yang tangguh, serta sistem kecerdasan buatan (AI) terintegrasi. Fokus saya adalah kualitas kode, skalabilitas sistem, dan menghadirkan solusi bisnis secara cepat.
+          Kerja di pemerintahan. Di luar jam kantor, saya bikin aplikasi — dari Chrome extension sampai platform tryout. Udah ada 3 produk rilis.
         {/if}
       </p>
 
