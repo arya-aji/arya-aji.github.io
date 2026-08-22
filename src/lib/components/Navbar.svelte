@@ -1,5 +1,5 @@
 <script lang="ts">
-  import { Menu, X } from "lucide-svelte";
+  import { Menu, X, Palette } from "lucide-svelte";
   import { page } from "$app/stores";
   import {
     theme,
@@ -31,7 +31,6 @@
       label: $language === "EN" ? "All Projects" : "Semua Proyek",
       desc: $language === "EN" ? "Full gallery with filters & demos" : "Galeri lengkap dengan filter & demo",
       badge: "Gallery",
-      icon: "📂",
       external: false
     },
     {
@@ -39,7 +38,6 @@
       label: $language === "EN" ? "Extension Hub" : "Hub Ekstensi",
       desc: $language === "EN" ? "Privacy browser extensions" : "Ekstensi browser privasi",
       badge: "WebStore",
-      icon: "🔌",
       external: true
     },
     {
@@ -47,7 +45,6 @@
       label: $language === "EN" ? "Resume (CV)" : "Resume (CV)",
       desc: $language === "EN" ? "Experience & technical skills" : "Pengalaman & riwayat teknis",
       badge: "PDF",
-      icon: "📄",
       external: false
     },
   ]);
@@ -119,8 +116,9 @@
         onclick={() => (navPanelOpen = true)}
         aria-expanded={navPanelOpen}
         title="Theme & Colors"
+        aria-label="Theme settings"
       >
-        🎨
+        <Palette size={16} />
       </button>
 
       <a 
@@ -253,7 +251,6 @@
           onclick={closePanel}
         >
           <div class="more-card-header">
-            <span class="more-card-icon">{link.icon}</span>
             <span class="more-card-badge">{link.badge}</span>
           </div>
           <span class="more-card-title">{link.label}</span>

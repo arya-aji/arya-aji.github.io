@@ -55,9 +55,6 @@
     }
   });
 
-  let sliderProjects = $derived(projects.slice(0, 10));
-
-  let currentIndex = $state(0);
   let currentPage = $state(1);
   const itemsPerPage = PAGINATION.projects;
   let caseStudyProject: Project | null = $state(null);
@@ -92,16 +89,6 @@
   function handleMouseLeave() {
     hoveredProject = null;
   }
-
-  function nextSlide() {
-    if (sliderProjects.length <= 1) return;
-    currentIndex = (currentIndex + 1) % sliderProjects.length;
-  }
-
-  function prevSlide() {
-    if (sliderProjects.length <= 1) return;
-    currentIndex = (currentIndex - 1 + sliderProjects.length) % sliderProjects.length;
-  }
 </script>
 
 <svelte:head>
@@ -117,68 +104,6 @@
         ? 'I have built many projects over the years. Below are the key public ones, while the rest are internal or government projects. Click any to learn more.' 
         : 'Saya telah membangun banyak proyek selama bertahun-tahun. Berikut adalah proyek publik utama, sedangkan sisanya merupakan proyek internal atau pemerintah. Klik salah satu untuk info lebih lanjut.'}
     </p>
-
-    <!-- Dedicated SKUI SaaS Case Study (Moved from Pricing) -->
-    <section class="featured-case-study-section">
-      <div class="featured-case-card">
-        <div class="case-badge-row">
-          <span class="case-badge">{$language === 'EN' ? 'Featured SaaS Case Study' : 'Studi Kasus SaaS Unggulan'}</span>
-          <span class="case-badge-pill">🛡️ Midtrans Verified</span>
-        </div>
-
-        <div class="case-grid">
-          <div class="case-info-col">
-            <h2 class="case-title">Siap Kuliah UI (SKUI) — Exam Simulator</h2>
-            <p class="case-description">
-              {$language === 'EN'
-                ? 'A premium, mobile-first SaaS exam simulation platform built for SIMAK UI aspirants with dynamic time tracking, automated question seeding, and integrated billing.'
-                : 'Platform SaaS simulasi ujian mobile-first premium untuk calon mahasiswa SIMAK UI dengan pelacakan waktu dinamis, seeding soal otomatis, dan sistem pembayaran terintegrasi.'}
-            </p>
-
-            <div class="case-narrative-pills">
-              <div class="narrative-pill-item">
-                <span class="narrative-pill-label">🎯 {$language === 'EN' ? 'Problem' : 'Masalah'}</span>
-                <p>{$language === 'EN' ? 'Candidates lacked authentic exam environments with strict timers and rigorous scoring.' : 'Calon mahasiswa kesulitan latihan simulasi ujian dengan batas waktu ketat dan penilaian akurat seperti aslinya.'}</p>
-              </div>
-              <div class="narrative-pill-item">
-                <span class="narrative-pill-label">⚙️ {$language === 'EN' ? 'Solution' : 'Solusi'}</span>
-                <p>{$language === 'EN' ? 'Built mobile-first app with timer simulator, instant voucher generation, and Midtrans checkout.' : 'Membangun aplikasi mobile-first dengan timer dinamis, voucher instan otomatis, dan gateway Midtrans.'}</p>
-              </div>
-              <div class="narrative-pill-item">
-                <span class="narrative-pill-label">📊 {$language === 'EN' ? 'Result' : 'Hasil'}</span>
-                <p>{$language === 'EN' ? '1,000+ active users with 100% automated transaction processing and real-time study analytics.' : 'Digunakan ribuan pengguna aktif dengan 100% transaksi otomatis dan analitik performa belajar.'}</p>
-              </div>
-            </div>
-
-            <div class="case-tech-tags">
-              <span class="cs-tag">Next.js</span>
-              <span class="cs-tag">FastAPI</span>
-              <span class="cs-tag">PostgreSQL</span>
-              <span class="cs-tag">Midtrans API</span>
-              <span class="cs-tag">TailwindCSS</span>
-            </div>
-          </div>
-
-          <div class="case-action-col">
-            <div class="case-action-card">
-              <div class="case-preview-frame">
-                <img src="/skui.png" alt="Siap Kuliah UI Platform Preview" class="case-preview-img" />
-              </div>
-              <div class="case-action-buttons">
-                <a href="https://tryout.aryaaji.com" target="_blank" rel="noopener noreferrer" class="btn primary case-cta-btn">
-                  <ExternalLink size={16} />
-                  {$language === 'EN' ? 'Visit Live App' : 'Kunjungi Aplikasi'}
-                </a>
-                <a href="https://github.com/arya-aji" target="_blank" rel="noopener noreferrer" class="btn secondary case-cta-btn">
-                  <svg width="16" height="16" viewBox="0 0 24 24" fill="currentColor"><path d="M12 0c-6.626 0-12 5.373-12 12 0 5.302 3.438 9.8 8.207 11.387.599.111.793-.261.793-.577v-2.234c-3.338.726-4.033-1.416-4.033-1.416-.546-1.387-1.333-1.756-1.333-1.756-1.089-.745.083-.729.083-.729 1.205.084 1.839 1.237 1.839 1.237 1.07 1.834 2.807 1.304 3.492.997.107-.775.418-1.305.762-1.604-2.665-.305-5.467-1.334-5.467-5.931 0-1.311.469-2.381 1.236-3.221-.124-.303-.535-1.524.117-3.176 0 0 1.008-.322 3.301 1.23.957-.266 1.983-.399 3.003-.404 1.02.005 2.047.138 3.006.404 2.291-1.552 3.297-1.23 3.297-1.23.653 1.653.242 2.874.118 3.176.77.84 1.235 1.911 1.235 3.221 0 4.609-2.807 5.624-5.479 5.921.43.372.823 1.102.823 2.222v3.293c0 .319.192.694.801.576 4.765-1.589 8.199-6.086 8.199-11.386 0-6.627-5.373-12-12-12z"/></svg>
-                  GitHub
-                </a>
-              </div>
-            </div>
-          </div>
-        </div>
-      </div>
-    </section>
 
     {#if isLoading}
       <div class="loader-container">
@@ -211,134 +136,6 @@
         </div>
       </div>
     {:else}
-      <!-- Top Slider (up to 10 projects) -->
-      {#if sliderProjects.length > 0}
-        {#if sliderProjects.length > 1}
-          <div class="slider-header-controls">
-            <div class="slider-controls">
-              <button class="slider-btn" onclick={prevSlide} aria-label="Previous project">
-                <ChevronLeft size={20} />
-              </button>
-              <div class="slider-dots-top">
-                {#each sliderProjects as _, i}
-                  <button 
-                    class="slider-dot {i === currentIndex ? 'active' : ''}" 
-                    onclick={() => currentIndex = i}
-                    aria-label="Go to project {i + 1}"
-                  ></button>
-                {/each}
-              </div>
-              <button class="slider-btn" onclick={nextSlide} aria-label="Next project">
-                <ChevronRight size={20} />
-              </button>
-            </div>
-          </div>
-        {/if}
-
-        <div class="slider-viewport">
-          <div class="slider-track" style="transform: translateX(-{currentIndex * 100}%);">
-            {#each sliderProjects as highlight}
-              <div class="slider-slide">
-                <!-- svelte-ignore a11y_no_static_element_interactions -->
-                <div class="project-card-wrapper featured" onmousemove={(e) => handleMouseMove(e, highlight)} onmouseleave={handleMouseLeave}>
-                  
-                  <!-- Left side: Visuals & Terminal -->
-                  <div class="project-visual-side">
-                    <div class="terminal-card">
-                      <div class="terminal-header">
-                        <div class="terminal-dots">
-                          <span class="dot red"></span>
-                          <span class="dot yellow"></span>
-                          <span class="dot green"></span>
-                        </div>
-                        <div class="repo-name-header">
-                          <span class="repo-org">arya-aji</span>
-                          <span class="repo-sep"> / </span>
-                          <span class="repo-project">{highlight.slug}</span>
-                        </div>
-                      </div>
-                      <div class="terminal-content">
-                        <div class="terminal-preview">
-                          {#if highlight.image}
-                            <div class="preview-placeholder has-image" role="img" aria-label="Project Preview" style="background-image: url('{highlight.image}');"></div>
-                          {:else}
-                            <div class="preview-placeholder" role="img" aria-label="Project Preview">
-                              <svg width="40" height="40" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round">
-                                <rect x="3" y="3" width="18" height="18" rx="2" ry="2"/>
-                                <circle cx="8.5" cy="8.5" r="1.5"/>
-                                <polyline points="21 15 16 10 5 21"/>
-                              </svg>
-                            </div>
-                          {/if}
-                        </div>
-                      </div>
-                    </div>
-                  </div>
-
-                  <!-- Right side: Information and Actions -->
-                  <div class="project-info-side">
-                    <div class="project-info-content">
-                      <div class="title-row" style="display: flex; align-items: center; gap: 12px; margin-bottom: 8px;">
-                        {#if highlight.logo}
-                          <img src={highlight.logo} alt="" style="width: 38px; height: 38px; border-radius: 8px; object-fit: contain; background: #ffffff; padding: 3px; border: 1px solid var(--ctp-surface1); flex-shrink: 0;" />
-                        {/if}
-                        <h3 class="highlight-name" style="margin: 0;">{highlight.title}</h3>
-                        {#if highlight.stars}
-                          <span class="stars">
-                            <Star size={16} fill="currentColor" />
-                            {highlight.stars.toLocaleString()}
-                          </span>
-                        {/if}
-                      </div>
-                      <div class="project-date-badge">{highlight.dateDisplay}</div>
-                      
-                      {#if highlight.problem && highlight.solution}
-                        <div class="slider-narrative-box">
-                          <p class="slider-narrative-line"><strong>{$language === 'EN' ? 'Problem:' : 'Masalah:'}</strong> {highlight.problem}</p>
-                          <p class="slider-narrative-line"><strong>{$language === 'EN' ? 'Solution:' : 'Solusi:'}</strong> {highlight.solution}</p>
-                          {#if highlight.results && highlight.results.length > 0}
-                            <p class="slider-narrative-line"><strong>{$language === 'EN' ? 'Result:' : 'Hasil:'}</strong> {highlight.results.map(r => `${r.metric} ${r.label}`).join(' · ')}</p>
-                          {/if}
-                        </div>
-                      {:else}
-                        <p class="project-long-desc">{highlight.description}</p>
-                      {/if}
-                      
-                      <div class="highlight-tags">
-                        <Tag size={16} class="tag-icon" />
-                        {#each highlight.tags as tag}
-                          <span class="highlight-tag" style="--tag-color: {tagColors[tag] || 'var(--accent)'}">
-                            {tag}
-                          </span>
-                        {/each}
-                      </div>
-                    </div>
-
-                    <div class="project-actions">
-                      <button class="action-btn case-study" onclick={() => caseStudyProject = highlight}>
-                        <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 2v20"/><path d="M17 5H9.5a3.5 3.5 0 0 0 0 7h5a3.5 3.5 0 0 1 0 7H6"/></svg>
-                        {$language === 'EN' ? 'Glance' : 'Lihat Sekilas'}
-                      </button>
-                      {#if highlight.github}
-                        <a href={highlight.github} target="_blank" rel="noopener noreferrer" class="action-btn outline">
-                          <svg width="16" height="16" viewBox="0 0 24 24" fill="currentColor"><path d="M12 0c-6.626 0-12 5.373-12 12 0 5.302 3.438 9.8 8.207 11.387.599.111.793-.261.793-.577v-2.234c-3.338.726-4.033-1.416-4.033-1.416-.546-1.387-1.333-1.756-1.333-1.756-1.089-.745.083-.729.083-.729 1.205.084 1.839 1.237 1.839 1.237 1.07 1.834 2.807 1.304 3.492.997.107-.775.418-1.305.762-1.604-2.665-.305-5.467-1.334-5.467-5.931 0-1.311.469-2.381 1.236-3.221-.124-.303-.535-1.524.117-3.176 0 0 1.008-.322 3.301 1.23.957-.266 1.983-.399 3.003-.404 1.02.005 2.047.138 3.006.404 2.291-1.552 3.297-1.23 3.297-1.23.653 1.653.242 2.874.118 3.176.77.84 1.235 1.911 1.235 3.221 0 4.609-2.807 5.624-5.479 5.921.43.372.823 1.102.823 2.222v3.293c0 .319.192.694.801.576 4.765-1.589 8.199-6.086 8.199-11.386 0-6.627-5.373-12-12-12z"/></svg>
-                          GitHub
-                        </a>
-                      {/if}
-                      {#if highlight.live}
-                        <a href={highlight.live} target="_blank" rel="noopener noreferrer" class="action-btn primary">
-                          <ExternalLink size={18} /> {$language === 'EN' ? 'Demo' : 'Demo'}
-                        </a>
-                      {/if}
-                    </div>
-                  </div>
-                </div>
-              </div>
-            {/each}
-          </div>
-        </div>
-      {/if}
-
       <!-- Grid List for All Projects -->
       {#if projects.length > 0}
         <div class="projects-filter-bar">

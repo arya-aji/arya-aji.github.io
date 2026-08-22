@@ -24,22 +24,20 @@ export const serviceOfferings: ServiceOffering[] = [
     badge: "Most Popular",
     badgeColor: "#cba6f7",
     badgeBg: "rgba(203, 166, 247, 0.15)",
-    description_en: "Turn repetitive browsing, scraping, or web actions into 1-click tools running natively in Manifest V3.",
-    description_id: "Ubah pekerjaan browser manual, scraping, atau alur kerja berulang jadi 1-klik alat bantu Manifest V3.",
+    description_en: "Turn repetitive browsing, scraping, or web workflows into 1-click tools running natively in Manifest V3.",
+    description_id: "Ubah pekerjaan browser manual, scraping, atau workflow berulang jadi 1-klik alat bantu Manifest V3.",
     deliverables_en: [
-      "Manifest V3 compliant extension",
-      "Custom popup, side panel, or background worker",
-      "DOM automation, auto-fill, or web scraping",
-      "Ready-to-publish store zip package"
+      "Manifest V3 extension (Popup, Sidepanel, Background)",
+      "Automated DOM scraping, autofill & data extraction",
+      "Store-ready package + publishing guide"
     ],
     deliverables_id: [
-      "Ekstensi standar Manifest V3",
-      "Popup kustom, panel samping, atau background worker",
-      "Otomasi DOM, auto-fill, atau web scraping",
-      "Paket ZIP siap diunggah ke Chrome Web Store"
+      "Ekstensi Manifest V3 (Popup, Sidepanel, Background)",
+      "Otomasi DOM scraping, autofill & ekstraksi data",
+      "Paket ZIP siap rilis ke Chrome Web Store"
     ],
-    idealFor_en: "Teams needing productivity boosters, privacy protectors, or internal workflow helpers.",
-    idealFor_id: "Tim yang butuh alat bantu produktivitas, proteksi privasi, atau otomatisasi kerja internal.",
+    idealFor_en: "Productivity boosters & custom browser workflows.",
+    idealFor_id: "Alat bantu produktivitas & otomasi alur kerja web.",
     icon: "Boxes",
     turnaround_en: "3 – 5 Days",
     turnaround_id: "3 – 5 Hari"
@@ -51,22 +49,20 @@ export const serviceOfferings: ServiceOffering[] = [
     badge: "High ROI",
     badgeColor: "#89b4fa",
     badgeBg: "rgba(137, 180, 250, 0.15)",
-    description_en: "Automate complex data gathering, spreadsheet wrangling (Excel/Google Sheets), OSM geocoding, and REST API syncs.",
-    description_id: "Otomasi penarikan data, pengolahan spreadsheet (Excel/Google Sheets), geocoding peta OSM, dan sinkronisasi API.",
+    description_en: "Automate complex data gathering, spreadsheet wrangling (Excel/Sheets), OSM geocoding, and REST API syncs.",
+    description_id: "Otomasi penarikan data, pengolahan spreadsheet (Excel/Sheets), geocoding peta OSM, dan sinkronisasi API.",
     deliverables_en: [
-      "Robust, self-contained Python / Node scripts",
-      "Scheduled or triggered execution",
-      "Clean Excel / CSV / JSON structured reports",
-      "Complete deployment & run documentation"
+      "Self-contained, battle-tested Python scripts",
+      "Scheduled/instant automated pipelines",
+      "Structured Excel / CSV / JSON reports"
     ],
     deliverables_id: [
-      "Script Python / Node yang mandiri dan teruji",
-      "Jadwal eksekusi otomatis atau pemicu instan",
-      "Laporan terstruktur Excel / CSV / JSON bersih",
-      "Dokumentasi lengkap cara pakai dan deployment"
+      "Script Python mandiri & teruji andal",
+      "Pipeline terjadwal / otomatis sekali klik",
+      "Laporan terstruktur Excel / CSV / JSON bersih"
     ],
-    idealFor_en: "Businesses wasting hours doing manual copy-paste, reporting, or data verification.",
-    idealFor_id: "Bisnis yang membuang waktu berjam-jam untuk copy-paste manual, pelaporan, atau validasi data.",
+    idealFor_en: "Eliminating tedious manual copy-paste & reporting.",
+    idealFor_id: "Menghilangkan pekerjaan manual copy-paste & rekap data.",
     icon: "Cpu",
     turnaround_en: "2 – 4 Days",
     turnaround_id: "2 – 4 Hari"
@@ -78,22 +74,20 @@ export const serviceOfferings: ServiceOffering[] = [
     badge: "Fixed-Price Sprints",
     badgeColor: "#fab387",
     badgeBg: "rgba(250, 179, 135, 0.15)",
-    description_en: "Fast, lightweight modern web applications and interactive portals built with SvelteKit or Next.js.",
-    description_id: "Aplikasi web modern, cepat, dan portal interaktif yang dibangun menggunakan SvelteKit atau Next.js.",
+    description_en: "Fast, modern web applications and interactive portals built with SvelteKit or Next.js for immediate validation.",
+    description_id: "Aplikasi web modern, cepat, dan portal interaktif dengan SvelteKit / Next.js untuk validasi langsung.",
     deliverables_en: [
-      "Responsive, mobile-first web interface",
-      "Dynamic interactive charts, tables, & filters",
-      "API integrations & payment gateways",
+      "Responsive mobile-first UI with dark/light themes",
+      "Interactive charts, live filters & auth/payments",
       "High performance & zero-maintenance static deploy"
     ],
     deliverables_id: [
-      "Antarmuka responsif mobile-first",
-      "Grafik interaktif dinamis, tabel, & filter",
-      "Integrasi API & sistem pembayaran",
+      "Antarmuka mobile-first responsif & elegan",
+      "Grafik interaktif, filter instan & integrasi API",
       "Performa tinggi & deployment statis hemat biaya"
     ],
-    idealFor_en: "Founders, creators, and teams needing a working proof-of-concept or internal tool quickly.",
-    idealFor_id: "Founder, kreator, dan tim yang butuh validasi produk cepat atau dashboard operasional.",
+    idealFor_en: "Founders & teams needing a working MVP fast.",
+    idealFor_id: "Founder & tim yang butuh rilis MVP cepat.",
     icon: "LayoutDashboard",
     turnaround_en: "1 – 2 Weeks",
     turnaround_id: "1 – 2 Minggu"

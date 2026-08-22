@@ -7,7 +7,6 @@
   <div class="container hero-inner">
     <div class="hero-text-col">
       <div class="availability-badge">
-        <span class="badge-icon">⏱️</span>
         <span class="status-dot pulse"></span>
         <span>
           {#if $language === "EN"}
