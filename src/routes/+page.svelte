@@ -3,6 +3,7 @@
   import ServicesGrid from '$lib/components/ServicesGrid.svelte';
   import FeaturedProjects from '$lib/components/FeaturedProjects.svelte';
   import AboutSection from '$lib/components/AboutSection.svelte';
+  import ContactSection from '$lib/components/ContactSection.svelte';
   import type { Project } from '$lib/data/projects';
 
   let { data } = $props<{ data: { projects: Project[] } }>();
@@ -19,6 +20,7 @@
   <ServicesGrid />
   <FeaturedProjects projects={featuredProjects} />
   <AboutSection />
+  <ContactSection />
 </main>
 
 <style>

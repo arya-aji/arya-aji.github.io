@@ -21,12 +21,21 @@
 
   let navLinks = $derived([
     { href: "/#services", label: $language === "EN" ? "Services" : "Layanan" },
-    { href: "/projects", label: $language === "EN" ? "Projects" : "Proyek" },
+    { href: "/#projects", label: $language === "EN" ? "Work" : "Portofolio" },
     { href: "/#about", label: $language === "EN" ? "About" : "Tentang" },
-    { href: "/contact", label: $language === "EN" ? "Contact & Hire" : "Kontak / Rekrut" },
+    { href: "/resume", label: $language === "EN" ? "Resume" : "Resume" },
+    { href: "/#contact", label: $language === "EN" ? "Contact" : "Kontak" },
   ]);
 
   let moreLinks = $derived([
+    {
+      href: "/projects",
+      label: $language === "EN" ? "All Projects" : "Semua Proyek",
+      desc: $language === "EN" ? "Full gallery with filters & demos" : "Galeri lengkap dengan filter & demo",
+      badge: "Gallery",
+      icon: "📂",
+      external: false
+    },
     {
       href: externalLinks.extensions.url,
       label: $language === "EN" ? "Extension Hub" : "Hub Ekstensi",
@@ -37,8 +46,8 @@
     },
     {
       href: "/resume",
-      label: $language === "EN" ? "Resume" : "Resume",
-      desc: $language === "EN" ? "Printable profile overview" : "Ringkasan profil cetak",
+      label: $language === "EN" ? "Resume (CV)" : "Resume (CV)",
+      desc: $language === "EN" ? "Experience & technical skills" : "Pengalaman & riwayat teknis",
       badge: "PDF",
       icon: "📄",
       external: false
@@ -98,6 +107,7 @@
       {#each navLinks as link}
         <a href={link.href} class="nav-link">{link.label}</a>
       {/each}
+      
       <button
         class="nav-link lang-toggle-btn"
         onclick={() => language.update(l => l === "EN" ? "ID" : "EN")}
@@ -105,13 +115,24 @@
       >
         {$language}
       </button>
+
       <button
-        class="nav-link more-btn"
+        class="nav-link theme-panel-btn"
         onclick={() => (navPanelOpen = true)}
         aria-expanded={navPanelOpen}
+        title="Theme & Colors"
       >
-        More...
+        🎨
       </button>
+
+      <a 
+        href="https://upwork.com/freelancers/aryaajik" 
+        target="_blank" 
+        rel="noopener noreferrer" 
+        class="nav-hire-btn"
+      >
+        {$language === "EN" ? "Hire Me" : "Rekrut"} &rarr;
+      </a>
     </div>
 
     <!-- Mobile hamburger -->
@@ -364,10 +385,30 @@
     background: color-mix(in srgb, var(--accent) 10%, transparent);
     opacity: 1;
   }
-  .more-btn {
-    display: flex;
+  .theme-panel-btn {
+    font-size: 1rem;
+    padding: 6px 10px;
+  }
+  .nav-hire-btn {
+    display: inline-flex;
     align-items: center;
     gap: 4px;
+    padding: 7px 16px;
+    border-radius: 8px;
+    background: var(--accent-surface);
+    color: var(--accent);
+    border: 1px solid var(--accent-subtle);
+    font-size: 0.88rem;
+    font-weight: 700;
+    text-decoration: none;
+    transition: all 0.2s ease;
+    margin-left: 6px;
+  }
+  .nav-hire-btn:hover {
+    background: var(--accent);
+    color: var(--ctp-base, #1e1e2e);
+    border-color: var(--accent);
+    transform: translateY(-1px);
   }
 
   /* ─── Mobile ─────────────────────────────────────────── */

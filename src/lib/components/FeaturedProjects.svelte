@@ -110,6 +110,14 @@
         </div>
       {/each}
     </div>
+
+    <!-- Link to full projects gallery -->
+    <div class="view-all-container">
+      <a href="/projects" class="view-all-btn">
+        <span>Explore All Projects & Tools</span>
+        <ExternalLink size={16} />
+      </a>
+    </div>
   </div>
 
   {#if hoveredProjectObj && (hoveredProjectObj.gif || hoveredProjectObj.image)}
@@ -138,6 +146,35 @@
     font-weight: 800;
     color: var(--ctp-text);
     letter-spacing: -0.01em;
+  }
+
+  .view-all-container {
+    display: flex;
+    justify-content: center;
+    margin-top: 48px;
+  }
+
+  .view-all-btn {
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    padding: 12px 24px;
+    border-radius: 10px;
+    background: var(--accent-surface);
+    color: var(--accent);
+    border: 1px solid var(--accent-subtle);
+    font-weight: 600;
+    font-size: 0.95rem;
+    text-decoration: none;
+    transition: all 0.25s ease;
+  }
+
+  .view-all-btn:hover {
+    background: var(--accent);
+    color: var(--ctp-base, #1e1e2e);
+    border-color: var(--accent);
+    transform: translateY(-2px);
+    box-shadow: 0 10px 25px -8px var(--accent-subtle);
   }
 
   .projects-list {
