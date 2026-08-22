@@ -3,6 +3,7 @@
   import type { Project } from '$lib/data/projects';
   import { tagColors } from '$lib/data/projects';
   import CaseStudyModal from '$lib/components/CaseStudyModal.svelte';
+  import { language } from '$lib/stores/language';
 
   let { projects = [] }: { projects: Project[] } = $props();
 
@@ -31,7 +32,17 @@
 <section class="featured-projects section" id="projects">
   <div class="container">
     <div class="section-header">
-      <h2 class="section-title">Selected Work</h2>
+      <div class="badge-pill">
+        <span>{$language === "EN" ? "Portfolio" : "Portofolio"}</span>
+      </div>
+      <h2 class="section-title">
+        {$language === "EN" ? "Selected Work" : "Proyek Pilihan"}
+      </h2>
+      <p class="section-subtitle">
+        {$language === "EN" 
+          ? "Production-ready web applications, Chrome extensions, and developer tooling."
+          : "Aplikasi web siap pakai, ekstensi browser Chrome, dan alat otomasi pengembang."}
+      </p>
     </div>
 
     <div class="projects-list">
@@ -138,14 +149,49 @@
   }
 
   .section-header {
-    margin-bottom: 48px;
+    display: flex !important;
+    flex-direction: column !important;
+    align-items: center !important;
+    text-align: center;
+    max-width: 680px;
+    margin: 0 auto 52px;
+    gap: 0;
+  }
+
+  .badge-pill {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    gap: 6px;
+    padding: 5px 14px;
+    border-radius: 999px;
+    background: var(--accent-surface);
+    color: var(--accent);
+    font-size: 0.85rem;
+    font-weight: 600;
+    margin-bottom: 14px;
+    border: 1px solid var(--accent-subtle);
+    width: fit-content;
   }
 
   .section-title {
-    font-size: 2rem;
+    font-size: 2.3rem;
     font-weight: 800;
     color: var(--ctp-text);
-    letter-spacing: -0.01em;
+    margin: 0 0 14px;
+    letter-spacing: -0.02em;
+    line-height: 1.2;
+    text-align: center;
+    display: block;
+  }
+
+  .section-subtitle {
+    font-size: 1.05rem;
+    color: var(--ctp-subtext0);
+    line-height: 1.6;
+    margin: 0;
+    text-align: center;
+    display: block;
   }
 
   .view-all-container {

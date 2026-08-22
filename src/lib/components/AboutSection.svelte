@@ -7,14 +7,9 @@
   <div class="container">
     <div class="section-divider"></div>
     <div class="about-card">
-      <div class="about-header">
-        <h2 class="section-title">
-          {$language === "EN" ? "About Me" : "Tentang Saya"}
-        </h2>
-      </div>
-
-      <div class="about-content">
-        <div class="profile-col">
+      <div class="about-content-grid">
+        <!-- Kolom Kiri: Foto Profil Khusus -->
+        <div class="photo-col">
           <div class="photo-wrapper">
             <img
               src="/photo.png"
@@ -23,21 +18,24 @@
               loading="lazy"
             />
           </div>
-          <div class="profile-meta">
-            <h3 class="profile-name">Arya Aji Kusuma</h3>
-            <span class="profile-loc">
-              <MapPin size={14} class="loc-icon" />
-              Jakarta, Indonesia
-            </span>
-          </div>
         </div>
 
-        <div class="text-col">
+        <!-- Kolom Kanan: Nama di atas, baru penjelasan filosofi di bawah -->
+        <div class="info-col">
+          <div class="profile-header">
+            <span class="about-badge">{$language === "EN" ? "About Me" : "Tentang Saya"}</span>
+            <h2 class="profile-name">Arya Aji Kusuma</h2>
+            <div class="profile-loc">
+              <MapPin size={14} class="loc-icon" />
+              <span>Jakarta, Indonesia</span>
+            </div>
+          </div>
+
           <p class="about-philosophy">
             {#if $language === "EN"}
-              Building applications from real problems — not from theory. Every project starts with an observation: is there a tedious manual process? A workflow that can be automated? If yes, I build the tool for it.
+              I build applications to solve real bottlenecks, not theoretical concepts. Every project starts with a clear observation: is there a tedious manual task or a process we can streamline? If yes, I engineer the solution for it.
             {:else}
-              Bikin aplikasi dari masalah nyata — bukan dari teori. Setiap proyek dimulai dari observasi: ada proses manual yang bikin orang capek? Ada workflow yang bisa diotomatisin? Kalau iya, saya bikin alatnya.
+              Saya membangun aplikasi untuk menyelesaikan masalah nyata di lapangan. Setiap proyek selalu berawal dari pertanyaan: apakah ada pekerjaan manual yang memakan waktu atau alur yang bisa diotomasi? Jika ada, saya bangun alatnya.
             {/if}
           </p>
 
@@ -150,57 +148,79 @@
     letter-spacing: -0.01em;
   }
 
-  .about-content {
+  .about-content-grid {
     display: grid;
-    grid-template-columns: 220px 1fr;
-    gap: 36px;
-    align-items: center;
+    grid-template-columns: 180px 1fr;
+    gap: 40px;
+    align-items: flex-start;
   }
 
-  /* Profile Column */
-  .profile-col {
+  /* Photo Column (Left Side Dedicated Column) */
+  .photo-col {
     display: flex;
-    align-items: center;
-    gap: 16px;
+    justify-content: center;
+    align-items: flex-start;
+    padding-top: 4px;
   }
 
   .photo-wrapper {
-    width: 72px;
-    height: 72px;
-    border-radius: 50%;
-    padding: 2px;
+    width: 140px;
+    height: 140px;
+    border-radius: 24px;
+    padding: 3px;
     background: linear-gradient(135deg, var(--accent), var(--ctp-lavender));
-    box-shadow: 0 6px 18px color-mix(in srgb, var(--accent) 25%, transparent);
-    flex-shrink: 0;
+    box-shadow: 0 10px 28px color-mix(in srgb, var(--accent) 25%, transparent);
+    overflow: hidden;
   }
 
   .photo-img {
     width: 100%;
     height: 100%;
-    border-radius: 50%;
+    border-radius: 21px;
     object-fit: cover;
     display: block;
   }
 
-  .profile-meta {
+  /* Info Column (Right Side) */
+  .info-col {
     display: flex;
     flex-direction: column;
-    gap: 4px;
+    gap: 16px;
+  }
+
+  .profile-header {
+    display: flex;
+    flex-direction: column;
+    gap: 6px;
+  }
+
+  .about-badge {
+    align-self: flex-start;
+    font-size: 0.72rem;
+    font-weight: 700;
+    text-transform: uppercase;
+    letter-spacing: 0.08em;
+    color: var(--accent);
+    background: var(--accent-surface);
+    border: 1px solid var(--accent-subtle);
+    padding: 3px 10px;
+    border-radius: 999px;
   }
 
   .profile-name {
-    font-size: 1.05rem;
-    font-weight: 700;
+    font-size: 1.8rem;
+    font-weight: 800;
     color: var(--ctp-text);
     margin: 0;
-    line-height: 1.3;
+    line-height: 1.2;
+    letter-spacing: -0.01em;
   }
 
   .profile-loc {
     display: inline-flex;
     align-items: center;
-    gap: 4px;
-    font-size: 0.8rem;
+    gap: 5px;
+    font-size: 0.85rem;
     color: var(--ctp-subtext0);
     font-family: "JetBrains Mono", monospace;
   }
@@ -210,15 +230,8 @@
     flex-shrink: 0;
   }
 
-  /* Text Column */
-  .text-col {
-    display: flex;
-    flex-direction: column;
-    gap: 20px;
-  }
-
   .about-philosophy {
-    font-size: 1.02rem;
+    font-size: 1.05rem;
     line-height: 1.8;
     color: var(--ctp-subtext1);
     margin: 0;
@@ -229,14 +242,15 @@
     display: flex;
     align-items: center;
     gap: 10px;
+    margin-top: 4px;
   }
 
   .social-icon-btn {
     display: inline-flex;
     align-items: center;
     justify-content: center;
-    width: 38px;
-    height: 38px;
+    width: 40px;
+    height: 40px;
     border-radius: 10px;
     background: var(--ctp-crust);
     border: 1px solid var(--ctp-surface0);
@@ -254,16 +268,33 @@
 
   @media (max-width: 768px) {
     .about-card {
-      padding: 24px 20px;
+      padding: 28px 20px;
     }
 
-    .about-content {
+    .about-content-grid {
       grid-template-columns: 1fr;
-      gap: 20px;
+      gap: 24px;
+      text-align: center;
     }
 
-    .section-title {
+    .photo-col {
+      padding-top: 0;
+    }
+
+    .profile-header {
+      align-items: center;
+    }
+
+    .about-badge {
+      align-self: center;
+    }
+
+    .profile-name {
       font-size: 1.5rem;
+    }
+
+    .social-icons {
+      justify-content: center;
     }
 
     .about-philosophy {

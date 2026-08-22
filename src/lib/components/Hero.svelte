@@ -19,17 +19,17 @@
 
       <h1 class="hero-heading">
         {#if $language === "EN"}
-          Building <span class="accent-name">automation tools</span>, extensions & web applications.
+          Building modern <span class="accent-name">web applications</span>, automation tools & extensions.
         {:else}
-          Membangun <span class="accent-name">alat otomasi</span>, ekstensi & aplikasi web.
+          Membangun <span class="accent-name">aplikasi web modern</span>, alat otomasi & ekstensi browser.
         {/if}
       </h1>
 
       <p class="hero-bio">
         {#if $language === "EN"}
-          Full-stack builder specializing in custom Chrome extensions, Python data workflows, and lightweight web apps. Designed for reliability, fast delivery, and clear scope.
+          Full-stack web developer specializing in fast interactive web applications, custom browser extensions, and Python data pipelines. Built for speed, clarity, and async fixed-price delivery.
         {:else}
-          Full-stack developer spesialis ekstensi Chrome, otomasi data Python, dan aplikasi web ringan. Dirancang untuk hasil cepat, teruji, dan lingkup kerja yang jelas.
+          Full-stack web developer spesialis aplikasi web interaktif yang cepat, ekstensi browser kustom, dan pipeline data Python. Dirancang untuk hasil cepat, teruji, dan kerja asinkron terstruktur.
         {/if}
       </p>
 

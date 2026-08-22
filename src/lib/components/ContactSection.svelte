@@ -16,8 +16,8 @@
 
       <p class="section-desc">
         {$language === "EN"
-          ? "Whether you need a custom Chrome extension, Python data pipeline, or a fast lightweight web app — send a brief directly."
-          : "Baik Anda membutuhkan ekstensi Chrome kustom, pipeline data Python, atau web app modern yang cepat — kirim ringkasan kebutuhan Anda secara langsung."}
+          ? "Need a custom web app, browser extension, or Python automation? Send your project brief directly."
+          : "Butuh web app kustom, ekstensi browser, atau otomasi data Python? Kirim ringkasan kebutuhan proyek Anda langsung."}
       </p>
     </div>
 
@@ -85,14 +85,19 @@
   }
 
   .contact-header {
+    display: flex !important;
+    flex-direction: column !important;
+    align-items: center !important;
     text-align: center;
     max-width: 640px;
     margin: 0 auto 48px;
+    gap: 0;
   }
 
   .badge-pill {
     display: inline-flex;
     align-items: center;
+    justify-content: center;
     gap: 6px;
     padding: 5px 14px;
     border-radius: 999px;
@@ -102,14 +107,18 @@
     font-weight: 600;
     margin-bottom: 14px;
     border: 1px solid var(--accent-subtle);
+    width: fit-content;
   }
 
   .section-title {
-    font-size: 2.2rem;
+    font-size: 2.3rem;
     font-weight: 800;
     color: var(--ctp-text);
     margin: 0 0 14px;
     letter-spacing: -0.02em;
+    line-height: 1.2;
+    text-align: center;
+    display: block;
   }
 
   .section-desc {
@@ -117,6 +126,8 @@
     color: var(--ctp-subtext0);
     line-height: 1.65;
     margin: 0;
+    text-align: center;
+    display: block;
   }
 
   /* 2 Column Horizontal Grid */

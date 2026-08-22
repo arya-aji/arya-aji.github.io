@@ -16,12 +16,12 @@
       </h2>
       <p class="section-subtitle">
         {$language === "EN" 
-          ? "No endless hourly drag. Clear deliverables, fast turnaround, and async milestone updates." 
-          : "Tanpa biaya jam kerja membengkak. Hasil terukur, pengerjaan cepat, dan update milestone asinkron."}
+          ? "You bring the goal or problem, and leave the heavy lifting and technical thinking to me. Clear deliverables, fixed pricing, and fast turnaround." 
+          : "Cukup bawa tujuan atau problem yang ingin diselesaikan, serahkan urusan teknis dan arsitekturnya ke saya. Hasil kerja terukur, harga pasti, dan pengerjaan cepat."}
       </p>
     </div>
 
-    <!-- 3 Services Cards Grid -->
+    <!-- 3 Services Cards Grid (Berdampingan) -->
     <div class="services-grid">
       {#each serviceOfferings as service}
         <div class="service-card" style="--badge-color: {service.badgeColor};">
@@ -130,14 +130,19 @@
   }
 
   .section-header {
+    display: flex !important;
+    flex-direction: column !important;
+    align-items: center !important;
     text-align: center;
     max-width: 680px;
     margin: 0 auto 52px;
+    gap: 0;
   }
 
   .badge-pill {
     display: inline-flex;
     align-items: center;
+    justify-content: center;
     gap: 6px;
     padding: 5px 14px;
     border-radius: 999px;
@@ -147,6 +152,7 @@
     font-weight: 600;
     margin-bottom: 14px;
     border: 1px solid var(--accent-subtle);
+    width: fit-content;
   }
 
   .section-title {
@@ -156,6 +162,8 @@
     margin: 0 0 14px;
     letter-spacing: -0.02em;
     line-height: 1.2;
+    text-align: center;
+    display: block;
   }
 
   .section-subtitle {
@@ -163,14 +171,17 @@
     color: var(--ctp-subtext0);
     line-height: 1.6;
     margin: 0;
+    text-align: center;
+    display: block;
   }
 
-  /* Grid Layout */
+  /* Grid Layout (3 Kolom Berdampingan) */
   .services-grid {
     display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(330px, 1fr));
+    grid-template-columns: repeat(3, 1fr);
     gap: 28px;
     margin-bottom: 40px;
+    align-items: stretch;
   }
 
   /* Premium Glassmorphic Card */
@@ -441,12 +452,15 @@
     color: var(--ctp-base, #1e1e2e);
   }
 
+  @media (max-width: 1024px) {
+    .services-grid {
+      grid-template-columns: 1fr;
+    }
+  }
+
   @media (max-width: 768px) {
     .section-title {
       font-size: 1.75rem;
-    }
-    .services-grid {
-      grid-template-columns: 1fr;
     }
     .service-card {
       padding: 24px 20px;

@@ -18,6 +18,31 @@ export interface ServiceOffering {
 
 export const serviceOfferings: ServiceOffering[] = [
   {
+    id: "fast-mvp",
+    title_en: "Modern Web Apps & Interactive Dashboards",
+    title_id: "Aplikasi Web Modern & Dashboard Interaktif",
+    badge: "Core Expertise",
+    badgeColor: "#fab387",
+    badgeBg: "rgba(250, 179, 135, 0.15)",
+    description_en: "Fast, responsive web applications and interactive dashboards built with SvelteKit, React, or Next.js.",
+    description_id: "Aplikasi web responsif yang cepat dan dashboard interaktif yang dibangun menggunakan SvelteKit, React, atau Next.js.",
+    deliverables_en: [
+      "Responsive mobile-first UI with dark/light themes",
+      "Interactive charts, live filters & auth/payments",
+      "High performance & zero-maintenance static deploy"
+    ],
+    deliverables_id: [
+      "Antarmuka mobile-first responsif & elegan",
+      "Grafik interaktif, filter instan & integrasi API",
+      "Performa tinggi & deployment statis hemat biaya"
+    ],
+    idealFor_en: "Founders & teams needing a production-ready web app fast.",
+    idealFor_id: "Founder & tim yang butuh rilis web app berkualitas cepat.",
+    icon: "LayoutDashboard",
+    turnaround_en: "1 – 2 Weeks",
+    turnaround_id: "1 – 2 Minggu"
+  },
+  {
     id: "browser-extensions",
     title_en: "Custom Chrome & Browser Extensions",
     title_id: "Ekstensi Browser & Chrome Kustom",
@@ -66,30 +91,5 @@ export const serviceOfferings: ServiceOffering[] = [
     icon: "Cpu",
     turnaround_en: "2 – 4 Days",
     turnaround_id: "2 – 4 Hari"
-  },
-  {
-    id: "fast-mvp",
-    title_en: "Interactive Web MVPs & Dashboards",
-    title_id: "Web App Ringan & Dashboard Interaktif",
-    badge: "Fixed-Price Sprints",
-    badgeColor: "#fab387",
-    badgeBg: "rgba(250, 179, 135, 0.15)",
-    description_en: "Fast, modern web applications and interactive portals built with SvelteKit or Next.js for immediate validation.",
-    description_id: "Aplikasi web modern, cepat, dan portal interaktif dengan SvelteKit / Next.js untuk validasi langsung.",
-    deliverables_en: [
-      "Responsive mobile-first UI with dark/light themes",
-      "Interactive charts, live filters & auth/payments",
-      "High performance & zero-maintenance static deploy"
-    ],
-    deliverables_id: [
-      "Antarmuka mobile-first responsif & elegan",
-      "Grafik interaktif, filter instan & integrasi API",
-      "Performa tinggi & deployment statis hemat biaya"
-    ],
-    idealFor_en: "Founders & teams needing a working MVP fast.",
-    idealFor_id: "Founder & tim yang butuh rilis MVP cepat.",
-    icon: "LayoutDashboard",
-    turnaround_en: "1 – 2 Weeks",
-    turnaround_id: "1 – 2 Minggu"
   }
 ];

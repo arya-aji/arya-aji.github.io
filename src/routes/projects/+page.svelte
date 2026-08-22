@@ -55,6 +55,7 @@
     }
   });
 
+  let featuredProjects = $derived(projects.filter(p => p.featured).slice(0, 3));
   let currentPage = $state(1);
   const itemsPerPage = PAGINATION.projects;
   let caseStudyProject: Project | null = $state(null);
@@ -136,6 +137,67 @@
         </div>
       </div>
     {:else}
+      <!-- 3 Curated Featured Projects -->
+      {#if featuredProjects.length > 0}
+        <section class="featured-trio-section">
+          <div class="featured-trio-header">
+            <span class="featured-trio-badge">{$language === 'EN' ? 'Selected Highlights' : 'Karya Pilihan'}</span>
+            <h2 class="featured-trio-title">{$language === 'EN' ? 'Featured Projects' : 'Proyek Unggulan'}</h2>
+          </div>
+
+          <div class="featured-trio-grid">
+            {#each featuredProjects as project}
+              <!-- svelte-ignore a11y_no_static_element_interactions -->
+              <div 
+                class="featured-trio-card"
+                onmousemove={(e) => handleMouseMove(e, project)}
+                onmouseleave={handleMouseLeave}
+              >
+                <div class="trio-media-frame">
+                  {#if project.image}
+                    <div class="trio-thumb has-img" style="background-image: url('{project.image}');" role="img" aria-label="{project.title}"></div>
+                  {:else}
+                    <div class="trio-thumb">
+                      <svg width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round">
+                        <rect x="3" y="3" width="18" height="18" rx="2" ry="2"/>
+                        <circle cx="8.5" cy="8.5" r="1.5"/>
+                        <polyline points="21 15 16 10 5 21"/>
+                      </svg>
+                    </div>
+                  {/if}
+                  <span class="trio-date-tag">{project.dateDisplay}</span>
+                </div>
+
+                <div class="trio-body">
+                  <h3 class="trio-title">{project.title}</h3>
+                  <p class="trio-desc">{project.description || project.longDesc}</p>
+
+                  <div class="trio-tags">
+                    {#each project.tags.slice(0, 3) as tag}
+                      <span class="trio-tag" style="--tag-color: {tagColors[tag] || 'var(--accent)'}">
+                        {tag}
+                      </span>
+                    {/each}
+                  </div>
+
+                  <div class="trio-actions">
+                    <button class="trio-btn glance-btn" onclick={() => caseStudyProject = project}>
+                      {$language === 'EN' ? 'Glance' : 'Lihat'}
+                    </button>
+                    {#if project.live}
+                      <a href={project.live} target="_blank" rel="noopener noreferrer" class="trio-btn live-btn">
+                        <span>{$language === 'EN' ? 'Demo' : 'Demo'}</span>
+                        <ExternalLink size={13} />
+                      </a>
+                    {/if}
+                  </div>
+                </div>
+              </div>
+            {/each}
+          </div>
+        </section>
+      {/if}
+
       <!-- Grid List for All Projects -->
       {#if projects.length > 0}
         <div class="projects-filter-bar">
@@ -346,27 +408,195 @@
     margin-bottom: 32px;
   }
 
-  /* --- Featured SaaS Case Study Banner (SKUI) --- */
-  .featured-case-study-section {
-    margin-bottom: 48px;
+  /* --- 3 Featured Projects (Trio Grid) --- */
+  .featured-trio-section {
+    margin-bottom: 56px;
+    padding-bottom: 40px;
+    border-bottom: 1px solid var(--ctp-surface0);
   }
 
-  .featured-case-card {
-    background: color-mix(in srgb, var(--ctp-mantle) 85%, transparent);
-    border: 1px solid color-mix(in srgb, var(--accent) 30%, var(--ctp-surface0));
-    border-radius: 20px;
-    padding: 32px 36px;
-    box-shadow: 0 16px 40px rgba(0, 0, 0, 0.2);
+  .featured-trio-header {
+    margin-bottom: 24px;
+  }
+
+  .featured-trio-badge {
+    display: inline-block;
+    font-size: 0.72rem;
+    font-weight: 700;
+    text-transform: uppercase;
+    letter-spacing: 0.06em;
+    color: var(--accent);
+    background: color-mix(in srgb, var(--accent) 12%, transparent);
+    padding: 3px 10px;
+    border-radius: 999px;
+    margin-bottom: 8px;
+    border: 1px solid color-mix(in srgb, var(--accent) 25%, transparent);
+  }
+
+  .featured-trio-title {
+    font-size: 1.6rem;
+    font-weight: 800;
+    color: var(--ctp-text);
+    margin: 0;
+    letter-spacing: -0.01em;
+  }
+
+  .featured-trio-grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 24px;
+  }
+
+  .featured-trio-card {
+    background: color-mix(in srgb, var(--ctp-mantle) 75%, transparent);
+    backdrop-filter: blur(12px);
+    -webkit-backdrop-filter: blur(12px);
+    border: 1px solid var(--ctp-surface0);
+    border-radius: 16px;
+    overflow: hidden;
+    display: flex;
+    flex-direction: column;
+    transition: transform 0.25s ease, border-color 0.25s ease, box-shadow 0.25s ease;
+  }
+
+  .featured-trio-card:hover {
+    transform: translateY(-4px);
+    border-color: var(--accent);
+    box-shadow: 0 16px 36px -10px color-mix(in srgb, var(--accent) 20%, transparent);
+  }
+
+  .trio-media-frame {
+    height: 180px;
     position: relative;
+    background: var(--ctp-crust);
+    overflow: hidden;
+    border-bottom: 1px solid var(--ctp-surface0);
+  }
+
+  .trio-thumb {
+    width: 100%;
+    height: 100%;
+    background-size: cover;
+    background-position: center;
+    transition: transform 0.4s ease;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: var(--ctp-overlay0);
+  }
+
+  .featured-trio-card:hover .trio-thumb {
+    transform: scale(1.04);
+  }
+
+  .trio-date-tag {
+    position: absolute;
+    top: 12px;
+    right: 12px;
+    background: color-mix(in srgb, var(--ctp-base) 85%, transparent);
+    border: 1px solid var(--ctp-surface0);
+    padding: 2px 8px;
+    border-radius: 6px;
+    font-size: 0.72rem;
+    font-weight: 600;
+    color: var(--ctp-subtext0);
+    font-family: 'JetBrains Mono', monospace;
+    backdrop-filter: blur(8px);
+  }
+
+  .trio-body {
+    padding: 22px 20px;
+    display: flex;
+    flex-direction: column;
+    flex-grow: 1;
+  }
+
+  .trio-title {
+    font-size: 1.15rem;
+    font-weight: 700;
+    color: var(--ctp-text);
+    margin: 0 0 8px;
+    line-height: 1.35;
+  }
+
+  .trio-desc {
+    font-size: 0.86rem;
+    color: var(--ctp-subtext0);
+    line-height: 1.5;
+    margin: 0 0 16px;
+    flex-grow: 1;
+    display: -webkit-box;
+    -webkit-line-clamp: 2;
+    -webkit-box-orient: vertical;
     overflow: hidden;
   }
 
-  .featured-case-card::before {
-    content: '';
-    position: absolute;
-    top: 0; left: 0; right: 0;
-    height: 3px;
-    background: linear-gradient(90deg, var(--accent), var(--ctp-lavender));
+  .trio-tags {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 6px;
+    margin-bottom: 20px;
+  }
+
+  .trio-tag {
+    font-size: 0.72rem;
+    font-weight: 600;
+    padding: 2px 8px;
+    border-radius: 6px;
+    background: color-mix(in srgb, var(--tag-color, var(--accent)) 10%, transparent);
+    color: var(--tag-color, var(--accent));
+    border: 1px solid color-mix(in srgb, var(--tag-color, var(--accent)) 20%, transparent);
+    font-family: 'JetBrains Mono', monospace;
+  }
+
+  .trio-actions {
+    display: flex;
+    gap: 10px;
+    margin-top: auto;
+  }
+
+  .trio-btn {
+    flex: 1;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    gap: 6px;
+    padding: 8px 14px;
+    border-radius: 8px;
+    font-size: 0.82rem;
+    font-weight: 600;
+    text-decoration: none;
+    cursor: pointer;
+    transition: all 0.2s ease;
+  }
+
+  .glance-btn {
+    background: var(--ctp-surface0);
+    color: var(--ctp-text);
+    border: 1px solid var(--ctp-surface1);
+  }
+
+  .glance-btn:hover {
+    background: var(--ctp-surface1);
+    color: var(--accent);
+  }
+
+  .live-btn {
+    background: var(--accent-surface);
+    color: var(--accent);
+    border: 1px solid var(--accent-subtle);
+  }
+
+  .live-btn:hover {
+    background: var(--accent);
+    color: var(--ctp-base, #1e1e2e);
+  }
+
+  @media (max-width: 960px) {
+    .featured-trio-grid {
+      grid-template-columns: 1fr;
+      gap: 20px;
+    }
   }
 
   .case-badge-row {
