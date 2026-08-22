@@ -5,6 +5,7 @@
 
 <section class="about-section section" id="about">
   <div class="container">
+    <div class="section-divider"></div>
     <div class="about-card">
       <div class="about-header">
         <h2 class="section-title">
@@ -92,8 +93,15 @@
 
 <style>
   .about-section {
-    padding: 32px 0 48px;
+    padding: 60px 0 40px;
     position: relative;
+  }
+
+  .section-divider {
+    height: 1px;
+    background: linear-gradient(90deg, transparent, var(--ctp-surface1), transparent);
+    margin-bottom: 48px;
+    width: 100%;
   }
 
   .container {

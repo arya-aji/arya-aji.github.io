@@ -7,6 +7,7 @@
   <div class="container hero-inner">
     <div class="hero-text-col">
       <div class="availability-badge">
+        <span class="badge-icon">⏱️</span>
         <span class="status-dot pulse"></span>
         <span>
           {#if $language === "EN"}
@@ -155,20 +156,26 @@
   .availability-badge {
     display: inline-flex;
     align-items: center;
-    gap: 8px;
-    padding: 6px 14px;
+    gap: 10px;
+    padding: 8px 18px;
     border-radius: 999px;
-    background: color-mix(in srgb, #a6e3a1 15%, transparent);
-    border: 1px solid color-mix(in srgb, #a6e3a1 35%, transparent);
-    color: #a6e3a1;
-    font-size: 0.82rem;
+    background: color-mix(in srgb, var(--accent) 18%, var(--ctp-mantle));
+    border: 1px solid var(--accent);
+    color: var(--ctp-text);
+    font-size: 1rem;
     font-weight: 600;
-    margin-bottom: 20px;
+    margin-bottom: 24px;
+    box-shadow: 0 4px 16px -4px var(--accent-subtle);
+  }
+
+  .badge-icon {
+    font-size: 1.1rem;
+    line-height: 1;
   }
 
   .status-dot {
-    width: 8px;
-    height: 8px;
+    width: 9px;
+    height: 9px;
     border-radius: 50%;
     background: #a6e3a1;
   }

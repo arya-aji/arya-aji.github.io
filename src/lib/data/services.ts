@@ -3,6 +3,8 @@ export interface ServiceOffering {
   title_en: string;
   title_id: string;
   badge: string;
+  badgeColor: string;
+  badgeBg: string;
   description_en: string;
   description_id: string;
   deliverables_en: string[];
@@ -19,7 +21,9 @@ export const serviceOfferings: ServiceOffering[] = [
     id: "browser-extensions",
     title_en: "Custom Chrome & Browser Extensions",
     title_id: "Ekstensi Browser & Chrome Kustom",
-    badge: "Most Popular for Small Tasks",
+    badge: "Most Popular",
+    badgeColor: "#cba6f7",
+    badgeBg: "rgba(203, 166, 247, 0.15)",
     description_en: "Turn repetitive browsing, scraping, or web actions into 1-click tools running natively in Manifest V3.",
     description_id: "Ubah pekerjaan browser manual, scraping, atau alur kerja berulang jadi 1-klik alat bantu Manifest V3.",
     deliverables_en: [
@@ -45,6 +49,8 @@ export const serviceOfferings: ServiceOffering[] = [
     title_en: "Python Data & Workflow Automation",
     title_id: "Otomasi Data & Workflow Python",
     badge: "High ROI",
+    badgeColor: "#89b4fa",
+    badgeBg: "rgba(137, 180, 250, 0.15)",
     description_en: "Automate complex data gathering, spreadsheet wrangling (Excel/Google Sheets), OSM geocoding, and REST API syncs.",
     description_id: "Otomasi penarikan data, pengolahan spreadsheet (Excel/Google Sheets), geocoding peta OSM, dan sinkronisasi API.",
     deliverables_en: [
@@ -70,6 +76,8 @@ export const serviceOfferings: ServiceOffering[] = [
     title_en: "Interactive Web MVPs & Dashboards",
     title_id: "Web App Ringan & Dashboard Interaktif",
     badge: "Fixed-Price Sprints",
+    badgeColor: "#fab387",
+    badgeBg: "rgba(250, 179, 135, 0.15)",
     description_en: "Fast, lightweight modern web applications and interactive portals built with SvelteKit or Next.js.",
     description_id: "Aplikasi web modern, cepat, dan portal interaktif yang dibangun menggunakan SvelteKit atau Next.js.",
     deliverables_en: [

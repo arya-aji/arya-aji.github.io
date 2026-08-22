@@ -87,6 +87,29 @@ export const allProjects: Project[] = [
     featured: true,
     visible: true,
     image: "/blur-wa.png"
+  },
+  {
+    slug: "minitube-pip",
+    title: "MiniTube PiP",
+    name: "MiniTube PiP",
+    org: "arya-aji",
+    date: "2024-01",
+    dateDisplay: "Jan 2024",
+    description: "Floating Picture-in-Picture extension for seamless multitasking with minimal system resource footprint.",
+    longDesc: "A lightweight Picture-in-Picture companion allowing effortless video playback in a floating resizable window while working on code or documents.",
+    problem: "Switching back and forth between tutorial videos and code editors degrades developer multitasking and flow.",
+    solution: "Developed a 1-click Picture-in-Picture trigger that detaches any HTML5 video stream into an always-on-top floating canvas.",
+    results: [
+      { metric: "1-Click", label: "Instant Trigger" },
+      { metric: "<5MB", label: "Ultra Lightweight" }
+    ],
+    tags: ["javascript", "extension", "productivity", "web"],
+    category: "extension",
+    live: "https://extension.aryaaji.com",
+    github: "https://github.com/arya-aji",
+    featured: true,
+    visible: true,
+    image: "/minitube.jpg"
   }
 ];
 

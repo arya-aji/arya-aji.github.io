@@ -25,7 +25,9 @@
       {#each serviceOfferings as service}
         <div class="service-card">
           <div class="card-header">
-            <span class="service-badge">{service.badge}</span>
+            <span class="service-badge" style="color: {service.badgeColor}; background: {service.badgeBg}; border: 1px solid {service.badgeColor};">
+              {service.badge}
+            </span>
             <span class="turnaround-tag">
               <Clock size={13} />
               {$language === "EN" ? service.turnaround_en : service.turnaround_id}
@@ -99,7 +101,7 @@
 
 <style>
   .services-section {
-    padding: 60px 0 80px;
+    padding: 80px 0;
     background: transparent;
     position: relative;
   }
