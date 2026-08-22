@@ -10,9 +10,9 @@
         <span class="status-dot pulse"></span>
         <span>
           {#if $language === "EN"}
-            Available for Fixed-Price & Async Projects
+            Available for Hourly & Fixed-Price Contracts
           {:else}
-            Terbuka untuk Proyek Fixed-Price & Asinkron
+            Terbuka untuk Kontrak Hourly & Fixed-Price
           {/if}
         </span>
       </div>
@@ -27,9 +27,9 @@
 
       <p class="hero-bio">
         {#if $language === "EN"}
-          Full-stack web developer specializing in fast interactive web applications, custom browser extensions, and Python data pipelines. Built for speed, clarity, and async fixed-price delivery.
+          Full-stack web developer specializing in fast interactive web applications, custom browser extensions, and Python data pipelines. Built for speed, reliability, and smooth async collaboration.
         {:else}
-          Full-stack web developer spesialis aplikasi web interaktif yang cepat, ekstensi browser kustom, dan pipeline data Python. Dirancang untuk hasil cepat, teruji, dan kerja asinkron terstruktur.
+          Full-stack web developer spesialis aplikasi web interaktif yang cepat, ekstensi browser kustom, dan pipeline data Python. Dirancang untuk hasil cepat, teruji, dan kolaborasi asinkron yang terstruktur.
         {/if}
       </p>
 
@@ -412,35 +412,57 @@
 
   @media (max-width: 768px) {
     .hero {
-      padding: 80px 0 0;
+      padding: 72px 0 0;
       min-height: auto;
     }
 
     .hero-inner {
-      padding-top: 16px;
-      padding-bottom: 16px;
+      padding-top: 20px;
+      padding-bottom: 24px;
+    }
+
+    .availability-badge {
+      font-size: 0.82rem;
+      padding: 6px 14px;
+      margin-bottom: 18px;
     }
 
     .hero-heading {
-      font-size: 1.75rem;
+      font-size: 1.85rem;
+      line-height: 1.25;
       margin-bottom: 16px;
     }
 
     .hero-bio {
-      font-size: 0.9rem;
-      line-height: 1.6;
-      margin-bottom: 20px;
-      display: -webkit-box;
-      -webkit-line-clamp: 4;
-      -webkit-box-orient: vertical;
-      overflow: hidden;
+      font-size: 0.95rem;
+      line-height: 1.7;
+      margin-bottom: 24px;
+      display: block;
+    }
+
+    .hero-actions-container {
+      flex-direction: column;
+      align-items: stretch;
+      gap: 16px;
+      margin-bottom: 28px;
+    }
+
+    .hero-cta-btn {
+      width: 100%;
+      justify-content: center;
+      padding: 14px 24px;
     }
 
     .social-links {
-      gap: 8px;
-      margin-bottom: 24px;
+      justify-content: center;
+      gap: 12px;
+      margin-bottom: 0;
     }
 
+    .social-capsule {
+      width: 44px;
+      height: 44px;
+    }
 
     .scroll-indicator {
       padding: 12px 0 20px;

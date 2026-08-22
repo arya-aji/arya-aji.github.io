@@ -530,21 +530,31 @@
     }
 
     .project-actions {
-      flex-direction: column;
+      flex-direction: row;
+      flex-wrap: wrap;
+    }
+
+    .action-btn {
+      flex: 1;
+      min-width: 130px;
     }
   }
 
   @media (max-width: 600px) {
     .featured-projects {
-      padding: 48px 0;
+      padding: 56px 0;
     }
 
     .section-header {
-      margin-bottom: 24px;
+      margin-bottom: 32px;
     }
 
     .section-title {
-      font-size: 1.6rem;
+      font-size: 1.75rem;
+    }
+
+    .section-subtitle {
+      font-size: 0.92rem;
     }
 
     .projects-list {
@@ -552,14 +562,19 @@
     }
 
     .project-visual-side,
-    .project-card-wrapper.reverse .project-visual-side,
-    .project-info-side,
-    .project-card-wrapper.reverse .project-info-side {
+    .project-card-wrapper.reverse .project-visual-side {
       padding: 16px;
     }
 
-    .project-info-side {
+    .project-info-side,
+    .project-card-wrapper.reverse .project-info-side {
+      padding: 20px 16px;
       gap: 16px;
+    }
+
+    .action-btn {
+      width: 100%;
+      min-width: 100%;
     }
   }
 </style>

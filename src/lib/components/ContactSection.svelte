@@ -34,8 +34,8 @@
         <h3 class="col-title">{$language === "EN" ? "Hire via Upwork" : "Rekrut via Upwork"}</h3>
         <p class="col-text">
           {$language === "EN"
-            ? "Milestone protection, escrow payments, async delivery."
-            : "Proteksi milestone, pembayaran aman escrow, hasil kerja asinkron."}
+            ? "Hourly contracts or fixed milestones with escrow protection and async delivery."
+            : "Kontrak hourly atau milestone dengan proteksi escrow dan hasil kerja asinkron."}
         </p>
         <a
           href="https://upwork.com/freelancers/aryaajik"

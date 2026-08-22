@@ -12,7 +12,7 @@
 
 <svelte:head>
   <title>Arya Aji Kusuma | Automation Tools, Chrome Extensions & Web Apps</title>
-  <meta name="description" content="Custom Chrome extensions, Python data automation workflows, and lightweight web applications. Available for fixed-price contracts on Upwork." />
+  <meta name="description" content="Full-stack web developer specializing in fast web applications, custom Chrome extensions, and Python data automation. Available for project and contract work on Upwork." />
 </svelte:head>
 
 <main>

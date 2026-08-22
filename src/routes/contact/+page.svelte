@@ -25,7 +25,7 @@
         <Clock size={18} class="guide-icon" />
         <div>
           <h3>{$language === 'EN' ? '24-Hour Review' : 'Tinjauan 24 Jam'}</h3>
-          <p>{$language === 'EN' ? 'I review every incoming brief and respond with a fixed-price timeline within 24 hours.' : 'Saya meninjau setiap brief yang masuk dan merespons dengan estimasi jadwal fixed-price dalam 24 jam.'}</p>
+          <p>{$language === 'EN' ? 'I review every incoming brief and respond with a clear timeline and proposal within 24 hours.' : 'Saya meninjau setiap brief yang masuk dan merespons dengan estimasi jadwal serta proposal kerja dalam 24 jam.'}</p>
         </div>
       </div>
       <div class="guide-item">

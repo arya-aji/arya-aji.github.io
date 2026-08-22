@@ -12,12 +12,12 @@
         <span>{$language === "EN" ? "What I Build" : "Layanan Spesialis"}</span>
       </div>
       <h2 class="section-title">
-        {$language === "EN" ? "Fixed-Scope Sprints for Fast Results" : "Pengerjaan Cepat dengan Lingkup Jelas"}
+        {$language === "EN" ? "Focused Sprints & Fast Delivery" : "Pengerjaan Cepat dengan Lingkup Terarah"}
       </h2>
       <p class="section-subtitle">
         {$language === "EN" 
-          ? "You bring the goal or problem, and leave the heavy lifting and technical thinking to me. Clear deliverables, fixed pricing, and fast turnaround." 
-          : "Cukup bawa tujuan atau problem yang ingin diselesaikan, serahkan urusan teknis dan arsitekturnya ke saya. Hasil kerja terukur, harga pasti, dan pengerjaan cepat."}
+          ? "You bring the goal or problem, and leave the heavy lifting and technical thinking to me. Available for hourly contracts or focused milestone sprints." 
+          : "Cukup bawa tujuan atau problem yang ingin diselesaikan, serahkan urusan teknis dan arsitekturnya ke saya. Tersedia untuk kontrak hourly maupun sprint milestone terarah."}
       </p>
     </div>
 
