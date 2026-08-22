@@ -17,6 +17,12 @@ export const externalLinks = {
     url: "https://extension.aryaaji.com",
     description: "Browser extension products, install links, privacy notes, and support pages.",
   },
+  upwork: {
+    label: "Upwork Profile",
+    domain: "upwork.com",
+    url: "https://upwork.com/freelancers/aryaajik",
+    description: "Hire via Upwork with Escrow and milestone protection.",
+  },
 } as const;
 
 export const serviceMap = [

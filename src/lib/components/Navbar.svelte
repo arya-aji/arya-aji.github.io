@@ -20,10 +20,10 @@
   let navPanelOpen = $state(false);
 
   let navLinks = $derived([
-    { href: "/about", label: $language === "EN" ? "About" : "Tentang" },
-    { href: "/pricing", label: $language === "EN" ? "Services & Pricing" : "Layanan & Produk" },
+    { href: "/#services", label: $language === "EN" ? "Services" : "Layanan" },
     { href: "/projects", label: $language === "EN" ? "Projects" : "Proyek" },
-    { href: "/contact", label: $language === "EN" ? "Contact" : "Kontak" },
+    { href: "/#about", label: $language === "EN" ? "About" : "Tentang" },
+    { href: "/contact", label: $language === "EN" ? "Contact & Hire" : "Kontak / Rekrut" },
   ]);
 
   let moreLinks = $derived([

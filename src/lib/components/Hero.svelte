@@ -1,35 +1,60 @@
 <script lang="ts">
-  import { ArrowRight } from "lucide-svelte";
+  import { ArrowRight, CheckCircle2, ShieldCheck, Sparkles } from "lucide-svelte";
   import { language } from "$lib/stores/language";
 </script>
 
 <section class="hero" id="hero">
   <div class="container hero-inner">
     <div class="hero-text-col">
+      <div class="availability-badge">
+        <span class="status-dot pulse"></span>
+        <span>
+          {#if $language === "EN"}
+            Available for Fixed-Price & Async Projects
+          {:else}
+            Terbuka untuk Proyek Fixed-Price & Asinkron
+          {/if}
+        </span>
+      </div>
+
       <h1 class="hero-heading">
         {#if $language === "EN"}
-          I build applications for <span class="accent-name">everyday problems</span>.
+          Building <span class="accent-name">automation tools</span>, extensions & web applications.
         {:else}
-          Saya bikin aplikasi untuk <span class="accent-name">masalah sehari-hari</span>.
+          Membangun <span class="accent-name">alat otomasi</span>, ekstensi & aplikasi web.
         {/if}
       </h1>
 
       <p class="hero-bio">
         {#if $language === "EN"}
-          Working in government. Outside office hours, I build applications — from Chrome extensions to an exam platform. 3 products already shipped.
+          Full-stack builder specializing in custom Chrome extensions, Python data workflows, and lightweight web apps. Designed for reliability, fast delivery, and clear scope.
         {:else}
-          Kerja di pemerintahan. Di luar jam kantor, saya bikin aplikasi — dari Chrome extension sampai platform tryout. Udah ada 3 produk rilis.
+          Full-stack developer spesialis ekstensi Chrome, otomasi data Python, dan aplikasi web ringan. Dirancang untuk hasil cepat, teruji, dan lingkup kerja yang jelas.
         {/if}
       </p>
 
       <div class="hero-actions-container">
-        <a href="/contact" class="btn btn-accent hero-cta-btn">
+        <a 
+          href="https://upwork.com/freelancers/aryaajik" 
+          target="_blank" 
+          rel="noopener noreferrer" 
+          class="btn btn-accent hero-cta-btn"
+        >
+          <ShieldCheck size={18} />
           {#if $language === "EN"}
-            Start a Project
+            Hire on Upwork
           {:else}
-            Mulai Proyek
+            Rekrut via Upwork
           {/if}
           <ArrowRight size={16} style="margin-left: 4px;" />
+        </a>
+
+        <a href="#services" class="btn btn-secondary hero-secondary-btn">
+          {#if $language === "EN"}
+            View Services
+          {:else}
+            Lihat Layanan
+          {/if}
         </a>
 
         <div class="social-links">
@@ -82,7 +107,7 @@
               /></svg
             >
           </a>
-          <a href="/about" class="social-capsule more-link-capsule" title="About Me">
+          <a href="/#about" class="social-capsule more-link-capsule" title="About Me">
             <ArrowRight size={16} />
           </a>
         </div>
@@ -136,6 +161,47 @@
   .hero-text-col {
     flex: 1;
     max-width: 680px;
+  }
+
+  .availability-badge {
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    padding: 6px 14px;
+    border-radius: 999px;
+    background: color-mix(in srgb, #a6e3a1 15%, transparent);
+    border: 1px solid color-mix(in srgb, #a6e3a1 35%, transparent);
+    color: #a6e3a1;
+    font-size: 0.82rem;
+    font-weight: 600;
+    margin-bottom: 20px;
+  }
+
+  .status-dot {
+    width: 8px;
+    height: 8px;
+    border-radius: 50%;
+    background: #a6e3a1;
+  }
+
+  .status-dot.pulse {
+    box-shadow: 0 0 0 0 rgba(166, 227, 161, 0.7);
+    animation: statusPulse 2s infinite;
+  }
+
+  @keyframes statusPulse {
+    0% {
+      transform: scale(0.95);
+      box-shadow: 0 0 0 0 rgba(166, 227, 161, 0.7);
+    }
+    70% {
+      transform: scale(1);
+      box-shadow: 0 0 0 6px rgba(166, 227, 161, 0);
+    }
+    100% {
+      transform: scale(0.95);
+      box-shadow: 0 0 0 0 rgba(166, 227, 161, 0);
+    }
   }
 
   .hero-heading {
@@ -196,11 +262,35 @@
   .hero-cta-btn {
     text-decoration: none;
     box-shadow: 0 4px 20px color-mix(in srgb, var(--accent) 20%, transparent);
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
   }
 
   .hero-cta-btn:hover {
     transform: translateY(-2px);
     box-shadow: 0 8px 30px color-mix(in srgb, var(--accent) 35%, transparent);
+  }
+
+  .hero-secondary-btn {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    padding: 10px 20px;
+    border-radius: 8px;
+    background: color-mix(in srgb, var(--ctp-surface0) 40%, transparent);
+    border: 1px solid var(--ctp-surface1);
+    color: var(--ctp-text);
+    text-decoration: none;
+    font-weight: 600;
+    font-size: 0.95rem;
+    transition: all 0.25s ease;
+  }
+
+  .hero-secondary-btn:hover {
+    background: var(--ctp-surface1);
+    color: var(--accent);
+    transform: translateY(-2px);
   }
 
   .social-links {

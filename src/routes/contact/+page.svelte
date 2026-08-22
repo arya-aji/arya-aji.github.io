@@ -25,14 +25,21 @@
         <Clock size={18} class="guide-icon" />
         <div>
           <h3>{$language === 'EN' ? '24-Hour Review' : 'Tinjauan 24 Jam'}</h3>
-          <p>{$language === 'EN' ? 'I review every incoming brief and respond with an estimate within 24 business hours.' : 'Saya meninjau setiap brief yang masuk dan merespons dengan estimasi dalam 24 jam kerja.'}</p>
+          <p>{$language === 'EN' ? 'I review every incoming brief and respond with a fixed-price timeline within 24 hours.' : 'Saya meninjau setiap brief yang masuk dan merespons dengan estimasi jadwal fixed-price dalam 24 jam.'}</p>
         </div>
       </div>
       <div class="guide-item">
         <Mail size={18} class="guide-icon" />
         <div>
-          <h3>{$language === 'EN' ? 'Direct Email' : 'Email Langsung'}</h3>
-          <p>{$language === 'EN' ? 'Submissions go straight to my secure inbox at' : 'Pengiriman langsung ke inbox aman saya di'} <strong>hello@aryaaji.com</strong>.</p>
+          <h3>{$language === 'EN' ? 'Direct Upwork Contract' : 'Kontrak Upwork Aman'}</h3>
+          <p>
+            {$language === 'EN' 
+              ? 'Prefer platform protection? You can hire directly via ' 
+              : 'Lebih nyaman lewat perlindungan platform? Anda bisa rekrut langsung lewat '}
+            <a href="https://upwork.com/freelancers/aryaajik" target="_blank" rel="noopener noreferrer" style="color: var(--accent); font-weight: 600; text-decoration: underline;">
+              Upwork Profile &rarr;
+            </a>
+          </p>
         </div>
       </div>
     </div>
