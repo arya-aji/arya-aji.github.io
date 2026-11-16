@@ -2,6 +2,10 @@
 	import Seo from '$lib/components/Seo.svelte';
 	import WorkCard from '$lib/components/WorkCard.svelte';
 	import { work } from '$lib/data/work';
+
+	// Projects with a picture lead at full width; the text-only ones pair up below them.
+	const featured = work.filter((w) => w.image);
+	const rest = work.filter((w) => !w.image);
 </script>
 
 <Seo
@@ -13,12 +17,17 @@
 	<header class="intro">
 		<h1>Work</h1>
 		<p class="lede">
-			Things I've shipped, from browser extensions on the Chrome Web Store to the internal tools that
-			replaced a team's spreadsheets.
+			Things I’ve shipped, from browser extensions on the Chrome Web Store to the internal tools that
+			replaced a team’s spreadsheets.
 		</p>
 	</header>
+	<div class="featured">
+		{#each featured as item}
+			<WorkCard {item} headingLevel={2} wide />
+		{/each}
+	</div>
 	<div class="grid">
-		{#each work as item}
+		{#each rest as item}
 			<WorkCard {item} headingLevel={2} />
 		{/each}
 	</div>
@@ -26,15 +35,20 @@
 
 <style>
 	.page {
-		padding-block: clamp(2.5rem, 6vw, 4.5rem) clamp(4rem, 8vw, 6rem);
+		padding-block: var(--space-2xl) var(--section-gap-s);
 	}
 	.intro {
-		margin-bottom: 3rem;
+		margin-bottom: var(--space-2xl);
+	}
+	.featured {
+		display: grid;
+		gap: var(--section-gap-s);
+		margin-bottom: var(--section-gap-s);
 	}
 	.grid {
 		display: grid;
-		gap: 3rem 2rem;
+		gap: var(--space-2xl) var(--space-xl);
 		grid-template-columns: repeat(auto-fit, minmax(min(100%, 30rem), 1fr));
-		align-items: start;
+		align-items: stretch;
 	}
 </style>

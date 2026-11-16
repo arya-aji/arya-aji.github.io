@@ -42,7 +42,7 @@ document.documentElement.append(style);`}</code></pre>
 		<code>[aria-label]</code>, with a fallback scan for the media gallery drawer.
 	</p>
 
-	<h2>4. Observe, don't poll</h2>
+	<h2>4. Observe, don’t poll</h2>
 	<p>
 		WhatsApp virtualises its lists: rows are destroyed and recreated as you scroll. Rather than running a
 		<code>setInterval</code> loop to re-apply the blur, one lean <code>MutationObserver</code> notices new

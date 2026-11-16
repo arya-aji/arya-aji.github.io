@@ -15,7 +15,7 @@
 		<div>
 			<h1>Describe your task</h1>
 			<p class="lede">
-				Tell me what you do by hand and how often. You'll get a scope, a price and a delivery date within 24
+				Tell me what you do by hand and how often. You’ll get a scope, a price and a delivery date within 24
 				hours.
 			</p>
 			<ContactForm />
@@ -34,11 +34,11 @@
 
 <style>
 	.page {
-		padding-block: clamp(2.5rem, 6vw, 4.5rem) clamp(4rem, 8vw, 6rem);
+		padding-block: var(--space-xl) var(--section-gap-s);
 	}
 	.grid {
 		display: grid;
-		gap: 3rem;
+		gap: var(--space-2xl);
 		grid-template-columns: minmax(0, 1fr);
 	}
 	@media (min-width: 940px) {
@@ -50,24 +50,26 @@
 		font-size: var(--step-4);
 	}
 	.lede {
-		margin-bottom: 2.5rem;
+		margin-top: var(--space-sm);
+		margin-bottom: var(--space-lg);
 	}
 	aside {
-		padding: 1.75rem;
+		padding: var(--space-lg);
 		background: var(--column);
 		border-radius: var(--r-panel);
 		align-self: start;
 	}
 	aside h2 {
 		font-size: var(--step-1);
+		margin-bottom: var(--space-sm);
 	}
 	aside h2:not(:first-child) {
-		margin-top: 2rem;
+		margin-top: var(--space-2xl);
 	}
 	aside ol {
-		padding-left: 1.2rem;
+		padding-left: var(--space-lg);
 		display: grid;
-		gap: 0.6rem;
+		gap: var(--space-sm);
 		margin: 0;
 	}
 </style>

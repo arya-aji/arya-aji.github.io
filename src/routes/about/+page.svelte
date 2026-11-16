@@ -14,8 +14,8 @@
 		<div class="prose">
 			<h1>About</h1>
 			<p class="lede">
-				I'm Arya Aji Kusuma, a full-stack developer in Jakarta. I describe myself as professionally lazy: if I
-				have to do something twice, I'd rather build a tool that does it.
+				I’m Arya Aji Kusuma, a full-stack developer in Jakarta. I describe myself as professionally lazy: if I
+				have to do something twice, I’d rather build a tool that does it.
 			</p>
 			<p>
 				I studied applied statistics at Politeknik Statistika STIS, then spent the following years building
@@ -25,7 +25,7 @@
 				daily.
 			</p>
 			<p>
-				Since 2024 I've also built my own products. <a href="/projects/blur-your-whatsapp">Blur Your WhatsApp</a>
+				Since 2024 I’ve also built my own products. <a href="/projects/blur-your-whatsapp">Blur Your WhatsApp</a>
 				is a privacy extension under 20KB. <a href="/projects/skui">Skui</a> is an exam simulator with 1,000+
 				users. Building products end to end, payments included, keeps me honest about what clients actually
 				need.
@@ -57,11 +57,11 @@
 
 <style>
 	.page {
-		padding-block: clamp(2.5rem, 6vw, 4.5rem) clamp(4rem, 8vw, 6rem);
+		padding-block: var(--space-2xl) var(--section-gap-s);
 	}
 	.grid {
 		display: grid;
-		gap: 3rem;
+		gap: var(--space-2xl);
 		grid-template-columns: minmax(0, 1fr);
 	}
 	@media (min-width: 900px) {
@@ -76,12 +76,13 @@
 	}
 	h2 {
 		font-size: var(--step-2);
-		margin-top: 2.5rem;
+		margin-top: var(--space-2xl);
+		margin-bottom: var(--space-md);
 	}
 	.actions {
 		display: flex;
 		flex-wrap: wrap;
-		gap: 0.75rem;
-		margin-top: 2.5rem;
+		gap: var(--space-sm);
+		margin-top: var(--space-xl);
 	}
 </style>

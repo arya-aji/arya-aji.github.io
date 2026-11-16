@@ -1,0 +1,33 @@
+[
+ {
+  "mode": "redesign",
+  "depth": "full",
+  "shape": "Workbench",
+  "theme": "dusk",
+  "axes": "dark/grotesk-sans/cool",
+  "hero": "Poster",
+  "nav": "slab",
+  "footer": "index columns",
+  "imagery": "photographs",
+  "photos": [
+   "Vallee-brouillard"
+  ],
+  "entry": "product",
+  "fingerprint": "031fc1",
+  "sections": [
+   "hero",
+   "case",
+   "run",
+   "skui",
+   "offer",
+   "close",
+   "footer"
+  ],
+  "signature": "Blur Your WhatsApp switches live over sample chats",
+  "waived": [
+   "81"
+  ],
+  "prompt": "redesign web portfolio aryaaji.com, use existing data",
+  "date": "2026-11-16"
+ }
+]

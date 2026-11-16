@@ -1,9 +1,9 @@
 <script lang="ts">
 	import type { Work } from '$lib/data/work';
-	let { item, headingLevel = 3 }: { item: Work; headingLevel?: 2 | 3 } = $props();
+	let { item, headingLevel = 3, wide = false }: { item: Work; headingLevel?: 2 | 3; wide?: boolean } = $props();
 </script>
 
-<article class="card" class:text-only={!item.image}>
+<article class="card" class:text-only={!item.image} class:wide>
 	{#if item.image}
 		<a class="cover" href={`/projects/${item.slug}`} tabindex="-1" aria-hidden="true">
 			<img src={item.image.src} alt="" width={item.image.width} height={item.image.height} loading="lazy" decoding="async" />
@@ -26,11 +26,21 @@
 <style>
 	.card {
 		display: grid;
-		gap: 1rem;
+		gap: var(--space-md);
 		align-content: start;
 	}
+	@media (min-width: 60rem) {
+		.wide {
+			grid-template-columns: minmax(0, 1.5fr) minmax(0, 1fr);
+			gap: var(--gap-columns);
+			align-items: center;
+		}
+		.wide .title {
+			font-size: var(--step-3);
+		}
+	}
 	.text-only {
-		padding: 1.25rem;
+		padding: var(--space-lg);
 		background: var(--board);
 		border: 1px solid var(--line);
 		border-radius: var(--r-panel);
@@ -51,7 +61,7 @@
 	}
 	.title {
 		font-size: var(--step-2);
-		margin-bottom: 0.25rem;
+		margin-bottom: var(--space-2xs);
 	}
 	.title a {
 		color: var(--heading);
@@ -63,7 +73,7 @@
 		text-decoration-thickness: 2px;
 	}
 	.kind {
-		margin: 0 0 0.6rem;
+		margin: 0 0 var(--space-sm);
 		font-size: var(--step--1);
 		color: var(--subtext);
 	}
@@ -74,10 +84,10 @@
 	.outcomes {
 		list-style: none;
 		padding: 0;
-		margin: 1rem 0 0;
+		margin: var(--space-md) 0 0;
 		display: flex;
 		flex-wrap: wrap;
-		gap: 0.4rem;
+		gap: var(--space-xs);
 	}
 	.outcomes li {
 		font-size: var(--step--1);

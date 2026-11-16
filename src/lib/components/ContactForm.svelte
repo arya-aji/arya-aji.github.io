@@ -36,7 +36,7 @@
 			if (!json.success) throw new Error(json.message);
 			await goto('/thank-you');
 		} catch {
-			error = `Your message didn't send. Try again, or email ${site.email}.`;
+			error = `Your message didn’t send. Try again, or email ${site.email}.`;
 		} finally {
 			sending = false;
 		}
@@ -55,60 +55,63 @@
 		</label>
 	</div>
 
-	<label>
-		<span>What kind of tool?</span>
-		<select name="project_type">
-			<option>Chrome extension</option>
-			<option>Internal tool or dashboard</option>
-			<option>Data or workflow automation</option>
-			<option>Not sure yet</option>
-		</select>
-	</label>
+	<div class="row">
+		<label>
+			<span>What kind of tool?</span>
+			<select name="project_type">
+				<option>Chrome extension</option>
+				<option>Internal tool or dashboard</option>
+				<option>Data or workflow automation</option>
+				<option>Not sure yet</option>
+			</select>
+		</label>
+		<label>
+			<span>Budget (optional)</span>
+			<select name="budget">
+				<option value="">Prefer to get a quote first</option>
+				<option>Under $300</option>
+				<option>$300 to $1,000</option>
+				<option>$1,000 to $3,000</option>
+				<option>Over $3,000</option>
+			</select>
+		</label>
+	</div>
 
 	<label>
 		<span>What do you do by hand today?</span>
 		<textarea
 			name="message"
 			bind:value={message}
-			rows="7"
+			rows="4"
 			required
-			placeholder="For example: every Friday we copy 200 order IDs from our admin panel into a Google Sheet, then look up each customer's email in HubSpot."
+			placeholder="For example: every Friday we copy 200 order IDs from our admin panel into a Google Sheet, then look up each customer’s email in HubSpot."
 		></textarea>
 	</label>
 
-	<label>
-		<span>Budget (optional)</span>
-		<select name="budget">
-			<option value="">Prefer to get a quote first</option>
-			<option>Under $300</option>
-			<option>$300 to $1,000</option>
-			<option>$1,000 to $3,000</option>
-			<option>Over $3,000</option>
-		</select>
-	</label>
+
 
 	<div class="visually-hidden" aria-hidden="true"><input type="checkbox" name="botcheck" tabindex="-1" autocomplete="off" /></div>
 
 	{#if error}<p class="error" role="alert">{error}</p>{/if}
 
 	<button class="btn" type="submit" disabled={sending}>{sending ? 'Sending…' : 'Send task description'}</button>
-	<p class="small">You'll get a reply with a fixed quote within 24 hours.</p>
+	<p class="small">You’ll get a reply with a fixed quote within 24 hours.</p>
 </form>
 
 <style>
 	form {
 		display: grid;
-		gap: 1.25rem;
+		gap: var(--space-lg);
 	}
 	.row {
 		display: grid;
-		gap: 1.25rem;
+		gap: var(--space-lg);
 		grid-template-columns: repeat(auto-fit, minmax(14rem, 1fr));
 	}
 	label {
 		display: grid;
-		gap: 0.4rem;
-		font-weight: 700;
+		gap: var(--space-xs);
+		font-weight: 600;
 	}
 	input,
 	select,
@@ -117,9 +120,10 @@
 		font-weight: 400;
 		color: var(--heading);
 		background: var(--card);
-		border: 1.5px solid var(--line-strong);
+		border: 1px solid var(--color-muted);
 		border-radius: var(--r-card);
-		padding: 0.7rem 0.85rem;
+		min-height: 48px;
+		padding: var(--space-sm) var(--space-md);
 		width: 100%;
 	}
 	input:focus,
@@ -136,12 +140,15 @@
 		justify-self: start;
 	}
 	button:disabled {
-		opacity: 0.7;
-		cursor: progress;
+		opacity: 0.55;
+		cursor: not-allowed;
+		background: var(--color-paper-3);
+		color: var(--color-ink-2);
+		box-shadow: none;
 	}
 	.error {
 		margin: 0;
-		padding: 0.8rem 1rem;
+		padding: var(--space-sm) var(--space-md);
 		border-radius: var(--r-card);
 		background: color-mix(in srgb, var(--ctp-red) 14%, var(--bg));
 		color: var(--heading);

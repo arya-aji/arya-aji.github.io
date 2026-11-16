@@ -211,7 +211,7 @@
 		margin: 0.5rem 0 0;
 	}
 	.kind {
-		font-weight: 700;
+		font-weight: 600;
 		background: var(--board);
 	}
 
@@ -278,7 +278,7 @@
 		border-radius: var(--r-card);
 	}
 	.composer label {
-		font-weight: 700;
+		font-weight: 600;
 		font-size: 0.95rem;
 		color: var(--heading);
 	}
@@ -346,7 +346,7 @@
 		background: var(--accent);
 		color: var(--on-accent);
 		font-family: var(--font-display);
-		font-weight: 760;
+		font-weight: 600;
 		letter-spacing: -0.04em;
 	}
 

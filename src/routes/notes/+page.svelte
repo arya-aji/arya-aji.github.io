@@ -29,18 +29,18 @@
 
 <style>
 	.page {
-		padding-block: clamp(2.5rem, 6vw, 4.5rem) clamp(4rem, 8vw, 6rem);
+		padding-block: var(--space-2xl) var(--section-gap-s);
 	}
 	.list {
 		list-style: none;
 		padding: 0;
-		margin: 3rem 0 0;
+		margin: var(--space-2xl) 0 0;
 		max-width: 52rem;
 	}
 	.list li {
 		display: grid;
-		gap: 0.25rem 2rem;
-		padding-block: 1.75rem;
+		gap: var(--space-2xs) var(--space-xl);
+		padding-block: var(--space-lg);
 		border-top: 1px solid var(--line);
 	}
 	@media (min-width: 720px) {
@@ -51,11 +51,11 @@
 	time {
 		color: var(--subtext);
 		font-size: var(--step--1);
-		padding-top: 0.35rem;
+		padding-top: var(--space-2xs);
 	}
 	h2 {
 		font-size: var(--step-2);
-		margin-bottom: 0.4rem;
+		margin-bottom: var(--space-xs);
 	}
 	h2 a {
 		color: var(--heading);

@@ -18,8 +18,8 @@ export const services: Service[] = [
 			'Autofill forms from a sheet or CRM',
 			'Add missing buttons, filters or shortcuts to tools you use daily'
 		],
-		timeline: '3–5 days',
-		price: '$149–$349'
+		timeline: '3 to 5 days',
+		price: '$149 to $349'
 	},
 	{
 		id: 'internal-tools',
@@ -31,7 +31,7 @@ export const services: Service[] = [
 			'Dashboards with live filters and maps',
 			'Payments and auth for an MVP'
 		],
-		timeline: '1–2 weeks',
+		timeline: '1 to 2 weeks',
 		price: 'Quoted per scope'
 	},
 	{
@@ -44,7 +44,7 @@ export const services: Service[] = [
 			'Syncing data between REST APIs',
 			'Geocoding addresses with OpenStreetMap'
 		],
-		timeline: '2–4 days',
+		timeline: '2 to 4 days',
 		price: 'Quoted per task'
 	}
 ];

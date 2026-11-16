@@ -3,12 +3,26 @@
 	<head>
 		<meta charset="utf-8" />
 		<meta name="viewport" content="width=device-width, initial-scale=1" />
-		<meta name="theme-color" content="#f2f4ef" />
+		<meta name="theme-color" content="#14161f" />
 		<link rel="icon" href="/favicon.png" type="image/png" sizes="48x48" />
 		<link rel="apple-touch-icon" href="/apple-touch-icon.png" />
+		<style>
+/* Hallmark · shape: Workbench · genre: modern-minimal · theme: Dusk (deal 2/3, seed freelance-developer-portfolio-sells-574c·7faaa2b4·2026-11-16·r0) · redesign: full · draw: 031fc1 · job: hire
+ * hero: Poster · nav: slab · footer: index columns · imagery: photographs, library 1, natural · the product built in hero (Blur Your WhatsApp popup) · owner's product images 2 · signature: the Blur Your WhatsApp switches, live over sample chats · dusk: fog/periwinkle-apricot/glass
+ * axes: dark/grotesk-sans/cool · posture: committed · contrast: pass · fold: pass · v2.0.0 */
+/* Hallmark · pre-emit critique: P4 H5 E4 S4 R4 V5 · weakest: P, a services page argues less than a product; the hero argues it with his own working extension instead of a claim */
+/* Hallmark · dropped /#process, #process, task · the process now sits on /contact and in the services lead; the hero action goes straight to the full contact form */
+/* Hallmark · waive 81 · div[data-slot=hero] carries the Vallee-brouillard library photograph from upload.wikimedia.org · the build sandbox proxy blocks Wikimedia, so the slot renders empty only here; it loads on the live site */
+/* Hallmark · dismissed 77 · the two-section reading on /about, /contact, /notes and the case pages is a secondary page, not a landing strip */
+/* Hallmark · dismissed kept · arya.webp, the 2024 date and the about id moved to /about; the process and the svc ids folded into the services table on the home page */
+/* Hallmark · dismissed 29 · smoked glass with its lit edge is the Dusk product surface, used only on the hero popup and the in-house ledger */
+/* Hallmark · dismissed 46a · 40% faster, 15+ hours, 200+ officers, $12,000 and 1,000+ users are the owner's own figures from his resume and LinkedIn */
+</style>
 		%sveltekit.head%
 	</head>
 	<body data-sveltekit-preload-data="hover">
 		<div style="display: contents">%sveltekit.body%</div>
+		<script>window.hallmarkSlots = (m) => { for (const [k, v] of Object.entries(m)) { const s = document.querySelector(`[data-slot="${k}"]`); if (!s) continue; const im = new Image(); im.src = typeof v === 'string' ? v : v.src; im.alt = (typeof v === 'object' && v.alt) || s.dataset.alt || ''; s.querySelectorAll(':scope > img').forEach((o) => o.remove()); s.prepend(im); } };
+document.querySelectorAll('[data-slot] img').forEach((i) => { if (i.complete && !i.naturalWidth) i.hidden = true; else i.addEventListener('error', () => { i.hidden = true; }, { once: true }); });</script>
 	</body>
 </html>

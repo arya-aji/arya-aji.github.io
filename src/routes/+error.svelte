@@ -17,6 +17,6 @@
 
 <style>
 	.page {
-		padding-block: clamp(3rem, 8vw, 6rem);
+		padding-block: var(--space-2xl) var(--section-gap-s);
 	}
 </style>

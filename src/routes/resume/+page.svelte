@@ -37,7 +37,7 @@
 
 			<section class="job">
 				<h3>Full-stack developer (in-house)</h3>
-				<p class="when">In-house, large public-sector data organisation, Jakarta. 2018 to now</p>
+				<p class="when">In-house, large data organisation, Jakarta. 2018 to now</p>
 				<ul>
 					<li>Built 5+ full-stack web apps used across units, making reporting about 40% faster.</li>
 					<li>Wrote Python automations that remove 15+ hours a week of repetitive data processing.</li>
@@ -72,12 +72,12 @@
 
 <style>
 	.page {
-		padding-block: clamp(2.5rem, 6vw, 4.5rem) clamp(4rem, 8vw, 6rem);
+		padding-block: var(--space-2xl) var(--section-gap-s);
 	}
 	.head {
 		border-bottom: 2px solid var(--heading);
-		padding-bottom: 1.5rem;
-		margin-bottom: 2.5rem;
+		padding-bottom: var(--space-lg);
+		margin-bottom: var(--space-xl);
 	}
 	.head h1 {
 		font-size: var(--step-4);
@@ -88,7 +88,7 @@
 	}
 	.cols {
 		display: grid;
-		gap: 3rem;
+		gap: var(--space-2xl);
 		grid-template-columns: minmax(0, 1fr);
 	}
 	@media (min-width: 900px) {
@@ -100,24 +100,24 @@
 		font-size: var(--step-2);
 	}
 	.job {
-		margin-bottom: 2rem;
+		margin-bottom: var(--space-xl);
 	}
 	.job h3 {
 		font-size: var(--step-1);
-		margin-bottom: 0.2rem;
+		margin-bottom: var(--space-3xs);
 	}
 	.when {
 		color: var(--subtext);
-		margin-bottom: 0.6rem;
+		margin-bottom: var(--space-sm);
 	}
 	.job ul {
-		padding-left: 1.2rem;
+		padding-left: var(--space-lg);
 		display: grid;
-		gap: 0.35rem;
+		gap: var(--space-2xs);
 	}
 	aside h3 {
 		font-size: var(--step-0);
-		margin: 1.25rem 0 0.2rem;
+		margin: var(--space-lg) 0 var(--space-3xs);
 	}
 	aside p {
 		color: var(--subtext);

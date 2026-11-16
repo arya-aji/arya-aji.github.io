@@ -6,12 +6,12 @@
 
 <section class="wrap page prose">
 	<h1>Message sent</h1>
-	<p class="lede">Thanks. I'll read your task and reply with a fixed quote within 24 hours.</p>
+	<p class="lede">Thanks. I’ll read your task and reply with a fixed quote within 24 hours.</p>
 	<p>Meanwhile, <a href="/projects">see how similar tools turned out</a>.</p>
 </section>
 
 <style>
 	.page {
-		padding-block: clamp(3rem, 8vw, 6rem);
+		padding-block: var(--space-2xl) var(--section-gap-s);
 	}
 </style>

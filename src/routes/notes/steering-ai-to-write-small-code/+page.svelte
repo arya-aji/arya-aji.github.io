@@ -20,7 +20,7 @@
 		<li>No frameworks and no dependencies. Plain JavaScript only.</li>
 		<li>If CSS can do it, CSS does it. Blur, hover and transitions belong in a stylesheet.</li>
 		<li>No event listeners on individual elements.</li>
-		<li>Never select by class name on a site you don't control.</li>
+		<li>Never select by class name on a site you don’t control.</li>
 		<li>No polling. React to changes with observers.</li>
 	</ul>
 

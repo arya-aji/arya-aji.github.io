@@ -15,6 +15,6 @@
 
 <style>
 	.page {
-		padding-block: 4rem;
+		padding-block: var(--space-2xl);
 	}
 </style>

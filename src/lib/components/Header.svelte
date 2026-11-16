@@ -14,36 +14,18 @@
 
 <a class="skip" href="#main">Skip to content</a>
 
-<header class="site-header">
-	<div class="wrap bar">
-		<a class="mark" href="/">
-			<span class="mono" aria-hidden="true">aa</span>
-			<span class="name">Arya Aji Kusuma</span>
-		</a>
+<header class="slab">
+	<div class="container bar">
+		<a class="mark" href="/" aria-label="Arya Aji Kusuma, home">Arya Aji Kusuma</a>
 
-		<button
-			class="toggle"
-			type="button"
-			aria-expanded={open}
-			aria-controls="site-nav"
-			onclick={() => (open = !open)}
-		>
-			<svg viewBox="0 0 20 20" width="18" height="18" aria-hidden="true">
-				{#if open}
-					<path d="M5 5l10 10M15 5L5 15" stroke="currentColor" stroke-width="2" stroke-linecap="round" />
-				{:else}
-					<path d="M3 6h14M3 10h14M3 14h14" stroke="currentColor" stroke-width="2" stroke-linecap="round" />
-				{/if}
-			</svg>
-			Menu
+		<button class="toggle" type="button" aria-expanded={open} aria-controls="site-nav" onclick={() => (open = !open)}>
+			{open ? 'Close' : 'Menu'}
 		</button>
 
 		<nav id="site-nav" class:open aria-label="Main">
 			<ul>
 				{#each nav as item}
-					<li>
-						<a href={item.href} aria-current={isCurrent(item.href) ? 'page' : undefined}>{item.label}</a>
-					</li>
+					<li><a href={item.href} aria-current={isCurrent(item.href) ? 'page' : undefined}>{item.label}</a></li>
 				{/each}
 			</ul>
 			<a class="btn cta" href="/contact">Start a project</a>
@@ -54,118 +36,126 @@
 <style>
 	.skip {
 		position: absolute;
-		left: 1rem;
-		top: -4rem;
-		background: var(--accent);
-		color: var(--on-accent);
-		padding: 0.5rem 0.9rem;
-		border-radius: var(--r-card);
-		z-index: 20;
+		left: var(--space-md);
+		top: calc(-1 * var(--space-3xl));
+		z-index: var(--z-tooltip);
+		padding: var(--space-xs) var(--space-md);
+		border-radius: var(--radius-pill);
+		background: var(--color-accent);
+		color: var(--color-accent-ink);
 	}
 	.skip:focus {
-		top: 0.75rem;
+		top: var(--space-sm);
 	}
 
-	.site-header {
+	/* The slab: one heavy full-width bar, slate glass */
+	.slab {
 		position: sticky;
 		top: 0;
-		z-index: 10;
-		background: color-mix(in srgb, var(--bg) 92%, transparent);
-		backdrop-filter: saturate(1.4) blur(10px);
-		border-bottom: 1px solid var(--line);
+		z-index: var(--z-sticky-nav);
+		background: color-mix(in oklab, var(--color-paper) 88%, transparent);
+		-webkit-backdrop-filter: blur(var(--glass-blur)) saturate(1.35);
+		backdrop-filter: blur(var(--glass-blur)) saturate(1.35);
+		box-shadow: inset 0 -1px 0 var(--color-rule);
 	}
 	.bar {
 		display: flex;
 		align-items: center;
-		gap: 1rem;
-		min-height: 4rem;
+		gap: var(--space-lg);
+		min-height: 72px;
 	}
-
 	.mark {
-		display: inline-flex;
-		align-items: center;
-		gap: 0.6rem;
-		color: var(--heading);
-		text-decoration: none;
-		font-family: var(--font-display);
-		font-weight: 700;
-		letter-spacing: -0.01em;
 		margin-right: auto;
+		font-family: var(--font-display);
+		font-weight: 600;
+		font-size: 1.125rem;
+		letter-spacing: -0.01em;
+		color: var(--color-ink);
+		text-decoration: none;
 	}
-	.mono {
-		display: grid;
-		place-items: center;
-		width: 2.1rem;
-		height: 2.1rem;
-		border-radius: 50%;
-		background: var(--accent);
-		color: var(--on-accent);
-		font-weight: 760;
-		letter-spacing: -0.04em;
+	.mark:hover {
+		color: var(--color-ink);
+	}
+	.mark:focus-visible {
+		outline: 2px solid var(--color-focus);
+		outline-offset: 4px;
 	}
 
 	nav {
 		display: flex;
 		align-items: center;
-		gap: 1rem;
+		gap: var(--space-lg);
 	}
 	nav ul {
 		display: flex;
-		gap: 0.15rem;
+		gap: var(--space-2xs);
 		list-style: none;
 		margin: 0;
 		padding: 0;
 	}
 	nav ul a {
 		display: block;
-		padding: 0.45rem 0.75rem;
-		border-radius: var(--r-chip);
-		color: var(--text);
-		text-decoration: none;
+		padding: var(--space-xs) var(--space-sm);
+		border-radius: var(--radius-pill);
+		color: var(--color-ink-2);
 		font-weight: 600;
+		font-size: 0.9375rem;
+		text-decoration: none;
+		transition: background-color var(--dur-short) var(--ease-out);
 	}
 	nav ul a:hover {
-		background: var(--column);
-		color: var(--heading);
+		background: color-mix(in oklab, var(--color-light) 6%, transparent);
+		color: var(--color-ink);
+	}
+	nav ul a:active {
+		background: color-mix(in oklab, var(--color-light) 10%, transparent);
+	}
+	nav ul a:focus-visible {
+		outline: 2px solid var(--color-focus);
+		outline-offset: 2px;
 	}
 	nav ul a[aria-current='page'] {
-		background: var(--accent-tint);
-		color: var(--accent);
-	}
-	.cta {
-		padding: 0.55em 1em;
-		font-size: 0.97rem;
+		color: var(--color-ink);
+		background: color-mix(in oklab, var(--color-light) 8%, transparent);
 	}
 
 	.toggle {
 		display: none;
-		align-items: center;
-		gap: 0.4rem;
-		font: 600 0.95rem var(--font-body);
-		color: var(--heading);
-		background: var(--column);
+		min-height: 44px;
+		padding: 0 var(--space-md);
 		border: 0;
-		border-radius: var(--r-chip);
-		padding: 0.45rem 0.85rem;
+		border-radius: var(--radius-pill);
+		background: color-mix(in oklab, var(--color-light) 6%, transparent);
+		color: var(--color-ink);
+		font-weight: 600;
 		cursor: pointer;
 	}
+	.toggle:hover {
+		background: color-mix(in oklab, var(--color-light) 10%, transparent);
+	}
+	.toggle:active {
+		background: color-mix(in oklab, var(--color-light) 14%, transparent);
+	}
+	.toggle:focus-visible {
+		outline: 2px solid var(--color-focus);
+		outline-offset: 2px;
+	}
 
-	@media (max-width: 820px) {
+	@media (max-width: 60rem) {
 		.toggle {
 			display: inline-flex;
+			align-items: center;
 		}
 		nav {
 			display: none;
 			position: absolute;
-			left: 0;
-			right: 0;
-			top: 100%;
+			inset: 100% 0 auto 0;
 			flex-direction: column;
 			align-items: stretch;
-			padding: 0.75rem var(--gutter) 1.25rem;
-			background: var(--bg);
-			border-bottom: 1px solid var(--line);
-			box-shadow: var(--shadow);
+			gap: var(--space-md);
+			padding: var(--space-md) var(--gutter) var(--space-lg);
+			background: var(--color-paper);
+			box-shadow: inset 0 -1px 0 var(--color-rule);
 		}
 		nav.open {
 			display: flex;
@@ -174,16 +164,8 @@
 			flex-direction: column;
 		}
 		nav ul a {
-			padding: 0.75rem 0.9rem;
-			border-radius: var(--r-card);
-		}
-		.cta {
-			margin-top: 0.5rem;
-		}
-	}
-	@media (max-width: 420px) {
-		.name {
-			display: none;
+			padding: var(--space-sm) var(--space-md);
+			font-size: 1.0625rem;
 		}
 	}
 </style>

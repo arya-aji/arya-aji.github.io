@@ -51,11 +51,11 @@ export const work: Work[] = [
 	},
 	{
 		slug: 'internal-reporting-tools',
-		title: 'Reporting and field-monitoring tools',
+		title: 'In-house reporting tools',
 		kind: 'Internal tools',
-		year: '2019–now',
+		year: '2019 to now',
 		summary:
-			'In-house web apps and Python pipelines that replaced spreadsheet-heavy reporting for a large public-sector data team.',
+			'In-house web apps and Python pipelines that replaced spreadsheet-heavy reporting for a large data organisation.',
 		description:
 			'Internal web apps, geospatial dashboards and Python automations that made reporting about 40% faster and removed 15+ hours a week of manual data work.',
 		stack: ['SvelteKit', 'Next.js', 'FastAPI', 'Python', 'PostgreSQL', 'Prisma', 'Leaflet', 'LLM APIs'],

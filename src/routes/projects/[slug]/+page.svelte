@@ -83,7 +83,7 @@
 
 	<aside class="ask">
 		<h2>Have a task like this?</h2>
-		<p>Describe what you do by hand today. You'll get a fixed quote within 24 hours.</p>
+		<p>Describe what you do by hand today. You’ll get a fixed quote within 24 hours.</p>
 		<a class="btn" href="/contact">Describe your task</a>
 	</aside>
 
@@ -97,81 +97,81 @@
 
 <style>
 	.page {
-		padding-block: 2rem clamp(4rem, 8vw, 6rem);
+		padding-block: var(--space-xl) var(--section-gap-s);
 	}
 	.crumbs {
 		font-size: var(--step--1);
 		color: var(--subtext);
-		margin-bottom: 2.5rem;
+		margin-bottom: var(--space-xl);
 	}
 	.head {
 		max-width: 50rem;
 	}
 	.kind {
 		color: var(--subtext);
-		margin: -0.25rem 0 1rem;
+		margin: calc(-1 * var(--space-2xs)) 0 var(--space-md);
 	}
 	.links {
 		display: flex;
 		flex-wrap: wrap;
-		gap: 0.75rem;
-		margin-top: 1.75rem;
+		gap: var(--space-sm);
+		margin-top: var(--space-lg);
 	}
 	.outcome {
 		list-style: none;
 		padding: 0;
-		margin: 2.5rem 0;
+		margin: var(--space-xl) 0;
 		display: grid;
 		grid-template-columns: repeat(auto-fit, minmax(13rem, 1fr));
 		border-top: 1px solid var(--line);
 		border-bottom: 1px solid var(--line);
 	}
 	.outcome li {
-		padding: 1rem 1rem 1rem 0;
+		padding: var(--space-md) var(--space-md) var(--space-md) 0;
 		font-family: var(--font-display);
-		font-weight: 650;
+		font-weight: 600;
 		font-size: var(--step-1);
 		line-height: 1.25;
 	}
 	.shot {
 		border-radius: var(--r-panel);
 		border: 1px solid var(--line);
-		margin-bottom: 3rem;
+		margin-bottom: var(--space-2xl);
 		width: 100%;
 		max-width: 60rem;
 	}
 	.body h2 {
-		font-size: var(--step-2);
-		margin-top: 2.25rem;
+		font-size: var(--text-section);
+		margin-top: var(--space-xl);
 	}
 	.approach {
-		padding-left: 1.2rem;
+		padding-left: var(--space-lg);
 		display: grid;
-		gap: 0.7rem;
+		gap: var(--space-sm);
 	}
 	.note-link {
-		margin-top: 2rem;
+		margin-top: var(--space-xl);
 	}
 	.ask {
-		margin-top: 4rem;
-		padding: 2rem;
+		margin-top: var(--space-2xl);
+		padding: var(--space-xl);
 		border-radius: var(--r-panel);
 		background: var(--column);
 		max-width: 50rem;
 	}
 	.ask h2 {
-		font-size: var(--step-2);
+		font-size: var(--text-section);
 	}
 	.others {
-		margin-top: 5rem;
+		margin-top: var(--space-3xl);
 	}
 	.others h2 {
-		font-size: var(--step-3);
-		margin-bottom: 1.5rem;
+		font-size: var(--text-section);
+		margin-bottom: var(--space-lg);
 	}
 	.grid {
 		display: grid;
-		gap: 2.5rem 2rem;
+		gap: var(--space-xl) var(--space-xl);
 		grid-template-columns: repeat(auto-fit, minmax(19rem, 1fr));
 	}
 </style>

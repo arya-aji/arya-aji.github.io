@@ -45,15 +45,15 @@
 
 <style>
 	.note {
-		padding-block: 2rem clamp(4rem, 8vw, 6rem);
+		padding-block: var(--space-xl) var(--section-gap-s);
 	}
 	.crumbs {
 		font-size: var(--step--1);
-		margin-bottom: 2.5rem;
+		margin-bottom: var(--space-xl);
 	}
 	header {
 		max-width: 48rem;
-		margin-bottom: 2.5rem;
+		margin-bottom: var(--space-xl);
 	}
 	h1 {
 		font-size: var(--step-4);
@@ -63,7 +63,7 @@
 	}
 	.content :global(h2) {
 		font-size: var(--step-2);
-		margin-top: 2.5rem;
+		margin-top: var(--space-xl);
 	}
 	.content :global(code) {
 		font-family: var(--font-code);
@@ -77,7 +77,7 @@
 		background: var(--ctp-crust);
 		color: var(--text);
 		border: 1px solid var(--line);
-		padding: 1.1rem 1.25rem;
+		padding: 1.1rem var(--space-lg);
 		border-radius: var(--r-card);
 		overflow-x: auto;
 		font-size: 0.9rem;
@@ -89,15 +89,15 @@
 		color: inherit;
 	}
 	.content :global(figure) {
-		margin: 2rem 0;
+		margin: var(--space-xl) 0;
 	}
 	.content :global(img) {
 		border-radius: var(--r-panel);
 		border: 1px solid var(--line);
 	}
 	.ask {
-		margin-top: 3.5rem;
-		padding-top: 1.5rem;
+		margin-top: var(--space-2xl);
+		padding-top: var(--space-lg);
 		border-top: 2px solid var(--accent);
 	}
 </style>
