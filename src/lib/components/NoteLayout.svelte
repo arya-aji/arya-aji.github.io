@@ -66,7 +66,7 @@
 		margin-top: 2.5rem;
 	}
 	.content :global(code) {
-		font-family: ui-monospace, 'Cascadia Code', Consolas, monospace;
+		font-family: var(--font-code);
 		font-size: 0.9em;
 		background: var(--column);
 		color: var(--heading);
