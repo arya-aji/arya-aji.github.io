@@ -113,20 +113,13 @@ export const work: Work[] = [
 			'One click sends any HTML5 video to a floating Picture-in-Picture window, so a tutorial keeps playing while you work.',
 		description:
 			'MiniTube PiP, a lightweight Chrome extension that puts any HTML5 video into a floating Picture-in-Picture window with one click.',
-		image: {
-			src: '/img/minitube-pip.webp',
-			alt: 'A desktop with a code editor open and a small floating YouTube window playing a tutorial in the corner.',
-			width: 1200,
-			height: 670
-		},
 		stack: ['JavaScript', 'Manifest V3', 'Picture-in-Picture API'],
 		links: [{ label: 'Extension hub', href: 'https://extension.aryaaji.com' }],
-		outcome: ['One click to float a video', 'Minimal permissions', 'No tracking'],
+		outcome: ['One click to float a video', 'Works on any HTML5 video'],
 		problem:
 			'Switching between a tutorial tab and an editor breaks concentration, and the built-in Picture-in-Picture control is hidden on many sites.',
 		approach: [
-			'A single toolbar action that finds the active video on the page and detaches it into an always-on-top window.',
-			'Same zero-bloat rules as Blur Your WhatsApp: no framework, minimal permissions, nothing sent anywhere.'
+			'A single toolbar action that finds the active video on the page and detaches it into an always-on-top window.'
 		],
 		featured: false
 	}

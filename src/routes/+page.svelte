@@ -65,8 +65,8 @@
 		<div class="intro">
 			<h1>If you do it twice, I'll make it a tool.</h1>
 			<p class="lede">
-				I'm Arya, a freelance developer in Jakarta. I build Chrome extensions, internal tools and Python
-				automations that take repetitive work off small teams.
+				I'm Arya, a freelance developer in Jakarta. I build Chrome extensions, internal tools and automations
+				for small teams.
 			</p>
 		</div>
 		<Board />
@@ -79,24 +79,21 @@
 			<h2>What I build</h2>
 			<p>Three kinds of tools. Each one replaces a task someone on your team does by hand, every week.</p>
 		</div>
-		<ul class="lanes">
+		<div class="svc-board">
 			{#each services as s, i}
-				<li class="lane" id={s.id}>
-					<div class="lane-head">
-						<span class="chip {i === 0 ? 'accent' : 'auto'}"><span class="dot" aria-hidden="true"></span>{i === 0 ? 'Specialty' : 'Also'}</span>
-						<h3>{s.title}</h3>
-						<p>{s.pitch}</p>
-					</div>
-					<ul class="examples" aria-label={`${s.title} examples`}>
-						{#each s.examples as e}<li>{e}</li>{/each}
+				<section class="svc-col" class:lead-col={i === 0} id={s.id} aria-labelledby={`svc-${s.id}`}>
+					<h3 id={`svc-${s.id}`}>{s.title}</h3>
+					<p class="pitch">{s.pitch}</p>
+					<ul class="examples" aria-label={`Tasks a ${s.title.toLowerCase()} project takes over`}>
+						{#each s.examples as e}<li class="tone-{s.id}">{e}</li>{/each}
 					</ul>
-					<dl class="terms">
-						<div><dt>Delivery</dt><dd>{s.timeline}</dd></div>
-						<div><dt>Price</dt><dd>{s.price}</dd></div>
-					</dl>
-				</li>
+					<p class="terms">
+						<span class="chip"><svg viewBox="0 0 16 16" width="12" height="12" aria-hidden="true"><circle cx="8" cy="8" r="6.5" fill="none" stroke="currentColor" stroke-width="1.6" /><path d="M8 4.5V8l2.5 1.5" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" /></svg>{s.timeline}</span>
+						<span class="chip price">{s.price}</span>
+					</p>
+				</section>
 			{/each}
-		</ul>
+		</div>
 	</div>
 </section>
 
@@ -112,8 +109,8 @@
 				<img src={lead.image!.src} alt="" width={lead.image!.width} height={lead.image!.height} loading="lazy" decoding="async" />
 			</a>
 			<div class="lead-body">
-				<p class="kind"><span class="chip auto">{lead.kind}</span></p>
 				<h3><a href={`/projects/${lead.slug}`}>{lead.title}</a></h3>
+				<p class="kind">{lead.kind}, {lead.year}</p>
 				<p>{lead.summary}</p>
 				<ul class="outcomes">
 					{#each lead.outcome as o}<li>{o}</li>{/each}
@@ -128,8 +125,8 @@
 		<div class="pair">
 			{#each rest as w}
 				<article class="mini">
-					<p class="kind"><span class="chip auto">{w.kind}</span></p>
 					<h3><a href={`/projects/${w.slug}`}>{w.title}</a></h3>
+					<p class="kind">{w.kind}, {w.year}</p>
 					<p>{w.summary}</p>
 					<ul class="outcomes">
 						{#each w.outcome.slice(0, 3) as o}<li>{o}</li>{/each}
@@ -185,12 +182,20 @@
 
 <style>
 	.hero {
-		padding-block: clamp(2.25rem, 6vw, 4.5rem) clamp(3rem, 7vw, 5rem);
+		padding-block: 1.5rem 3rem;
+	}
+	@media (min-width: 760px) {
+		.hero {
+			padding-block: 2.25rem 4.5rem;
+		}
 	}
 	.intro {
 		display: grid;
 		gap: 0.5rem 3rem;
-		margin-bottom: clamp(1.5rem, 4vw, 2.5rem);
+		margin-bottom: 1.25rem;
+	}
+	.intro h1 {
+		font-size: clamp(2.2rem, 1.4rem + 3.2vw, 3.6rem);
 	}
 	@media (min-width: 980px) {
 		.intro {
@@ -205,85 +210,81 @@
 	.intro .lede {
 		margin: 0;
 	}
-
-	/* Services as swimlanes */
-	.lanes {
-		list-style: none;
-		margin: 0;
-		padding: 0;
-		display: grid;
-		gap: 1rem;
+	@media (max-width: 759px) {
+		.intro .lede {
+			font-size: 1.08rem;
+		}
 	}
-	.lane {
+
+	/* Services: one board, a column per service, the chores it absorbs as cards */
+	.svc-board {
 		display: grid;
-		gap: 1rem 2rem;
-		padding: 1.25rem;
+		gap: 0.75rem;
+		grid-template-columns: repeat(auto-fit, minmax(min(100%, 19rem), 1fr));
+		padding: 0.75rem;
 		background: var(--board);
 		border: 1px solid var(--line);
 		border-radius: var(--r-panel);
 	}
-	.lane:first-child {
-		border-color: color-mix(in srgb, var(--accent) 55%, var(--line));
-	}
-	@media (min-width: 900px) {
-		.lane {
-			padding: 1.75rem;
-			grid-template-columns: minmax(0, 1.1fr) minmax(0, 1fr) 12rem;
-			align-items: start;
+	@media (min-width: 760px) {
+		.svc-board {
+			padding: 1rem;
 		}
 	}
-	.lane-head h3 {
+	.svc-col {
+		display: flex;
+		flex-direction: column;
+		background: var(--column);
+		border-radius: 14px;
+		padding: 1rem;
+	}
+	.lead-col {
+		box-shadow: inset 0 0 0 2px color-mix(in srgb, var(--accent) 60%, transparent);
+	}
+	.svc-col h3 {
 		font-size: var(--step-2);
-		margin: 0.6rem 0 0.4rem;
+		margin: 0 0 0.4rem;
 	}
-	.lane-head p {
-		margin: 0;
+	.pitch {
 		color: var(--subtext);
-	}
-	.chip.accent .dot {
-		color: var(--accent);
-	}
-	.chip.auto .dot {
-		color: var(--auto);
+		margin-bottom: 1rem;
 	}
 	.examples {
 		list-style: none;
-		margin: 0;
+		margin: 0 0 1rem;
 		padding: 0;
 		display: grid;
 		gap: 0.5rem;
 	}
 	.examples li {
-		background: var(--card);
+		--stripe: var(--ctp-teal);
+		background:
+			linear-gradient(var(--stripe), var(--stripe)) top / 100% 4px no-repeat,
+			var(--card);
 		border-radius: var(--r-card);
-		padding: 0.6rem 0.8rem;
+		padding: 0.75rem 0.85rem 0.6rem;
 		box-shadow: var(--shadow);
 		line-height: 1.4;
+		color: var(--heading);
+	}
+	.examples li.tone-extensions {
+		--stripe: var(--ctp-yellow);
+	}
+	.examples li.tone-automation {
+		--stripe: var(--ctp-green);
 	}
 	.terms {
-		margin: 0;
-		display: grid;
-		grid-template-columns: 1fr 1fr;
-		gap: 0.6rem;
+		margin: auto 0 0;
+		display: flex;
+		flex-wrap: wrap;
+		gap: 0.4rem;
 	}
-	@media (min-width: 900px) {
-		.terms {
-			grid-template-columns: 1fr;
-		}
+	.terms .chip {
+		background: var(--board);
+		font-size: 0.92rem;
 	}
-	.terms div {
-		background: var(--column);
-		border-radius: var(--r-card);
-		padding: 0.6rem 0.8rem;
-	}
-	.terms dt {
-		font-size: var(--step--1);
-		color: var(--subtext);
-	}
-	.terms dd {
-		margin: 0;
+	.terms .price {
 		font-weight: 700;
-		font-size: 1.1rem;
 		color: var(--heading);
 	}
 
@@ -308,10 +309,12 @@
 	}
 	.lead-body h3 {
 		font-size: var(--step-3);
-		margin: 0.6rem 0 0.5rem;
+		margin: 0 0 0.3rem;
 	}
 	.kind {
-		margin: 0;
+		margin: 0 0 0.6rem;
+		font-size: var(--step--1);
+		color: var(--subtext);
 	}
 	h3 a {
 		color: var(--heading);
@@ -358,7 +361,7 @@
 	}
 	.mini h3 {
 		font-size: var(--step-2);
-		margin: 0.6rem 0 0.4rem;
+		margin: 0 0 0.3rem;
 	}
 	.mini p {
 		color: var(--subtext);

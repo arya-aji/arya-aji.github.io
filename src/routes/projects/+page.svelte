@@ -35,5 +35,6 @@
 		display: grid;
 		gap: 3rem 2rem;
 		grid-template-columns: repeat(auto-fit, minmax(min(100%, 30rem), 1fr));
+		align-items: start;
 	}
 </style>

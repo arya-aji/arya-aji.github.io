@@ -40,8 +40,8 @@
 	<nav class="crumbs" aria-label="Breadcrumb"><a href="/projects">Work</a> / <span aria-current="page">{item.title}</span></nav>
 
 	<header class="head">
-		<p class="kind">{item.kind}, {item.year}</p>
 		<h1>{item.title}</h1>
+		<p class="kind">{item.kind}, {item.year}</p>
 		<p class="lede">{item.summary}</p>
 		{#if item.links.length}
 			<p class="links">
@@ -109,7 +109,7 @@
 	}
 	.kind {
 		color: var(--subtext);
-		margin-bottom: 0.5rem;
+		margin: -0.25rem 0 1rem;
 	}
 	.links {
 		display: flex;
