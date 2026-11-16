@@ -1,325 +1,155 @@
 <script lang="ts">
-  import { Send, AlertCircle, Loader2 } from "lucide-svelte";
-  import { language } from "$lib/stores/language";
-  import { PUBLIC_WEB3FORMS_KEY } from '$env/static/public';
-  import { goto } from '$app/navigation';
+	import { onMount } from 'svelte';
+	import { goto } from '$app/navigation';
+	import { env } from '$env/dynamic/public';
+	import { site } from '$lib/site';
 
-  let name = $state("");
-  let email = $state("");
-  let projectType = $state("landing-page");
-  let budget = $state("15m");
-  let message = $state("");
+	const key = env.PUBLIC_WEB3FORMS_KEY ?? '';
 
-  let loading = $state(false);
-  let errorMsg = $state("");
+	let message = $state('');
+	let sending = $state(false);
 
-  const budgets = [
-    { value: "under-15m", label: "< Rp 15M" },
-    { value: "15m", label: "Rp 15M - 30M" },
-    { value: "30m-50m", label: "Rp 30M - 50M" },
-    { value: "50m+", label: "Rp 50M+" }
-  ];
+	// The home page's "Your task" card hands its text over in ?task=
+	onMount(() => {
+		const t = new URLSearchParams(window.location.search).get('task');
+		if (t && !message) message = t.slice(0, 2000);
+	});
+	let error = $state('');
 
-  let projectTypes = $derived([
-    { value: "landing-page", label: $language === 'EN' ? "Premium Landing Page" : "Landing Page Premium" },
-    { value: "web-app", label: $language === 'EN' ? "Custom Web Application" : "Aplikasi Web Kustom" },
-    { value: "automation", label: $language === 'EN' ? "Enterprise & Workflow Automation" : "Otomasi Enterprise & Alur Kerja" },
-    { value: "maintenance", label: $language === 'EN' ? "Application Maintenance" : "Pemeliharaan Aplikasi" },
-    { value: "other", label: $language === 'EN' ? "Other Business Inquiry" : "Pertanyaan Bisnis Lainnya" }
-  ]);
-
-  async function handleSubmit(event: Event) {
-    event.preventDefault();
-    if (!name || !email || !message) {
-      errorMsg = $language === 'EN'
-        ? "Please fill in all required fields."
-        : "Harap lengkapi semua kolom yang wajib diisi.";
-      return;
-    }
-
-    loading = true;
-    errorMsg = "";
-
-    try {
-      const formData = new FormData();
-      formData.append("access_key", PUBLIC_WEB3FORMS_KEY);
-      formData.append("subject", `New Project Inquiry from ${name}`);
-      formData.append("name", name);
-      formData.append("email", email);
-      formData.append("project_type", projectType);
-      formData.append("budget", budget);
-      formData.append("message", message);
-      formData.append("from_name", "Arya Aji Portfolio");
-
-      const response = await fetch("https://api.web3forms.com/submit", {
-        method: "POST",
-        body: formData
-      });
-
-      const data = await response.json();
-
-      if (data.success) {
-        goto('/thank-you');
-      } else {
-        throw new Error(data.message || ($language === 'EN' ? "Failed to send message." : "Gagal mengirim pesan."));
-      }
-    } catch (err: any) {
-      errorMsg = err.message || ($language === 'EN'
-        ? "A system error occurred. Please try again or contact via WhatsApp."
-        : "Terjadi kesalahan sistem. Silakan coba lagi atau hubungi via WhatsApp.");
-    } finally {
-      loading = false;
-    }
-  }
+	async function submit(event: SubmitEvent) {
+		event.preventDefault();
+		const form = event.currentTarget as HTMLFormElement;
+		if (!form.reportValidity()) return;
+		if (!key) {
+			error = `The form is not configured yet. Email me directly at ${site.email}.`;
+			return;
+		}
+		sending = true;
+		error = '';
+		try {
+			const data = new FormData(form);
+			data.append('access_key', key);
+			data.append('subject', `New project inquiry from ${data.get('name')}`);
+			data.append('from_name', 'aryaaji.com');
+			const res = await fetch('https://api.web3forms.com/submit', { method: 'POST', body: data });
+			const json = await res.json();
+			if (!json.success) throw new Error(json.message);
+			await goto('/thank-you');
+		} catch {
+			error = `Your message didn't send. Try again, or email ${site.email}.`;
+		} finally {
+			sending = false;
+		}
+	}
 </script>
 
-<div class="contact-form-container">
-  <form onsubmit={handleSubmit} class="contact-form">
-      {#if errorMsg}
-        <div class="error-banner">
-          <AlertCircle size={18} />
-          <span>{errorMsg}</span>
-        </div>
-      {/if}
+<form onsubmit={submit} novalidate={false}>
+	<div class="row">
+		<label>
+			<span>Your name</span>
+			<input name="name" required autocomplete="name" />
+		</label>
+		<label>
+			<span>Email</span>
+			<input name="email" type="email" required autocomplete="email" />
+		</label>
+	</div>
 
-      <div class="form-row">
-        <div class="form-group">
-          <label for="form-name">{$language === 'EN' ? 'Full Name' : 'Nama Lengkap'} <span class="required">*</span></label>
-          <input
-            type="text"
-            id="form-name"
-            bind:value={name}
-            placeholder="Aji Kusuma"
-            required
-            disabled={loading}
-          />
-        </div>
+	<label>
+		<span>What kind of tool?</span>
+		<select name="project_type">
+			<option>Chrome extension</option>
+			<option>Internal tool or dashboard</option>
+			<option>Data or workflow automation</option>
+			<option>Not sure yet</option>
+		</select>
+	</label>
 
-        <div class="form-group">
-          <label for="form-email">{$language === 'EN' ? 'Email Address' : 'Alamat Email'} <span class="required">*</span></label>
-          <input
-            type="email"
-            id="form-email"
-            bind:value={email}
-            placeholder="aji@company.com"
-            required
-            disabled={loading}
-          />
-        </div>
-      </div>
+	<label>
+		<span>What do you do by hand today?</span>
+		<textarea
+			name="message"
+			bind:value={message}
+			rows="7"
+			required
+			placeholder="For example: every Friday we copy 200 order IDs from our admin panel into a Google Sheet, then look up each customer's email in HubSpot."
+		></textarea>
+	</label>
 
-      <div class="form-group">
-        <label for="form-type">{$language === 'EN' ? 'Service Category' : 'Kategori Layanan'}</label>
-        <select id="form-type" bind:value={projectType} disabled={loading}>
-          {#each projectTypes as type}
-            <option value={type.value}>{type.label}</option>
-          {/each}
-        </select>
-      </div>
+	<label>
+		<span>Budget (optional)</span>
+		<select name="budget">
+			<option value="">Prefer to get a quote first</option>
+			<option>Under $300</option>
+			<option>$300 to $1,000</option>
+			<option>$1,000 to $3,000</option>
+			<option>Over $3,000</option>
+		</select>
+	</label>
 
-      <div class="form-group">
-        <label>{$language === 'EN' ? 'Project Budget Estimate' : 'Estimasi Budget Proyek'}</label>
-        <div class="budget-swatches">
-          {#each budgets as b}
-            <button
-              class="budget-swatch-btn"
-              class:active={budget === b.value}
-              onclick={() => budget = b.value}
-              type="button"
-              disabled={loading}
-            >
-              {b.label}
-            </button>
-          {/each}
-        </div>
-      </div>
+	<div class="visually-hidden" aria-hidden="true"><input type="checkbox" name="botcheck" tabindex="-1" autocomplete="off" /></div>
 
-      <div class="form-group">
-        <label for="form-message">{$language === 'EN' ? 'Brief Project Description' : 'Deskripsi Brief Singkat Proyek'} <span class="required">*</span></label>
-        <textarea
-          id="form-message"
-          bind:value={message}
-          rows="5"
-          placeholder={$language === 'EN'
-            ? "Briefly describe the main features, target audience, and project deadline..."
-            : "Jelaskan secara singkat fitur utama, target audiens, dan deadline proyek Anda..."}
-          required
-          disabled={loading}
-        ></textarea>
-      </div>
+	{#if error}<p class="error" role="alert">{error}</p>{/if}
 
-      <button type="submit" class="btn primary submit-btn" disabled={loading}>
-        {#if loading}
-          <Loader2 size={17} class="spinner-icon" />
-          <span>{$language === 'EN' ? 'Sending...' : 'Mengirim...'}</span>
-        {:else}
-          <Send size={17} />
-          <span>{$language === 'EN' ? 'Send Project Inquiry' : 'Kirim Penawaran Proyek'}</span>
-        {/if}
-      </button>
-    </form>
-</div>
+	<button class="btn" type="submit" disabled={sending}>{sending ? 'Sending…' : 'Send task description'}</button>
+	<p class="small">You'll get a reply with a fixed quote within 24 hours.</p>
+</form>
 
 <style>
-  .contact-form-container {
-    background: var(--ctp-mantle);
-    border: 1px solid var(--ctp-surface0);
-    border-radius: 16px;
-    padding: 36px;
-    max-width: 720px;
-    width: 100%;
-    margin: 0 auto;
-    box-shadow: 0 16px 40px rgba(0, 0, 0, 0.1);
-    box-sizing: border-box;
-    overflow: hidden;
-  }
-
-  .contact-form {
-    display: flex;
-    flex-direction: column;
-    gap: 20px;
-  }
-
-  .error-banner {
-    display: flex;
-    align-items: center;
-    gap: 10px;
-    background: color-mix(in srgb, var(--ctp-red) 10%, transparent);
-    border: 1px solid var(--ctp-red);
-    color: var(--ctp-red);
-    padding: 12px 16px;
-    border-radius: 8px;
-    font-size: 0.9rem;
-  }
-
-  .form-row {
-    display: grid;
-    grid-template-columns: repeat(2, 1fr);
-    gap: 16px;
-    min-width: 0;
-  }
-
-  .form-group {
-    display: flex;
-    flex-direction: column;
-    gap: 8px;
-    min-width: 0;
-  }
-
-  .form-group label {
-    font-size: 0.88rem;
-    font-weight: 600;
-    color: var(--ctp-text);
-  }
-
-  .required {
-    color: var(--ctp-red);
-  }
-
-  input, select, textarea {
-    padding: 12px 16px;
-    border-radius: 8px;
-    border: 1px solid var(--ctp-surface1);
-    background: var(--ctp-base);
-    color: var(--ctp-text);
-    font-family: inherit;
-    font-size: 0.95rem;
-    outline: none;
-    transition: all 0.2s ease;
-    width: 100%;
-    box-sizing: border-box;
-    min-width: 0;
-  }
-
-  input:focus, select:focus, textarea:focus {
-    border-color: var(--accent);
-    box-shadow: 0 0 0 4px color-mix(in srgb, var(--accent) 15%, transparent);
-    background: var(--ctp-mantle);
-  }
-
-  /* Budget Swatches */
-  .budget-swatches {
-    display: grid;
-    grid-template-columns: repeat(4, 1fr);
-    gap: 8px;
-  }
-
-  .budget-swatch-btn {
-    padding: 12px 6px;
-    font-size: 0.82rem;
-    font-weight: 600;
-    color: var(--ctp-subtext1);
-    background: var(--ctp-base);
-    border: 1px solid var(--ctp-surface1);
-    border-radius: 8px;
-    cursor: pointer;
-    transition: all 0.2s cubic-bezier(0.16, 1, 0.3, 1);
-    font-family: inherit;
-  }
-
-  .budget-swatch-btn:hover {
-    border-color: var(--accent);
-    color: var(--accent);
-    transform: translateY(-1px);
-  }
-
-  .budget-swatch-btn.active {
-    background: var(--accent);
-    color: var(--ctp-base);
-    border-color: var(--accent);
-    box-shadow: 0 4px 12px color-mix(in srgb, var(--accent) 25%, transparent);
-    transform: translateY(-1px) scale(1.02);
-  }
-
-  .submit-btn {
-    display: inline-flex;
-    align-items: center;
-    justify-content: center;
-    gap: 8px;
-    padding: 14px 24px;
-    font-size: 1rem;
-    font-weight: 700;
-    border-radius: 8px;
-    cursor: pointer;
-    border: none;
-    background: var(--accent);
-    color: var(--ctp-base);
-    transition: all 0.2s cubic-bezier(0.16, 1, 0.3, 1);
-  }
-
-  .submit-btn:hover:not(:disabled) {
-    transform: translateY(-2px);
-    box-shadow: 0 8px 24px color-mix(in srgb, var(--accent) 30%, transparent);
-    filter: brightness(1.05);
-  }
-
-  .submit-btn:disabled {
-    opacity: 0.6;
-    cursor: not-allowed;
-  }
-
-  :global(.spinner-icon) {
-    animation: spin 1s linear infinite;
-  }
-
-  @keyframes spin {
-    from { transform: rotate(0deg); }
-    to { transform: rotate(360deg); }
-  }
-
-  @media (max-width: 768px) {
-    .budget-swatches {
-      grid-template-columns: repeat(2, 1fr);
-    }
-  }
-
-  @media (max-width: 640px) {
-    .contact-form-container {
-      padding: 24px 18px;
-    }
-    .form-row {
-      grid-template-columns: 1fr;
-      gap: 16px;
-    }
-  }
+	form {
+		display: grid;
+		gap: 1.25rem;
+	}
+	.row {
+		display: grid;
+		gap: 1.25rem;
+		grid-template-columns: repeat(auto-fit, minmax(14rem, 1fr));
+	}
+	label {
+		display: grid;
+		gap: 0.4rem;
+		font-weight: 700;
+	}
+	input,
+	select,
+	textarea {
+		font: inherit;
+		font-weight: 400;
+		color: var(--heading);
+		background: var(--card);
+		border: 1.5px solid var(--line-strong);
+		border-radius: var(--r-card);
+		padding: 0.7rem 0.85rem;
+		width: 100%;
+	}
+	input:focus,
+	select:focus,
+	textarea:focus {
+		outline: 3px solid var(--accent);
+		outline-offset: 0;
+		border-color: var(--accent);
+	}
+	textarea {
+		resize: vertical;
+	}
+	button {
+		justify-self: start;
+	}
+	button:disabled {
+		opacity: 0.7;
+		cursor: progress;
+	}
+	.error {
+		margin: 0;
+		padding: 0.8rem 1rem;
+		border-radius: var(--r-card);
+		background: color-mix(in srgb, var(--ctp-red) 14%, var(--bg));
+		color: var(--heading);
+		outline: 1px solid color-mix(in srgb, var(--ctp-red) 45%, transparent);
+	}
+	.small {
+		margin: 0;
+		color: var(--subtext);
+		font-size: var(--step--1);
+	}
 </style>

@@ -1,175 +1,73 @@
 <script lang="ts">
-  import ContactForm from "$lib/components/ContactForm.svelte";
-  import { Mail, MessageCircle, Clock } from "lucide-svelte";
-  import { language } from "$lib/stores/language";
+	import Seo from '$lib/components/Seo.svelte';
+	import ContactForm from '$lib/components/ContactForm.svelte';
+	import { site } from '$lib/site';
+	import { steps } from '$lib/data/services';
 </script>
 
-<svelte:head>
-  <title>{$language === 'EN' ? 'Contact' : 'Kontak'} | Arya Aji Kusuma</title>
-  <meta name="description" content="Get in touch with Aji. Submit your project brief, category, and budget estimates securely." />
-</svelte:head>
+<Seo
+	title="Start a project"
+	description="Describe the repetitive task you want gone. Arya Aji Kusuma replies within 24 hours with a fixed quote for a Chrome extension, internal tool or automation."
+/>
 
-
-<main class="contact-page container pt-32 pb-32">
-  <div class="contact-intro">
-    <span class="eyebrow">{$language === 'EN' ? 'Connect' : 'Hubungi'}</span>
-    <h1>{$language === 'EN' ? 'Ready to build your next dream project?' : 'Siap membangun proyek impian Anda berikutnya?'}</h1>
-    <p>
-      {$language === 'EN'
-        ? "Let's collaborate to turn your unique goals into beautiful, scalable web applications, landing pages, or automated enterprise systems."
-        : 'Mari berkolaborasi untuk mewujudkan tujuan unik Anda menjadi aplikasi web yang indah dan skalabel, landing page, atau sistem enterprise yang terotomasi.'}
-    </p>
-
-    <div class="intake-guides">
-      <div class="guide-item">
-        <Clock size={18} class="guide-icon" />
-        <div>
-          <h3>{$language === 'EN' ? '24-Hour Review' : 'Tinjauan 24 Jam'}</h3>
-          <p>{$language === 'EN' ? 'I review every incoming brief and respond with a clear timeline and proposal within 24 hours.' : 'Saya meninjau setiap brief yang masuk dan merespons dengan estimasi jadwal serta proposal kerja dalam 24 jam.'}</p>
-        </div>
-      </div>
-      <div class="guide-item">
-        <Mail size={18} class="guide-icon" />
-        <div>
-          <h3>{$language === 'EN' ? 'Direct Upwork Contract' : 'Kontrak Upwork Aman'}</h3>
-          <p>
-            {$language === 'EN' 
-              ? 'Prefer platform protection? You can hire directly via ' 
-              : 'Lebih nyaman lewat perlindungan platform? Anda bisa rekrut langsung lewat '}
-            <a href="https://upwork.com/freelancers/aryaajik" target="_blank" rel="noopener noreferrer" style="color: var(--accent); font-weight: 600; text-decoration: underline;">
-              Upwork Profile &rarr;
-            </a>
-          </p>
-        </div>
-      </div>
-    </div>
-  </div>
-
-  <div class="form-wrapper">
-    <ContactForm />
-  </div>
-</main>
-
+<section class="wrap page">
+	<div class="grid">
+		<div>
+			<h1>Describe your task</h1>
+			<p class="lede">
+				Tell me what you do by hand and how often. You'll get a scope, a price and a delivery date within 24
+				hours.
+			</p>
+			<ContactForm />
+		</div>
+		<aside>
+			<h2>Prefer another channel?</h2>
+			<p><a href={`mailto:${site.email}`}>{site.email}</a></p>
+			<p><a href={site.upwork} rel="noopener" target="_blank">Hire me on Upwork</a> with escrow protection.</p>
+			<h2>What happens next</h2>
+			<ol>
+				{#each steps as s}<li><strong>{s.title}.</strong> {s.text}</li>{/each}
+			</ol>
+		</aside>
+	</div>
+</section>
 
 <style>
-  .contact-page {
-    max-width: 1120px;
-    margin: 0 auto;
-    min-height: calc(100vh - 64px);
-    display: grid;
-    grid-template-columns: 1fr 1.2fr;
-    gap: 48px;
-    align-items: center;
-    padding-top: 120px;
-    padding-bottom: 80px;
-    overflow-x: hidden;
-    box-sizing: border-box;
-  }
-
-  .contact-intro {
-    max-width: 480px;
-    min-width: 0;
-    overflow-wrap: break-word;
-    word-break: break-word;
-  }
-
-  .eyebrow {
-    display: inline-flex;
-    align-items: center;
-    font-family: "JetBrains Mono", monospace;
-    font-size: 0.78rem;
-    font-weight: 600;
-    color: var(--accent);
-    margin-bottom: 12px;
-  }
-
-  .contact-intro h1 {
-    font-size: clamp(1.8rem, 4vw, 2.8rem);
-    line-height: 1.15;
-    font-weight: 800;
-    color: var(--ctp-text);
-    margin: 0 0 20px 0;
-  }
-
-  .contact-intro p {
-    color: var(--ctp-subtext1);
-    font-size: 1.05rem;
-    line-height: 1.8;
-    margin: 0 0 36px 0;
-  }
-
-  .intake-guides {
-    display: flex;
-    flex-direction: column;
-    gap: 16px;
-    border-top: 1px solid var(--ctp-surface0);
-    padding-top: 28px;
-  }
-
-  .guide-item {
-    display: flex;
-    gap: 16px;
-    align-items: flex-start;
-    background: var(--ctp-mantle);
-    border: 1px solid var(--ctp-surface0);
-    border-radius: 12px;
-    padding: 16px 20px;
-    transition: border-color 0.2s ease, transform 0.2s ease;
-  }
-
-  .guide-item:hover {
-    border-color: color-mix(in srgb, var(--accent) 20%, var(--ctp-surface0));
-    transform: translateX(4px);
-  }
-
-  .guide-icon {
-    color: var(--accent);
-    flex-shrink: 0;
-    margin-top: 4px;
-  }
-
-  .guide-item h3 {
-    font-size: 0.95rem;
-    font-weight: 700;
-    color: var(--ctp-text);
-    margin: 0 0 4px 0;
-  }
-
-  .guide-item p {
-    font-size: 0.82rem;
-    color: var(--ctp-subtext0);
-    line-height: 1.5;
-    margin: 0;
-  }
-
-  .form-wrapper {
-    width: 100%;
-    min-width: 0;
-    overflow: hidden;
-  }
-
-  @media (max-width: 960px) {
-    .contact-page {
-      grid-template-columns: 1fr;
-      gap: 40px;
-      padding-top: 100px;
-      padding-bottom: 48px;
-    }
-
-    .contact-intro {
-      max-width: 100%;
-    }
-
-    .contact-intro h1 {
-      font-size: 2.2rem;
-    }
-  }
-
-  @media (max-width: 480px) {
-    .contact-page {
-      gap: 28px;
-      padding-top: 80px;
-      padding-bottom: 32px;
-    }
-  }
+	.page {
+		padding-block: clamp(2.5rem, 6vw, 4.5rem) clamp(4rem, 8vw, 6rem);
+	}
+	.grid {
+		display: grid;
+		gap: 3rem;
+		grid-template-columns: minmax(0, 1fr);
+	}
+	@media (min-width: 940px) {
+		.grid {
+			grid-template-columns: minmax(0, 1.5fr) minmax(0, 1fr);
+		}
+	}
+	h1 {
+		font-size: var(--step-4);
+	}
+	.lede {
+		margin-bottom: 2.5rem;
+	}
+	aside {
+		padding: 1.75rem;
+		background: var(--column);
+		border-radius: var(--r-panel);
+		align-self: start;
+	}
+	aside h2 {
+		font-size: var(--step-1);
+	}
+	aside h2:not(:first-child) {
+		margin-top: 2rem;
+	}
+	aside ol {
+		padding-left: 1.2rem;
+		display: grid;
+		gap: 0.6rem;
+		margin: 0;
+	}
 </style>

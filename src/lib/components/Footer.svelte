@@ -1,155 +1,103 @@
 <script lang="ts">
-  import { externalLinks } from '$lib/data/externalLinks';
+	import { site } from '$lib/site';
+	const year = new Date().getFullYear();
 </script>
 
-<footer class="footer">
-  <div class="footer-inner">
-    <!-- Main footer bar -->
-    <div class="footer-bar">
-      <!-- Left -->
-      <div class="footer-left">
-        <span class="copyright">© 2026 Arya Aji Kusuma</span>
-        <span class="footer-separator">|</span>
-        <div class="footer-links">
-          <a href={externalLinks.extensions.url} target="_blank" rel="noopener noreferrer" class="footer-link">Extensions</a>
-        </div>
-      </div>
-
-      <!-- Right -->
-      <div class="footer-right">
-        <div class="footer-socials">
-          <a href="https://github.com/arya-aji" target="_blank" rel="noopener noreferrer" aria-label="GitHub">
-            <svg width="15" height="15" viewBox="0 0 24 24" fill="currentColor"><path d="M12 0c-6.626 0-12 5.373-12 12 0 5.302 3.438 9.8 8.207 11.387.599.111.793-.261.793-.577v-2.234c-3.338.726-4.033-1.416-4.033-1.416-.546-1.387-1.333-1.756-1.333-1.756-1.089-.745.083-.729.083-.729 1.205.084 1.839 1.237 1.839 1.237 1.07 1.834 2.807 1.304 3.492.997.107-.775.418-1.305.762-1.604-2.665-.305-5.467-1.334-5.467-5.931 0-1.311.469-2.381 1.236-3.221-.124-.303-.535-1.524.117-3.176 0 0 1.008-.322 3.301 1.23.957-.266 1.983-.399 3.003-.404 1.02.005 2.047.138 3.006.404 2.291-1.552 3.297-1.23 3.297-1.23.653 1.653.242 2.874.118 3.176.77.84 1.235 1.911 1.235 3.221 0 4.609-2.807 5.624-5.479 5.921.43.372.823 1.102.823 2.222v3.293c0 .319.192.694.801.576 4.765-1.589 8.199-6.086 8.199-11.386 0-6.627-5.373-12-12-12z"/></svg>
-          </a>
-          <a href="https://www.linkedin.com/in/arya-aji-kusuma" target="_blank" rel="noopener noreferrer" aria-label="LinkedIn">
-            <svg width="15" height="15" viewBox="0 0 24 24" fill="currentColor"><path d="M20.447 20.452h-3.554v-5.569c0-1.328-.027-3.037-1.852-3.037-1.853 0-2.136 1.445-2.136 2.939v5.667H9.351V9h3.414v1.561h.046c.477-.9 1.637-1.85 3.37-1.85 3.601 0 4.267 2.37 4.267 5.455v6.286zM5.337 7.433c-1.144 0-2.063-.926-2.063-2.065 0-1.138.92-2.063 2.063-2.063 1.14 0 2.064.925 2.064 2.063 0 1.139-.925 2.065-2.064 2.065zm1.782 13.019H3.555V9h3.564v11.452zM22.225 0H1.771C.792 0 0 .774 0 1.729v20.542C0 23.227.792 24 1.771 24h20.451C23.2 24 24 23.227 24 22.271V1.729C24 .774 23.2 0 22.222 0h.003z"/></svg>
-          </a>
-          <a href="https://www.instagram.com/aryaajikusuma_" target="_blank" rel="noopener noreferrer" aria-label="Instagram">
-            <svg width="15" height="15" viewBox="0 0 24 24" fill="currentColor"><path d="M12 2.163c3.204 0 3.584.012 4.85.07 3.252.148 4.771 1.691 4.919 4.919.058 1.265.069 1.645.069 4.849 0 3.205-.012 3.584-.069 4.849-.149 3.225-1.664 4.771-4.919 4.919-1.266.058-1.644.07-4.85.07-3.204 0-3.584-.012-4.849-.07-3.26-.149-4.771-1.699-4.919-4.92-.058-1.265-.07-1.644-.07-4.849 0-3.204.013-3.583.07-4.849.149-3.227 1.664-4.771 4.919-4.919 1.266-.057 1.645-.069 4.849-.069zM12 0C8.741 0 8.333.014 7.053.072 2.695.272.273 2.69.073 7.052.014 8.333 0 8.741 0 12c0 3.259.014 3.668.072 4.948.2 4.358 2.618 6.78 6.98 6.98C8.333 23.986 8.741 24 12 24c3.259 0 3.668-.014 4.948-.072 4.354-.2 6.782-2.618 6.979-6.98.059-1.28.073-1.689.073-4.948 0-3.259-.014-3.667-.072-4.947-.196-4.354-2.617-6.78-6.979-6.98C15.668.014 15.259 0 12 0zm0 5.838a6.162 6.162 0 100 12.324 6.162 6.162 0 000-12.324zM12 16a4 4 0 110-8 4 4 0 010 8zm6.406-11.845a1.44 1.44 0 100 2.881 1.44 1.44 0 000-2.881z"/></svg>
-          </a>
-        </div>
-      </div>
-    </div>
-  </div>
+<footer class="site-footer">
+	<div class="wrap grid">
+		<div>
+			<p class="sign">If you do it twice, I'll make it a tool.</p>
+			<p class="muted">
+				Arya Aji Kusuma, freelance developer in {site.location}. Async, in English or Indonesian, with
+				clients anywhere.
+			</p>
+			<a class="btn" href="/contact">Describe your task</a>
+		</div>
+		<nav aria-label="Footer">
+			<div>
+				<h2>Site</h2>
+				<ul>
+					<li><a href="/projects">Work</a></li>
+					<li><a href="/#services">Services</a></li>
+					<li><a href="/#process">Process</a></li>
+					<li><a href="/notes">Notes</a></li>
+					<li><a href="/about">About</a></li>
+					<li><a href="/resume">Resume</a></li>
+				</ul>
+			</div>
+			<div>
+				<h2>Elsewhere</h2>
+				<ul>
+					<li><a href={`mailto:${site.email}`}>{site.email}</a></li>
+					<li><a href={site.upwork} rel="me noopener" target="_blank">Upwork</a></li>
+					<li><a href={site.github} rel="me noopener" target="_blank">GitHub</a></li>
+					<li><a href={site.linkedin} rel="me noopener" target="_blank">LinkedIn</a></li>
+				</ul>
+			</div>
+		</nav>
+	</div>
+	<div class="wrap legal">© {year} Arya Aji Kusuma. Colours: Catppuccin.</div>
 </footer>
 
 <style>
-  .footer {
-    border-top: 1px solid var(--ctp-surface0);
-    margin-top: 40px;
-    background: var(--ctp-mantle);
-    overflow-x: hidden;
-  }
-
-  .footer-inner {
-    max-width: 1200px;
-    margin: 0 auto;
-    padding: 0 24px;
-  }
-
-  .footer-bar {
-    display: flex;
-    align-items: center;
-    justify-content: space-between;
-    height: 64px;
-    gap: 16px;
-    flex-wrap: wrap;
-  }
-
-  .footer-left {
-    display: flex;
-    align-items: center;
-    gap: 16px;
-    flex-wrap: wrap;
-    min-width: 0;
-  }
-
-  .copyright {
-    font-size: 0.78rem;
-    color: var(--ctp-subtext0);
-    font-family: 'JetBrains Mono', 'Fira Code', monospace;
-  }
-
-  /* Right side */
-  .footer-right {
-    display: flex;
-    align-items: center;
-    gap: 16px;
-    flex-wrap: wrap;
-    min-width: 0;
-  }
-
-  .footer-socials {
-    display: flex;
-    align-items: center;
-    gap: 16px;
-  }
-
-  .footer-socials a {
-    color: var(--ctp-overlay1);
-    transition: color 0.2s;
-    display: flex;
-    align-items: center;
-  }
-
-  .footer-socials a:hover {
-    color: var(--accent);
-    opacity: 1;
-  }
-
-  .footer-separator {
-    color: var(--ctp-surface2);
-    font-size: 0.78rem;
-    font-family: 'JetBrains Mono', 'Fira Code', monospace;
-  }
-
-  .footer-links {
-    display: flex;
-    align-items: center;
-    gap: 16px;
-  }
-
-  .footer-link {
-    font-size: 0.78rem;
-    color: var(--ctp-subtext0);
-    font-family: 'JetBrains Mono', 'Fira Code', monospace;
-    text-decoration: none;
-    transition: color 0.2s;
-  }
-
-  .footer-link:hover {
-    color: var(--accent);
-    opacity: 1;
-  }
-
-  @media (max-width: 520px) {
-    .footer-bar {
-      flex-direction: column;
-      align-items: center;
-      gap: 14px;
-      padding: 24px 0;
-      height: auto;
-    }
-
-    .footer-left {
-      flex-direction: column;
-      gap: 10px;
-      align-items: center;
-      text-align: center;
-    }
-
-    .footer-separator {
-      display: none;
-    }
-
-    .footer-links {
-      gap: 16px;
-      justify-content: center;
-    }
-
-    .footer-right {
-      justify-content: center;
-      width: 100%;
-    }
-  }
+	.site-footer {
+		background: var(--board);
+		border-top: 1px solid var(--line);
+		padding-top: clamp(3rem, 7vw, 4.5rem);
+	}
+	.grid {
+		display: grid;
+		gap: 2.5rem;
+	}
+	@media (min-width: 780px) {
+		.grid {
+			grid-template-columns: minmax(0, 1.3fr) minmax(0, 1fr);
+		}
+	}
+	.sign {
+		font-family: var(--font-display);
+		font-size: var(--step-3);
+		font-weight: 720;
+		line-height: 1.08;
+		letter-spacing: -0.03em;
+		color: var(--heading);
+		max-width: 16ch;
+		margin-bottom: 0.75rem;
+	}
+	.muted {
+		color: var(--subtext);
+		max-width: 44ch;
+		margin-bottom: 1.5rem;
+	}
+	nav {
+		display: grid;
+		grid-template-columns: 1fr 1fr;
+		gap: 1.5rem;
+	}
+	h2 {
+		font-size: 1rem;
+		letter-spacing: 0;
+		margin-bottom: 0.75rem;
+	}
+	ul {
+		list-style: none;
+		margin: 0;
+		padding: 0;
+		display: grid;
+		gap: 0.5rem;
+	}
+	ul a {
+		color: var(--text);
+		overflow-wrap: anywhere;
+	}
+	ul a:hover {
+		color: var(--accent);
+	}
+	.legal {
+		margin-top: 3rem;
+		padding-block: 1.25rem;
+		border-top: 1px solid var(--line);
+		font-size: var(--step--1);
+		color: var(--subtext);
+	}
 </style>
