@@ -5,14 +5,14 @@
 
 <Seo
 	title="Resume"
-	description="Resume of Arya Aji Kusuma: full-stack developer with 7+ years building internal tools, Python automation and LLM features, plus data pipelines, browser extensions and SaaS products."
+	description="Resume of Arya Aji Kusuma: full-stack developer with 7+ years building web apps, data pipelines and dashboards, Python automation and browser extensions."
 	type="profile"
 />
 
 <section class="wrap page">
 	<header class="head">
 		<h1>Arya Aji Kusuma</h1>
-		<p class="lede">Full-stack developer for web apps, data pipelines, automation and browser extensions.</p>
+		<p class="lede">Full-stack developer. Focus, in order: web apps, data pipelines and dashboards, workflow automation, browser extensions.</p>
 		<p class="contact">
 			{site.location}<br />
 			<a href={`mailto:${site.email}`}>{site.email}</a><br />
@@ -26,13 +26,13 @@
 			<h2>Experience</h2>
 
 			<section class="job">
-				<h3>Freelance full-stack and automation developer</h3>
+				<h3>Freelance full-stack, data and automation developer</h3>
 				<p class="when">Self-employed, remote. 2024 to now</p>
 				<ul>
-					<li>Built and run Gerbang Dinas (gerbangdinas.com), a CAT-style tryout platform on SvelteKit and Supabase with Midtrans checkout and human-reviewed AI questions.</li>
-					<li>Built Recap Suite, an Electron studio that turns comic chapters into narrated videos with vision AI, text-to-speech and FFmpeg.</li>
-					<li>Built Grambox, a cached-first Instagram JSON API (Hono, SQLite, Python), and MiniTube PiP, a Chrome extension.</li>
-					<li>Deliver full-stack web apps, data pipelines, automations and browser extensions for clients through Upwork.</li>
+					<li><strong>Full-stack:</strong> built and run Gerbang Dinas (gerbangdinas.com), a CAT-style tryout platform on SvelteKit and Supabase with Midtrans checkout and human-reviewed AI questions.</li>
+					<li><strong>Full-stack:</strong> built Recap Suite, an Electron studio that turns comic chapters into narrated videos with vision AI, text-to-speech and FFmpeg, and Grambox, a cached-first Instagram JSON API (Hono, SQLite, Python).</li>
+					<li><strong>Data and automation:</strong> deliver data pipelines, dashboards and Python automations for clients through Upwork, quoted per milestone.</li>
+					<li><strong>Browser extensions:</strong> published MiniTube PiP on the Chrome Web Store, a one-click Picture-in-Picture extension for YouTube.</li>
 				</ul>
 			</section>
 
@@ -40,11 +40,10 @@
 				<h3>Computer Specialist (Pranata Komputer Ahli Pertama)</h3>
 				<p class="when">BPS-Statistics Indonesia, Jakarta Pusat. 2019 to now</p>
 				<ul>
-					<li>Built 5+ full-stack web apps used across units, making reporting about 40% faster.</li>
-					<li>Wrote Python automations that remove 15+ hours a week of repetitive data processing.</li>
-					<li>Replaced paid software with open-source builds, saving about $12,000 a year in licences.</li>
-					<li>Delivered geospatial monitoring tools and dashboards used by 200+ field officers.</li>
-					<li>Integrated LLM APIs that automate about 80% of routine content and metadata classification.</li>
+					<li><strong>Full-stack:</strong> built 5+ web apps used across units, making reporting about 40% faster, and replaced paid software with open-source builds, saving about $12,000 a year in licences.</li>
+					<li><strong>Data:</strong> delivered geospatial monitoring dashboards used by 200+ field officers, and a computer-vision pipeline (FastAPI, OpenCV, OCR) that straightens and indexes photographed field maps.</li>
+					<li><strong>Automation:</strong> wrote Python jobs and Playwright bots that remove 15+ hours a week of repetitive data entry and processing, plus an offline geocoder for business addresses.</li>
+					<li><strong>AI:</strong> integrated LLM APIs that automate about 80% of routine content and metadata classification, with human review.</li>
 				</ul>
 			</section>
 
@@ -57,14 +56,16 @@
 
 		<aside>
 			<h2>Skills</h2>
-			<h3>Full-stack</h3>
-			<p>SvelteKit, Next.js, TypeScript, FastAPI, Python, PostgreSQL, Prisma</p>
-			<h3>Browser</h3>
+			<h3>1. Full-stack</h3>
+			<p>SvelteKit, Next.js, TypeScript, FastAPI, Supabase, PostgreSQL, Prisma, Midtrans</p>
+			<h3>2. Data</h3>
+			<p>Data pipelines, dashboards, Leaflet maps, statistical and geospatial analysis, Excel and Google Sheets</p>
+			<h3>3. Automation</h3>
+			<p>Python pipelines, Playwright, scheduled jobs, REST APIs, Nominatim geocoding</p>
+			<h3>4. Browser extensions</h3>
 			<p>Chrome Manifest V3, content scripts, side panels, DOM extraction</p>
-			<h3>Automation</h3>
-			<p>Python pipelines, Excel and Google Sheets, REST APIs, OpenStreetMap geocoding</p>
-			<h3>Data and AI</h3>
-			<p>Statistical analysis, dashboards, geospatial analysis, LLM integration</p>
+			<h3>AI and computer vision</h3>
+			<p>LLM integration, vision models, OpenCV, OCR, text-to-speech</p>
 			<h3>Languages</h3>
 			<p>Indonesian (native), English (professional)</p>
 		</aside>
@@ -99,6 +100,10 @@
 	}
 	h2 {
 		font-size: var(--step-2);
+		margin-bottom: var(--space-lg);
+	}
+	.prose h2:not(:first-child) {
+		margin-top: var(--space-2xl);
 	}
 	.job {
 		margin-bottom: var(--space-xl);
