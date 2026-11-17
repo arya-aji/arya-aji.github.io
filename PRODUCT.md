@@ -54,7 +54,7 @@ aryaaji.com is the personal portfolio and lead-generation site of Arya Aji Kusum
 
 - Blur Your WhatsApp: Chrome Web Store extension, under 20KB, zero dependencies, no trackers; competitors were 30MB+. Engineering write-up from his own LinkedIn posts (one post reached about 1.9k impressions). Assets: `static/img/blur-your-whatsapp.webp`, store link, GitHub `arya-aji/blur-your-whatsapp`.
 - Skui (tryout.aryaaji.com): SaaS exam simulator for SIMAK UI applicants, Next.js + FastAPI + PostgreSQL + Midtrans, 1,000+ users. Asset: `static/img/skui.webp`.
-- MiniTube PiP: one-click Picture-in-Picture extension (extension.aryaaji.com). Asset image is an AI-generated mock with garbled text; treat as weak evidence.
+- MiniTube PiP: one-click Picture-in-Picture extension (Chrome Web Store). Asset image is an AI-generated mock with garbled text; treat as weak evidence.
 - In-house results (anonymised): 5+ full-stack apps, reporting about 40% faster, 15+ hours/week of manual data work removed, dashboards used by 200+ field officers, about $12,000/year saved on licences, LLM features automating about 80% of routine content and metadata classification.
 - Education: D4 Applied Statistics, Politeknik Statistika STIS (2014–2018).
 - Profiles: Upwork `aryaajik`, GitHub `arya-aji`, LinkedIn `arya-aji-kusuma`, email hello@aryaaji.com.

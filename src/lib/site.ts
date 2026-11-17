@@ -8,7 +8,6 @@ export const site = {
 	upwork: 'https://www.upwork.com/freelancers/aryaajik',
 	github: 'https://github.com/arya-aji',
 	linkedin: 'https://www.linkedin.com/in/arya-aji-kusuma',
-	extensions: 'https://extension.aryaaji.com',
 	ogImage: '/og.png'
 } as const;
 

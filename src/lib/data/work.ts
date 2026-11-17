@@ -260,20 +260,27 @@ export const work: Work[] = [
 		slug: 'minitube-pip',
 		title: 'MiniTube PiP',
 		kind: 'Browser extension',
-		year: '2024',
-		tagline: 'Float any HTML5 video in a Picture-in-Picture window',
-		badge: 'Extension',
+		year: '2026',
+		tagline: 'One-click Picture-in-Picture for YouTube',
+		badge: 'Live',
 		summary:
-			'One click sends any HTML5 video to a floating Picture-in-Picture window, so a tutorial keeps playing while you work.',
+			'A Chrome extension that pops the current YouTube video into Chrome’s native Picture-in-Picture window with one click, so it keeps playing while you work.',
 		description:
-			'MiniTube PiP, a lightweight Chrome extension that puts any HTML5 video into a floating Picture-in-Picture window with one click.',
+			'MiniTube PiP, a lightweight Chrome extension on the Chrome Web Store that opens YouTube videos in Picture-in-Picture with one click.',
+		image: {
+			src: '/img/minitube-pip.webp',
+			alt: 'MiniTube PiP store screenshot: “One Click. Picture-in-Picture.” with a YouTube video popped out into a mini window in three steps.',
+			width: 1200,
+			height: 800
+		},
 		stack: ['JavaScript', 'Manifest V3', 'Picture-in-Picture API'],
-		links: [{ label: 'Extension hub', href: 'https://extension.aryaaji.com' }],
-		outcome: ['One click to float a video', 'Works on any HTML5 video'],
+		links: [{ label: 'Chrome Web Store', href: 'https://chromewebstore.google.com/detail/minitube-pip/nnaefjfojaokboaeojpidgacfpjihaoi' }],
+		outcome: ['One click to float a video', 'No extra player, no tracking'],
 		problem:
-			'Switching between a tutorial tab and an editor breaks concentration, and the built-in Picture-in-Picture control is hidden on many sites.',
+			'Switching between a tutorial tab and an editor breaks concentration, and YouTube’s own Picture-in-Picture control is buried in a right-click menu.',
 		approach: [
-			'A single toolbar action that finds the active video on the page and detaches it into an always-on-top window.'
+			'A single toolbar action that finds the playing YouTube video and hands it to Chrome’s native Picture-in-Picture window, always on top.',
+			'No custom player and no data collection: it only asks for the permissions it needs.'
 		],
 		featured: false
 	}
