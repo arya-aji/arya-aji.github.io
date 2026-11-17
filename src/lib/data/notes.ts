@@ -8,13 +8,6 @@ export type Note = {
 
 export const notes: Note[] = [
 	{
-		slug: 'whatsapp-blur-extension-under-20kb',
-		title: 'How I built a WhatsApp Web blur extension in under 20KB',
-		description:
-			'Four rules that kept Blur Your WhatsApp under 20KB with zero dependencies: think in CSS, unblur with :hover, ignore class names, and observe instead of polling.',
-		date: '2026-09-10'
-	},
-	{
 		slug: 'steering-ai-to-write-small-code',
 		title: 'Steering an AI assistant to write small code',
 		description:

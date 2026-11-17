@@ -17,6 +17,6 @@ export const nav = [
 	{ href: '/#experience', label: 'Experience', count: '7y+' },
 	{ href: '/#work', label: 'Work', count: '10' },
 	{ href: '/#services', label: 'Services', count: '3' },
-	{ href: '/notes', label: 'Notes', count: '2' },
+	{ href: '/notes', label: 'Notes', count: '1' },
 	{ href: '/#contact', label: 'Contact' }
 ] as const;

@@ -37,8 +37,4 @@
 		and why obfuscated class names break is what let me say no to its first answer. AI amplifies whatever
 		judgement you bring to it, so the judgement still has to be yours.
 	</p>
-	<p>
-		The full technical breakdown is in
-		<a href="/notes/whatsapp-blur-extension-under-20kb">how I built a WhatsApp Web blur extension in under 20KB</a>.
-	</p>
 </NoteLayout>
