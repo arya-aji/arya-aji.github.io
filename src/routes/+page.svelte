@@ -144,7 +144,7 @@
 				<p class="eyebrow">Experience</p>
 				<h2 id="exp-h">Where I’ve worked</h2>
 			</div>
-			<p>Civil servant at BPS-Statistics Indonesia since 2018, building the internal tools and automations the office runs on. Freelance products and client work on the side.</p>
+			<p>Civil servant at BPS-Statistics Indonesia since 2019, building the internal tools and automations the office runs on. Freelance products and client work on the side.</p>
 		</header>
 
 		<ol class="rows">

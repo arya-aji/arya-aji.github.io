@@ -29,7 +29,7 @@ export const experience: Role[] = [
 		title: 'Computer Specialist (Pranata Komputer)',
 		org: 'BPS-Statistics Indonesia, Jakarta Pusat',
 		where: 'Jakarta · On-site',
-		from: '2018',
+		from: '2019',
 		to: 'Now',
 		points: [
 			'Turned spreadsheet-heavy reporting into 5+ validated web apps, making reports about 40% faster.',
