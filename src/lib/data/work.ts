@@ -21,7 +21,7 @@ export type Work = {
 };
 
 // Sourced from the READMEs and docs of github.com/arya-aji repositories.
-// Private repos get no GitHub link. BPS work is named; never mention the statistical publications.
+// Private repos and all BPS work get no GitHub link. BPS work is named; never mention the statistical publications.
 export const work: Work[] = [
 	{
 		slug: 'gerbang-dinas',
@@ -96,7 +96,7 @@ export const work: Work[] = [
 		description:
 			'A Next.js, FastAPI and OpenCV pipeline that straightens, enhances and OCRs photographed field maps, then validates and files them in S3-compatible storage.',
 		stack: ['Next.js', 'FastAPI', 'OpenCV', 'OCR', 'Redis', 'PostgreSQL', 'S3 (Garage)'],
-		links: [{ label: 'Source on GitHub', href: 'https://github.com/arya-aji/smartgeo' }],
+		links: [],
 		outcome: ['Area codes read and validated automatically', 'Images go straight to storage', 'Workers scale on a queue'],
 		problem:
 			'Thousands of paper field maps were photographed at odd angles and filed by hand. Finding the right map meant reading a small printed code on each photo.',
@@ -138,13 +138,13 @@ export const work: Work[] = [
 		kind: 'Automation',
 		year: '2026',
 		tagline: 'Turns messy business addresses into coordinates, offline',
-		badge: 'Open source',
+		badge: 'BPS',
 		summary:
 			'A Python geocoder on a private Nominatim server: a six-level fallback search, fuzzy matching for misspelt Jakarta areas, region validation and multithreading.',
 		description:
-			'An open-source Python geocoder that runs on a local Nominatim server with waterfall search, fuzzy area matching and Jakarta region validation.',
+			'A Python geocoder for BPS that runs on a local Nominatim server with waterfall search, fuzzy area matching and Jakarta region validation.',
 		stack: ['Python', 'Nominatim', 'Docker', 'Fuzzy matching', 'Multithreading'],
-		links: [{ label: 'Source on GitHub', href: 'https://github.com/arya-aji/geocoding_auto' }],
+		links: [],
 		outcome: ['Six fallback search strategies', 'Results outside Jakarta rejected', 'No API quotas: runs locally'],
 		problem:
 			'Business addresses in survey data are full of typos, building floors and RT/RW numbers. Public geocoding APIs either miss them or cap the number of calls.',
@@ -185,13 +185,13 @@ export const work: Work[] = [
 		kind: 'Automation',
 		year: '2025',
 		tagline: 'Playwright bot that fills the BPS business directory from a spreadsheet',
-		badge: 'Open source',
+		badge: 'BPS',
 		summary:
 			'Python and Playwright automation that reads a validated master sheet, checks it for duplicates, then enters or updates each business on the BPS business directory (MatchaPro) while logging progress to PostgreSQL.',
 		description:
-			'MatchaMaster, an open-source Python and Playwright bot that enters and updates business-directory records from a master spreadsheet.',
+			'MatchaMaster, a Python and Playwright bot that enters and updates business-directory records from a master spreadsheet.',
 		stack: ['Python', 'Playwright', 'PostgreSQL (Neon)', 'Excel & CSV'],
-		links: [{ label: 'Source on GitHub', href: 'https://github.com/arya-aji/automation' }],
+		links: [],
 		outcome: ['Replaces manual form entry', 'Duplicate check before any write', 'Resumable progress log'],
 		problem:
 			'Field teams had to type thousands of business records into a web directory one form at a time.',
