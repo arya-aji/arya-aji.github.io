@@ -15,7 +15,7 @@ export const site = {
 // Anchors on the home page; `count` is the small bracketed figure under each label.
 export const nav = [
 	{ href: '/#experience', label: 'Experience', count: '7y+' },
-	{ href: '/#work', label: 'Work', count: '4' },
+	{ href: '/#work', label: 'Work', count: '10' },
 	{ href: '/#services', label: 'Services', count: '3' },
 	{ href: '/notes', label: 'Notes', count: '2' },
 	{ href: '/#contact', label: 'Contact' }

@@ -25,9 +25,10 @@
 				daily.
 			</p>
 			<p>
-				Since 2024 I’ve also built my own products. <a href="/projects/blur-your-whatsapp">Blur Your WhatsApp</a>
-				is a privacy extension under 20KB. <a href="/projects/skui">Skui</a> is an exam simulator with 1,000+
-				users. Building products end to end, payments included, keeps me honest about what clients actually
+				Since 2024 I’ve also built my own products. <a href="/projects/gerbang-dinas">Gerbang Dinas</a> is a
+				CAT-style tryout platform for civil-service and service-school applicants.
+				<a href="/projects/recap-suite">Recap Suite</a> is a desktop studio that turns comic chapters into narrated
+				videos. Building products end to end, payments included, keeps me honest about what clients actually
 				need.
 			</p>
 

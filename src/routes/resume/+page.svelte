@@ -29,8 +29,9 @@
 				<h3>Freelance full-stack and automation developer</h3>
 				<p class="when">Self-employed, remote. 2024 to now</p>
 				<ul>
-					<li>Built and run Skui, a mobile-first exam simulator with automated Midtrans billing and 1,000+ users.</li>
-					<li>Published Blur Your WhatsApp, a sub-20KB privacy extension on the Chrome Web Store, and MiniTube PiP.</li>
+					<li>Built and run Gerbang Dinas (gerbangdinas.com), a CAT-style tryout platform on SvelteKit and Supabase with Midtrans checkout and human-reviewed AI questions.</li>
+					<li>Built Recap Suite, an Electron studio that turns comic chapters into narrated videos with vision AI, text-to-speech and FFmpeg.</li>
+					<li>Built Grambox, a cached-first Instagram JSON API (Hono, SQLite, Python), and MiniTube PiP, a Chrome extension.</li>
 					<li>Deliver Chrome extensions, internal tools and Python automations for clients through Upwork.</li>
 				</ul>
 			</section>

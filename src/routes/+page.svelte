@@ -12,7 +12,8 @@
 	const kinds = ['All', ...new Set(work.map((w) => w.kind))];
 	let filter = $state('All');
 	const shown = $derived(filter === 'All' ? work : work.filter((w) => w.kind === filter));
-	const kindLabel = (k: string) => (k === 'All' ? 'All' : k === 'Browser extension' ? 'Extensions' : k === 'SaaS product' ? 'SaaS' : k);
+	const labels: Record<string, string> = { 'SaaS product': 'SaaS', 'AI tool': 'AI tools', 'Browser extension': 'Extensions' };
+	const kindLabel = (k: string) => labels[k] ?? k;
 
 	// Rotating role under the giant name, typed with a caret.
 	const roles = ['Chrome Extension Developer', 'Automation Engineer', 'Full-Stack Developer'];
@@ -177,7 +178,7 @@
 				<p class="eyebrow">Projects</p>
 				<h2 id="work-h">Things I’ve built</h2>
 			</div>
-			<p>From a 20KB privacy extension to the internal tools a team runs every week: {work.length} projects, all shipped and in use.</p>
+			<p>From a live tryout SaaS to a computer-vision pipeline and an AI video studio: {work.length} projects pulled from my GitHub.</p>
 		</header>
 
 		<div class="filters" role="group" aria-label="Filter projects">

@@ -9,17 +9,23 @@
 	const jsonLd = $derived([
 		{
 			'@context': 'https://schema.org',
-			'@type': item.kind === 'Internal tools' ? 'CreativeWork' : 'SoftwareApplication',
+			'@type': item.kind === 'Internal tools' || item.kind === 'Automation' ? 'CreativeWork' : 'SoftwareApplication',
 			name: item.title,
 			description: item.description,
 			url: `${site.url}/projects/${item.slug}`,
 			...(item.image ? { image: site.url + item.image.src } : {}),
-			...(item.kind === 'Internal tools'
+			...(item.kind === 'Internal tools' || item.kind === 'Automation'
 				? {}
 				: {
 						applicationCategory:
-							item.kind === 'Browser extension' ? 'BrowserApplication' : 'EducationalApplication',
-						operatingSystem: item.kind === 'Browser extension' ? 'Chrome' : 'Web'
+							item.kind === 'Browser extension'
+								? 'BrowserApplication'
+								: item.slug === 'gerbang-dinas'
+									? 'EducationalApplication'
+									: item.kind === 'AI tool'
+										? 'MultimediaApplication'
+										: 'BusinessApplication',
+						operatingSystem: item.kind === 'Browser extension' ? 'Chrome' : item.slug === 'recap-suite' ? 'Windows' : 'Web'
 					}),
 			author: { '@type': 'Person', name: site.name, url: site.url }
 		},
@@ -74,11 +80,6 @@
 			{#each item.stack as s}<li>{s}</li>{/each}
 		</ul>
 
-		{#if item.slug === 'blur-your-whatsapp'}
-			<p class="note-link">
-				Full write-up: <a href="/notes/whatsapp-blur-extension-under-20kb">how the extension stays under 20KB</a>.
-			</p>
-		{/if}
 	</div>
 
 	<aside class="ask">
@@ -148,9 +149,6 @@
 		padding-left: var(--space-lg);
 		display: grid;
 		gap: var(--space-sm);
-	}
-	.note-link {
-		margin-top: var(--space-xl);
 	}
 	.ask {
 		margin-top: var(--space-2xl);

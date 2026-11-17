@@ -9,7 +9,7 @@
 		or more, just to blur a few lines of text.
 	</p>
 	<p>
-		So I built <a href="/projects/blur-your-whatsapp">Blur Your WhatsApp</a>. The whole extension is under
+		So I built <a href="https://chromewebstore.google.com/detail/blur-your-whatsapp/knhgdpafncoifgmbcfkclhglcifjhpmc" rel="noopener" target="_blank">Blur Your WhatsApp</a>. The whole extension is under
 		20KB, has zero dependencies, no trackers, and does nothing on the main thread while you scroll. These are
 		the four decisions that made that possible.
 	</p>

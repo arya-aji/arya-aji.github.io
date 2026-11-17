@@ -7,7 +7,7 @@
 
 <Seo
 	title="Projects: Chrome extensions, internal tools and SaaS"
-	description="Case studies from Arya Aji Kusuma: a sub-20KB WhatsApp privacy extension, internal reporting tools that save 15+ hours a week, and Skui, a SaaS with 1,000+ users."
+	description="Case studies from Arya Aji Kusuma: Gerbang Dinas, a live CAT tryout SaaS; Recap Suite, an AI video studio; a computer-vision map pipeline; automation bots; and internal tools that save 15+ hours a week."
 />
 
 <section class="wrap page">
@@ -15,7 +15,7 @@
 		<p class="eyebrow">Projects</p>
 		<h1>Things I’ve built</h1>
 		<p class="lede">
-			Things I’ve shipped, from browser extensions on the Chrome Web Store to the internal tools that
+			Things I’ve shipped, from a live tryout SaaS and an AI video studio to the internal tools that
 			replaced a team’s spreadsheets.
 		</p>
 	</header>

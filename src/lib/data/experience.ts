@@ -19,10 +19,10 @@ export const experience: Role[] = [
 		to: 'Now',
 		points: [
 			'Build Chrome extensions, internal tools and Python automations for small teams, quoted per milestone through Upwork escrow.',
-			'Published Blur Your WhatsApp, a sub-20KB privacy extension on the Chrome Web Store, and MiniTube PiP.',
-			'Built and run Skui solo: a mobile-first exam simulator with automated Midtrans billing and 1,000+ users.'
+			'Built and run Gerbang Dinas solo: a CAT-style tryout platform on SvelteKit and Supabase with Midtrans checkout and AI-drafted, human-reviewed questions.',
+			'Shipped Recap Suite, an Electron studio that turns comic chapters into narrated videos with vision AI, text-to-speech and FFmpeg.'
 		],
-		tags: ['Manifest V3', 'SvelteKit', 'Next.js', 'FastAPI', 'Python'],
+		tags: ['SvelteKit', 'Supabase', 'Electron', 'Manifest V3', 'Python'],
 		link: { label: 'Hire on Upwork', href: 'https://www.upwork.com/freelancers/aryaajik' }
 	},
 	{
@@ -35,9 +35,10 @@ export const experience: Role[] = [
 			'Turned spreadsheet-heavy reporting into 5+ validated web apps, making reports about 40% faster.',
 			'Wrote scheduled Python jobs that remove 15+ hours a week of copy-paste and reshaping.',
 			'Shipped geospatial monitoring dashboards used by 200+ field officers, and retired paid software worth about $12,000 a year.',
-			'Added LLM steps that automate about 80% of routine drafting and metadata classification, with a human reviewing.'
+			'Added LLM steps that automate about 80% of routine drafting and metadata classification, with a human reviewing.',
+			'Built a computer-vision pipeline that straightens, enhances and OCRs photographed field maps, and Playwright bots that replace manual form entry.'
 		],
-		tags: ['Python', 'PostgreSQL', 'Prisma', 'Leaflet', 'LLM APIs'],
+		tags: ['Python', 'FastAPI', 'OpenCV', 'Playwright', 'PostgreSQL', 'LLM APIs'],
 		link: { label: 'Read the case study', href: '/projects/internal-reporting-tools' }
 	},
 	{

@@ -3,13 +3,6 @@
 	let { item, headingLevel = 3 }: { item: Work; headingLevel?: 2 | 3 } = $props();
 
 	const isExternal = (href: string) => href.startsWith('http');
-	const initials = $derived(
-		item.title
-			.split(/\s+/)
-			.slice(0, 2)
-			.map((w) => w[0])
-			.join('')
-	);
 </script>
 
 <article class="card">
@@ -17,7 +10,8 @@
 		{#if item.image}
 			<img src={item.image.src} alt="" width={item.image.width} height={item.image.height} loading="lazy" decoding="async" />
 		{:else}
-			<span class="mono">{initials}</span>
+			<span class="plate-kind">{item.kind}</span>
+			<span class="mono">{item.title}</span>
 			<ul class="stat">
 				{#each item.outcome.slice(0, 2) as o}<li>{o}</li>{/each}
 			</ul>
@@ -86,14 +80,39 @@
 		transform: scale(1.03);
 	}
 	/* No screenshot (in-house work under NDA): a typographic plate instead */
+	/* No screenshot: the project name as an outlined poster */
+	.thumb:not(:has(img)) {
+		place-items: center start;
+		background:
+			radial-gradient(circle at 1px 1px, color-mix(in oklab, var(--color-ink) 14%, transparent) 1px, transparent 0) 0 0 / 16px 16px,
+			var(--color-well);
+	}
+	.plate-kind {
+		position: absolute;
+		top: var(--space-lg);
+		left: var(--space-lg);
+		font-size: var(--text-xs);
+		font-weight: 500;
+		letter-spacing: 0.28em;
+		text-transform: uppercase;
+		color: var(--color-muted);
+	}
 	.mono {
+		max-width: min(11ch, 100%);
+		overflow-wrap: anywhere;
 		font-family: var(--font-display);
 		font-weight: 900;
-		font-size: clamp(4rem, 9vw, 7rem);
-		line-height: 1;
-		letter-spacing: -0.05em;
+		font-variation-settings: 'wdth' 118;
+		font-size: clamp(2rem, 3.6vw, 3.1rem);
+		line-height: 0.9;
+		letter-spacing: -0.04em;
+		text-transform: uppercase;
 		color: transparent;
 		-webkit-text-stroke: 1.5px var(--color-ink);
+		transition: color var(--dur-long) var(--ease-out);
+	}
+	.card:hover .mono {
+		color: var(--color-ink);
 	}
 	.stat {
 		position: absolute;

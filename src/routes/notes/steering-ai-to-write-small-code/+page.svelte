@@ -9,7 +9,7 @@
 		listeners everywhere. It works, and it is far heavier than it needs to be.
 	</p>
 	<p>
-		When I built <a href="/projects/blur-your-whatsapp">Blur Your WhatsApp</a>, the interesting part was not
+		When I built <a href="https://chromewebstore.google.com/detail/blur-your-whatsapp/knhgdpafncoifgmbcfkclhglcifjhpmc" rel="noopener" target="_blank">Blur Your WhatsApp</a>, the interesting part was not
 		the code. It was steering the assistant away from that default. I treat it like a capable junior
 		developer: it writes quickly, but it needs explicit constraints.
 	</p>
