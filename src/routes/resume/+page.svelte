@@ -56,13 +56,13 @@
 
 		<aside>
 			<h2>Skills</h2>
-			<h3>1. Full-stack</h3>
+			<h3>Full-stack</h3>
 			<p>SvelteKit, Next.js, TypeScript, FastAPI, Supabase, PostgreSQL, Prisma, Midtrans</p>
-			<h3>2. Data</h3>
+			<h3>Data</h3>
 			<p>Data pipelines, dashboards, Leaflet maps, statistical and geospatial analysis, Excel and Google Sheets</p>
-			<h3>3. Automation</h3>
+			<h3>Automation</h3>
 			<p>Python pipelines, Playwright, scheduled jobs, REST APIs, Nominatim geocoding</p>
-			<h3>4. Browser extensions</h3>
+			<h3>Browser extensions</h3>
 			<p>Chrome Manifest V3, content scripts, side panels, DOM extraction</p>
 			<h3>AI and computer vision</h3>
 			<p>LLM integration, vision models, OpenCV, OCR, text-to-speech</p>
