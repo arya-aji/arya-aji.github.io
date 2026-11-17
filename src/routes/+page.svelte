@@ -1,15 +1,57 @@
 <script lang="ts">
 	import Seo from '$lib/components/Seo.svelte';
-	import HeroBlur from '$lib/components/HeroBlur.svelte';
+	import WorkCard from '$lib/components/WorkCard.svelte';
+	import ContactForm from '$lib/components/ContactForm.svelte';
 	import { services } from '$lib/data/services';
+	import { work } from '$lib/data/work';
+	import { experience, skills } from '$lib/data/experience';
 	import { site } from '$lib/site';
 	import { onMount } from 'svelte';
 
-	// A hotlinked photograph can fail; hide it so no broken-image glyph shows over the fog.
-	let photo: HTMLImageElement | undefined = $state();
-	let photoOk = $state(true);
+	// Project filter, like the reference: All plus one chip per kind.
+	const kinds = ['All', ...new Set(work.map((w) => w.kind))];
+	let filter = $state('All');
+	const shown = $derived(filter === 'All' ? work : work.filter((w) => w.kind === filter));
+	const kindLabel = (k: string) => (k === 'All' ? 'All' : k === 'Browser extension' ? 'Extensions' : k === 'SaaS product' ? 'SaaS' : k);
+
+	// Rotating role under the giant name, typed with a caret.
+	const roles = ['Chrome Extension Developer', 'Automation Engineer', 'Full-Stack Developer'];
+	let typed = $state(roles[0]);
 	onMount(() => {
-		if (photo && photo.complete && !photo.naturalWidth) photoOk = false;
+		if (matchMedia('(prefers-reduced-motion: reduce)').matches) return;
+		let r = 0;
+		let n = roles[0].length;
+		let deleting = true;
+		let wait = 28;
+		const id = setInterval(() => {
+			if (wait > 0) return void wait--;
+			if (deleting) {
+				n--;
+				if (n === 0) {
+					deleting = false;
+					r = (r + 1) % roles.length;
+					wait = 4;
+				}
+			} else {
+				n++;
+				if (n === roles[r].length) {
+					deleting = true;
+					wait = 32;
+				}
+			}
+			typed = roles[r].slice(0, n);
+		}, 60);
+
+		// Reveal sections as they scroll in
+		const io = new IntersectionObserver(
+			(entries) => entries.forEach((e) => e.isIntersecting && (e.target.classList.add('in'), io.unobserve(e.target))),
+			{ rootMargin: '0px 0px -10% 0px' }
+		);
+		document.querySelectorAll('.reveal').forEach((el) => io.observe(el));
+		return () => {
+			clearInterval(id);
+			io.disconnect();
+		};
 	});
 
 	const jsonLd = [
@@ -19,7 +61,7 @@
 			'@id': `${site.url}/#person`,
 			name: site.name,
 			url: site.url,
-			image: `${site.url}/img/arya.webp`,
+			image: `${site.url}/img/arya-cutout.webp`,
 			jobTitle: 'Full-stack developer',
 			email: `mailto:${site.email}`,
 			address: { '@type': 'PostalAddress', addressLocality: 'Jakarta', addressCountry: 'ID' },
@@ -52,531 +94,576 @@
 	{jsonLd}
 />
 
+<!-- HERO: giant name, half solid, half outline, portrait standing over it -->
 <section class="hero" aria-labelledby="hero-h">
-	<div class="hour" data-slot="hero" data-alt="A landscape at dusk with a calm, pale area on the left for the headline">
+	<div class="container hero-in">
+		<h1 id="hero-h" class="mega">
+			<span class="solid">Arya</span>
+			<span class="outline">Aji</span>
+			<span class="visually-hidden">Kusuma, freelance Chrome extension and automation developer</span>
+		</h1>
+
 		<img
-			bind:this={photo}
-			hidden={!photoOk}
-			onerror={() => (photoOk = false)}
-			src="https://upload.wikimedia.org/wikipedia/commons/thumb/4/46/Vallee-brouillard.jpg/1920px-Vallee-brouillard.jpg"
-			srcset="https://upload.wikimedia.org/wikipedia/commons/thumb/4/46/Vallee-brouillard.jpg/960px-Vallee-brouillard.jpg 960w, https://upload.wikimedia.org/wikipedia/commons/thumb/4/46/Vallee-brouillard.jpg/1280px-Vallee-brouillard.jpg 1280w, https://upload.wikimedia.org/wikipedia/commons/thumb/4/46/Vallee-brouillard.jpg/1920px-Vallee-brouillard.jpg 1920w"
-			sizes="100vw"
-			width="4210"
-			height="2750"
-			alt=""
+			class="portrait"
+			src="/img/arya-cutout.webp"
+			alt="Portrait of Arya Aji Kusuma with arms crossed"
+			width="640"
+			height="825"
 			fetchpriority="high"
 			decoding="async"
 		/>
-	</div>
-	<div class="scrim" aria-hidden="true"></div>
-	<div class="container stage">
-		<div class="copy">
-			<h1 id="hero-h">Do it twice? I’ll build the tool.</h1>
-			<p class="lead">Chrome extensions, internal tools and automations for small teams.</p>
-			<div class="actions">
-				<a class="btn" href="/contact">Describe your task</a>
-				<a class="text-link" href="#work">See the work</a>
+
+		<div class="hero-copy">
+			<p class="role" aria-label={roles[0]}><span aria-hidden="true">{typed}</span><span class="caret" aria-hidden="true"></span></p>
+			<p class="tag">If I have to do it twice, I build the tool.<br />Chrome extensions, internal tools and automations for small teams.</p>
+			<div class="hero-actions">
+				<a class="btn arrow" href="#contact">Let’s collaborate</a>
+				<a class="btn ghost" href="/resume">
+					<svg width="14" height="14" viewBox="0 0 16 16" aria-hidden="true"><path d="M8 2v8m0 0 3.5-3.5M8 10 4.5 6.5M3 13.5h10" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" /></svg>
+					Resume
+				</a>
 			</div>
 		</div>
-		<div class="product">
-			<HeroBlur />
+
+		<ul class="hero-social" aria-label="Profiles">
+			<li><a href={site.github} rel="me noopener" target="_blank"><svg viewBox="0 0 16 16" aria-hidden="true"><path fill="currentColor" d="M8 0a8 8 0 0 0-2.53 15.59c.4.07.55-.17.55-.38v-1.33c-2.23.48-2.7-1.07-2.7-1.07-.36-.92-.89-1.17-.89-1.17-.73-.5.06-.49.06-.49.8.06 1.23.83 1.23.83.72 1.22 1.88.87 2.34.66.07-.52.28-.87.5-1.07-1.78-.2-3.65-.89-3.65-3.95 0-.87.31-1.59.82-2.15-.08-.2-.36-1.02.08-2.12 0 0 .67-.21 2.2.82a7.6 7.6 0 0 1 4 0c1.53-1.04 2.2-.82 2.2-.82.44 1.1.16 1.92.08 2.12.51.56.82 1.27.82 2.15 0 3.07-1.87 3.75-3.65 3.95.29.25.54.73.54 1.48v2.2c0 .21.15.46.55.38A8 8 0 0 0 8 0Z" /></svg>GitHub</a></li>
+			<li><a href={site.linkedin} rel="me noopener" target="_blank"><svg viewBox="0 0 16 16" aria-hidden="true"><path fill="currentColor" d="M3.6 5.3H.9V16h2.7V5.3ZM2.25 0a1.56 1.56 0 1 0 0 3.12 1.56 1.56 0 0 0 0-3.12ZM16 9.9c0-2.88-.62-5.1-3.98-5.1-1.61 0-2.7.89-3.14 1.73h-.05V5.3H6.26V16h2.67v-5.3c0-1.4.27-2.75 2-2.75 1.7 0 1.73 1.6 1.73 2.84V16H16V9.9Z" /></svg>LinkedIn</a></li>
+			<li><a href={site.upwork} rel="me noopener" target="_blank"><svg viewBox="0 0 16 16" aria-hidden="true"><path fill="currentColor" d="M12.2 9.5c-.7 0-1.37-.3-1.98-.79l.15-.69v-.03c.13-.74.55-1.98 1.83-1.98a1.75 1.75 0 0 1 0 3.5Zm0-5.25c-1.64 0-2.9 1.06-3.42 2.81-.79-1.19-1.39-2.61-1.74-3.81H5.27v4.6a1.6 1.6 0 0 1-3.2 0v-4.6H.3v4.6a3.37 3.37 0 0 0 6.74 0v-.78c.32.67.72 1.35 1.2 1.95l-1.02 4.78h1.8l.74-3.47c.65.41 1.4.68 2.25.68a3.5 3.5 0 0 0 0-6.76Z" /></svg>Upwork</a></li>
+			<li><a href={site.extensions} rel="noopener" target="_blank"><svg viewBox="0 0 16 16" aria-hidden="true"><path fill="currentColor" d="M6.5 1a1.75 1.75 0 0 1 1.75 1.75V3H11a1 1 0 0 1 1 1v2.75h.25a1.75 1.75 0 1 1 0 3.5H12V14a1 1 0 0 1-1 1H8.25v-.75a1.75 1.75 0 1 0-3.5 0V15H2a1 1 0 0 1-1-1v-3.25h.75a1.75 1.75 0 1 0 0-3.5H1V4a1 1 0 0 1 1-1h2.75v-.25A1.75 1.75 0 0 1 6.5 1Z" /></svg>Extensions</a></li>
+		</ul>
+	</div>
+</section>
+
+<!-- EXPERIENCE -->
+<section class="section" id="experience" aria-labelledby="exp-h">
+	<div class="container">
+		<header class="section-head reveal">
+			<div>
+				<p class="eyebrow">Experience</p>
+				<h2 id="exp-h">Where I’ve worked</h2>
+			</div>
+			<p>Seven years of in-house tools for a data organisation, plus freelance extensions and a SaaS I run on my own.</p>
+		</header>
+
+		<ol class="rows">
+			{#each experience as job, i}
+				<li class="row reveal">
+					<span class="idx">{String(i + 1).padStart(2, '0')}</span>
+					<div class="row-main">
+						<h3>{job.title}</h3>
+						<p class="org">{job.org} <span>·</span> {job.where}</p>
+						<ul class="points">
+							{#each job.points as pt}<li>{pt}</li>{/each}
+						</ul>
+						<ul class="tag-list" aria-label="Tools">
+							{#each job.tags as t}<li>{t}</li>{/each}
+						</ul>
+						{#if job.link}
+							<a class="btn ghost sm arrow row-link" href={job.link.href} rel={job.link.href.startsWith('http') ? 'noopener' : undefined} target={job.link.href.startsWith('http') ? '_blank' : undefined}>{job.link.label}</a>
+						{/if}
+					</div>
+					<span class="when">{job.from} — {job.to}</span>
+				</li>
+			{/each}
+		</ol>
+	</div>
+</section>
+
+<!-- PROJECTS -->
+<section class="section" id="work" aria-labelledby="work-h">
+	<div class="container">
+		<header class="section-head reveal">
+			<div>
+				<p class="eyebrow">Projects</p>
+				<h2 id="work-h">Things I’ve built</h2>
+			</div>
+			<p>From a 20KB privacy extension to the internal tools a team runs every week: {work.length} projects, all shipped and in use.</p>
+		</header>
+
+		<div class="filters" role="group" aria-label="Filter projects">
+			{#each kinds as k}
+				<button type="button" class:on={filter === k} aria-pressed={filter === k} onclick={() => (filter = k)}>{kindLabel(k)}</button>
+			{/each}
+		</div>
+
+		<div class="grid">
+			{#each shown as item (item.slug)}
+				<WorkCard {item} />
+			{/each}
 		</div>
 	</div>
 </section>
 
-<section class="case" id="work" aria-labelledby="blur-h">
-	<div class="container case-grid">
-		<figure class="well case-shot" data-slot="blur" data-kind="product" data-alt="Blur Your WhatsApp store image, or a screenshot of the popup in use">
-			<img src="/img/blur-your-whatsapp.webp" width="1200" height="751" alt="Blur Your WhatsApp: the extension popup with switches beside a WhatsApp Web chat list" loading="lazy" decoding="async" />
-		</figure>
-		<div class="case-copy">
-			<h2 id="blur-h">Under 20&nbsp;KB, zero dependencies</h2>
-			<p class="lead">Blur Your WhatsApp hides chats while you share your screen.</p>
-			<dl class="facts">
-				<div><dt>Dependencies</dt><dd>None</dd></div>
-				<div><dt>Trackers</dt><dd>None</dd></div>
-			</dl>
-			<p class="links">
-				<a href="/projects/blur-your-whatsapp">Read the case study</a>
-				<a href="/notes/whatsapp-blur-extension-under-20kb">How it stays small</a>
-			</p>
+<!-- SERVICES -->
+<section class="section" id="services" aria-labelledby="svc-h">
+	<div class="container">
+		<header class="section-head reveal">
+			<div>
+				<p class="eyebrow">Services</p>
+				<h2 id="svc-h">What I can build for you</h2>
+			</div>
+			<p>Fixed quote within 24 hours. Paid per milestone through Upwork escrow, released only after you test it.</p>
+		</header>
+
+		<ol class="rows">
+			{#each services as s, i}
+				<li class="row reveal" id={s.id}>
+					<span class="idx">{String(i + 1).padStart(2, '0')}</span>
+					<div class="row-main">
+						<h3>{s.title}</h3>
+						<p class="org">{s.pitch}</p>
+						<ul class="points">
+							{#each s.examples as ex}<li>{ex}</li>{/each}
+						</ul>
+					</div>
+					<span class="when price"><strong>{s.price}</strong><small>{s.timeline}</small></span>
+				</li>
+			{/each}
+		</ol>
+	</div>
+</section>
+
+<!-- SKILLS -->
+<section class="section" id="skills" aria-labelledby="skills-h">
+	<div class="container">
+		<header class="section-head reveal">
+			<div>
+				<p class="eyebrow">Skills</p>
+				<h2 id="skills-h">Technical expertise</h2>
+			</div>
+			<p>The tools I reach for, grouped by the job they do.</p>
+		</header>
+		<div class="skills">
+			{#each skills as g}
+				<div class="skill reveal">
+					<h3>{g.group}</h3>
+					<ul class="tag-list">
+						{#each g.items as t}<li>{t}</li>{/each}
+					</ul>
+				</div>
+			{/each}
 		</div>
 	</div>
 </section>
 
-<section class="run" aria-labelledby="run-h">
-	<div class="container run-grid">
-		<div class="run-head">
-			<h2 id="run-h">Tools a data team runs every week</h2>
-			<p class="lead">In-house work for a large data organisation, 2019 to now.</p>
-			<p><a href="/projects/internal-reporting-tools">See how they were built</a></p>
-		</div>
-		<div class="glass ledger">
-			<p class="ledger-title">What each tool replaced</p>
-			<ol>
-				<li><span class="ini" aria-hidden="true">R</span><span class="what">Reporting web apps<small>5 shipped</small></span><span class="res">About 40% faster reports</span></li>
-				<li><span class="ini" aria-hidden="true">P</span><span class="what">Python data jobs<small>run on a schedule</small></span><span class="res">15+ hours a week</span></li>
-				<li><span class="ini" aria-hidden="true">F</span><span class="what">Field dashboards<small>maps, live progress</small></span><span class="res">200+ officers</span></li>
-				<li><span class="ini" aria-hidden="true">O</span><span class="what">Open-source swaps<small>paid software retired</small></span><span class="res">About $12,000 a year</span></li>
-			</ol>
-		</div>
-	</div>
-</section>
-
-<section class="skui" aria-labelledby="skui-h">
-	<div class="container skui-grid">
-		<div class="skui-copy">
-			<h2 id="skui-h">Skui, a SaaS I run alone</h2>
-			<p class="lead">Timed practice exams with checkout built in.</p>
-			<dl class="facts">
-				<div><dt>Users</dt><dd>1,000+</dd></div>
-				<div><dt>Payments</dt><dd>Midtrans, automated</dd></div>
-				<div><dt>Stack</dt><dd>Next.js, FastAPI, PostgreSQL</dd></div>
-			</dl>
-			<p class="links"><a href="/projects/skui">Read the case study</a><a href="https://tryout.aryaaji.com" rel="noopener" target="_blank">Open Skui</a></p>
-		</div>
-		<figure class="well skui-shot" data-slot="skui" data-kind="product" data-alt="A screenshot of a Skui practice exam on a phone">
-			<img src="/img/skui.webp" width="896" height="734" alt="Skui promo: a timed practice question, a score of 85 out of 100 and topic progress" loading="lazy" decoding="async" />
-		</figure>
-	</div>
-</section>
-
-<section class="offer" id="services" aria-labelledby="offer-h">
-	<div class="container offer-grid">
-		<div class="offer-head">
-			<h2 id="offer-h">Three tools, quoted within a day</h2>
-			<p class="lead">Paid per milestone through Upwork escrow.</p>
-		</div>
-		<table>
-			<caption class="visually-hidden">Services, delivery and price</caption>
-			<thead><tr><th scope="col">Tool</th><th scope="col">Typical job</th><th scope="col">Delivery</th><th scope="col">Price</th></tr></thead>
-			<tbody>
-				{#each services as s}
-					<tr id={s.id}>
-						<th scope="row">{s.title}</th>
-						<td>{s.examples[0]}</td>
-						<td class="num">{s.timeline}</td>
-						<td class="num">{s.price}</td>
-					</tr>
-				{/each}
-			</tbody>
-		</table>
-	</div>
-</section>
-
-<section class="close" aria-labelledby="close-h">
-	<div class="container close-grid">
-		<h2 id="close-h">Tell me the chore you repeat.</h2>
-		<dl class="contact-list">
-			<div><dt>Email</dt><dd><a class="mail" href={`mailto:${site.email}`}>{site.email}</a></dd></div>
-			<div><dt>Where</dt><dd>Jakarta, UTC+7</dd></div>
-			<div><dt>Reply</dt><dd>Within 24 hours</dd></div>
-		</dl>
-		<div class="actions">
-			<a class="btn" href="/contact">Describe your task</a>
-			<a class="btn ghost" href={site.upwork} rel="noopener" target="_blank">Hire on Upwork</a>
+<!-- CONTACT -->
+<section class="section contact" id="contact" aria-labelledby="contact-h">
+	<div class="container">
+		<p class="eyebrow">Contact</p>
+		<h2 id="contact-h" class="big reveal">Let’s automate the boring part together.</h2>
+		<p class="contact-note">Open to freelance projects: Chrome extensions, internal tools and data automation. Tell me the chore you repeat; I reply within 24 hours from Jakarta (UTC+7).</p>
+		<div class="form-wrap">
+			<ContactForm compact secondary={{ label: 'Hire on Upwork', href: site.upwork }} />
 		</div>
 	</div>
 </section>
 
 <style>
+	/* ---------- Hero ---------- */
 	.hero {
 		position: relative;
-		isolation: isolate;
-		min-height: calc(100dvh - 72px);
+		overflow: hidden;
+		margin-top: -76px; /* slide under the floating nav */
+		padding-top: 96px;
+	}
+	.hero-in {
+		position: relative;
 		display: grid;
-		align-items: center;
-		padding-block: var(--space-2xl) var(--space-3xl);
-		background: var(--color-paper);
-		color: var(--color-ink);
+		grid-template-columns: minmax(0, 1fr) minmax(0, 1fr);
+		grid-template-areas:
+			'name name'
+			'copy social';
+		min-height: min(100svh, 860px);
+		align-content: space-between;
+		padding-bottom: 0;
 	}
-	/* If the photograph fails, the fog colour keeps the head legible */
-	.hour {
-		position: absolute;
-		inset: 0;
-		z-index: -2;
-		background: linear-gradient(to bottom, var(--color-fog), var(--color-well-2));
-	}
-	.hour > img {
-		color: transparent;
-		object-position: 40% 55%;
-		animation: drift 48s var(--ease-in-out) infinite alternate;
-	}
-	@keyframes drift {
-		from {
-			transform: scale(1.06) translateX(0);
-		}
-		to {
-			transform: scale(1.06) translateX(-3%);
-		}
-	}
-	/* Fog behind the text only; the foot fades into slate */
-	.scrim {
-		position: absolute;
-		inset: 0;
-		z-index: -1;
-		background:
-			radial-gradient(ellipse 46% 52% at 24% 54%, color-mix(in oklab, var(--color-fog) 80%, transparent), transparent 80%),
-			linear-gradient(to bottom, transparent 70%, var(--color-paper));
-	}
-
-	.stage {
-		display: grid;
-		gap: var(--space-2xl);
-		grid-template-columns: minmax(0, 1fr);
-		align-items: end;
-	}
-	@media (min-width: 60rem) {
-		.stage {
-			grid-template-columns: minmax(0, 6fr) minmax(0, 5fr);
-			align-items: center;
-		}
-	}
-
-	.copy h1 {
-		color: var(--color-day-ink);
-		max-width: 12ch;
-		line-height: 1.02;
-	}
-	.copy .lead {
-		margin-top: var(--space-lg);
-		color: var(--color-day-muted);
-		max-width: 30ch;
-	}
-	.actions {
-		display: flex;
-		flex-wrap: wrap;
-		align-items: center;
-		gap: var(--space-md) var(--space-lg);
-		margin-top: var(--space-xl);
-	}
-	.text-link {
-		color: var(--color-day-ink);
-		font-weight: 600;
-		text-underline-offset: 0.25em;
-		min-height: 44px;
-		display: inline-flex;
-		align-items: center;
-	}
-	.text-link:hover {
-		color: var(--color-day-ink);
-	}
-	.text-link:active {
-		color: var(--color-day-muted);
-	}
-	.text-link:focus-visible {
-		outline: 2px solid var(--color-accent-deep);
-		outline-offset: 3px;
-	}
-
-	.product {
-		display: grid;
-		justify-items: center;
-		gap: var(--space-sm);
-	}
-
-	/* Sections below the hero: slate, bone wells, one glass ledger */
-	.case,
-	.skui {
-		padding-block: var(--section-gap-s) var(--section-gap);
-	}
-	.run {
-		padding-block: var(--section-gap);
-		background: var(--color-paper-2);
-	}
-	.offer {
-		padding-block: var(--section-gap-l) var(--section-gap);
-	}
-	.close {
-		padding-block: var(--section-gap-s);
-		background: var(--color-paper-2);
-	}
-
-	.case-grid,
-	.skui-grid,
-	.run-grid {
-		display: grid;
-		gap: var(--space-2xl) var(--gap-columns);
-		grid-template-columns: minmax(0, 1fr);
-		align-items: center;
-	}
-	@media (min-width: 60rem) {
-		.case-grid {
-			grid-template-columns: minmax(0, 7fr) minmax(0, 5fr);
-		}
-		.skui-grid {
-			grid-template-columns: minmax(0, 5fr) minmax(0, 6fr);
-		}
-		.run-grid {
-			grid-template-columns: minmax(0, 4fr) minmax(0, 7fr);
-			gap: var(--space-2xl) var(--space-3xl);
-		}
-	}
-
-	.well {
-		margin: 0;
-		aspect-ratio: 5 / 4;
-		background: var(--color-well);
-	}
-	.well > img {
-		position: absolute;
-		inset: var(--space-xl);
-		width: calc(100% - 2 * var(--space-xl));
-		height: calc(100% - 2 * var(--space-xl));
-		object-fit: contain;
-		box-shadow: none;
-		background: transparent;
-	}
-
-	.case-copy h2,
-	.skui-copy h2 {
-		max-width: 14ch;
-	}
-	.case-copy .lead,
-	.skui-copy .lead,
-	.run-head .lead,
-	.offer-head .lead {
-		margin-top: var(--space-md);
-		color: var(--color-ink-2);
-	}
-	.facts {
-		margin: var(--space-xl) 0 0;
-		display: grid;
-	}
-	.facts div {
+	.mega {
+		grid-area: name;
+		position: relative;
+		z-index: 1;
 		display: flex;
 		justify-content: space-between;
-		gap: var(--space-md);
-		padding-block: var(--space-sm);
-		box-shadow: inset 0 -1px 0 var(--color-rule);
-	}
-	.facts dt {
-		color: var(--color-muted);
-	}
-	.facts dd {
+		align-items: baseline;
+		max-width: none;
 		margin: 0;
-		font-weight: 600;
-		color: var(--color-ink);
-		text-align: right;
+		font-size: clamp(4.25rem, 13.2vw, 13rem);
+		line-height: 0.82;
+		letter-spacing: -0.045em;
+		text-transform: uppercase;
+		font-variation-settings: 'wdth' 118;
+		text-wrap: nowrap;
 	}
-	.links {
-		display: flex;
-		flex-wrap: wrap;
-		gap: var(--space-xs) var(--space-lg);
-		margin-top: var(--space-lg);
-		font-weight: 600;
+	.mega > span {
+		display: inline-block;
+		animation: rise 1s var(--ease-out) both;
 	}
-	.links a:focus-visible,
-	.run-head a:focus-visible,
-	.mail:focus-visible {
-		outline: 2px solid var(--color-focus);
-		outline-offset: 3px;
+	.outline {
+		color: transparent;
+		-webkit-text-stroke: clamp(1.5px, 0.22vw, 3px) var(--color-ink);
+		animation-delay: 120ms !important;
 	}
-	.links a:active,
-	.run-head a:active,
-	.mail:active {
-		color: var(--color-accent-deep);
+	@keyframes rise {
+		from {
+			opacity: 0;
+			transform: translateY(18%);
+		}
 	}
 
-	/* A run as an account list */
-	.run-head p:last-child {
-		margin-top: var(--space-lg);
-		font-weight: 600;
+	.portrait {
+		position: absolute;
+		z-index: 2;
+		left: 50%;
+		bottom: 0;
+		height: 90%;
+		width: auto;
+		max-width: none;
+		transform: translateX(-50%);
+		-webkit-mask-image: linear-gradient(to bottom, #000 82%, transparent 99%);
+		mask-image: linear-gradient(to bottom, #000 82%, transparent 99%);
+		animation: fade 1.2s var(--ease-out) 200ms both;
+		pointer-events: none;
 	}
-	.ledger {
-		padding: var(--space-lg);
+	@keyframes fade {
+		from {
+			opacity: 0;
+			transform: translateX(-50%) translateY(24px);
+		}
 	}
-	.ledger-title {
-		font-weight: 600;
+
+	.hero-copy {
+		grid-area: copy;
+		position: relative;
+		z-index: 3;
+		align-self: center;
+		max-width: 30ch;
+		padding-block: var(--space-2xl) var(--space-3xl);
+	}
+	.role {
+		font-family: var(--font-display);
+		font-weight: 800;
+		font-size: clamp(1.3rem, 1vw + 0.9rem, 1.75rem);
+		letter-spacing: -0.02em;
+		line-height: 1.1;
+		white-space: nowrap;
 		color: var(--color-ink);
-		padding: 0 var(--space-xs) var(--space-md);
 	}
-	.ledger ol {
+	.caret {
+		display: inline-block;
+		width: 2px;
+		height: 0.95em;
+		margin-left: 3px;
+		vertical-align: -0.1em;
+		background: var(--color-ink);
+		animation: blink 1s steps(1) infinite;
+	}
+	@keyframes blink {
+		50% {
+			opacity: 0;
+		}
+	}
+	.tag {
+		margin-top: var(--space-md);
+		color: var(--color-muted);
+		font-size: 0.9375rem;
+		line-height: 1.6;
+	}
+	.hero-actions {
+		display: grid;
+		justify-items: start;
+		gap: var(--space-sm);
+		margin-top: var(--space-xl);
+	}
+
+	.hero-social {
+		grid-area: social;
+		position: relative;
+		z-index: 3;
+		align-self: center;
+		justify-self: end;
+		display: grid;
+		justify-items: end;
+		gap: var(--space-sm);
+		margin: 0;
+		padding: 0;
+		list-style: none;
+	}
+	.hero-social a {
+		display: inline-flex;
+		align-items: center;
+		gap: 8px;
+		padding: 8px 16px;
+		border-radius: var(--radius-pill);
+		background: var(--color-paper);
+		box-shadow: inset 0 0 0 1px var(--color-rule);
+		color: var(--color-ink);
+		font-size: var(--text-sm);
+		font-weight: 500;
+		text-decoration: none;
+		transition: box-shadow var(--dur-short) var(--ease-out), transform var(--dur-short) var(--ease-out);
+	}
+	.hero-social a:hover {
+		box-shadow: inset 0 0 0 1px var(--color-ink);
+		transform: translateX(-3px);
+	}
+	.hero-social svg {
+		width: 15px;
+		height: 15px;
+	}
+
+	@media (max-width: 52rem) {
+		.hero {
+			margin-top: -76px;
+			padding-top: 100px;
+		}
+		.hero-in {
+			grid-template-columns: minmax(0, 1fr);
+			grid-template-areas: 'name' 'portrait' 'copy' 'social';
+			min-height: 0;
+		}
+		.mega {
+			font-size: clamp(3rem, 16vw, 8rem);
+			font-variation-settings: 'wdth' 100;
+		}
+		.portrait {
+			grid-area: portrait;
+			position: relative;
+			left: auto;
+			transform: none;
+			justify-self: center;
+			height: auto;
+			width: min(78vw, 360px);
+			margin-top: -10%;
+			animation-name: fade-m;
+		}
+		@keyframes fade-m {
+			from {
+				opacity: 0;
+				transform: translateY(24px);
+			}
+		}
+		.hero-copy {
+			padding-block: var(--space-xl) var(--space-lg);
+			max-width: none;
+		}
+		.role {
+			white-space: normal;
+			min-height: 1.1em;
+		}
+		.hero-actions {
+			display: flex;
+			flex-wrap: wrap;
+		}
+		.hero-social {
+			justify-self: start;
+			display: flex;
+			flex-wrap: wrap;
+			padding-bottom: var(--space-xl);
+		}
+	}
+
+	/* ---------- Sections ---------- */
+	.section {
+		padding-block: var(--section-gap-s);
+	}
+	#experience {
+		border-top: 1px solid var(--color-rule);
+	}
+
+	/* Numbered rows: index · content · date */
+	.rows {
 		list-style: none;
 		margin: 0;
 		padding: 0;
-		border-radius: var(--radius-inner);
-		background: color-mix(in oklab, var(--color-light) 4%, transparent);
 	}
-	.ledger li {
+	.row {
 		display: grid;
-		grid-template-columns: auto minmax(0, 1fr) auto;
-		align-items: center;
-		gap: var(--space-md);
-		padding: var(--space-md);
+		grid-template-columns: 72px minmax(0, 1fr) auto;
+		gap: var(--space-lg);
+		padding-block: var(--space-xl);
+		border-top: 1px solid var(--color-rule);
 	}
-	@media (max-width: 35rem) {
-		.ledger li {
-			grid-template-columns: auto minmax(0, 1fr);
-		}
-		.res {
-			grid-column: 2;
-			text-align: left;
-		}
+	.row:last-child {
+		border-bottom: 1px solid var(--color-rule);
 	}
-	.ledger li + li {
-		box-shadow: inset 0 1px 0 color-mix(in oklab, var(--color-light) 7%, transparent);
-	}
-	.ini {
-		display: grid;
-		place-items: center;
-		width: 36px;
-		height: 36px;
-		border-radius: 50%;
-		box-shadow: inset 0 0 0 1px color-mix(in oklab, var(--color-light) 16%, transparent);
-		color: var(--color-ink-2);
+	.idx {
 		font-size: var(--text-sm);
-		font-weight: 600;
-	}
-	.what {
-		display: grid;
-		color: var(--color-ink);
-		font-weight: 600;
-	}
-	.what small {
-		font-size: var(--text-sm);
-		font-weight: 400;
 		color: var(--color-muted);
-	}
-	.res {
 		font-variant-numeric: tabular-nums;
-		color: var(--color-accent-2);
-		font-weight: 600;
-		text-align: right;
+		padding-top: 0.4em;
 	}
-
-	/* What I build: a table */
-	.offer-grid {
-		display: grid;
-		gap: var(--space-2xl);
+	.row-main h3 {
+		font-size: clamp(1.35rem, 1vw + 1rem, 1.85rem);
+		max-width: none;
 	}
-	table {
-		width: 100%;
-		border-collapse: collapse;
-	}
-	thead th {
-		text-align: left;
-		font-size: var(--text-sm);
-		font-weight: 600;
+	.org {
+		margin-top: var(--space-2xs);
 		color: var(--color-muted);
-		padding: 0 var(--space-md) var(--space-sm) 0;
-		white-space: nowrap;
+		font-size: 0.9375rem;
+		max-width: 60ch;
 	}
-	tbody th,
-	tbody td {
-		text-align: left;
-		vertical-align: baseline;
-		padding: var(--space-lg) var(--space-md) var(--space-lg) 0;
-		box-shadow: inset 0 1px 0 var(--color-rule);
+	.org span {
+		margin-inline: 2px;
 	}
-	tbody th {
-		font-family: var(--font-display);
-		font-weight: 600;
-		font-size: var(--text-title);
-		letter-spacing: var(--tracking-display);
-		color: var(--color-ink);
-		width: 32%;
+	.points {
+		display: grid;
+		gap: var(--space-sm);
+		margin: var(--space-lg) 0;
+		padding: 0;
+		list-style: none;
+		max-width: 64ch;
 	}
-	tbody td {
+	.points li {
+		padding-left: var(--space-md);
+		border-left: 2px solid var(--color-ink);
 		color: var(--color-ink-2);
+		line-height: 1.6;
 	}
-	tbody td.num {
+	.row-link {
+		margin-top: var(--space-lg);
+	}
+	.when {
+		font-size: var(--text-sm);
+		color: var(--color-muted);
 		white-space: nowrap;
-		color: var(--color-ink);
+		font-variant-numeric: tabular-nums;
+		padding-top: 0.4em;
 	}
-	tbody tr:first-child th,
-	tbody tr:first-child td {
-		box-shadow: inset 0 1px 0 var(--color-accent);
+	.price {
+		display: grid;
+		justify-items: end;
+		align-content: start;
+		gap: 2px;
+	}
+	.price strong {
+		font-family: var(--font-display);
+		font-size: var(--text-lg);
+		font-weight: 800;
+		color: var(--color-ink);
 	}
 	@media (max-width: 48rem) {
-		thead {
-			display: none;
+		.row {
+			grid-template-columns: minmax(0, 1fr);
+			gap: var(--space-xs);
 		}
-		tbody tr {
-			display: grid;
-			grid-template-columns: minmax(0, 1fr) auto;
-			gap: var(--space-2xs) var(--space-md);
-			padding-block: var(--space-lg);
-			box-shadow: inset 0 1px 0 var(--color-rule);
+		.idx,
+		.when {
+			padding-top: 0;
 		}
-		tbody th,
-		tbody td {
-			padding: 0;
-			box-shadow: none;
-			width: auto;
+		.when {
+			order: -1;
+			justify-self: start;
 		}
-		tbody th {
-			grid-column: 1 / -1;
+		.idx {
+			order: -2;
 		}
-		tbody td:nth-child(2) {
-			grid-column: 1 / -1;
-		}
-		tbody tr:first-child {
-			box-shadow: inset 0 1px 0 var(--color-accent);
-		}
-		tbody tr:first-child th,
-		tbody tr:first-child td {
-			box-shadow: none;
+		.price {
+			justify-items: start;
 		}
 	}
 
-	/* Close: the plain contact, a statement over three facts */
-	.close-grid {
-		display: grid;
-		gap: var(--space-2xl);
+	/* Project filter + grid */
+	.filters {
+		display: flex;
+		flex-wrap: wrap;
+		gap: var(--space-xs);
+		margin: calc(-1 * var(--space-lg)) 0 var(--space-xl);
 	}
-	.close h2 {
-		font-size: var(--text-display);
-		max-width: 16ch;
-	}
-	.contact-list {
-		margin: 0;
-		display: grid;
-		gap: var(--space-lg) var(--gap-columns);
-		grid-template-columns: repeat(auto-fit, minmax(min(100%, 16rem), 1fr));
-	}
-	.contact-list div {
-		padding-top: var(--space-md);
-		box-shadow: inset 0 1px 0 var(--color-rule);
-	}
-	.contact-list dt {
+	.filters button {
+		min-height: 42px;
+		padding: 0 20px;
+		border: 0;
+		border-radius: var(--radius-pill);
+		background: var(--color-paper);
+		box-shadow: inset 0 0 0 1px var(--color-rule);
+		color: var(--color-ink);
 		font-size: var(--text-sm);
-		color: var(--color-muted);
+		font-weight: 500;
+		cursor: pointer;
+		transition: background-color var(--dur-short) var(--ease-out), color var(--dur-short) var(--ease-out);
 	}
-	.contact-list dd {
-		margin: var(--space-2xs) 0 0;
-		font-family: var(--font-display);
-		font-size: var(--text-xl);
-		letter-spacing: var(--tracking-display);
-		color: var(--color-ink);
+	.filters button:hover {
+		box-shadow: inset 0 0 0 1px var(--color-ink);
 	}
-	.mail {
-		color: var(--color-ink);
-		overflow-wrap: anywhere;
+	.filters button.on {
+		background: var(--color-ink);
+		color: var(--color-paper);
+		box-shadow: none;
 	}
-	.mail:hover {
-		color: var(--color-accent-hi);
+	.filters button:focus-visible {
+		outline: 2px solid var(--color-focus);
+		outline-offset: 2px;
 	}
-	.close .actions {
-		margin-top: 0;
+	.grid {
+		display: grid;
+		gap: var(--space-lg);
+		grid-template-columns: repeat(auto-fill, minmax(min(100%, 22rem), 1fr));
+	}
+	@media (min-width: 60rem) {
+		.grid {
+			grid-template-columns: repeat(2, minmax(0, 1fr));
+		}
 	}
 
-	@media (max-width: 60rem) {
-		.hero {
-			padding-top: var(--space-xl);
-		}
-		.product {
-			justify-items: stretch;
-		}
-		.scrim {
-			background:
-				linear-gradient(to bottom, color-mix(in oklab, var(--color-fog) 82%, transparent) 0, color-mix(in oklab, var(--color-fog) 55%, transparent) 38%, transparent 55%),
-				linear-gradient(to bottom, transparent 70%, var(--color-paper));
-		}
+	/* Skills */
+	.skills {
+		display: grid;
+		gap: var(--space-lg);
+		grid-template-columns: repeat(auto-fill, minmax(min(100%, 19rem), 1fr));
+	}
+	.skill {
+		padding: var(--space-lg);
+		border: 1px solid var(--color-rule);
+		border-radius: var(--radius-card);
+	}
+	.skill h3 {
+		font-size: var(--text-md);
+		font-family: var(--font-body);
+		font-weight: 700;
+		letter-spacing: 0;
+		font-variation-settings: normal;
+		margin-bottom: var(--space-md);
+	}
+
+	/* Contact */
+	.contact {
+		padding-block: var(--section-gap) var(--section-gap-s);
+	}
+	.big {
+		max-width: 15ch;
+		font-size: clamp(2.75rem, 7vw, 6.25rem);
+		line-height: 0.95;
+	}
+	.contact-note {
+		margin-top: var(--space-xl);
+		max-width: 56ch;
+		color: var(--color-muted);
+		font-size: var(--text-lead);
+		line-height: 1.5;
+	}
+	.form-wrap {
+		max-width: 680px;
+		margin: var(--space-2xl) auto 0;
+	}
+
+	/* Scroll reveal (progressive: content is visible without JS) */
+	:global(html.js) .reveal {
+		opacity: 0;
+		transform: translateY(16px);
+		transition:
+			opacity var(--dur-long) var(--ease-out),
+			transform var(--dur-long) var(--ease-out);
+	}
+	:global(html.js) .reveal:global(.in) {
+		opacity: 1;
+		transform: none;
 	}
 	@media (prefers-reduced-motion: reduce) {
-		.hour > img {
+		.mega > span,
+		.portrait {
 			animation: none;
+		}
+		:global(html.js) .reveal {
+			opacity: 1;
 			transform: none;
 		}
 	}

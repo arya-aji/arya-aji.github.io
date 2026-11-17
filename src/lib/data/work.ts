@@ -3,6 +3,10 @@ export type Work = {
 	title: string;
 	kind: 'Browser extension' | 'SaaS product' | 'Internal tools';
 	year: string;
+	/** Short line under the title on cards */
+	tagline: string;
+	/** Status pill on the card thumbnail */
+	badge: string;
 	summary: string;
 	description: string;
 	image?: { src: string; alt: string; width: number; height: number };
@@ -20,6 +24,8 @@ export const work: Work[] = [
 		title: 'Blur Your WhatsApp',
 		kind: 'Browser extension',
 		year: '2024',
+		tagline: 'Privacy blur for WhatsApp Web during screen sharing',
+		badge: 'Live',
 		summary:
 			'A privacy extension that blurs WhatsApp Web chats, names and media during screen sharing. Under 20KB, zero dependencies.',
 		description:
@@ -54,6 +60,8 @@ export const work: Work[] = [
 		title: 'In-house reporting tools',
 		kind: 'Internal tools',
 		year: '2019 to now',
+		tagline: 'Web apps and Python jobs that replaced spreadsheet reporting',
+		badge: 'In-house',
 		summary:
 			'In-house web apps and Python pipelines that replaced spreadsheet-heavy reporting for a large data organisation.',
 		description:
@@ -82,6 +90,8 @@ export const work: Work[] = [
 		title: 'Skui exam simulator',
 		kind: 'SaaS product',
 		year: '2024',
+		tagline: 'Timed SIMAK UI practice exams with checkout built in',
+		badge: 'Live',
 		summary:
 			'A mobile-first practice platform for the SIMAK UI entrance exam, with strict section timers and automated Midtrans payments.',
 		description:
@@ -109,6 +119,8 @@ export const work: Work[] = [
 		title: 'MiniTube PiP',
 		kind: 'Browser extension',
 		year: '2024',
+		tagline: 'Float any HTML5 video in a Picture-in-Picture window',
+		badge: 'Extension',
 		summary:
 			'One click sends any HTML5 video to a floating Picture-in-Picture window, so a tutorial keeps playing while you work.',
 		description:

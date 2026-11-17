@@ -1,64 +1,52 @@
 ---
 name: Arya Aji Kusuma
-theme: Dusk (Hallmark v2.0.0)
-genre: modern-minimal
+theme: Monochrome editorial (v3)
+reference: https://www.noorrehman.me/
 tokens: src/lib/styles/tokens.css
 ---
 
 # Design system: aryaaji.com
 
-Built with Hallmark, theme **Dusk**: a fog-pale first screen that falls into slate, smoked glass for the product, bone wells for screenshots. The page sells one thing: a developer who turns a chore you repeat into a tool.
+A white page, black ink and one oversized name. The layout follows the reference portfolio (noorrehman.me): giant two-word name with the portrait standing over it, a floating pill nav, numbered rows, project cards with a TLDR, and a big contact headline.
 
 ## Colour
 
-All colour goes through the tokens in `src/lib/styles/tokens.css`. No literal colours past the token block.
+All colour goes through `src/lib/styles/tokens.css`. Token names are kept from v2, so inner pages pick up the theme automatically.
 
 | Role | Token | Value |
 | --- | --- | --- |
-| Page (slate) | `--color-paper` | oklch(17.5% 0.014 268) |
-| Raised slate | `--color-paper-2`, `--color-paper-3` | oklch(21% …), oklch(25% …) |
-| Ink on slate | `--color-ink`, `--color-ink-2`, `--color-muted` | warm white, cool grey, muted grey |
-| Footer shade | `--color-shade` | oklch(10% 0.022 268) |
-| Signal 1: periwinkle | `--color-accent` (+ `-hi`, `-ink`, `-deep`, `-soft`) | oklch(77% 0.10 274) |
-| Signal 2: apricot | `--color-accent-2` | oklch(83% 0.095 62) |
-| Fog (hero) | `--color-fog`, `--color-day-ink`, `--color-day-muted` | pale warm fog with dark day ink |
-| Bone well | `--color-well`, `--color-well-2`, `--color-card` | light surface holding one screenshot |
-
-- Periwinkle is the action colour: primary buttons, links, focus, the "on" state of switches.
-- Apricot has one job: the figures in the in-house ledger (what each tool replaced). Keep it to figures.
-- Body text on slate is `--color-ink-2`; heads are `--color-ink`.
+| Page | `--color-paper` | #ffffff |
+| Wells, thumbnails | `--color-paper-2`, `--color-well` | #f6f6f6, #f4f4f4 |
+| Ink | `--color-ink`, `--color-ink-2`, `--color-muted` | #0a0a0a, #3d3d3d, #6e6e6e |
+| Hairlines | `--color-rule` | #e6e6e6 |
+| Action | `--color-accent` | same as ink (black buttons, black links) |
+| Available / live | `--color-live` | #22c55e, only for the status dot and "Live" badges |
 
 ## Type
 
-- Display: **Wix Madefor Display** (variable), weight 500, tracking -0.022em.
-- Text: **Wix Madefor Text** (variable), 400 body, 600 labels, links and strong.
-- Three weights in running use: 400, 500, 600.
-- Labels are the body face a step smaller, sentence case, never tracked capitals, never mono.
-- Curly quotes and apostrophes in prose. No dashes in copy; write "to" for ranges.
+- Display: **Archivo Variable**, weight 900, width axis 112 to 125, tracking about -0.04em. Used for the mega name, section headings and card titles (800).
+- Text: **Inter Variable**, 400 body, 500 to 600 labels.
+- Eyebrows: Inter 500, uppercase, letter-spacing 0.32em, muted, above every section heading.
+- The hero name: first word solid, second word outlined (`-webkit-text-stroke`).
 
-## Surfaces
+## Components
 
-- **Glass** (`.glass`): smoked slate with blur and a lit top edge. Used only on the hero product (Blur Your WhatsApp popup) and the in-house ledger.
-- **Well** (`.well`): bone surface that holds a product screenshot.
-- Radii: 18px card, 10px inner, pill for buttons and chips.
-
-## Layout
-
-- Shape: Workbench. Hero (Poster posture) → Blur Your WhatsApp case → in-house ledger → Skui → services table → statement close → index-column footer.
-- Hero: headline of seven words or fewer, one sentence, one primary button plus one text link; the live product sits beside it.
-- Container capped and centred; at 1920 the gutters grow, the measure does not.
-- All spacing through `--space-*`, `--section-gap-*` and `--gap-columns`.
+- **Floating pill nav** (`Header.svelte`): status pill "Available for projects" with a pulsing green dot, links with bracketed counts under the label, black "Let’s talk" button. Collapses to a menu button under 52rem.
+- **Buttons**: black filled pill and outlined ghost pill; `.arrow` adds a north-east arrow. `.sm` for card actions.
+- **Numbered rows** (experience, services): index `01`, title, muted sub-line, bullets with a 2px black left rule, outline tag pills, date or price on the right.
+- **Project card** (`WorkCard.svelte`): grey thumbnail with a status badge, title, tagline, "TLDR" summary, four stack tags, Case study + external link buttons. In-house work without screenshots gets an outlined monogram plate with two outcome chips.
+- **Filter chips**: All plus one per project kind; the active chip is filled black.
 
 ## Imagery
 
-- The owner's product images in bone wells: `static/img/blur-your-whatsapp.webp`, `static/img/skui.webp`.
-- Hero background: library photograph "Vallee-brouillard" by Thomas Bresson (CC BY 3.0, Wikimedia Commons), credited in the footer. Currently hotlinked; self-host it under `static/img/` when possible.
-- Portrait: `static/img/arya.webp` on /about.
+- Hero portrait: `static/img/arya-cutout.webp`, the owner's pixel-art portrait with the background removed, greyscale, faded at the bottom with a mask.
+- Product images: `static/img/blur-your-whatsapp.webp`, `static/img/skui.webp`, shown `contain` in grey wells.
 
 ## Motion
 
-- One drift on the hero photograph (48s), off under `prefers-reduced-motion`.
-- Switch and blur transitions use transform, opacity and filter only. Never `transition: all`.
+- Hero name rises in, portrait fades up, role line types and deletes with a blinking caret.
+- Sections and rows reveal on scroll (`.reveal`, only when JS runs).
+- Cards lift 3px on hover. All motion is off under `prefers-reduced-motion`.
 
 ## Content rules
 

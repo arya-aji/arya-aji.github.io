@@ -1,6 +1,6 @@
 <script lang="ts">
-	import '@fontsource-variable/wix-madefor-display';
-	import '@fontsource-variable/wix-madefor-text';
+	import '@fontsource-variable/archivo/wdth.css';
+	import '@fontsource-variable/inter';
 	import '$lib/styles/tokens.css';
 	import '$lib/styles/base.css';
 	import '../app.css';

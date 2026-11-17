@@ -51,7 +51,7 @@
 				<a class="btn ghost" href="/resume">Read the resume</a>
 			</p>
 		</div>
-		<img src="/img/arya.webp" alt="Pixel-art portrait of Arya Aji Kusuma with arms crossed" width="640" height="960" />
+		<img src="/img/arya-cutout.webp" alt="Pixel-art portrait of Arya Aji Kusuma with arms crossed" width="640" height="825" />
 	</div>
 </section>
 
@@ -71,8 +71,12 @@
 		}
 	}
 	img {
-		border-radius: var(--r-panel);
 		max-width: 20rem;
+		background: var(--color-well);
+		border-radius: var(--r-panel);
+		padding-top: var(--space-xl);
+		-webkit-mask-image: linear-gradient(to bottom, #000 85%, transparent);
+		mask-image: linear-gradient(to bottom, #000 85%, transparent);
 	}
 	h2 {
 		font-size: var(--step-2);

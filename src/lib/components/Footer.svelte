@@ -7,70 +7,92 @@
 	<div class="container cols">
 		<div class="intro">
 			<p class="name">Arya Aji Kusuma</p>
-			<p class="muted">Chrome extensions, internal tools and automation. {site.location}.</p>
+			<p class="muted">Professionally lazy developer. If I do it twice, I build the tool.</p>
+			<ul class="socials">
+				<li><a href={site.github} rel="me noopener" target="_blank">GitHub</a></li>
+				<li><a href={site.linkedin} rel="me noopener" target="_blank">LinkedIn</a></li>
+				<li><a href={site.upwork} rel="me noopener" target="_blank">Upwork</a></li>
+			</ul>
 		</div>
 		<nav aria-label="Site">
-			<h2>Site</h2>
+			<h2>Navigation</h2>
 			<ul>
+				<li><a href="/#experience">Experience</a></li>
 				<li><a href="/projects">Work</a></li>
 				<li><a href="/#services">Services</a></li>
 				<li><a href="/notes">Notes</a></li>
 				<li><a href="/about">About</a></li>
-				<li><a href="/resume">Resume</a></li>
 			</ul>
 		</nav>
-		<nav aria-label="Contact">
-			<h2>Contact</h2>
+		<div>
+			<h2>Focus areas</h2>
+			<ul class="plain">
+				<li>Chrome extensions</li>
+				<li>Internal tools & dashboards</li>
+				<li>Python automation</li>
+				<li>LLM-assisted workflows</li>
+			</ul>
+		</div>
+		<div>
+			<h2>Get in touch</h2>
 			<ul>
 				<li><a href={`mailto:${site.email}`}>{site.email}</a></li>
+				<li class="plain-li">{site.location} · UTC+7</li>
 				<li><a href="/contact">Project form</a></li>
-				<li><a href={site.upwork} rel="me noopener" target="_blank">Upwork</a></li>
-				<li><a href={site.github} rel="me noopener" target="_blank">GitHub</a></li>
-				<li><a href={site.linkedin} rel="me noopener" target="_blank">LinkedIn</a></li>
+				<li><a href="/resume">Resume</a></li>
 			</ul>
-		</nav>
+		</div>
 	</div>
 	<div class="container legal">
 		<p>© {year} Arya Aji Kusuma</p>
-		<p data-credits>
-			Photographs: <a href="https://commons.wikimedia.org/wiki/File:Vallee-brouillard.jpg" rel="noopener" target="_blank">Thomas Bresson</a> (CC BY 3.0, Wikimedia Commons)
-		</p>
+		<p>Built once, so you don’t have to do it twice.</p>
 	</div>
 </footer>
 
 <style>
 	.foot {
-		background: var(--color-shade);
+		background: var(--color-paper);
 		padding-top: var(--space-3xl);
+		border-top: 1px solid var(--color-rule);
 	}
 	.cols {
 		display: grid;
 		gap: var(--space-xl) var(--gap-columns);
-		grid-template-columns: minmax(0, 1fr);
+		grid-template-columns: repeat(2, minmax(0, 1fr));
 	}
-	@media (min-width: 48rem) {
+	.intro {
+		grid-column: 1 / -1;
+	}
+	@media (min-width: 56rem) {
 		.cols {
-			grid-template-columns: minmax(0, 6fr) minmax(0, 3fr) minmax(0, 3fr);
+			grid-template-columns: minmax(0, 4fr) repeat(3, minmax(0, 2.5fr));
+		}
+		.intro {
+			grid-column: auto;
 		}
 	}
 	.name {
 		font-family: var(--font-display);
-		font-weight: 600;
+		font-weight: 900;
+		font-variation-settings: 'wdth' 112;
 		letter-spacing: var(--tracking-display);
-		font-size: var(--text-2xl);
+		font-size: var(--text-xl);
 		color: var(--color-ink);
 	}
 	.muted {
 		margin-top: var(--space-xs);
 		color: var(--color-muted);
+		max-width: 32ch;
 	}
 	h2 {
 		font-family: var(--font-body);
-		font-size: var(--text-sm);
-		font-weight: 600;
-		letter-spacing: 0;
+		font-size: var(--text-xs);
+		font-weight: 500;
+		letter-spacing: 0.28em;
+		text-transform: uppercase;
+		font-variation-settings: normal;
 		color: var(--color-muted);
-		margin-bottom: var(--space-sm);
+		margin-bottom: var(--space-md);
 	}
 	ul {
 		list-style: none;
@@ -78,6 +100,11 @@
 		padding: 0;
 		display: grid;
 		gap: var(--space-xs);
+		font-size: 0.9375rem;
+	}
+	.plain li,
+	.plain-li {
+		color: var(--color-ink-2);
 	}
 	ul a {
 		color: var(--color-ink-2);
@@ -88,10 +115,24 @@
 		color: var(--color-ink);
 		text-decoration: underline;
 	}
-	ul a:focus-visible,
-	.legal a:focus-visible {
-		outline: 2px solid var(--color-focus);
-		outline-offset: 2px;
+	.socials {
+		display: flex;
+		flex-wrap: wrap;
+		gap: var(--space-xs);
+		margin-top: var(--space-lg);
+	}
+	.socials a {
+		display: inline-flex;
+		padding: 6px 14px;
+		border-radius: var(--radius-pill);
+		box-shadow: inset 0 0 0 1px var(--color-rule);
+		font-size: var(--text-sm);
+		font-weight: 500;
+		color: var(--color-ink);
+	}
+	.socials a:hover {
+		box-shadow: inset 0 0 0 1px var(--color-ink);
+		text-decoration: none;
 	}
 	.legal {
 		display: flex;
@@ -100,11 +141,8 @@
 		gap: var(--space-xs) var(--space-lg);
 		margin-top: var(--space-2xl);
 		padding-block: var(--space-lg);
-		box-shadow: inset 0 1px 0 var(--color-rule);
+		border-top: 1px solid var(--color-rule);
 		font-size: var(--text-sm);
 		color: var(--color-muted);
-	}
-	.legal a {
-		color: var(--color-ink-2);
 	}
 </style>

@@ -3,9 +3,6 @@
 	import WorkCard from '$lib/components/WorkCard.svelte';
 	import { work } from '$lib/data/work';
 
-	// Projects with a picture lead at full width; the text-only ones pair up below them.
-	const featured = work.filter((w) => w.image);
-	const rest = work.filter((w) => !w.image);
 </script>
 
 <Seo
@@ -15,19 +12,15 @@
 
 <section class="wrap page">
 	<header class="intro">
-		<h1>Work</h1>
+		<p class="eyebrow">Projects</p>
+		<h1>Things I’ve built</h1>
 		<p class="lede">
 			Things I’ve shipped, from browser extensions on the Chrome Web Store to the internal tools that
 			replaced a team’s spreadsheets.
 		</p>
 	</header>
-	<div class="featured">
-		{#each featured as item}
-			<WorkCard {item} headingLevel={2} wide />
-		{/each}
-	</div>
 	<div class="grid">
-		{#each rest as item}
+		{#each work as item}
 			<WorkCard {item} headingLevel={2} />
 		{/each}
 	</div>
@@ -40,15 +33,14 @@
 	.intro {
 		margin-bottom: var(--space-2xl);
 	}
-	.featured {
-		display: grid;
-		gap: var(--section-gap-s);
-		margin-bottom: var(--section-gap-s);
-	}
 	.grid {
 		display: grid;
-		gap: var(--space-2xl) var(--space-xl);
-		grid-template-columns: repeat(auto-fit, minmax(min(100%, 30rem), 1fr));
-		align-items: stretch;
+		gap: var(--space-lg);
+		grid-template-columns: repeat(auto-fill, minmax(min(100%, 22rem), 1fr));
+	}
+	@media (min-width: 60rem) {
+		.grid {
+			grid-template-columns: repeat(2, minmax(0, 1fr));
+		}
 	}
 </style>

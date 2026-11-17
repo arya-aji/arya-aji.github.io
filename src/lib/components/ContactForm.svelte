@@ -6,6 +6,9 @@
 
 	const key = env.PUBLIC_WEB3FORMS_KEY ?? '';
 
+	// compact: name, email and message only (home page). secondary: an extra link button beside Send.
+	let { compact = false, secondary }: { compact?: boolean; secondary?: { label: string; href: string } } = $props();
+
 	let message = $state('');
 	let sending = $state(false);
 
@@ -55,6 +58,7 @@
 		</label>
 	</div>
 
+	{#if !compact}
 	<div class="row">
 		<label>
 			<span>What kind of tool?</span>
@@ -76,6 +80,7 @@
 			</select>
 		</label>
 	</div>
+	{/if}
 
 	<label>
 		<span>What do you do by hand today?</span>
@@ -94,7 +99,10 @@
 
 	{#if error}<p class="error" role="alert">{error}</p>{/if}
 
-	<button class="btn" type="submit" disabled={sending}>{sending ? 'Sending…' : 'Send task description'}</button>
+	<div class="send">
+		<button class="btn arrow" type="submit" disabled={sending}>{sending ? 'Sending…' : 'Send message'}</button>
+		{#if secondary}<a class="btn ghost arrow" href={secondary.href} rel="noopener" target="_blank">{secondary.label}</a>{/if}
+	</div>
 	<p class="small">You’ll get a reply with a fixed quote within 24 hours.</p>
 </form>
 
@@ -111,40 +119,48 @@
 	label {
 		display: grid;
 		gap: var(--space-xs);
+		font-size: var(--text-sm);
 		font-weight: 600;
+		color: var(--color-ink);
+	}
+	.send {
+		display: flex;
+		flex-wrap: wrap;
+		gap: var(--space-sm);
 	}
 	input,
 	select,
 	textarea {
 		font: inherit;
 		font-weight: 400;
-		color: var(--heading);
-		background: var(--card);
-		border: 1px solid var(--color-muted);
-		border-radius: var(--r-card);
+		font-size: 1rem;
+		color: var(--color-ink);
+		background: var(--color-paper);
+		border: 1px solid var(--color-rule);
+		border-radius: var(--radius-inner);
+		transition: border-color var(--dur-short) var(--ease-out);
 		min-height: 48px;
 		padding: var(--space-sm) var(--space-md);
 		width: 100%;
 	}
+	input:hover,
+	select:hover,
+	textarea:hover {
+		border-color: color-mix(in oklab, var(--color-ink) 30%, var(--color-rule));
+	}
 	input:focus,
 	select:focus,
 	textarea:focus {
-		outline: 3px solid var(--accent);
+		outline: 3px solid color-mix(in oklab, var(--color-ink) 12%, transparent);
 		outline-offset: 0;
-		border-color: var(--accent);
+		border-color: var(--color-ink);
 	}
 	textarea {
 		resize: vertical;
 	}
-	button {
-		justify-self: start;
-	}
 	button:disabled {
-		opacity: 0.55;
+		opacity: 0.5;
 		cursor: not-allowed;
-		background: var(--color-paper-3);
-		color: var(--color-ink-2);
-		box-shadow: none;
 	}
 	.error {
 		margin: 0;

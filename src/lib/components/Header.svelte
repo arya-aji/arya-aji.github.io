@@ -3,6 +3,8 @@
 	import { nav } from '$lib/site';
 
 	let open = $state(false);
+	let scrolled = $state(false);
+
 	const isCurrent = (href: string) =>
 		!href.includes('#') && (page.url.pathname === href || page.url.pathname.startsWith(href + '/'));
 
@@ -12,24 +14,36 @@
 	});
 </script>
 
+<svelte:window onscroll={() => (scrolled = window.scrollY > 12)} />
+
 <a class="skip" href="#main">Skip to content</a>
 
-<header class="slab">
-	<div class="container bar">
-		<a class="mark" href="/" aria-label="Arya Aji Kusuma, home">Arya Aji Kusuma</a>
-
-		<button class="toggle" type="button" aria-expanded={open} aria-controls="site-nav" onclick={() => (open = !open)}>
-			{open ? 'Close' : 'Menu'}
-		</button>
+<header class="top" class:scrolled>
+	<div class="pill">
+		<a class="status" href="/" aria-label="Arya Aji Kusuma, home. Available for projects">
+			<span class="dot" aria-hidden="true"></span>
+			<span class="status-text">Available for projects</span>
+			<span class="status-short" aria-hidden="true">Arya Aji</span>
+		</a>
 
 		<nav id="site-nav" class:open aria-label="Main">
 			<ul>
 				{#each nav as item}
-					<li><a href={item.href} aria-current={isCurrent(item.href) ? 'page' : undefined}>{item.label}</a></li>
+					<li>
+						<a href={item.href} aria-current={isCurrent(item.href) ? 'page' : undefined} onclick={() => (open = false)}>
+							<span>{item.label}</span>
+							{#if 'count' in item}<small>[{item.count}]</small>{/if}
+						</a>
+					</li>
 				{/each}
 			</ul>
-			<a class="btn cta" href="/contact">Start a project</a>
 		</nav>
+
+		<a class="btn sm arrow cta" href="/contact">Let’s talk</a>
+
+		<button class="toggle" type="button" aria-expanded={open} aria-controls="site-nav" aria-label={open ? 'Close menu' : 'Open menu'} onclick={() => (open = !open)}>
+			<span class="bars" class:x={open} aria-hidden="true"><i></i><i></i></span>
+		</button>
 	</div>
 </header>
 
@@ -41,131 +55,207 @@
 		z-index: var(--z-tooltip);
 		padding: var(--space-xs) var(--space-md);
 		border-radius: var(--radius-pill);
-		background: var(--color-accent);
-		color: var(--color-accent-ink);
+		background: var(--color-ink);
+		color: var(--color-paper);
 	}
 	.skip:focus {
 		top: var(--space-sm);
 	}
 
-	/* The slab: one heavy full-width bar, slate glass */
-	.slab {
+	/* A floating pill, centred, that lifts off the page once you scroll */
+	.top {
 		position: sticky;
 		top: 0;
 		z-index: var(--z-sticky-nav);
-		background: color-mix(in oklab, var(--color-paper) 88%, transparent);
-		-webkit-backdrop-filter: blur(var(--glass-blur)) saturate(1.35);
-		backdrop-filter: blur(var(--glass-blur)) saturate(1.35);
-		box-shadow: inset 0 -1px 0 var(--color-rule);
+		display: flex;
+		justify-content: center;
+		padding: var(--space-md) var(--space-md) 0;
+		pointer-events: none;
 	}
-	.bar {
+	.pill {
+		pointer-events: auto;
+		position: relative;
 		display: flex;
 		align-items: center;
 		gap: var(--space-lg);
-		min-height: 72px;
+		width: min(100%, 980px);
+		min-height: 60px;
+		padding: 8px 8px 8px 10px;
+		border-radius: var(--radius-pill);
+		background: var(--glass);
+		-webkit-backdrop-filter: blur(var(--glass-blur)) saturate(1.4);
+		backdrop-filter: blur(var(--glass-blur)) saturate(1.4);
+		box-shadow: inset 0 0 0 1px var(--color-rule);
+		transition: box-shadow var(--dur-short) var(--ease-out);
 	}
-	.mark {
-		margin-right: auto;
-		font-family: var(--font-display);
-		font-weight: 600;
-		font-size: 1.125rem;
-		letter-spacing: -0.01em;
+	.scrolled .pill {
+		box-shadow: inset 0 0 0 1px var(--color-rule), var(--shadow-float);
+	}
+
+	.status {
+		display: inline-flex;
+		align-items: center;
+		gap: 8px;
+		min-height: 40px;
+		padding: 0 14px;
+		border-radius: var(--radius-pill);
+		box-shadow: inset 0 0 0 1px var(--color-rule);
+		background: var(--color-paper);
 		color: var(--color-ink);
+		font-size: var(--text-sm);
+		font-weight: 500;
 		text-decoration: none;
+		white-space: nowrap;
 	}
-	.mark:hover {
+	.status:hover {
 		color: var(--color-ink);
+		box-shadow: inset 0 0 0 1px var(--color-ink);
 	}
-	.mark:focus-visible {
-		outline: 2px solid var(--color-focus);
-		outline-offset: 4px;
+	.dot {
+		position: relative;
+		width: 8px;
+		height: 8px;
+		border-radius: 50%;
+		background: var(--color-live);
+	}
+	.dot::after {
+		content: '';
+		position: absolute;
+		inset: 0;
+		border-radius: 50%;
+		background: var(--color-live);
+		animation: ping 2s var(--ease-out) infinite;
+	}
+	@keyframes ping {
+		from {
+			transform: scale(1);
+			opacity: 0.6;
+		}
+		to {
+			transform: scale(2.8);
+			opacity: 0;
+		}
+	}
+	.status-short {
+		display: none;
+		font-weight: 700;
 	}
 
 	nav {
-		display: flex;
-		align-items: center;
-		gap: var(--space-lg);
+		margin-left: auto;
 	}
 	nav ul {
 		display: flex;
+		align-items: center;
 		gap: var(--space-2xs);
 		list-style: none;
 		margin: 0;
 		padding: 0;
 	}
-	nav ul a {
-		display: block;
-		padding: var(--space-xs) var(--space-sm);
-		border-radius: var(--radius-pill);
-		color: var(--color-ink-2);
+	nav a {
+		display: grid;
+		justify-items: start;
+		padding: 6px 10px;
+		border-radius: var(--radius-inner);
+		color: var(--color-ink);
+		font-size: var(--text-sm);
 		font-weight: 600;
-		font-size: 0.9375rem;
+		line-height: 1.15;
 		text-decoration: none;
 		transition: background-color var(--dur-short) var(--ease-out);
 	}
-	nav ul a:hover {
-		background: color-mix(in oklab, var(--color-light) 6%, transparent);
+	nav a small {
+		font-size: 0.6875rem;
+		font-weight: 500;
+		color: var(--color-muted);
+		font-variant-numeric: tabular-nums;
+	}
+	nav a:hover,
+	nav a[aria-current='page'] {
 		color: var(--color-ink);
+		background: var(--color-paper-2);
 	}
-	nav ul a:active {
-		background: color-mix(in oklab, var(--color-light) 10%, transparent);
-	}
-	nav ul a:focus-visible {
-		outline: 2px solid var(--color-focus);
-		outline-offset: 2px;
-	}
-	nav ul a[aria-current='page'] {
-		color: var(--color-ink);
-		background: color-mix(in oklab, var(--color-light) 8%, transparent);
+
+	.cta {
+		min-height: 44px;
 	}
 
 	.toggle {
 		display: none;
-		min-height: 44px;
-		padding: 0 var(--space-md);
+		width: 44px;
+		height: 44px;
 		border: 0;
-		border-radius: var(--radius-pill);
-		background: color-mix(in oklab, var(--color-light) 6%, transparent);
-		color: var(--color-ink);
-		font-weight: 600;
+		border-radius: 50%;
+		background: var(--color-ink);
+		color: var(--color-paper);
 		cursor: pointer;
+		place-items: center;
 	}
-	.toggle:hover {
-		background: color-mix(in oklab, var(--color-light) 10%, transparent);
+	.bars {
+		display: grid;
+		gap: 5px;
 	}
-	.toggle:active {
-		background: color-mix(in oklab, var(--color-light) 14%, transparent);
+	.bars i {
+		display: block;
+		width: 16px;
+		height: 1.5px;
+		background: currentColor;
+		transition: transform var(--dur-short) var(--ease-out);
 	}
-	.toggle:focus-visible {
-		outline: 2px solid var(--color-focus);
-		outline-offset: 2px;
+	.bars.x i:first-child {
+		transform: translateY(3.25px) rotate(45deg);
+	}
+	.bars.x i:last-child {
+		transform: translateY(-3.25px) rotate(-45deg);
 	}
 
-	@media (max-width: 60rem) {
+	@media (max-width: 64rem) {
+		.status-text {
+			display: none;
+		}
+		.status-short {
+			display: inline;
+		}
+	}
+	@media (max-width: 52rem) {
 		.toggle {
-			display: inline-flex;
-			align-items: center;
+			display: grid;
+		}
+		.cta {
+			margin-left: auto;
 		}
 		nav {
 			display: none;
 			position: absolute;
-			inset: 100% 0 auto 0;
-			flex-direction: column;
-			align-items: stretch;
-			gap: var(--space-md);
-			padding: var(--space-md) var(--gutter) var(--space-lg);
+			top: calc(100% + 8px);
+			left: 0;
+			right: 0;
+			padding: var(--space-sm);
+			border-radius: var(--radius-card);
 			background: var(--color-paper);
-			box-shadow: inset 0 -1px 0 var(--color-rule);
+			box-shadow: inset 0 0 0 1px var(--color-rule), var(--shadow-float);
 		}
 		nav.open {
-			display: flex;
+			display: block;
 		}
 		nav ul {
 			flex-direction: column;
+			align-items: stretch;
 		}
-		nav ul a {
-			padding: var(--space-sm) var(--space-md);
+		nav a {
+			grid-auto-flow: column;
+			justify-content: space-between;
+			align-items: baseline;
+			padding: 14px 16px;
 			font-size: 1.0625rem;
+		}
+	}
+	@media (max-width: 24rem) {
+		.cta {
+			display: none;
+		}
+		.toggle {
+			margin-left: auto;
 		}
 	}
 </style>
