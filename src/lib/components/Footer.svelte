@@ -27,10 +27,10 @@
 		<div>
 			<h2>Focus areas</h2>
 			<ul class="plain">
-				<li>Chrome extensions</li>
-				<li>Internal tools & dashboards</li>
-				<li>Python automation</li>
-				<li>LLM-assisted workflows</li>
+				<li>Full-stack web apps</li>
+				<li>Data pipelines & dashboards</li>
+				<li>Workflow automation</li>
+				<li>Browser extensions</li>
 			</ul>
 		</div>
 		<div>

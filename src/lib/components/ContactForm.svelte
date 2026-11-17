@@ -63,9 +63,10 @@
 		<label>
 			<span>What kind of tool?</span>
 			<select name="project_type">
-				<option>Chrome extension</option>
-				<option>Internal tool or dashboard</option>
-				<option>Data or workflow automation</option>
+				<option>Full-stack web app</option>
+				<option>Data pipeline or dashboard</option>
+				<option>Workflow automation</option>
+				<option>Browser extension</option>
 				<option>Not sure yet</option>
 			</select>
 		</label>

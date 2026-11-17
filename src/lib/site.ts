@@ -2,7 +2,7 @@ export const site = {
 	url: 'https://aryaaji.com',
 	name: 'Arya Aji Kusuma',
 	shortName: 'Arya Aji',
-	role: 'Freelance developer for browser extensions, internal tools and automation',
+	role: 'Freelance full-stack, data and automation developer',
 	email: 'hello@aryaaji.com',
 	location: 'Jakarta, Indonesia',
 	upwork: 'https://www.upwork.com/freelancers/aryaajik',

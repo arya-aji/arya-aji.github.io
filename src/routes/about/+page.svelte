@@ -5,7 +5,7 @@
 
 <Seo
 	title="About Arya Aji Kusuma"
-	description="Arya Aji Kusuma is a Jakarta-based full-stack developer with an applied statistics background who builds Chrome extensions, internal tools and automations."
+	description="Arya Aji Kusuma is a Jakarta-based full-stack developer with an applied statistics background who builds web apps, data pipelines, automations and browser extensions."
 	type="profile"
 />
 

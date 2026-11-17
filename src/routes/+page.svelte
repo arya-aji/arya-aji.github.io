@@ -9,14 +9,15 @@
 	import { onMount } from 'svelte';
 
 	// Project filter, like the reference: All plus one chip per kind.
-	const kinds = ['All', ...new Set(work.map((w) => w.kind))];
+	const kindOrder = ['SaaS product', 'AI tool', 'Internal tools', 'Automation', 'Browser extension'];
+	const kinds = ['All', ...kindOrder.filter((k) => work.some((w) => w.kind === k))];
 	let filter = $state('All');
 	const shown = $derived(filter === 'All' ? work : work.filter((w) => w.kind === filter));
-	const labels: Record<string, string> = { 'SaaS product': 'SaaS', 'AI tool': 'AI tools', 'Browser extension': 'Extensions' };
+	const labels: Record<string, string> = { 'SaaS product': 'SaaS', 'AI tool': 'AI tools', 'Internal tools': 'Data', 'Browser extension': 'Extensions' };
 	const kindLabel = (k: string) => labels[k] ?? k;
 
 	// Rotating role under the giant name, typed with a caret.
-	const roles = ['Chrome Extension Developer', 'Automation Engineer', 'Full-Stack Developer'];
+	const roles = ['Full-Stack Developer', 'Data Engineer', 'Automation Engineer', 'Extension Developer'];
 	let typed = $state(roles[0]);
 	onMount(() => {
 		if (matchMedia('(prefers-reduced-motion: reduce)').matches) return;
@@ -68,7 +69,7 @@
 			address: { '@type': 'PostalAddress', addressLocality: 'Jakarta', addressCountry: 'ID' },
 			alumniOf: { '@type': 'CollegeOrUniversity', name: 'Politeknik Statistika STIS' },
 			worksFor: { '@type': 'GovernmentOrganization', name: 'BPS-Statistics Indonesia', url: 'https://www.bps.go.id' },
-			knowsAbout: ['Chrome extension development', 'Browser automation', 'Internal tools', 'Python automation', 'SvelteKit', 'Next.js', 'FastAPI', 'LLM integration'],
+			knowsAbout: ['Full-stack web development', 'Data pipelines', 'Dashboards', 'Python automation', 'Chrome extension development', 'SvelteKit', 'Next.js', 'FastAPI', 'PostgreSQL', 'LLM integration'],
 			sameAs: [site.github, site.linkedin, site.upwork]
 		},
 		{
@@ -91,8 +92,8 @@
 </script>
 
 <Seo
-	title="Arya Aji Kusuma | Chrome Extension & Automation Developer"
-	description="Freelance developer in Jakarta who builds Chrome extensions, internal tools and Python automations that remove repetitive work for small teams. Fixed quotes, Upwork escrow."
+	title="Arya Aji Kusuma | Full-Stack, Data & Automation Developer"
+	description="Full-stack developer in Jakarta who builds web apps, data pipelines and dashboards, Python automations and browser extensions that remove repetitive work. Fixed quotes, Upwork escrow."
 	{jsonLd}
 />
 
@@ -102,7 +103,7 @@
 		<h1 id="hero-h" class="mega">
 			<span class="solid">Arya</span>
 			<span class="outline">Aji</span>
-			<span class="visually-hidden">Kusuma, freelance Chrome extension and automation developer</span>
+			<span class="visually-hidden">Kusuma, full-stack, data and automation developer</span>
 		</h1>
 
 		<img
@@ -117,7 +118,7 @@
 
 		<div class="hero-copy">
 			<p class="role" aria-label={roles[0]}><span aria-hidden="true">{typed}</span><span class="caret" aria-hidden="true"></span></p>
-			<p class="tag">If I have to do it twice, I build the tool.<br />Chrome extensions, internal tools and automations for small teams.</p>
+			<p class="tag">If I have to do it twice, I build the tool.<br />Full-stack apps, data pipelines and automations for small teams.</p>
 			<div class="hero-actions">
 				<a class="btn arrow" href="#contact">Let’s collaborate</a>
 				<a class="btn ghost" href="/resume">
@@ -252,7 +253,7 @@
 	<div class="container">
 		<p class="eyebrow">Contact</p>
 		<h2 id="contact-h" class="big reveal">Let’s automate the boring part together.</h2>
-		<p class="contact-note">Open to freelance projects: Chrome extensions, internal tools and data automation. Tell me the chore you repeat; I reply within 24 hours from Jakarta (UTC+7).</p>
+		<p class="contact-note">Open to freelance projects: full-stack web apps, data pipelines and dashboards, automation and browser extensions. Tell me the chore you repeat; I reply within 24 hours from Jakarta (UTC+7).</p>
 		<div class="form-wrap">
 			<ContactForm compact secondary={{ label: 'Hire on Upwork', href: site.upwork }} />
 		</div>

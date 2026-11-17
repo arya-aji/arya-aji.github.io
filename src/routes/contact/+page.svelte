@@ -7,7 +7,7 @@
 
 <Seo
 	title="Start a project"
-	description="Describe the repetitive task you want gone. Arya Aji Kusuma replies within 24 hours with a fixed quote for a Chrome extension, internal tool or automation."
+	description="Describe the repetitive task you want gone. Arya Aji Kusuma replies within 24 hours with a fixed quote for a web app, data pipeline, automation or browser extension."
 />
 
 <section class="wrap page">

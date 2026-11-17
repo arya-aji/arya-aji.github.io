@@ -5,14 +5,14 @@
 
 <Seo
 	title="Resume"
-	description="Resume of Arya Aji Kusuma: full-stack developer with 7+ years building internal tools, Python automation and LLM features, plus Chrome extensions and SaaS products."
+	description="Resume of Arya Aji Kusuma: full-stack developer with 7+ years building internal tools, Python automation and LLM features, plus data pipelines, browser extensions and SaaS products."
 	type="profile"
 />
 
 <section class="wrap page">
 	<header class="head">
 		<h1>Arya Aji Kusuma</h1>
-		<p class="lede">Full-stack developer for internal tools, browser extensions and automation.</p>
+		<p class="lede">Full-stack developer for web apps, data pipelines, automation and browser extensions.</p>
 		<p class="contact">
 			{site.location}<br />
 			<a href={`mailto:${site.email}`}>{site.email}</a><br />
@@ -32,7 +32,7 @@
 					<li>Built and run Gerbang Dinas (gerbangdinas.com), a CAT-style tryout platform on SvelteKit and Supabase with Midtrans checkout and human-reviewed AI questions.</li>
 					<li>Built Recap Suite, an Electron studio that turns comic chapters into narrated videos with vision AI, text-to-speech and FFmpeg.</li>
 					<li>Built Grambox, a cached-first Instagram JSON API (Hono, SQLite, Python), and MiniTube PiP, a Chrome extension.</li>
-					<li>Deliver Chrome extensions, internal tools and Python automations for clients through Upwork.</li>
+					<li>Deliver full-stack web apps, data pipelines, automations and browser extensions for clients through Upwork.</li>
 				</ul>
 			</section>
 

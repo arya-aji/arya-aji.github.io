@@ -18,7 +18,7 @@ export const experience: Role[] = [
 		from: '2024',
 		to: 'Now',
 		points: [
-			'Build Chrome extensions, internal tools and Python automations for small teams, quoted per milestone through Upwork escrow.',
+			'Build full-stack web apps, data pipelines, automations and browser extensions for small teams, quoted per milestone through Upwork escrow.',
 			'Built and run Gerbang Dinas solo: a CAT-style tryout platform on SvelteKit and Supabase with Midtrans checkout and AI-drafted, human-reviewed questions.',
 			'Shipped Recap Suite, an Electron studio that turns comic chapters into narrated videos with vision AI, text-to-speech and FFmpeg.'
 		],
@@ -54,11 +54,12 @@ export const experience: Role[] = [
 	}
 ];
 
+// Focus order: full-stack, data, automation, browser extensions.
 export const skills: { group: string; items: string[] }[] = [
-	{ group: 'Browser extensions', items: ['Chrome Manifest V3', 'Content scripts', 'Side panels', 'DOM extraction', 'chrome.storage', 'MutationObserver'] },
-	{ group: 'Full-stack', items: ['SvelteKit', 'Next.js', 'TypeScript', 'FastAPI', 'Tailwind CSS', 'Midtrans'] },
-	{ group: 'Data & databases', items: ['PostgreSQL', 'Prisma', 'Excel & Google Sheets', 'Google Apps Script', 'REST APIs'] },
-	{ group: 'Automation', items: ['Python pipelines', 'Scheduled jobs', 'Scraping & exports', 'OpenStreetMap geocoding'] },
-	{ group: 'AI & analysis', items: ['LLM integration', 'Classification', 'Statistical analysis', 'Geospatial dashboards', 'Leaflet'] },
-	{ group: 'Shipping', items: ['GitHub Actions', 'Cloudflare', 'Chrome Web Store', 'Static prerendering', 'SEO'] }
+	{ group: 'Full-stack', items: ['SvelteKit', 'Next.js', 'TypeScript', 'FastAPI', 'Supabase', 'Tailwind CSS', 'Midtrans'] },
+	{ group: 'Data & dashboards', items: ['PostgreSQL', 'Prisma', 'Drizzle', 'Excel & Google Sheets', 'Statistical analysis', 'Leaflet maps'] },
+	{ group: 'Automation', items: ['Python pipelines', 'Playwright', 'Scheduled jobs', 'REST APIs', 'Geocoding (Nominatim)'] },
+	{ group: 'Browser extensions', items: ['Chrome Manifest V3', 'Content scripts', 'Side panels', 'DOM extraction', 'chrome.storage'] },
+	{ group: 'AI & computer vision', items: ['LLM integration', 'Vision models', 'OpenCV', 'OCR', 'Text-to-speech'] },
+	{ group: 'Shipping', items: ['Docker', 'GitHub Actions', 'Cloudflare', 'Vercel', 'Chrome Web Store'] }
 ];

@@ -18,7 +18,7 @@ aryaaji.com is the personal portfolio and lead-generation site of Arya Aji Kusum
 
 ## Positioning
 
-"If you do it twice, I'll make it a tool." Arya is professionally lazy: he removes repetitive work for a living. Chrome extensions are the lead specialty and the strongest differentiator (he ships his own, including a sub-20KB, zero-dependency privacy extension on the Chrome Web Store). Internal tools/dashboards and Python data/workflow automation are supporting services. Background in applied statistics plus years of building in-house tools for a large data organisation back the claim with results, not adjectives.
+"If you do it twice, I'll make it a tool." Arya is professionally lazy: he removes repetitive work for a living. Focus order: full-stack web apps first, then data (pipelines and dashboards), then automation, then browser extensions. Extensions remain a differentiator (he ships his own, including a sub-20KB, zero-dependency privacy extension on the Chrome Web Store). Internal tools/dashboards and Python data/workflow automation are supporting services. Background in applied statistics plus years of building in-house tools for a large data organisation back the claim with results, not adjectives.
 
 ## Operating Context
 
@@ -30,7 +30,7 @@ aryaaji.com is the personal portfolio and lead-generation site of Arya Aji Kusum
 
 ## Capabilities and Constraints
 
-- Services: Chrome extensions (Manifest V3; scraping/export, autofill, added buttons and shortcuts), internal tools and dashboards (admin panels, approval flows, maps, auth and payments), data and workflow automation (Excel/Google Sheets, REST API sync, OpenStreetMap geocoding, scheduled Python jobs), LLM integration.
+- Services, in this order: full-stack web apps; data pipelines and dashboards; workflow automation; browser extensions (Manifest V3; scraping/export, autofill, added buttons and shortcuts). Older wording: internal tools and dashboards (admin panels, approval flows, maps, auth and payments), data and workflow automation (Excel/Google Sheets, REST API sync, OpenStreetMap geocoding, scheduled Python jobs), LLM integration.
 - Stack he works in: SvelteKit, Next.js, TypeScript, FastAPI, Python, PostgreSQL, Prisma, Leaflet, Google Apps Script, LLM APIs.
 - Typical delivery: extensions 3–5 days, internal tools 1–2 weeks, automations 2–4 days.
 - Published price: Chrome extensions $149–$349. Other services are quoted per scope; do not invent prices.

@@ -20,6 +20,7 @@ export type Work = {
 	featured: boolean;
 };
 
+// Ordered by focus: full-stack apps, data (BPS), automation, browser extensions.
 // Sourced from the READMEs and docs of github.com/arya-aji repositories.
 // Private repos and all BPS work get no GitHub link. BPS work is named; never mention the statistical publications.
 export const work: Work[] = [
@@ -85,30 +86,6 @@ export const work: Work[] = [
 		featured: true
 	},
 	{
-		slug: 'map-processing-platform',
-		title: 'Map Processing Platform',
-		kind: 'Internal tools',
-		year: '2026',
-		tagline: 'Computer-vision pipeline that cleans and indexes BPS field maps',
-		badge: 'BPS',
-		summary:
-			'Operators upload phone photos of paper maps. A worker finds the sheet, fixes perspective and orientation, enhances it, reads the 16-digit area code and checks it against the master list.',
-		description:
-			'A Next.js, FastAPI and OpenCV pipeline that straightens, enhances and OCRs photographed field maps, then validates and files them in S3-compatible storage.',
-		stack: ['Next.js', 'FastAPI', 'OpenCV', 'OCR', 'Redis', 'PostgreSQL', 'S3 (Garage)'],
-		links: [],
-		outcome: ['Area codes read and validated automatically', 'Images go straight to storage', 'Workers scale on a queue'],
-		problem:
-			'Thousands of paper field maps were photographed at odd angles and filed by hand. Finding the right map meant reading a small printed code on each photo.',
-		approach: [
-			'The browser uploads directly to object storage with presigned URLs, so the API never proxies image bytes.',
-			'FastAPI queues each image on Redis; an OpenCV worker runs paper detection, perspective correction, orientation, enhancement, upscaling and OCR.',
-			'The recognised code is validated against the master list, and anything uncertain goes to a human review screen.',
-			'A second geo worker prepares georeferenced output, and the whole stack ships with Docker Compose.'
-		],
-		featured: true
-	},
-	{
 		slug: 'grambox',
 		title: 'Grambox',
 		kind: 'SaaS product',
@@ -131,30 +108,6 @@ export const work: Work[] = [
 			'Deployed on a single VPS with PM2, with OAuth sign-in and Lemon Squeezy subscriptions.'
 		],
 		featured: true
-	},
-	{
-		slug: 'business-geocoder',
-		title: 'Business Geocoder',
-		kind: 'Automation',
-		year: '2026',
-		tagline: 'Turns messy business addresses into coordinates, offline',
-		badge: 'BPS',
-		summary:
-			'A Python geocoder on a private Nominatim server: a six-level fallback search, fuzzy matching for misspelt Jakarta areas, region validation and multithreading.',
-		description:
-			'A Python geocoder for BPS that runs on a local Nominatim server with waterfall search, fuzzy area matching and Jakarta region validation.',
-		stack: ['Python', 'Nominatim', 'Docker', 'Fuzzy matching', 'Multithreading'],
-		links: [],
-		outcome: ['Six fallback search strategies', 'Results outside Jakarta rejected', 'No API quotas: runs locally'],
-		problem:
-			'Business addresses in survey data are full of typos, building floors and RT/RW numbers. Public geocoding APIs either miss them or cap the number of calls.',
-		approach: [
-			'Run Nominatim in Docker, so lookups are private, free and unlimited.',
-			'Search in levels: name plus address, full address, two keywords, fuzzy Jakarta area, a regex-cleaned address, then name only.',
-			'Fuzzy logic fixes common misspellings of area names, for example “Glora” to “Gelora”.',
-			'Every hit is checked against city, state and district, so a match outside Jakarta counts as not found.'
-		],
-		featured: false
 	},
 	{
 		slug: 'cryptospike',
@@ -180,26 +133,25 @@ export const work: Work[] = [
 		featured: false
 	},
 	{
-		slug: 'matchamaster',
-		title: 'MatchaMaster',
-		kind: 'Automation',
-		year: '2025',
-		tagline: 'Playwright bot that fills the BPS business directory from a spreadsheet',
-		badge: 'BPS',
+		slug: 'flashprd',
+		title: 'flashPRD',
+		kind: 'AI tool',
+		year: '2026',
+		tagline: 'Turns an app idea into a spec an AI coding assistant can build from',
+		badge: 'Prototype',
 		summary:
-			'Python and Playwright automation that reads a validated master sheet, checks it for duplicates, then enters or updates each business on the BPS business directory (MatchaPro) while logging progress to PostgreSQL.',
+			'A seven-step guided brainstorm that produces a structured PRD plus copy-ready prompts for Claude, ChatGPT and Gemini, exported as Markdown, JSON or a ZIP package.',
 		description:
-			'MatchaMaster, a Python and Playwright bot that enters and updates business-directory records from a master spreadsheet.',
-		stack: ['Python', 'Playwright', 'PostgreSQL (Neon)', 'Excel & CSV'],
+			'flashPRD, a Next.js app that turns an app idea into a structured product requirements document and AI-ready prompts.',
+		stack: ['Next.js', 'TypeScript', 'Tailwind CSS', 'Radix UI', 'Python'],
 		links: [],
-		outcome: ['Replaces manual form entry', 'Duplicate check before any write', 'Resumable progress log'],
+		outcome: ['Idea to PRD in minutes', 'Prompts tuned per AI assistant', 'Markdown, JSON or ZIP export'],
 		problem:
-			'Field teams had to type thousands of business records into a web directory one form at a time.',
+			'AI coding assistants build the wrong thing when the brief is vague, and writing a proper spec takes longer than people want to spend.',
 		approach: [
-			'A master spreadsheet template that the team fills and a supervisor approves before anything runs.',
-			'A mandatory duplicate check, so the bot never creates the same business twice.',
-			'Playwright drives the real web forms, and each record’s status is stored in PostgreSQL so a run can stop and resume.',
-			'A step-by-step guide written for non-programmers.'
+			'A seven-step questionnaire that collects users, features, data and constraints.',
+			'A generator that turns the answers into a structured PRD and task-ready prompts.',
+			'A dashboard to keep and revisit every generated spec.'
 		],
 		featured: false
 	},
@@ -234,25 +186,74 @@ export const work: Work[] = [
 		featured: false
 	},
 	{
-		slug: 'flashprd',
-		title: 'flashPRD',
-		kind: 'AI tool',
+		slug: 'map-processing-platform',
+		title: 'Map Processing Platform',
+		kind: 'Internal tools',
 		year: '2026',
-		tagline: 'Turns an app idea into a spec an AI coding assistant can build from',
-		badge: 'Prototype',
+		tagline: 'Computer-vision pipeline that cleans and indexes BPS field maps',
+		badge: 'BPS',
 		summary:
-			'A seven-step guided brainstorm that produces a structured PRD plus copy-ready prompts for Claude, ChatGPT and Gemini, exported as Markdown, JSON or a ZIP package.',
+			'Operators upload phone photos of paper maps. A worker finds the sheet, fixes perspective and orientation, enhances it, reads the 16-digit area code and checks it against the master list.',
 		description:
-			'flashPRD, a Next.js app that turns an app idea into a structured product requirements document and AI-ready prompts.',
-		stack: ['Next.js', 'TypeScript', 'Tailwind CSS', 'Radix UI', 'Python'],
+			'A Next.js, FastAPI and OpenCV pipeline that straightens, enhances and OCRs photographed field maps, then validates and files them in S3-compatible storage.',
+		stack: ['Next.js', 'FastAPI', 'OpenCV', 'OCR', 'Redis', 'PostgreSQL', 'S3 (Garage)'],
 		links: [],
-		outcome: ['Idea to PRD in minutes', 'Prompts tuned per AI assistant', 'Markdown, JSON or ZIP export'],
+		outcome: ['Area codes read and validated automatically', 'Images go straight to storage', 'Workers scale on a queue'],
 		problem:
-			'AI coding assistants build the wrong thing when the brief is vague, and writing a proper spec takes longer than people want to spend.',
+			'Thousands of paper field maps were photographed at odd angles and filed by hand. Finding the right map meant reading a small printed code on each photo.',
 		approach: [
-			'A seven-step questionnaire that collects users, features, data and constraints.',
-			'A generator that turns the answers into a structured PRD and task-ready prompts.',
-			'A dashboard to keep and revisit every generated spec.'
+			'The browser uploads directly to object storage with presigned URLs, so the API never proxies image bytes.',
+			'FastAPI queues each image on Redis; an OpenCV worker runs paper detection, perspective correction, orientation, enhancement, upscaling and OCR.',
+			'The recognised code is validated against the master list, and anything uncertain goes to a human review screen.',
+			'A second geo worker prepares georeferenced output, and the whole stack ships with Docker Compose.'
+		],
+		featured: true
+	},
+	{
+		slug: 'business-geocoder',
+		title: 'Business Geocoder',
+		kind: 'Automation',
+		year: '2026',
+		tagline: 'Turns messy business addresses into coordinates, offline',
+		badge: 'BPS',
+		summary:
+			'A Python geocoder on a private Nominatim server: a six-level fallback search, fuzzy matching for misspelt Jakarta areas, region validation and multithreading.',
+		description:
+			'A Python geocoder for BPS that runs on a local Nominatim server with waterfall search, fuzzy area matching and Jakarta region validation.',
+		stack: ['Python', 'Nominatim', 'Docker', 'Fuzzy matching', 'Multithreading'],
+		links: [],
+		outcome: ['Six fallback search strategies', 'Results outside Jakarta rejected', 'No API quotas: runs locally'],
+		problem:
+			'Business addresses in survey data are full of typos, building floors and RT/RW numbers. Public geocoding APIs either miss them or cap the number of calls.',
+		approach: [
+			'Run Nominatim in Docker, so lookups are private, free and unlimited.',
+			'Search in levels: name plus address, full address, two keywords, fuzzy Jakarta area, a regex-cleaned address, then name only.',
+			'Fuzzy logic fixes common misspellings of area names, for example “Glora” to “Gelora”.',
+			'Every hit is checked against city, state and district, so a match outside Jakarta counts as not found.'
+		],
+		featured: false
+	},
+	{
+		slug: 'matchamaster',
+		title: 'MatchaMaster',
+		kind: 'Automation',
+		year: '2025',
+		tagline: 'Playwright bot that fills the BPS business directory from a spreadsheet',
+		badge: 'BPS',
+		summary:
+			'Python and Playwright automation that reads a validated master sheet, checks it for duplicates, then enters or updates each business on the BPS business directory (MatchaPro) while logging progress to PostgreSQL.',
+		description:
+			'MatchaMaster, a Python and Playwright bot that enters and updates business-directory records from a master spreadsheet.',
+		stack: ['Python', 'Playwright', 'PostgreSQL (Neon)', 'Excel & CSV'],
+		links: [],
+		outcome: ['Replaces manual form entry', 'Duplicate check before any write', 'Resumable progress log'],
+		problem:
+			'Field teams had to type thousands of business records into a web directory one form at a time.',
+		approach: [
+			'A master spreadsheet template that the team fills and a supervisor approves before anything runs.',
+			'A mandatory duplicate check, so the bot never creates the same business twice.',
+			'Playwright drives the real web forms, and each record’s status is stored in PostgreSQL so a run can stop and resume.',
+			'A step-by-step guide written for non-programmers.'
 		],
 		featured: false
 	},

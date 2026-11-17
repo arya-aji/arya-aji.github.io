@@ -6,7 +6,7 @@
 </script>
 
 <Seo
-	title="Projects: Chrome extensions, internal tools and SaaS"
+	title="Projects: full-stack apps, data, automation and extensions"
 	description="Case studies from Arya Aji Kusuma: Gerbang Dinas, a live CAT tryout SaaS; Recap Suite, an AI video studio; a computer-vision map pipeline; automation bots; and internal tools that save 15+ hours a week."
 />
 
