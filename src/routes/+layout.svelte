@@ -1,7 +1,6 @@
 <script lang="ts">
 	import '@fontsource-variable/archivo/wdth.css';
 	import '@fontsource-variable/inter';
-	import '@fontsource/press-start-2p/latin-400.css';
 	import '$lib/styles/tokens.css';
 	import '$lib/styles/base.css';
 	import '../app.css';

@@ -13,13 +13,6 @@
 		open = false;
 	});
 
-	// 8-bit coin, drawn with box-shadows on one 2px pixel. o outline, y gold, h highlight.
-	const coinMap = ['..oooo..', '.oyyyyo.', 'oyhyyyyo', 'oyhyyyyo', 'oyhyyyyo', 'oyhyyyyo', '.oyyyyo.', '..oooo..'];
-	const tone: Record<string, string> = { o: '#6b3d00', y: '#f8c630', h: '#fff4c2' };
-	const coin = coinMap
-		.flatMap((row, y) => [...row].map((c, x) => (c === '.' ? '' : `${x * 2}px ${y * 2}px 0 ${tone[c]}`)))
-		.filter(Boolean)
-		.join(',');
 </script>
 
 <svelte:window onscroll={() => (scrolled = window.scrollY > 12)} />
@@ -29,9 +22,9 @@
 <header class="top" class:scrolled>
 	<div class="pill">
 		<a class="status" href="/" aria-label="Arya Aji Kusuma, home. Available for projects">
-			<span class="coin" aria-hidden="true"><i style={`box-shadow:${coin}`}></i></span>
-			<span class="status-text">Available for projects<span class="blink">_</span></span>
-			<span class="status-short" aria-hidden="true">Arya Aji</span>
+			<span class="dot" aria-hidden="true"></span>
+			<span>Available</span>
+			<span class="sla"><i class="sep" aria-hidden="true"></i>Replies in 24h</span>
 		</a>
 
 		<nav id="site-nav" class:open aria-label="Main">
@@ -99,79 +92,67 @@
 		box-shadow: inset 0 0 0 1px var(--color-rule), var(--shadow-float);
 	}
 
-	/* 8-bit status chip: notched pixel corners, pixel font, a spinning coin */
+	/* Live status chip: a pulsing green dot, then the reply promise */
 	.status {
-		--px: 3px;
-		position: relative;
 		display: inline-flex;
 		align-items: center;
-		gap: 10px;
+		gap: 9px;
 		min-height: 40px;
-		padding: 0 16px 0 12px;
-		background: var(--color-ink);
-		color: var(--color-paper);
-		font-family: 'Press Start 2P', ui-monospace, monospace;
-		font-size: 9px;
-		line-height: 1;
-		letter-spacing: 0.04em;
-		text-transform: uppercase;
+		padding: 0 16px 0 14px;
+		border-radius: var(--radius-pill);
+		box-shadow: inset 0 0 0 1px var(--color-rule);
+		background: var(--color-paper);
+		color: var(--color-ink);
+		font-size: var(--text-sm);
+		font-weight: 500;
 		text-decoration: none;
 		white-space: nowrap;
-		image-rendering: pixelated;
-		clip-path: polygon(
-			0 var(--px), var(--px) var(--px), var(--px) 0,
-			calc(100% - var(--px)) 0, calc(100% - var(--px)) var(--px), 100% var(--px),
-			100% calc(100% - var(--px)), calc(100% - var(--px)) calc(100% - var(--px)), calc(100% - var(--px)) 100%,
-			var(--px) 100%, var(--px) calc(100% - var(--px)), 0 calc(100% - var(--px))
-		);
-		transition: background-color var(--dur-micro) steps(2);
+		transition: box-shadow var(--dur-short) var(--ease-out);
 	}
 	.status:hover {
-		color: var(--color-paper);
-		background: #1f1f1f;
+		color: var(--color-ink);
+		box-shadow: inset 0 0 0 1px var(--color-ink);
 	}
 	.status:focus-visible {
 		outline: 2px solid var(--color-focus);
 		outline-offset: 3px;
 	}
-	.coin {
+	.dot {
 		position: relative;
-		width: 16px;
-		height: 16px;
+		width: 8px;
+		height: 8px;
 		flex: none;
-		animation: spin 1.2s steps(1) infinite;
+		border-radius: 50%;
+		background: var(--color-live);
 	}
-	.coin i {
+	.dot::after {
+		content: '';
 		position: absolute;
-		top: 0;
-		left: 0;
-		width: 2px;
-		height: 2px;
+		inset: 0;
+		border-radius: 50%;
+		background: var(--color-live);
+		animation: ping 2s var(--ease-out) infinite;
 	}
-	@keyframes spin {
-		0% { transform: scaleX(1); }
-		25% { transform: scaleX(0.5); }
-		50% { transform: scaleX(0.15); }
-		75% { transform: scaleX(0.5); }
+	@keyframes ping {
+		from {
+			transform: scale(1);
+			opacity: 0.6;
+		}
+		to {
+			transform: scale(2.8);
+			opacity: 0;
+		}
 	}
-	/* Hover: the coin pops up, like a pickup */
-	.status:hover .coin {
-		animation: spin 0.4s steps(1) infinite, pop 0.5s steps(5) both;
+	.sla {
+		display: inline-flex;
+		align-items: center;
+		gap: 9px;
+		color: var(--color-muted);
 	}
-	@keyframes pop {
-		0% { translate: 0 0; }
-		40% { translate: 0 -6px; }
-		100% { translate: 0 0; }
-	}
-	.blink {
-		margin-left: 2px;
-		animation: blink 1s steps(1) infinite;
-	}
-	@keyframes blink {
-		50% { opacity: 0; }
-	}
-	.status-short {
-		display: none;
+	.sep {
+		width: 1px;
+		height: 14px;
+		background: var(--color-rule);
 	}
 
 	nav {
@@ -240,11 +221,8 @@
 	}
 
 	@media (max-width: 64rem) {
-		.status-text {
+		.sla {
 			display: none;
-		}
-		.status-short {
-			display: inline;
 		}
 	}
 	@media (max-width: 52rem) {
