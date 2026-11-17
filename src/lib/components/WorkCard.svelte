@@ -24,7 +24,7 @@
 			<a href={`/projects/${item.slug}`}>{item.title}</a>
 		</svelte:element>
 		<p class="sub">{item.tagline}</p>
-		<p class="tldr"><strong>TLDR</strong> {item.summary}</p>
+		<p class="tldr">{item.summary}</p>
 		<ul class="tag-list" aria-label="Stack">
 			{#each item.stack.slice(0, 4) as t}<li>{t}</li>{/each}
 		</ul>
@@ -79,7 +79,7 @@
 	.card:hover .thumb img {
 		transform: scale(1.03);
 	}
-	/* No screenshot (in-house work under NDA): a typographic plate instead */
+	/* No screenshot: a typographic plate instead */
 	/* No screenshot: the project name as an outlined poster */
 	.thumb:not(:has(img)) {
 		place-items: center start;
@@ -184,11 +184,6 @@
 		color: var(--color-ink-2);
 		font-size: 0.9375rem;
 		line-height: 1.6;
-	}
-	.tldr strong {
-		color: var(--color-ink);
-		font-weight: 800;
-		margin-right: 4px;
 	}
 	.actions {
 		display: flex;

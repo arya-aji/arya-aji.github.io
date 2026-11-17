@@ -21,7 +21,7 @@ export type Work = {
 };
 
 // Sourced from the READMEs and docs of github.com/arya-aji repositories.
-// Private repos get no GitHub link; in-house work stays low-key (no employer name).
+// Private repos get no GitHub link. BPS work is named; never mention the statistical publications.
 export const work: Work[] = [
 	{
 		slug: 'gerbang-dinas',
@@ -89,8 +89,8 @@ export const work: Work[] = [
 		title: 'Map Processing Platform',
 		kind: 'Internal tools',
 		year: '2026',
-		tagline: 'Computer-vision pipeline that cleans and indexes photographed field maps',
-		badge: 'In-house',
+		tagline: 'Computer-vision pipeline that cleans and indexes BPS field maps',
+		badge: 'BPS',
 		summary:
 			'Operators upload phone photos of paper maps. A worker finds the sheet, fixes perspective and orientation, enhances it, reads the 16-digit area code and checks it against the master list.',
 		description:
@@ -184,10 +184,10 @@ export const work: Work[] = [
 		title: 'MatchaMaster',
 		kind: 'Automation',
 		year: '2025',
-		tagline: 'Playwright bot that fills a business directory from a spreadsheet',
+		tagline: 'Playwright bot that fills the BPS business directory from a spreadsheet',
 		badge: 'Open source',
 		summary:
-			'Python and Playwright automation that reads a validated master sheet, checks it for duplicates, then enters or updates each business on a web directory while logging progress to PostgreSQL.',
+			'Python and Playwright automation that reads a validated master sheet, checks it for duplicates, then enters or updates each business on the BPS business directory (MatchaPro) while logging progress to PostgreSQL.',
 		description:
 			'MatchaMaster, an open-source Python and Playwright bot that enters and updates business-directory records from a master spreadsheet.',
 		stack: ['Python', 'Playwright', 'PostgreSQL (Neon)', 'Excel & CSV'],
@@ -209,11 +209,11 @@ export const work: Work[] = [
 		kind: 'Internal tools',
 		year: '2019 to now',
 		tagline: 'Web apps and Python jobs that replaced spreadsheet reporting',
-		badge: 'In-house',
+		badge: 'BPS',
 		summary:
-			'In-house web apps and Python pipelines that replaced spreadsheet-heavy reporting for a large data organisation.',
+			'Web apps and Python pipelines that replaced spreadsheet-heavy reporting at BPS-Statistics Indonesia, Jakarta Pusat.',
 		description:
-			'Internal web apps, geospatial dashboards and Python automations that made reporting about 40% faster and removed 15+ hours a week of manual data work.',
+			'Internal web apps, geospatial dashboards and Python automations at BPS-Statistics Indonesia that made reporting about 40% faster and removed 15+ hours a week of manual data work.',
 		stack: ['SvelteKit', 'Next.js', 'FastAPI', 'Python', 'PostgreSQL', 'Prisma', 'Leaflet', 'LLM APIs'],
 		links: [],
 		outcome: [

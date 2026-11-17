@@ -67,6 +67,7 @@
 			email: `mailto:${site.email}`,
 			address: { '@type': 'PostalAddress', addressLocality: 'Jakarta', addressCountry: 'ID' },
 			alumniOf: { '@type': 'CollegeOrUniversity', name: 'Politeknik Statistika STIS' },
+			worksFor: { '@type': 'GovernmentOrganization', name: 'BPS-Statistics Indonesia', url: 'https://www.bps.go.id' },
 			knowsAbout: ['Chrome extension development', 'Browser automation', 'Internal tools', 'Python automation', 'SvelteKit', 'Next.js', 'FastAPI', 'LLM integration'],
 			sameAs: [site.github, site.linkedin, site.upwork]
 		},
@@ -143,7 +144,7 @@
 				<p class="eyebrow">Experience</p>
 				<h2 id="exp-h">Where I’ve worked</h2>
 			</div>
-			<p>Seven years of in-house tools for a data organisation, plus freelance extensions and a SaaS I run on my own.</p>
+			<p>Civil servant at BPS-Statistics Indonesia since 2018, building the internal tools and automations the office runs on. Freelance products and client work on the side.</p>
 		</header>
 
 		<ol class="rows">

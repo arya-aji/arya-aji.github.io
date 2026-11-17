@@ -19,7 +19,7 @@
 			</p>
 			<p>
 				I studied applied statistics at Politeknik Statistika STIS, then spent the following years building
-				in-house software for a large data organisation. Most of that work came down to one habit: noticing
+				in-house software at BPS-Statistics Indonesia in Jakarta Pusat, where I work as a civil servant. Most of that work came down to one habit: noticing
 				what people repeat every week and making it disappear. That produced five internal web apps, a set of
 				Python jobs that save analysts more than 15 hours a week, and dashboards that 200+ field officers use
 				daily.

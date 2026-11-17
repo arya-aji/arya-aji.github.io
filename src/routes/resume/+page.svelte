@@ -37,8 +37,8 @@
 			</section>
 
 			<section class="job">
-				<h3>Full-stack developer (in-house)</h3>
-				<p class="when">In-house, large data organisation, Jakarta. 2018 to now</p>
+				<h3>Computer Specialist (Pranata Komputer Ahli Pertama)</h3>
+				<p class="when">BPS-Statistics Indonesia, Jakarta Pusat. 2018 to now</p>
 				<ul>
 					<li>Built 5+ full-stack web apps used across units, making reporting about 40% faster.</li>
 					<li>Wrote Python automations that remove 15+ hours a week of repetitive data processing.</li>

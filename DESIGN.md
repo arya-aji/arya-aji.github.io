@@ -50,5 +50,5 @@ All colour goes through `src/lib/styles/tokens.css`. Token names are kept from v
 
 ## Content rules
 
-- Never mention the owner's statistical publications. Keep the day job low-key: "a large data organisation".
+- The day job is shown openly: Computer Specialist at BPS-Statistics Indonesia, Jakarta Pusat. Never mention the statistical publications.
 - Figures shown are the owner's own: about 40% faster reports, 15+ hours a week, 200+ officers, about $12,000 a year, 1,000+ Skui users.

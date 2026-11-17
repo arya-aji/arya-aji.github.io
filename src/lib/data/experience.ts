@@ -9,7 +9,7 @@ export type Role = {
 	link?: { label: string; href: string };
 };
 
-// Keep the day job low-key: "a large data organisation", no publication work.
+// Day job at BPS is shown openly; never mention the statistical publications.
 export const experience: Role[] = [
 	{
 		title: 'Freelance Full-Stack & Automation Developer',
@@ -26,8 +26,8 @@ export const experience: Role[] = [
 		link: { label: 'Hire on Upwork', href: 'https://www.upwork.com/freelancers/aryaajik' }
 	},
 	{
-		title: 'Full-Stack Developer (In-house)',
-		org: 'A large data organisation',
+		title: 'Computer Specialist (Pranata Komputer)',
+		org: 'BPS-Statistics Indonesia, Jakarta Pusat',
 		where: 'Jakarta · On-site',
 		from: '2018',
 		to: 'Now',
