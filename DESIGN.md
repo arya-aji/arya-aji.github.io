@@ -31,7 +31,7 @@ All colour goes through `src/lib/styles/tokens.css`. Token names are kept from v
 
 ## Components
 
-- **Floating pill nav** (`Header.svelte`): status pill "Available for projects" with a pulsing green dot, links with bracketed counts under the label, black "Let’s talk" button. Collapses to a menu button under 52rem.
+- **Floating pill nav** (`Header.svelte`): an 8-bit status chip (Press Start 2P, notched pixel corners, a spinning box-shadow pixel coin that pops on hover, blinking cursor) reading "Available for projects", plain single-line links, black "Let’s talk" button. The chip shortens to "Arya Aji" under 64rem; links collapse to a menu button under 52rem.
 - **Buttons**: black filled pill and outlined ghost pill; `.arrow` adds a north-east arrow. `.sm` for card actions.
 - **Numbered rows** (experience, services): index `01`, title, muted sub-line, bullets with a 2px black left rule, outline tag pills, date or price on the right.
 - **Project card** (`WorkCard.svelte`): grey thumbnail with a status badge, title, tagline, "TLDR" summary, four stack tags, Case study + external link buttons. In-house work without screenshots gets an outlined monogram plate with two outcome chips.

@@ -12,11 +12,11 @@ export const site = {
 	ogImage: '/og.png'
 } as const;
 
-// Anchors on the home page; `count` is the small bracketed figure under each label.
+// Anchors on the home page.
 export const nav = [
-	{ href: '/#experience', label: 'Experience', count: '7y+' },
-	{ href: '/#work', label: 'Work', count: '10' },
-	{ href: '/#services', label: 'Services', count: '3' },
-	{ href: '/notes', label: 'Notes', count: '1' },
+	{ href: '/#experience', label: 'Experience' },
+	{ href: '/#work', label: 'Work' },
+	{ href: '/#services', label: 'Services' },
+	{ href: '/notes', label: 'Notes' },
 	{ href: '/#contact', label: 'Contact' }
 ] as const;
